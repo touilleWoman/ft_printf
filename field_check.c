@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
 int		is_flag(char c)
@@ -32,4 +31,12 @@ int		is_valid(char c)
 	if (is_flag(c) || is_conversion(c))
 		return (TRUE)
 	return (FALSE);
+}
+
+void	field_check(char c, int *cnt_printed_chars)
+{
+	if (is_conversion(c))
+	{
+		conversion_manage(c);
+	}
 }

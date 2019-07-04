@@ -12,24 +12,32 @@
 
 #include "ft_printf.h"
 
+
+
 int		parse_string(const char *str, va_list args)
 {
 	int		pos;
+	int		cnt_printed_chars;
 
+
+	cnt_printed_chars = 0;
 	(void)args;
 	pos = 0;
 	while (str[pos])
 	{
 		if (str[pos] == '%')
 		{
+			field_check(str[pos + 1], &cnt_printed_chars);
 			pos++;
-
 		}
 		else
+		{
 			write(1, &(str[pos]), 1);
-		pos++;
+			pos++;
+			cnt_printed_chars++;
+		}
 	}
-	return(pos);
+	return(pos);//à changer
 }
 
 
