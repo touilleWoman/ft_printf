@@ -12,51 +12,25 @@
 
 #include "ft_printf.h"
 
-
-
-int		parse_string(const char *str, va_list args)
-{
-	int		pos;
-	int		cnt_printed_chars;
-
-
-	cnt_printed_chars = 0;
-	(void)args;
-	pos = 0;
-	while (str[pos])
-	{
-		if (str[pos] == '%')
-		{
-			field_check(str[pos + 1], &cnt_printed_chars);
-			pos++;
-		}
-		else
-		{
-			write(1, &(str[pos]), 1);
-			pos++;
-			cnt_printed_chars++;
-		}
-	}
-	return(pos);//à changer
-}
-
-
 int		ft_printf(const char *str, ...)
 {
 	va_list		args;
 	int			result;
 
 	va_start(args, str);
+
 	// The va_list is nothing more than a byte pointer.
-	// #define va_start(list, param) (list = (((va_list)&param) + sizeof(param)))
+	// #define va_start(args, param) (args = (((va_list)&param) + sizeof(param)))
 	result = parse_string(str, args);
 	va_end(args);
+	result = 0;
 	return (result);
 }
 
 
 int		main()
 {
-	ft_printf("test\n");
+	ft_printf("test%ok", 'b', 2);
+	// ft_printf("test%d%d\n", 10);
 	return (0);
 }

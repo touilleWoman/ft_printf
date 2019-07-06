@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int		is_flag(char c)
+int		is_option(char c)
 {
 	if (ft_strchr("-+0 ", c) == 0)
 		return (FALSE);
