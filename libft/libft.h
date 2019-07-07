@@ -35,6 +35,12 @@ typedef struct	s_color
 	unsigned char	b;
 }				t_color;
 
+typedef enum 	e_bool
+{
+	TRUE = 1,
+	FALSE = 0,
+}				t_bool;
+
 t_color			ft_color_val_calculate(int val_cl);
 void			*ft_memset(void	*str, int c, size_t len);
 void			ft_bzero(void *s, size_t n);

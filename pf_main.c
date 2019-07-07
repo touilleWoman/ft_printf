@@ -16,8 +16,8 @@ int		ft_printf(const char *format, ...)
 {
 	va_list			args;
 	int				printed_nb;
-	t_list			*lst;
 	int				unit_nb;
+	t_list			
 
 	lst = parse_string(format, &printed_nb);
 	if (lst == NULL)

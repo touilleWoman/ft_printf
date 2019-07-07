@@ -57,8 +57,6 @@ char	*convert_double_p(char *s, int len, char *new_s)
 			j++;
 		}
 	}
-	free (s);
-	s = NULL;
 	return (new_s);
 }
 
@@ -89,6 +87,8 @@ char			*deal_with_double_percentage(const char*format, int *real_p_nb, int *new_
 	new_format = (char*)malloc(sizeof(char) * ((*new_len) + 1));
 	new_format[*new_len] ='\0';
 	convert_double_p(s, len, new_format);
+	free(s);
+	s = NULL;
 	return (new_format);
 }
 
@@ -117,7 +117,19 @@ t_list		*cut_to_unit(char *s, int real_p_nb, int len, int *unit_nb)
 		}
 		start++;
 	}
+}
 
+t_list		*unit_list_new(t_unit const *unit)
+{
+	t_list *lst;
+
+	lst = ft_lstnew((void const *)unit, sizeof(t_unit));
+	return (lst);
+}
+
+t_unit		*unit_access(t_list *lst)
+{
+	return ((t_unit*)lst->content);
 }
 
 
@@ -126,7 +138,13 @@ t_list		*parse_string(const char *format, int *printed_nb, int *unit_nb)
 	char			*new_format;
 	int				new_len;
 	int				real_p_nb;
-	t_list			*list;
+
+
+	t_list			*lst;
+	t_unit	*obj;
+
+
+
 
 	new_format = deal_with_double_percentage(format, &real_p_nb, &new_len);
 	if (real_p_nb == 0)
@@ -136,6 +154,7 @@ t_list		*parse_string(const char *format, int *printed_nb, int *unit_nb)
 		*printed_nb = new_len;
 		return (NULL);
 	}
+
 	list = cut_to_unit(new_format, real_p_nb, new_len, unit_nb);
 	return (list);
 }

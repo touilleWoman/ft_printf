@@ -17,48 +17,13 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "unit.h"
 #include "./libft/libft.h"
 
-typedef enum 		e_bool
-{
-	TRUE = 1,
-	FALSE = 0,
-}					t_bool;
 
-typedef	enum 		e_conversion
-{
-	LITERAL = 0,
-}					t_conversion;
 
-typedef struct 		s_literal
-{
-	char			*text;
-	int				len;
-}					t_literal;
 
-typedef	union		u_conversion_unit
-{
-	t_literal		ltr;
-	// char			c;
-	// char			*s;
-	// void			*p;
-	// int				d;
-	// int				i;
-	// unsigned int	o;
-	// unsigned int	u;
-	// unsigned int	x;
-	// unsigned int	mj_x;
-	// float			f;
-}					t_conversion_unit;
-
-typedef struct 					s_list
-{
-		t_conversion_unit		unit;
-		int						type;
-		s_list					*next;
-}								t_list;
-
-char				*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
+char		*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
 
 t_stock		**parse_string(const char *format, int *unit_nb);
 
