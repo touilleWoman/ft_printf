@@ -92,42 +92,36 @@ char			*deal_with_double_percentage(const char*format, int *real_p_nb, int *new_
 	return (new_format);
 }
 
-t_stock		**only_one_literal_unit(char *s, int *unit_nb, int len)
-{
 
-	return (stock);
-}
 
-void			detect_conversion(char *s, int len, int *unit_nb)
+
+t_list		*cut_to_unit(char *s, int real_p_nb, int len, int *unit_nb)
 {
+	int		start;
 	int		i;
+	int		end;
 
-	i = 0;
-	while (i < len)
+	i = 0
+	start = 0;
+	end = 0;
+	while ( start < len)
 	{
+		if (s[start] == '\0')
+		{
+			piece = ft_strcpy(s + start);
 
-		i++;
-	}
-}
+			end = start + 1;
+			while (s[end] != '\0')
+				end++;
 
-t_stock		**cut_to_unit(char *s, int real_p_nb, int len, int *unit_nb)
-{
-	t_stock	**stock;
+		}
+		start++;
+	}
 
-	if (real_p_nb == 0)
-	{
-		stock = only_one_literal_unit(s, unit_nb, len);
-		return (stock);
-	}
-	else
-	{
-		detect_conversion(s, len, unit_nb);
-		return (NULL);
-	}
 }
 
 
-t_stock		**parse_string(const char *format, int *unit_nb)
+t_list		*parse_string(const char *format, int *printed_nb, int *unit_nb)
 {
 	char			*new_format;
 	int				new_len;
@@ -137,7 +131,9 @@ t_stock		**parse_string(const char *format, int *unit_nb)
 	new_format = deal_with_double_percentage(format, &real_p_nb, &new_len);
 	if (real_p_nb == 0)
 	{
-		only_one_literal_unit(new_format, len)
+		write(1, new_format, new_len);
+		*unit_nb = 1;
+		*printed_nb = new_len;
 		return (NULL);
 	}
 	list = cut_to_unit(new_format, real_p_nb, new_len, unit_nb);

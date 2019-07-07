@@ -51,11 +51,12 @@ typedef	union		u_conversion_unit
 	// float			f;
 }					t_conversion_unit;
 
-typedef struct 					s_stock
+typedef struct 					s_list
 {
 		t_conversion_unit		unit;
 		int						type;
-}							t_stock;
+		s_list					*next;
+}								t_list;
 
 char				*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
 

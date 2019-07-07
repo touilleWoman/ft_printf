@@ -16,17 +16,13 @@ int		ft_printf(const char *format, ...)
 {
 	va_list			args;
 	int				printed_nb;
-	t_stock			**stock;
+	t_list			*lst;
 	int				unit_nb;
 
-	stock = parse_string(format, &unit_nb);
-	if (unit_nb == 1)
-	{
-		write(1, ((*stock)->unit.ltr.text), (*stock)->unit.ltr.len);
-		printf("printed_nb:%d\n", (*stock)->unit.ltr.len);
+	lst = parse_string(format, &printed_nb);
+	if (lst == NULL)
+		return (printed_nb);
 
-		return ((*stock)->unit.ltr.len);
-	}
 	va_start(args, format);
 
 	// The va_list is nothing more than a byte pointer.
