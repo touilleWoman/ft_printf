@@ -25,30 +25,41 @@ typedef enum 		e_bool
 	FALSE = 0,
 }					t_bool;
 
-
-typedef	union		u_conversion_union
+typedef	enum 		e_conversion
 {
-	char			c;
-	char			*s;
-	void			*p;
-	int				d;
-	int				i;
-	unsigned int	o;
-	unsigned int	u;
-	unsigned int	x;
-	unsigned int	mj_x;
-	float			f;
-}					t_conversion_union;
+	LITERAL = 0,
+}					t_conversion;
 
-typedef struct  	s_unit
+typedef struct 		s_literal
 {
-	char					*before;
-	char					*after;
-	t_conversion_union		type;
-}					t_unit;
+	char			*text;
+	int				len;
+}					t_literal;
 
-int		parse_string(const char *str, va_list args);
-int		count_true_percentage(const char*str);
+typedef	union		u_conversion_unit
+{
+	t_literal		ltr;
+	// char			c;
+	// char			*s;
+	// void			*p;
+	// int				d;
+	// int				i;
+	// unsigned int	o;
+	// unsigned int	u;
+	// unsigned int	x;
+	// unsigned int	mj_x;
+	// float			f;
+}					t_conversion_unit;
+
+typedef struct 					s_stock
+{
+		t_conversion_unit		unit;
+		int						type;
+}							t_stock;
+
+char				*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
+
+t_stock		**parse_string(const char *format, int *unit_nb);
 
 
 

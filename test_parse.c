@@ -1,23 +1,20 @@
 #include "ft_printf.h"
 
 
-void		test_count_ture_percentage(char *s, int expected)
+void		test_deal_with_double_percentage(char *s, char *expected)
 {
-	int		result;
+	char	*new_format;
 
-	result = count_true_percentage(s);
-	if (result != expected)
-		printf("error, s=%s, result=%d, expected =%d\n", s, result, expected);
+	new_format = deal_with_double_percentage(s, &5, &10 );
+	if (ft_strcmp(s, expected) != 0)
+		printf("error, s=%s, expected =%sn", s, expected);
 }
 
 int main()
 {
-	test_count_ture_percentage("%", 1);
-	test_count_ture_percentage("asfsda%", 1);
-	test_count_ture_percentage("%%", 0);
-	test_count_ture_percentage("%%ok", 0);
-	test_count_ture_percentage("%%%", 1);
-	test_count_ture_percentage("%%%%%", 1);
-	test_count_ture_percentage("%%%okjsks%", 2);
+	test_deal_with_double_percentage("%%%", "%");
+	test_deal_with_double_percentage("bonjour%", "bonjour");
+	test_deal_with_double_percentage("bonjour%%", "bonjour%");
+	test_deal_with_double_percentage("ok%%%%%ok", "ok%%");
 	return 0;
 }

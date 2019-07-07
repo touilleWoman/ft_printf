@@ -4,11 +4,9 @@ int main(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	char **ptr;
+	void	*a;
 
-	ptr = ft_strsplit("%%ok%d%c", '%');
-	printf("%s\n", ptr[0]);
-	printf("%s\n", ptr[1]);
-	printf("%s\n", ptr[2]);
+	a = NULL;
+	printf("ok\n%f\n", *(float*)&a);
 	return 0;
 }
