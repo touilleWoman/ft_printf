@@ -17,9 +17,9 @@ int		ft_printf(const char *format, ...)
 	va_list			args;
 	int				printed_nb;
 	int				unit_nb;
-	t_list			
+	t_list			*lst;
 
-	lst = parse_string(format, &printed_nb);
+	lst = parse_string(format, &printed_nb, &unit_nb);
 	if (lst == NULL)
 		return (printed_nb);
 

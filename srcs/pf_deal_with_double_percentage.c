@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_parse.c                                         :+:      :+:    :+:   */
+/*   pf_deal_with_double_percentage.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/06 11:57:04 by jleblond          #+#    #+#             */
-/*   Updated: 2019/07/06 11:57:19 by jleblond         ###   ########.fr       */
+/*   Created: 2019/07/09 10:35:52 by jleblond          #+#    #+#             */
+/*   Updated: 2019/07/09 10:35:58 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		count_single_p_then_to_zero(char *s, int len)
+/*
+** single% are converted to 0 then double % are converted to single%
+*/
+
+int				count_single_p_then_to_zero(char *s, int len)
 {
 	int		i;
 	int		counter;
@@ -22,7 +26,7 @@ int		count_single_p_then_to_zero(char *s, int len)
 	while (i < len)
 	{
 		if (s[i] == '%' && s[i + 1] == '%')
-			i+= 2;
+			i += 2;
 		if (s[i] == '%' && s[i + 1] != '%')
 		{
 			counter++;
@@ -35,7 +39,7 @@ int		count_single_p_then_to_zero(char *s, int len)
 	return (counter);
 }
 
-char	*convert_double_p(char *s, int len, char *new_s)
+char			*convert_double_p(char *s, int len, char *new_s)
 {
 	int			i;
 	int			j;
@@ -47,7 +51,7 @@ char	*convert_double_p(char *s, int len, char *new_s)
 		if (s[i] == '%' && s[i + 1] == '%')
 		{
 			new_s[j] = s[i];
-			i+= 2;
+			i += 2;
 			j++;
 		}
 		else
@@ -60,11 +64,9 @@ char	*convert_double_p(char *s, int len, char *new_s)
 	return (new_s);
 }
 
-/*
-** single% are converted to 0 then double % are converted to single%
-*/
-
-char			*deal_with_double_percentage(const char*format, int *real_p_nb, int *new_len)
+char			*deal_with_double_percentage(const char *format,
+													int *real_p_nb,
+													int *new_len)
 {
 	int			len;
 	int			p_cnt;
@@ -85,76 +87,9 @@ char			*deal_with_double_percentage(const char*format, int *real_p_nb, int *new_
 	}
 	*new_len = len - p_cnt / 2;
 	new_format = (char*)malloc(sizeof(char) * ((*new_len) + 1));
-	new_format[*new_len] ='\0';
+	new_format[*new_len] = '\0';
 	convert_double_p(s, len, new_format);
 	free(s);
 	s = NULL;
 	return (new_format);
-}
-
-
-
-
-t_list		*cut_to_unit(char *s, int real_p_nb, int len, int *unit_nb)
-{
-	int		start;
-	int		i;
-	int		end;
-
-	i = 0
-	start = 0;
-	end = 0;
-	while ( start < len)
-	{
-		if (s[start] == '\0')
-		{
-			piece = ft_strcpy(s + start);
-
-			end = start + 1;
-			while (s[end] != '\0')
-				end++;
-
-		}
-		start++;
-	}
-}
-
-t_list		*unit_list_new(t_unit const *unit)
-{
-	t_list *lst;
-
-	lst = ft_lstnew((void const *)unit, sizeof(t_unit));
-	return (lst);
-}
-
-t_unit		*unit_access(t_list *lst)
-{
-	return ((t_unit*)lst->content);
-}
-
-
-t_list		*parse_string(const char *format, int *printed_nb, int *unit_nb)
-{
-	char			*new_format;
-	int				new_len;
-	int				real_p_nb;
-
-
-	t_list			*lst;
-	t_unit	*obj;
-
-
-
-
-	new_format = deal_with_double_percentage(format, &real_p_nb, &new_len);
-	if (real_p_nb == 0)
-	{
-		write(1, new_format, new_len);
-		*unit_nb = 1;
-		*printed_nb = new_len;
-		return (NULL);
-	}
-
-	list = cut_to_unit(new_format, real_p_nb, new_len, unit_nb);
-	return (list);
 }
