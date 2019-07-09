@@ -1,35 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncpy.c                                       :+:      :+:    :+:   */
+/*   pf_field_check.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/21 19:27:31 by jleblond          #+#    #+#             */
-/*   Updated: 2018/11/21 19:27:33 by jleblond         ###   ########.fr       */
+/*   Created: 2019/07/09 16:45:37 by jleblond          #+#    #+#             */
+/*   Updated: 2019/07/09 16:45:42 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-char	*ft_strncpy(char *dst, const char *src, size_t n)
+int		is_option(char c)
 {
-	size_t	i;
+	if (ft_strchr("-+0 ", c) == 0)
+		return (FALSE);
+	return (TRUE);
+}
 
-	i = 0;
-	while (i < n)
+int		is_conversion(char c)
+{
+	if (ft_strchr("cspdiouxX", c) == 0)
+		return (FALSE);
+	return (TRUE);
+}
+
+int		is_valid(char c)
+{
+	if (is_flag(c) || is_conversion(c))
+		return (TRUE)
+	return (FALSE);
+}
+
+void	field_check(char c, int *cnt_printed_chars)
+{
+	if (is_conversion(c))
 	{
-		if (src[i] == 0)
-		{
-			while (i < n)
-			{
-				dst[i] = 0;
-				i++;
-			}
-			return (dst);
-		}
-		dst[i] = src[i];
-		i++;
+		conversion_manage(c);
 	}
-	return (dst);
 }

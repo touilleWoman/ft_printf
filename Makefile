@@ -23,6 +23,14 @@ SOURCE_NAME = ft_printf.c \
 					pf_parse.c\
 					pf_deal_with_double_percentage.c\
 					pf_unit_list.c\
+					ft_strlen.c\
+					ft_strdup.c\
+					ft_lstadd_top.c\
+					ft_lstadd_bot.c\
+					ft_lstnew.c\
+					ft_strchr.c\
+					ft_memcpy.c\
+
 
 SOURCE_PATH = ./srcs
 
@@ -32,24 +40,17 @@ OBJ = $(SOURCE:.c=.o)
 
 HEADER = ft_printf.h pf_unit.h
 
-LIBFTA = libft/libft.a
-
-INC = -I ./libft
-
 all:$(NAME)
 
-$(NAME): $(OBJ) $(LIBFTA)
-	ar rc $(NAME) $(OBJ) $(LIBFTA)
-	ranlib $(NAME)
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ)
 
 %.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) $(INC) -o $@ -c $<
+	$(CC) $(CFLAGS) -o $@ -c $<
 
-$(LIBFTA): FORCE
-	make -C ./libft
 
-FORCE:
-
+check:all
+	$(CC) $(CFLAGS) $(NAME) srcs/test.c
 
 clean:
 	rm -f $(OBJ)

@@ -12,44 +12,94 @@
 
 #include "ft_printf.h"
 
-// t_list		*cut_to_unit(char *s, int real_p_nb, int len, int *unit_nb)
-// {
-// 	int		start;
-// 	int		i;
-// 	int		end;
-
-// 	i = 0
-// 	start = 0;
-// 	end = 0;
-// 	while ( start < len)
-// 	{
-// 		if (s[start] == '\0')
-// 		{
-// 			piece = ft_strcpy(s + start);
-
-// 			end = start + 1;
-// 			while (s[end] != '\0')
-// 				end++;
-
-// 		}
-// 		start++;
-// 	}
-
-// }
-
-t_list		*unit_list_new(t_unit const *unit)
+void		unit_lstadd_literal(t_list **alst, char *literal_piece)
 {
-	t_list *lst;
+	t_unit		unit;
 
-	lst = ft_lstnew((void const *)unit, sizeof(t_unit));
+	unit.type = TYPE_LTR;
+	unit.val.ltr.string = literal_piece;
+	*alst = unit_list_new(&unit);
+}
+
+int		find_conversion_in_capsule(const char *capsule)
+{
+	int		len;
+	int		posi;
+
+	posi = 0;
+	len = ft_strlen(capsule);
+	while (posi < len)
+	{
+		if (is_conversion(capsule[posi]) == TRUE)
+			break;
+		posi++;
+	}
+	if (posi == len)
+	{
+		printf("format error: no conversion")
+		exit(0);
+		//need to free the list
+		// return (FALSE) ;
+	}
+	else
+		return (posi);
+}
+
+t_ptr_funs		funs[FUNS_NB] = {
+{'c', pf_parse_type_c},{'s', pf_parse_type_s}
+};
+
+void		pf_parse_type_c(t_list **alst, char *buf)
+{
+
+}
+
+void		seperate_conversion_and_literal(t_list **alst, const char *capsule)
+{
+	int			index;
+	int			posi;
+	char		buf[30];
+	int			len;
+
+	len = ft_strlen(capsule);
+	index = 0
+	posi = find_conversion_in_capsule(capsule);
+	while (index < FUNS_NB)
+	{
+		if(capsule[posi] = funs[index].symbol)
+		{
+			buf = ft_strncpy(buf, capsule, posi + 1);
+			buf[posi + 1] = '\0';
+			funs[index].f(alst, buf);
+		}
+		index++;
+	}
+	if (posi != len - 1) // there are literal after conversion
+		unit_lstadd_literal(alst, ft_strdup(capsule + posi + 1))
+}
+
+
+
+
+t_list		*cut_to_unit(char *s, int len)
+{
+	int		start;
+	t_list	*lst;
+
+	if (*s != '\0')
+	{
+		unit_lstadd_literal(&lst, ft_strdup(s));
+		start = ft_strlen(s) + 1;
+	}
+	else
+		start = 1;
+	while (start < len)
+	{
+		seperate_conversion_and_literal(&lst, ft_strcpy(s + start));
+		start += ft_strlen(s + start) + 1;
+	}
 	return (lst);
 }
-
-t_unit		*unit_access(t_list *lst)
-{
-	return ((t_unit*)lst->content);
-}
-
 
 t_list		*parse_string(const char *format, int *printed_nb, int *unit_nb)
 {
@@ -66,6 +116,9 @@ t_list		*parse_string(const char *format, int *printed_nb, int *unit_nb)
 		*printed_nb = new_len;
 		return (NULL);
 	}
-	// lst = cut_to_unit(new_format, real_p_nb, new_len, unit_nb);
+	lst = cut_to_unit(new_format, real_p_nb, new_len, unit_nb);
+	t_unit *unit = unit_access(lst);
+	printf("string:%s\n", unit->val.ltr.string );
+	printf("type:%d\n", unit->type);
 	return (lst = NULL);
 }

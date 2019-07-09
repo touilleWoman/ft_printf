@@ -4,9 +4,10 @@ int main(int argc, char const *argv[])
 {
 	(void)argc;
 	(void)argv;
-	void	*a;
 
-	a = NULL;
-	printf("ok\n%f\n", *(float*)&a);
+	printf("check:\n");
+	ft_printf("ok\n");
+	ft_printf("bonjour%d");
+
 	return 0;
 }

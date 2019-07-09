@@ -32,12 +32,3 @@ int		ft_printf(const char *format, ...)
 	return (printed_nb);
 }
 
-
-int		main()
-{
-	int		ret;
-
-	ret = ft_printf("ok%%lala\n");
-	printf("ret:%d\n", ret);
-	return (0);
-}

@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstcpy.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_bot.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/26 12:46:57 by jleblond          #+#    #+#             */
-/*   Updated: 2018/11/26 12:47:09 by jleblond         ###   ########.fr       */
+/*   Created: 2019/07/09 12:55:09 by jleblond          #+#    #+#             */
+/*   Updated: 2019/07/09 12:55:14 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstcpy(t_list *lst)
+void	ft_lstadd_bot(t_list **alst, t_list *new)
 {
-	t_list	*ret;
-	t_list	*ptr;
+	t_list	*tmp;
 
-	ret = NULL;
-	while (lst != NULL)
+	tmp = *alst;
+	if (tmp == NULL)
+		*alst = new;
+	else
 	{
-		if (ret == NULL)
-		{
-			ret = ft_lstnew(lst->content, lst->content_size);
-			ptr = ret;
-		}
-		else
-		{
-			ptr->next = ft_lstnew(lst->content, lst->content_size);
-			ptr = ptr->next;
-		}
-		lst = lst->next;
+		while (tmp != NULL)
+			tmp = tmp->next;
+		tmp = new;
 	}
-	return (ret);
 }

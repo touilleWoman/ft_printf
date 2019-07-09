@@ -17,14 +17,21 @@
 
 typedef	enum 		e_unit_type
 {
-	LITERAL = 0,
+	TYPE_LTR = 0,
+	TYPE_C,
+	TYPE_S,
+	TYPE_D,
 }					t_unit_type;
 
 typedef struct 		s_literal
 {
-	char			*text;
+	char			*string;
 }					t_literal;
 
+typedef struct 		s_type_c
+{
+	char			c;
+}					t_type_c;
 
 typedef	union		u_unit_union
 {

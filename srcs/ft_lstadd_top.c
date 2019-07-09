@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_top.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 15:24:31 by jleblond          #+#    #+#             */
-/*   Updated: 2018/11/23 15:24:32 by jleblond         ###   ########.fr       */
+/*   Created: 2019/07/09 12:46:01 by jleblond          #+#    #+#             */
+/*   Updated: 2019/07/09 12:46:05 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_strclr(char *s)
-{
-	int		i;
+#include "libft.h"
 
-	if (s != 0)
-	{
-		i = 0;
-		while (s[i] != 0)
-		{
-			s[i] = 0;
-			i++;
-		}
-	}
+void	ft_lstadd_top(t_list **alst, t_list *new)
+{
+	new->next = *alst;
+	*alst = new;
 }
