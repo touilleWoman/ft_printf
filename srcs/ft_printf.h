@@ -30,10 +30,9 @@ typedef struct	s_ptr_funs
 
 
 
+
 char		*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
 t_list		*parse_string(const char *format, int *printed_nb, int *unit_nb);
-int			ft_printf(const char *format, ...);
-t_list		*cut_to_unit(char *s, int len);
 
 
 #endif

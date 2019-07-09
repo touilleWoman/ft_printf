@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -10,6 +11,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+=======
+>>>>>>> 0fca97f66ba6da7912f3d26d8c01072cd31f3657
 
 .PHONY: all clean fclean re
 
@@ -19,6 +22,7 @@ CFLAGS = -Wall -Werror -Wextra
 
 NAME = libftprintf.a
 
+<<<<<<< HEAD
 SOURCE_NAME = ft_printf.c \
 					pf_parse.c\
 					pf_deal_with_double_percentage.c\
@@ -54,8 +58,44 @@ check:all
 
 clean:
 	rm -f $(OBJ)
+=======
+SOURCE = ft_printf.c \
+			pf_parse.c\
+			pf_parse_cut_tu_unit.c\
+			pf_unit_list.c\
+
+OFILE = $(SOURCE:.c=.o)
+
+HEADER = ft_printf.h pf_unit.h
+
+LIBFTA = libft/libft.a
+
+INC = -I ./libft
+
+all:$(NAME)
+
+$(NAME): $(OFILE)
+	$(CC) $(CFLAGS) $(OFILE) $(LIBFTA) $(INC) -L  -o $(NAME)
+
+%.o: %.c $(HEADER) $(LIBFTA)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INC)
+
+$(LIBFTA): FORCE
+	make -C ./libft
+
+FORCE:
+
+clean:
+	rm -f $(OFILE)
+>>>>>>> 0fca97f66ba6da7912f3d26d8c01072cd31f3657
 
 fclean: clean
 	rm -f $(NAME)
 
+<<<<<<< HEAD
 re:fclean all
+=======
+re:fclean all
+
+
+>>>>>>> 0fca97f66ba6da7912f3d26d8c01072cd31f3657
