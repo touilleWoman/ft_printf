@@ -1,20 +1,19 @@
-#include "ft_printf.h"
+#include <stdio.h>
+#include <stdlib.h>
 
+#include "CuTest.h"
+#include "../srcs/ft_printf.h"
 
-void		test_deal_with_double_percentage(char *s, char *expected)
+void Test_deal_with_double_percentage(CuTest *tc)
 {
+
 	char	*new_format;
+	int		real_p_nb;
+	int		new_len;
 
-	new_format = deal_with_double_percentage(s, , &10 );
-	if (ft_strcmp(s, expected) != 0)
-		printf("error, s=%s, expected =%sn", s, expected);
-}
+	// real_p_nb = 0;
+	// new_len = 0;
+	new_format = deal_with_double_percentage("bonjour%%", &real_p_nb, &new_len);
 
-int main()
-{
-	test_deal_with_double_percentage("%%%", "%");
-	test_deal_with_double_percentage("bonjour%", "bonjour");
-	test_deal_with_double_percentage("bonjour%%", "bonjour%");
-	test_deal_with_double_percentage("ok%%%%%ok", "ok%%");
-	return 0;
+	CuAssertStrEquals(tc, "bonjour%", new_format);
 }

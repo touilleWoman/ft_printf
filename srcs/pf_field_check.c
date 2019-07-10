@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-int		is_option(char c)
-{
-	if (ft_strchr("-+0 ", c) == 0)
-		return (FALSE);
-	return (TRUE);
-}
+// int		is_flags(char c)
+// {
+// 	if (ft_strchr("-+0 ", c) == 0)
+// 		return (FALSE);
+// 	return (TRUE);
+// }
 
 int		is_conversion(char c)
 {
@@ -26,17 +26,17 @@ int		is_conversion(char c)
 	return (TRUE);
 }
 
-int		is_valid(char c)
-{
-	if (is_flag(c) || is_conversion(c))
-		return (TRUE)
-	return (FALSE);
-}
+// int		is_valid(char c)
+// {
+// 	if (is_flag(c) || is_conversion(c))
+// 		return (TRUE)
+// 	return (FALSE);
+// }
 
-void	field_check(char c, int *cnt_printed_chars)
-{
-	if (is_conversion(c))
-	{
-		conversion_manage(c);
-	}
-}
+// void	field_check(char c, int *cnt_printed_chars)
+// {
+// 	if (is_conversion(c))
+// 	{
+// 		conversion_manage(c);
+// 	}
+// }

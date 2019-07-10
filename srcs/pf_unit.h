@@ -13,7 +13,7 @@
 #ifndef PF_UNIT_H
 # define PF_UNIT_H
 
-#include "../libft/libft.h"
+#include "libft.h"
 
 typedef	enum 		e_unit_type
 {
@@ -30,12 +30,13 @@ typedef struct 		s_literal
 
 typedef struct 		s_type_c
 {
-	char			c;
+	unsigned char	character;
 }					t_type_c;
 
 typedef	union		u_unit_union
 {
 	t_literal		ltr;
+	t_type_c		c;
 	// char			c;
 	// char			*s;
 	// void			*p;
@@ -56,6 +57,8 @@ typedef struct 					s_unit
 
 t_list		*unit_list_new(t_unit const *unit);
 t_unit		*unit_access(t_list *lst);
+void		unit_lstadd_bot(t_list **alst, t_unit const *unit);
+
 
 
 # endif
