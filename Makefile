@@ -33,7 +33,7 @@ SOURCE_NAME = ft_printf.c \
 					ft_strcpy.c\
 					ft_strncpy.c\
 					ft_memcpy.c\
-
+					pf_test_functions.c\
 
 SOURCE_PATH = ./srcs
 

@@ -25,7 +25,7 @@ typedef	enum 		e_unit_type
 
 typedef struct 		s_literal
 {
-	char			*string;
+	const char		*string;
 }					t_literal;
 
 typedef struct 		s_type_c
@@ -49,16 +49,18 @@ typedef	union		u_unit_union
 	// float			f;
 }					t_unit_union;
 
-typedef struct 					s_unit
+typedef struct		s_unit
 {
 		t_unit_union	val;
 		t_unit_type		type;
-}								t_unit;
+}					t_unit;
 
-t_list		*unit_list_new(t_unit const *unit);
-t_unit		*unit_access(t_list *lst);
-void		unit_lstadd_bot(t_list **alst, t_unit const *unit);
+t_unit				*unit_access(t_list *lst);
+void				unit_lstadd_bot(t_list **alst, t_unit const *unit);
+void				unit_lstadd_literal(t_list **alst, const char *literal_piece);
 
 
+//test functions
+void 				show_list(t_list   *lst);
 
 # endif

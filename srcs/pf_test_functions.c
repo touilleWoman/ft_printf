@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_bot.c                                    :+:      :+:    :+:   */
+/*   pf_test_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 12:55:09 by jleblond          #+#    #+#             */
-/*   Updated: 2019/07/09 12:55:14 by jleblond         ###   ########.fr       */
+/*   Created: 2019/07/11 12:09:17 by jleblond          #+#    #+#             */
+/*   Updated: 2019/07/11 12:09:19 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_lstadd_bot(t_list **alst, t_list *new)
+void 	show_list(t_list   *lst)
 {
-	t_list	*tmp;
+	t_unit		*unit;
+	int			index;
 
-	tmp = *alst;
-	if (*alst == NULL)
-		*alst = new;
-	else
+	index = 0;
+	while (lst != NULL)
 	{
-		while(tmp->next != NULL)
-		{
-			tmp = tmp->next;
-		}
-		tmp->next = new;
+		printf("unit index%d\n", index);
+		unit = unit_access(lst);
+		if (unit->type == TYPE_LTR)
+			printf("content of TYPE_LTR is:%s|\n", unit->val.ltr.string);
+		if (unit->type == TYPE_C)
+			printf("content of TYPE_C is:%c|\n", unit->val.c.character);
+		printf("\n\n");
+		lst = lst->next;
+		index++;
 	}
+
 }

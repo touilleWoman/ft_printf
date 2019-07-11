@@ -4,7 +4,7 @@
 #include "CuTest.h"
 #include "../srcs/ft_printf.h"
 
-void Test_deal_with_double_percentage(CuTest *tc)
+void Test_function_deal_with_double_percentage(CuTest *tc)
 {
 
 	char	*new_format;
@@ -24,3 +24,4 @@ void Test_deal_with_double_percentage(CuTest *tc)
 	CuAssertIntEquals(tc, 2, real_p_nb);
 	CuAssertIntEquals(tc, 12, new_len);
 }
+

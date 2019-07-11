@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void		unit_lstadd_literal(t_list **alst, char *literal_piece)
+void		unit_lstadd_literal(t_list **alst, const char *literal_piece)
 {
 	t_unit		unit;
 
@@ -66,7 +66,7 @@ void		cut_conversion_and_literal(t_list **alst, const char *capsule, va_list arg
 {
 	int			index;
 	int			posi;
-	char		*buf;
+	char		buf[50];
 	int			len;
 
 	len = ft_strlen(capsule);
@@ -76,21 +76,21 @@ void		cut_conversion_and_literal(t_list **alst, const char *capsule, va_list arg
 	{
 		if(capsule[posi] ==  funs[index].symbol)
 		{
-			buf = (char*)malloc(sizeof(char) * (posi + 2));
+			// buf = (char*)malloc(sizeof(char) * (posi + 2));
 
-			buf = ft_strncpy(buf, capsule, posi + 1); //check later
+			ft_strncpy(buf, capsule, posi + 1); //check later
 			buf[posi + 1] = '\0';
 			funs[index].f(alst, buf, args);
 		}
 		index++;
 	}
-	if (posi != len - 1) // if there are literal after conversion
+	if (posi != len - 1) // if there are literal after conversion, add ne literal unit
 		unit_lstadd_literal(alst, ft_strdup(capsule + posi + 1));
 }
 
 /*
-** one capsule is [flags][width][.precision][size][conversion]+[literal],
-** excepte the literal piece in the begining is a special one
+** one capsule is [flags][width][.precision][size][conversion][literal],
+** excepte the one in the begining, it contains only literal
 **	Ex "literal%+4dliteral%fliteral" cut to capsule will be
 **	 "literal|+4dliteral|fliteral"
 **  PS: % are already replaced by '\0'
@@ -100,17 +100,18 @@ t_list		*cut_to_capsule(char *s, int len, va_list args)
 {
 	int		start;
 	t_list	*lst;
-	char	s2[100];
+	char	*capsule;
 
-
-
+	lst = NULL;
 	if (*s != '\0')
 		unit_lstadd_literal(&lst, ft_strdup(s));
 	start = ft_strlen(s) + 1;
 	while (start < len)
 	{
-		ft_strcpy(s2, s+start);
-		cut_conversion_and_literal(&lst, s2, args);
+		capsule = ft_strdup(s + start);
+		cut_conversion_and_literal(&lst, capsule, args);
+		free(capsule);
+		capsule = NULL;
 		start += ft_strlen(s + start) + 1;
 	}
 	return (lst);
