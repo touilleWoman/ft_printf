@@ -29,8 +29,7 @@ typedef struct	s_ptr_funs
 }				t_ptr_funs;
 
 
-
-int			ft_printf(const char *format, ...);
+int		ft_printf(const char * restrict format, ...);
 char		*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
 t_list		*cut_to_capsule(char *s, int len, va_list args);
 

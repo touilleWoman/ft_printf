@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int		ft_printf(const char *format, ...)
+int		ft_printf(const char * restrict format, ...)
 {
 	va_list			args;
 	int				printed_nb;

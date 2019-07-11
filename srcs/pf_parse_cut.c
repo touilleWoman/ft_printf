@@ -89,7 +89,7 @@ void		cut_conversion_and_literal(t_list **alst, const char *capsule, va_list arg
 }
 
 /*
-** one capsule is [flags][width][.precision][size][conversion][literal],
+** one capsule is [flags][width][.precision][modifier][conversion][literal],
 ** excepte the one in the begining, it contains only literal
 **	Ex "literal%+4dliteral%fliteral" cut to capsule will be
 **	 "literal|+4dliteral|fliteral"
