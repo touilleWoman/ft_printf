@@ -23,20 +23,26 @@ typedef	enum 		e_unit_type
 	TYPE_D,
 }					t_unit_type;
 
-typedef struct 		s_literal
+typedef struct 		s_type_ltr
 {
-	const char		*string;
-}					t_literal;
+	const char		*literal;
+}					t_type_ltr;
 
 typedef struct 		s_type_c
 {
 	unsigned char	character;
 }					t_type_c;
 
+typedef struct 		s_type_s
+{
+	const char		*string;
+}					t_type_s;
+
 typedef	union		u_unit_union
 {
-	t_literal		ltr;
+	t_type_ltr		ltr;
 	t_type_c		c;
+	t_type_s		s;
 	// char			c;
 	// char			*s;
 	// void			*p;

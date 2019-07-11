@@ -23,7 +23,7 @@ void 	show_list(t_list   *lst)
 		printf("unit index%d\n", index);
 		unit = unit_access(lst);
 		if (unit->type == TYPE_LTR)
-			printf("content of TYPE_LTR is:%s|\n", unit->val.ltr.string);
+			printf("content of TYPE_LTR is:%s|\n", unit->val.ltr.literal);
 		if (unit->type == TYPE_C)
 			printf("content of TYPE_C is:%c|\n", unit->val.c.character);
 		printf("\n\n");
