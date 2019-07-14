@@ -12,16 +12,15 @@
 
 #include "ft_printf.h"
 
-
-int		pf_print_type_ltr(t_unit *unit)
+int		print_ltr(t_unit *unit)
 {
 	ft_putstr(unit->val.ltr.literal);
 	return (ft_strlen(unit->val.ltr.literal));
 }
 
-int		pf_print_type_c(t_unit *unit)
+int		print_c(t_unit *unit)
 {
-	char s[unit->val.c.width];
+	char	s[unit->val.c.width];
 	int		width;
 
 	width = unit->val.c.width;
@@ -40,16 +39,13 @@ int		pf_print_type_c(t_unit *unit)
 	return (1);
 }
 
-
-
 int		print_list(t_list *lst)
 {
-	t_unit		*unit;
-	static t_print_funs		funs[PRINT_FUNS_NB] = {
-	{TYPE_LTR, pf_print_type_ltr}, {TYPE_C, pf_print_type_c}
-	};
-	int		index;
-	int		printed_nb;
+	t_unit				*unit;
+	static t_print_funs	funs[PRINT_FUNS_NB] = {{TYPE_LTR, print_ltr},
+	{TYPE_C, print_c}};
+	int					index;
+	int					printed_nb;
 
 	printed_nb = 0;
 	while (lst != NULL)
@@ -59,9 +55,7 @@ int		print_list(t_list *lst)
 		while (index < PRINT_FUNS_NB)
 		{
 			if (funs[index].type == unit->type)
-			{
-				printed_nb +=funs[index].f(unit);
-			}
+				printed_nb += funs[index].f(unit);
 			index++;
 		}
 		lst = lst->next;
@@ -69,8 +63,7 @@ int		print_list(t_list *lst)
 	return (printed_nb);
 }
 
-
-int		ft_printf(const char * restrict format, ...)
+int		ft_printf(const char *restrict format, ...)
 {
 	va_list			args;
 	int				printed_nb;
@@ -78,8 +71,6 @@ int		ft_printf(const char * restrict format, ...)
 
 	va_start(args, format);
 	lst = parse_string(format, args);
-	// if (lst == NULL)
-	// 	return (printed_nb);
 	va_end(args);
 	printed_nb = print_list(lst);
 	return (printed_nb);

@@ -40,6 +40,8 @@ void Test_final_result_type_c(CuTest *tc)
 		ft_printf("okone%-20coktwo%-lcokthree\n", 'a', 'b'));
 	CuAssertIntEquals(tc, printf("%12coktwo%-lcokthree%-10c\n", 'a', 'b', 'c'),
 		ft_printf("%12coktwo%-lcokthree%-10c\n", 'a', 'b', 'c'));
+	CuAssertIntEquals(tc, printf("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e'),
+		ft_printf("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e'));
  }
 
 

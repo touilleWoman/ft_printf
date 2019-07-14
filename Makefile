@@ -20,8 +20,9 @@ NAME = libftprintf.a
 
 SOURCE_NAME = ft_printf.c \
 					pf_parse.c\
-					pf_parse_cut.c\
 					pf_deal_with_double_percentage.c\
+					pf_parse_tools.c\
+					pf_parse_type_c_s.c\
 					pf_unit_list.c\
 					pf_field_check.c \
 					ft_strlen.c\

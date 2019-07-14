@@ -25,9 +25,16 @@ void		unit_lstadd_bot(t_list **alst, t_unit const *unit)
 	ft_lstadd_bot(alst, unit_list_new(unit));
 }
 
-
-
 t_unit		*unit_access(t_list *lst)
 {
 	return ((t_unit*)lst->content);
+}
+
+void		unit_lstadd_literal(t_list **alst, const char *literal_piece)
+{
+	t_unit		unit;
+
+	unit.type = TYPE_LTR;
+	unit.val.ltr.literal = literal_piece;
+	unit_lstadd_bot(alst, &unit);
 }

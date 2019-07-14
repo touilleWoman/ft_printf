@@ -13,7 +13,7 @@
 #include "ft_printf.h"
 
 /*
-** single% are converted to 0 then double % are converted to single%
+** 		single% are converted to 0 then double % are converted to single%
 */
 
 int				count_single_p_then_to_zero(char *s, int len)
