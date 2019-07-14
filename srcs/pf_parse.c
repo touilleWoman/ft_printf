@@ -38,13 +38,12 @@ int		find_conversion_in_capsule(const char *capsule)
 
 void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_list args)
 {
-	int			index;
-	int			posi;
-	char		buf[100];
-	int			len;
-	static t_parse_funs		funs[PARSE_FUNS_NB] = {
-		{'c', pf_parse_type_c}
-		// {'c', pf_parse_type_c},{'s', pf_parse_type_s}
+	int					index;
+	int					posi;
+	char				buf[100];
+	int					len;
+	static t_parse_funs	funs[PARSE_FUNS_NB] = {
+		{'c', pf_parse_type_c},{'s', pf_parse_type_s}
 		};
 
 
@@ -95,6 +94,6 @@ t_list		*parse_string(const char *format, va_list args)
 
 	new_format = deal_with_double_percentage(format, &real_p_nb, &new_len);
 	lst = cut_to_capsule(new_format,new_len, args);
-	// show_list(lst);
+	show_list(lst);
 	return (lst);
 }

@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int			get_width(char *s, int *width_len)
+int			get_digits(char *s, int *digits_len)
 {
 	int		i;
 	char	s1[100];
@@ -25,7 +25,7 @@ int			get_width(char *s, int *width_len)
 		s1[i] = s[i];
 		i++;
 	}
-	*width_len = i;
+	*digits_len = i;
 	s1[i] = '\0';
 	return (ft_atoi(s1));
 }

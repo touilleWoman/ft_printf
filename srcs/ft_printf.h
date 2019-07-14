@@ -21,7 +21,7 @@
 #include "libft.h"
 #include <wchar.h>
 
-#define PARSE_FUNS_NB 1
+#define PARSE_FUNS_NB 2
 #define PRINT_FUNS_NB 2
 #define ERROR -1
 
@@ -37,7 +37,7 @@ typedef struct	s_print_funs
 	int			(*f)();
 }				t_print_funs;
 
-int				get_width(char *s, int *width_len);
+int				get_digits(char *s, int *digits_len);
 
 
 int				ft_printf(const char *restrict format, ...);
@@ -48,6 +48,8 @@ t_list			*parse_string(const char *format, va_list args);
 t_list			*cut_to_capsule(char *s, int len, va_list args);
 int				is_conversion(char c);
 void			pf_parse_type_c(t_list **alst, char *buf, va_list args);
+void			pf_parse_type_s(t_list **alst, char *buf, va_list args);
+
 
 //print
 

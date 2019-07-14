@@ -13,30 +13,14 @@
 #include "ft_printf.h"
 
 
-int			get_width(char *s, int *width_len)
-{
-	int		i;
-	char	s1[100];
 
-	i = 0;
-	if (ft_isdigit(*s) == FALSE)
-		return (FALSE);
-	while (ft_isdigit(s[i]))
-	{
-		s1[i] = s[i];
-		i++;
-	}
-	*width_len = i;
-	s1[i] = '\0';
-	return (ft_atoi(s1));
-}
 
 void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
 {
  	t_unit	unit;
  	int		i;
- 	int		width;
- 	int		width_len;
+ 	int		digits;
+ 	int		digits_len;
 
  	i = 0;
  	ft_bzero(&unit, sizeof(t_unit));
@@ -45,11 +29,11 @@ void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
 		unit.val.c.flag_minus = TRUE;
 		i++;
 	}
-	width = get_width(buf + i, &width_len);
-	if (width != FALSE)
+	digits = get_digits(buf + i, &digits_len);
+	if (digits != FALSE)
 	{
-		unit.val.c.width = width;
-		i += width_len;
+		unit.val.c.width = digits;
+		i += digits_len;
 	};
 	if (buf[i] == 'l')
 	{
@@ -70,12 +54,62 @@ void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
  	exit(0);
 }
 
+void		pf_parse_type_s(t_list **alst, char *buf, va_list args)
+{
+	 	t_unit	unit;
+	 	int		i;
+	 	int		digits;
+	 	int		digits_len;
+
+	 	i = 0;
+	 	ft_bzero(&unit, sizeof(t_unit));
+		if (buf[0] == '-')
+		{
+			unit.val.s.flag_minus = TRUE;
+			i++;
+		}
+		digits = get_digits(buf + i, &digits_len);
+		if (digits != FALSE)
+		{
+			unit.val.s.width = digits;
+			i += digits_len;
+		};
+		if (buf[i] == '.')
+		{
+			i++;
+			digits = get_digits(buf + i, &digits_len);
+			if (digits != FALSE)
+			{
+				unit.val.s.precision = digits;
+				i += digits_len;
+			}
+		}
+		if (buf[i] == 'l')
+		{
+			unit.val.s.modifier_l = TRUE;
+			i++;
+		}
+		if (buf[i] == 's')
+		{
+			unit.type = TYPE_S;
+			unit.val.s.string = ft_strdup(va_arg(args, char *));
+			// if (unit.val.s.modifier_l == TRUE)
+			// 	unit.val.s.character = va_arg(args, wint_t);
+			// else
+			// 	unit.val.c.character = va_arg(args, int);
+			unit_lstadd_bot(alst, &unit);
+			return ;
+		}
+	 	printf("error: %%s format wrong\n");
+	 	exit(0);
+}
+
 
 
 
 
 /*
-** one capsule is [flags][width][.precision][modifier][conversion][literal],
+** one capsule is [flags][digits][.precision][modifier][conversion][literal],
 ** excepte the one in the begining, it contains only literal
 **	Ex "literal%+4dliteral%fliteral" cut to capsule will be
 **	 "literal|+4dliteral|fliteral"

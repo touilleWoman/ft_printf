@@ -38,6 +38,10 @@ typedef struct 		s_type_c
 
 typedef struct 		s_type_s
 {
+	t_bool			flag_minus;
+	unsigned int	width;
+	unsigned int	precision;
+	t_bool			modifier_l;
 	const char		*string;
 }					t_type_s;
 
