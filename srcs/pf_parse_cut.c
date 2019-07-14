@@ -17,7 +17,7 @@ void		unit_lstadd_literal(t_list **alst, const char *literal_piece)
 	t_unit		unit;
 
 	unit.type = TYPE_LTR;
-	unit.val.ltr.string = literal_piece;
+	unit.val.ltr.literal = literal_piece;
 	unit_lstadd_bot(alst, &unit);
 }
 
@@ -50,23 +50,69 @@ t_ptr_funs		funs[FUNS_NB] = {
 // {'c', pf_parse_type_c},{'s', pf_parse_type_s}
 };
 
+
+int			get_width(char *s)
+{
+	int		i;
+	char	s1[100];
+
+	i = 0;
+	if (ft_isdigit(*s) == FALSE)
+		return (FALSE);
+	while (ft_isdigit(s[i]))
+	{
+		s1[i] = s[i];
+		i++;
+	}
+	s1[i] = '\0';
+	return (ft_atoi(s1));
+
+}
+
 void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
 {
  	t_unit	unit;
+ 	int		i;
+ 	int		width;
 
- 	if (*buf != 'c')
- 		printf("error, %%c don't takes flags\n");
- 	unit.type = TYPE_C;
- 	unit.val.c.character = va_arg(args, int);
- 	unit_lstadd_bot(alst, &unit);
+ 	i = 0;
+ 	ft_bzero(&unit, sizeof(t_unit));
+	if (buf[0] == '-')
+	{
+		unit.val.c.flag_minus = TRUE;
+		i++;
+	}
+	width = get_width(buf + i);
+	if (width != FALSE)
+	{
+		unit.val.c.width = width;
+		i += width / 10 + 1;
+	};
+	if (buf[i] == 'l')
+	{
+		unit.val.c.modifier_l = TRUE;
+		i++;
+	}
+	if (buf[i] == 'c')
+	{
+		unit.type = TYPE_C;
+		if (unit.val.c.modifier_l == TRUE)
+			unit.val.c.character = va_arg(args, wint_t);
+		else
+			unit.val.c.character = va_arg(args, int);
+		unit_lstadd_bot(alst, &unit);
+		return ;
+	}
+ 	printf("error: %%c format wrong\n");
+ 	exit(0);
 }
 
 
-void		cut_conversion_and_literal(t_list **alst, const char *capsule, va_list args)
+void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_list args)
 {
 	int			index;
 	int			posi;
-	char		buf[50];
+	char		buf[100];
 	int			len;
 
 	len = ft_strlen(capsule);
@@ -76,8 +122,6 @@ void		cut_conversion_and_literal(t_list **alst, const char *capsule, va_list arg
 	{
 		if(capsule[posi] ==  funs[index].symbol)
 		{
-			// buf = (char*)malloc(sizeof(char) * (posi + 2));
-
 			ft_strncpy(buf, capsule, posi + 1); //check later
 			buf[posi + 1] = '\0';
 			funs[index].f(alst, buf, args);
@@ -109,7 +153,7 @@ t_list		*cut_to_capsule(char *s, int len, va_list args)
 	while (start < len)
 	{
 		capsule = ft_strdup(s + start);
-		cut_conversion_and_literal(&lst, capsule, args);
+		seperate_conversion_and_literal(&lst, capsule, args);
 		free(capsule);
 		capsule = NULL;
 		start += ft_strlen(s + start) + 1;

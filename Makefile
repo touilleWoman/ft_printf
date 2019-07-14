@@ -32,7 +32,10 @@ SOURCE_NAME = ft_printf.c \
 					ft_strchr.c\
 					ft_strcpy.c\
 					ft_strncpy.c\
+					ft_bzero.c \
 					ft_memcpy.c\
+					ft_atoi.c\
+					ft_isdigit.c\
 					pf_test_functions.c\
 
 SOURCE_PATH = ./srcs

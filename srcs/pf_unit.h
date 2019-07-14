@@ -30,6 +30,9 @@ typedef struct 		s_type_ltr
 
 typedef struct 		s_type_c
 {
+	t_bool			flag_minus;
+	unsigned int	width;
+	t_bool			modifier_l;
 	unsigned char	character;
 }					t_type_c;
 

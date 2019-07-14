@@ -25,7 +25,13 @@ void 	show_list(t_list   *lst)
 		if (unit->type == TYPE_LTR)
 			printf("content of TYPE_LTR is:%s|\n", unit->val.ltr.literal);
 		if (unit->type == TYPE_C)
-			printf("content of TYPE_C is:%c|\n", unit->val.c.character);
+		{
+			printf("content of TYPE_C is:\n");
+			printf("flag_minus:%d|\n", unit->val.c.flag_minus);
+			printf("width:%d|\n", unit->val.c.width);
+			printf("modifier_l:%d|\n", unit->val.c.modifier_l);
+			printf("character:%c|\n", unit->val.c.character);
+		}
 		printf("\n\n");
 		lst = lst->next;
 		index++;

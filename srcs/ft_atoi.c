@@ -1,33 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_unit_list.c                                     :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/09 10:51:15 by jleblond          #+#    #+#             */
-/*   Updated: 2019/07/09 10:51:19 by jleblond         ###   ########.fr       */
+/*   Created: 2018/11/23 09:40:25 by jleblond          #+#    #+#             */
+/*   Updated: 2018/11/23 09:40:26 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-t_list		*unit_list_new(t_unit const *unit)
+int		ft_atoi(const char *str)
 {
-	t_list *lst;
+	int		i;
+	int		ret;
+	int		neg;
 
-	lst = ft_lstnew((void const *)unit, sizeof(t_unit));
-	return (lst);
-}
-
-void		unit_lstadd_bot(t_list **alst, t_unit const *unit)
-{
-	ft_lstadd_bot(alst, unit_list_new(unit));
-}
-
-
-
-t_unit		*unit_access(t_list *lst)
-{
-	return ((t_unit*)lst->content);
+	neg = 1;
+	i = 0;
+	ret = 0;
+	while (((str[i] <= 13) && (str[i] >= 9)) || (str[i] == 32))
+	{
+		i++;
+	}
+	if ((str[i] == '+') || (str[i] == '-'))
+	{
+		if (str[i] == '-')
+		{
+			neg = -neg;
+		}
+		i++;
+	}
+	while ((str[i] != 0) && (str[i] >= '0') && (str[i] <= '9'))
+	{
+		ret = ret * 10 + str[i] - '0';
+		i++;
+	}
+	return (ret * neg);
 }

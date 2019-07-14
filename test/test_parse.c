@@ -25,3 +25,10 @@ void Test_function_deal_with_double_percentage(CuTest *tc)
 	CuAssertIntEquals(tc, 12, new_len);
 }
 
+void Test_function_get_width(CuTest *tc)
+{
+	CuAssertIntEquals(tc, 123, get_width("123l"));
+	CuAssertIntEquals(tc, ERROR , get_width("l"));
+	CuAssertIntEquals(tc, 1, get_width("1l"));
+	CuAssertIntEquals(tc, 1, get_width("01l"));
+ }
