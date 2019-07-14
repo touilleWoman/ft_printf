@@ -45,13 +45,9 @@ int		find_conversion_in_capsule(const char *capsule)
 		return (posi);
 }
 
-t_ptr_funs		funs[FUNS_NB] = {
-{'c', pf_parse_type_c}
-// {'c', pf_parse_type_c},{'s', pf_parse_type_s}
-};
 
 
-int			get_width(char *s)
+int			get_width(char *s, int *width_len)
 {
 	int		i;
 	char	s1[100];
@@ -64,6 +60,7 @@ int			get_width(char *s)
 		s1[i] = s[i];
 		i++;
 	}
+	*width_len = i;
 	s1[i] = '\0';
 	return (ft_atoi(s1));
 
@@ -74,6 +71,7 @@ void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
  	t_unit	unit;
  	int		i;
  	int		width;
+ 	int		width_len;
 
  	i = 0;
  	ft_bzero(&unit, sizeof(t_unit));
@@ -82,11 +80,11 @@ void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
 		unit.val.c.flag_minus = TRUE;
 		i++;
 	}
-	width = get_width(buf + i);
+	width = get_width(buf + i, &width_len);
 	if (width != FALSE)
 	{
 		unit.val.c.width = width;
-		i += width / 10 + 1;
+		i += width_len;
 	};
 	if (buf[i] == 'l')
 	{
@@ -108,19 +106,25 @@ void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
 }
 
 
+
 void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_list args)
 {
 	int			index;
 	int			posi;
 	char		buf[100];
 	int			len;
+	static t_parse_funs		funs[PARSE_FUNS_NB] = {
+		{'c', pf_parse_type_c}
+		// {'c', pf_parse_type_c},{'s', pf_parse_type_s}
+		};
+
 
 	len = ft_strlen(capsule);
 	index = 0;
 	posi = find_conversion_in_capsule(capsule);
-	while (index < FUNS_NB)
+	while (index < PARSE_FUNS_NB)
 	{
-		if(capsule[posi] ==  funs[index].symbol)
+		if(capsule[posi] ==  funs[index].type)
 		{
 			ft_strncpy(buf, capsule, posi + 1); //check later
 			buf[posi + 1] = '\0';

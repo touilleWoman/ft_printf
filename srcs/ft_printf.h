@@ -21,24 +21,32 @@
 #include "libft.h"
 #include <wchar.h>
 
-#define FUNS_NB 1
+#define PARSE_FUNS_NB 1
+#define PRINT_FUNS_NB 2
 #define ERROR -1
 
-typedef struct	s_ptr_funs
+typedef struct	s_parse_funs
 {
-	char		symbol;
-	void		(*f)(t_list **alst, char *buf, va_list args);
-}				t_ptr_funs;
+	char		type;
+	void		(*f)();
+}				t_parse_funs;
+
+typedef struct	s_print_funs
+{
+	t_unit_type	type;
+	int		(*f)();
+}				t_print_funs;
+
+int			get_width(char *s, int *width_len);
 
 
 int			ft_printf(const char * restrict format, ...);
 char		*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
 t_list		*cut_to_capsule(char *s, int len, va_list args);
+t_list		*parse_string(const char *format, va_list args);
 
-t_list		*parse_string(const char *format, int *printed_nb, va_list args);
 int			is_conversion(char c);
 void		pf_parse_type_c(t_list **alst, char *buf, va_list args);
 //parse params
-int			get_width(char *s);
 
 #endif

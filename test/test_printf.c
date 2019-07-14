@@ -25,10 +25,24 @@ void Test_function_deal_with_double_percentage(CuTest *tc)
 	CuAssertIntEquals(tc, 12, new_len);
 }
 
-void Test_function_get_width(CuTest *tc)
-{
-	CuAssertIntEquals(tc, 123, get_width("123l"));
-	CuAssertIntEquals(tc, ERROR , get_width("l"));
-	CuAssertIntEquals(tc, 1, get_width("1l"));
-	CuAssertIntEquals(tc, 1, get_width("01l"));
+
+// void Test_function_get_width(CuTest *tc)
+// {
+// 	CuAssertIntEquals(tc, 123, get_width("123l"));
+// 	CuAssertIntEquals(tc, FALSE , get_width("l"));
+// 	CuAssertIntEquals(tc, 1, get_width("1l"));
+// 	CuAssertIntEquals(tc, 1, get_width("01l"));
+//  }
+
+void Test_final_result_type_c(CuTest *tc)
+ {
+	CuAssertIntEquals(tc, printf("okone%-20coktwo%-lcokthree\n", 'a', 'b'),
+		ft_printf("okone%-20coktwo%-lcokthree\n", 'a', 'b'));
+	CuAssertIntEquals(tc, printf("%12coktwo%-lcokthree%-10c\n", 'a', 'b', 'c'),
+		ft_printf("%12coktwo%-lcokthree%-10c\n", 'a', 'b', 'c'));
  }
+
+
+
+
+

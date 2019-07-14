@@ -30,7 +30,6 @@ int main()
 		printf("ret:%d\n", d);
 		d =printf("%5c\n", c);
 		printf("ret:%d\n", d);
-		printf("okone%12coktwo%-cokthree%%%-c%%", 'a', 'b');
 	// char *s = "bonjour";
 	// printf("%s|\n", s);
 	// // printf("%+s|\n",s);
