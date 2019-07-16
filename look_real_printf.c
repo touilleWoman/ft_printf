@@ -37,8 +37,11 @@ int main()
 // 	- and width
 	// precision
 	// l
+	int	d;
 	char *s = "bonjour";
-	printf("s:%s|\n", s);
+	d = printf("s:%s|\n", s);
+	printf("%d\n", d);
+
 	// printf("+s:%+s|\n",s);
 	printf("-s:%-s|\n",s);
 	// printf("0s:%10s|\n",s);
@@ -49,5 +52,8 @@ int main()
 	printf(".5s:%.5s|\n",s);
 	printf("10.5s:%10.5s|\n",s);
 	printf("10.5ls:%10.5s|\n",s);
+	s = NULL;
+	d = printf("%s\n", s);
+	printf("%d\n", d);
 	return 0;
 }

@@ -12,9 +12,6 @@
 
 #include "ft_printf.h"
 
-
-
-
 void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
 {
  	t_unit	unit;
@@ -44,7 +41,12 @@ void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
 	{
 		unit.type = TYPE_C;
 		if (unit.val.c.modifier_l == TRUE)
-			unit.val.c.character = va_arg(args, wint_t);
+		{
+			if (sizeof(wint_t) < sizeof(int))
+				unit.val.c.character = (wint_t)va_arg(args, int);
+			else
+				unit.val.c.character = va_arg(args, wint_t);
+		}
 		else
 			unit.val.c.character = va_arg(args, int);
 		unit_lstadd_bot(alst, &unit);
@@ -92,7 +94,9 @@ void		pf_parse_type_s(t_list **alst, char *buf, va_list args)
 		if (buf[i] == 's')
 		{
 			unit.type = TYPE_S;
-			unit.val.s.string = ft_strdup(va_arg(args, char *));
+			unit.val.s.string = va_arg(args, char *);
+			if (unit.val.s.string == NULL)
+				unit.val.s.string = "(null)";
 			// if (unit.val.s.modifier_l == TRUE)
 			// 	unit.val.s.character = va_arg(args, wint_t);
 			// else
