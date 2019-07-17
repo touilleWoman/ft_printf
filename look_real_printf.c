@@ -13,7 +13,7 @@ int main()
 
 		// int	d;
 		// char c = 'a';
-		printf("lc:%lc\n", (wint_t)60);
+		// printf("lc:%lc\n", (wint_t)60);
 		// // d = printf("------c:%-------10c|\n", c);
 		// d = printf("-10cc:%-10lc|\n", c);
 		// d = printf("10c:%10c|\n", c);
@@ -60,11 +60,9 @@ int main()
 	// printf("%d\n", d);
 
 
-	// printf("d:%ld\n", 5);
-	// printf("d:%lld\n", 5);
-	// printf("d:%hhd\n", 5);
-	// printf("d:%hllld\n", 5);
-	// printf("d:%--d\n", 5);
+	printf("%+d\n%10.1d\n%.10d\n", 543, 543, 543);
+	printf("%lld\n", (long long)53545135213513);
+	printf("d:%--d\n", 5);
 
 
 	return 0;
