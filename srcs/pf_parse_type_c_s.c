@@ -12,100 +12,124 @@
 
 #include "ft_printf.h"
 
-void		pf_parse_type_c(t_list **alst, char *buf, va_list args)
-{
- 	t_unit	unit;
- 	int		i;
- 	int		digits;
- 	int		digits_len;
 
- 	i = 0;
- 	ft_bzero(&unit, sizeof(t_unit));
-	if (buf[0] == '-')
+static char		*type_c_get_flags_width_modifier(char *buf, t_unit *unit, int buf_len)
+{
+	int		digits;
+	int		digits_len;
+	char	flags[buf_len];
+	int		flags_len;
+
+	flags_len = get_flags(flags, buf, "-");
+	if (flags_len != FALSE)
 	{
-		unit.val.c.flag_minus = TRUE;
-		i++;
+		unit->val.c.flag_minus = TRUE;
+		buf += flags_len;
 	}
-	digits = get_digits(buf + i, &digits_len);
-	if (digits != FALSE)
+	digits_len = get_digits(&digits, buf, ft_strlen(buf));
+	if (digits_len != FALSE)
 	{
-		unit.val.c.width = digits;
-		i += digits_len;
+		unit->val.c.width = digits;
+		buf += digits_len;
 	};
-	if (buf[i] == 'l')
+	if (*buf == 'l')
 	{
-		unit.val.c.modifier_l = TRUE;
-		i++;
+		unit->val.c.modifier_l = TRUE;
+		buf++;
 	}
-	if (buf[i] == 'c')
-	{
-		unit.type = TYPE_C;
-		if (unit.val.c.modifier_l == TRUE)
-		{
-			if (sizeof(wint_t) < sizeof(int))
-				unit.val.c.character = (wint_t)va_arg(args, int);
-			else
-				unit.val.c.character = va_arg(args, wint_t);
-		}
-		else
-			unit.val.c.character = va_arg(args, int);
-		unit_lstadd_bot(alst, &unit);
-		return ;
-	}
- 	printf("error: %%c format wrong\n");
- 	exit(0);
+	return (buf);
 }
 
-void		pf_parse_type_s(t_list **alst, char *buf, va_list args)
+void		parse_type_c(t_list **alst, char *buf, va_list args)
 {
-	 	t_unit	unit;
-	 	int		i;
+ 	t_unit	unit;
+
+ 	ft_bzero(&unit, sizeof(t_unit));
+ 	buf = type_c_get_flags_width_modifier(buf, &unit, ft_strlen(buf));
+	if (*buf != 'c')
+	{
+ 		printf("error: %%c format wrong\n");
+ 		exit(0);
+ 	}
+ 	unit.type = TYPE_C;
+ 	if (unit.val.c.modifier_l == TRUE)
+ 	{
+ 		if (sizeof(wint_t) < sizeof(int))
+ 			unit.val.c.character = (wint_t)va_arg(args, int);
+ 		else
+ 			unit.val.c.character = va_arg(args, wint_t);
+ 	}
+ 	else
+ 		unit.val.c.character = va_arg(args, int);
+ 	unit_lstadd_bot(alst, &unit);
+}
+
+static char		*type_s_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
+{
 	 	int		digits;
 	 	int		digits_len;
+	 	char	flags[buf_len];
+	 	int		flags_len;
 
-	 	i = 0;
-	 	ft_bzero(&unit, sizeof(t_unit));
-		if (buf[0] == '-')
-		{
-			unit.val.s.flag_minus = TRUE;
-			i++;
-		}
-		digits = get_digits(buf + i, &digits_len);
+	 	flags_len = get_flags(flags, buf, "-");
+	 	if (flags_len != FALSE)
+	 	{
+	 		unit->val.s.flag_minus = TRUE;
+	 		buf += flags_len;
+	 	}
+		digits_len = get_digits(&digits, buf, ft_strlen(buf));
 		if (digits != FALSE)
 		{
-			unit.val.s.width = digits;
-			i += digits_len;
+			unit->val.s.width = digits;
+			buf += digits_len;
 		};
-		if (buf[i] == '.')
+		return (buf);
+}
+
+static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit)
+{
+		int		digits;
+		int		digits_len;
+
+		if (*buf == '.')
 		{
-			i++;
-			digits = get_digits(buf + i, &digits_len);
-			if (digits != FALSE)
+			buf++;
+			digits_len = get_digits(&digits, buf, ft_strlen(buf));
+			if (digits_len != FALSE)
 			{
-				unit.val.s.precision = digits;
-				i += digits_len;
+				unit->val.s.precision = digits;
+				buf += digits_len;
 			}
 		}
-		if (buf[i] == 'l')
+		if (*buf== 'l')
 		{
-			unit.val.s.modifier_l = TRUE;
-			i++;
+			unit->val.s.modifier_l = TRUE;
+			buf++;
 		}
-		if (buf[i] == 's')
+		return (buf);
+}
+
+void		parse_type_s(t_list **alst, char *buf, va_list args)
+{
+	 	t_unit	unit;
+
+	 	ft_bzero(&unit, sizeof(t_unit));
+	 	buf = type_s_get_flags_and_width(buf, &unit, ft_strlen(buf));
+	 	buf = type_s_get_precision_and_modifier(buf, &unit);
+		if (*buf != 's')
 		{
-			unit.type = TYPE_S;
-			unit.val.s.string = va_arg(args, char *);
-			if (unit.val.s.string == NULL)
-				unit.val.s.string = "(null)";
-			// if (unit.val.s.modifier_l == TRUE)
-			// 	unit.val.s.character = va_arg(args, wint_t);
-			// else
-			// 	unit.val.c.character = va_arg(args, int);
-			unit_lstadd_bot(alst, &unit);
-			return ;
+			printf("error: %%s format wrong\n");
+			exit(0);
 		}
-	 	printf("error: %%s format wrong\n");
-	 	exit(0);
+	 	unit.type = TYPE_S;
+	 	unit.val.s.string = va_arg(args, char *);
+	 	if (unit.val.s.string == NULL)
+	 		unit.val.s.string = "(null)";
+	 	// if (unit.val.s.modifier_l == TRUE)
+	 	// 	unit.val.s.character = va_arg(args, wint_t);
+	 	// else
+	 	// 	unit.val.c.character = va_arg(args, int);
+	 	unit_lstadd_bot(alst, &unit);
 }
 
 

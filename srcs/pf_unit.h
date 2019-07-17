@@ -45,6 +45,21 @@ typedef struct 		s_type_s
 	const char		*string;
 }					t_type_s;
 
+typedef struct 		s_type_d
+{
+	t_bool			flag_minus;
+	t_bool			flag_plus;
+	t_bool			flag_zero;
+	t_bool			flag_space;
+	unsigned int	width;
+	unsigned int	precision;
+	t_bool			modifier_h;
+	t_bool			modifier_hh;
+	t_bool			modifier_l;
+	t_bool			modifier_ll;
+	int				integer;
+}					t_type_d;
+
 typedef	union		u_unit_union
 {
 	t_type_ltr		ltr;

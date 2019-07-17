@@ -12,20 +12,44 @@
 
 #include "ft_printf.h"
 
-int			get_digits(char *s, int *digits_len)
+int			get_digits(int *digits, char *buf, int buf_len)
 {
 	int		i;
-	char	s1[100];
+	char	s1[buf_len];
 
 	i = 0;
-	if (ft_isdigit(*s) == FALSE)
+	if (ft_isdigit(*buf) == FALSE)
 		return (FALSE);
-	while (ft_isdigit(s[i]))
+	while (ft_isdigit(buf[i]))
 	{
-		s1[i] = s[i];
+		s1[i] = buf[i];
 		i++;
 	}
-	*digits_len = i;
 	s1[i] = '\0';
-	return (ft_atoi(s1));
+	*digits = ft_atoi(s1);
+	return (i);
 }
+
+int		is_flags(char c, char *valid_flags)
+{
+	if (ft_strchr(valid_flags, c) == 0)
+		return (FALSE);
+	return (TRUE);
+}
+
+int		get_flags(char *flags, char *buf, char *valid_flags)
+{
+	int		i;
+
+	i = 0;
+	if (is_flags(*buf, valid_flags) == FALSE)
+		return(FALSE);
+	while(is_flags(buf[i], valid_flags))
+	{
+		flags[i] = buf[i];
+		i++;
+	}
+	flags[i] = '\0';
+	return (i);
+}
+

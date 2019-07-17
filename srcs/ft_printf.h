@@ -37,7 +37,8 @@ typedef struct	s_print_funs
 	int			(*f)();
 }				t_print_funs;
 
-int				get_digits(char *s, int *digits_len);
+int			get_digits(int *digits, char *buf, int buf_len);
+int		get_flags(char *flags, char *buf, char *valid_flags);
 
 
 int				ft_printf(const char *restrict format, ...);
@@ -47,8 +48,8 @@ char			*deal_with_double_percentage(const char*format, int *unit_nb, int *new_le
 t_list			*parse_string(const char *format, va_list args);
 t_list			*cut_to_capsule(char *s, int len, va_list args);
 int				is_conversion(char c);
-void			pf_parse_type_c(t_list **alst, char *buf, va_list args);
-void			pf_parse_type_s(t_list **alst, char *buf, va_list args);
+void			parse_type_c(t_list **alst, char *buf, va_list args);
+void			parse_type_s(t_list **alst, char *buf, va_list args);
 
 
 //print

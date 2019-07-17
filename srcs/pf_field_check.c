@@ -12,12 +12,6 @@
 
 #include "ft_printf.h"
 
-int		is_flags(char c)
-{
-	if (ft_strchr("-+0 #", c) == 0)
-		return (FALSE);
-	return (TRUE);
-}
 
 int		is_conversion(char c)
 {
