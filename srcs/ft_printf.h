@@ -21,7 +21,7 @@
 #include "libft.h"
 #include <wchar.h>
 
-#define PARSE_FUNS_NB 2
+#define PARSE_FUNS_NB 3
 #define PRINT_FUNS_NB 3
 #define ERROR -1
 
@@ -50,6 +50,7 @@ t_list			*cut_to_capsule(char *s, int len, va_list args);
 int				is_conversion(char c);
 void			parse_type_c(t_list **alst, char *buf, va_list args);
 void			parse_type_s(t_list **alst, char *buf, va_list args);
+void			parse_type_d(t_list **alst, char *buf, va_list args);
 
 
 //print

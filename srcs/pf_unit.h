@@ -17,11 +17,19 @@
 
 typedef	enum 		e_unit_type
 {
-	TYPE_LTR = 0,
+	TYPE_LTR = 1,
 	TYPE_C,
 	TYPE_S,
 	TYPE_D,
 }					t_unit_type;
+
+typedef enum 		e_modifier
+{
+	MD_H = 1,
+	MD_HH,
+	MD_L,
+	MD_LL,
+}					t_modifier;
 
 typedef struct 		s_type_ltr
 {
@@ -42,7 +50,7 @@ typedef struct 		s_type_s
 	unsigned int	width;
 	unsigned int	precision;
 	t_bool			modifier_l;
-	const char		*string;
+	char			*string;
 }					t_type_s;
 
 typedef struct 		s_type_d
@@ -50,14 +58,11 @@ typedef struct 		s_type_d
 	t_bool			flag_minus;
 	t_bool			flag_plus;
 	t_bool			flag_zero;
-	t_bool			flag_space;
+	t_bool			flag_blank;
 	unsigned int	width;
 	unsigned int	precision;
-	t_bool			modifier_h;
-	t_bool			modifier_hh;
-	t_bool			modifier_l;
-	t_bool			modifier_ll;
-	int				integer;
+	int				modifier;
+	intmax_t		integer;
 }					t_type_d;
 
 typedef	union		u_unit_union
@@ -65,16 +70,7 @@ typedef	union		u_unit_union
 	t_type_ltr		ltr;
 	t_type_c		c;
 	t_type_s		s;
-	// char			c;
-	// char			*s;
-	// void			*p;
-	// int				d;
-	// int				i;
-	// unsigned int	o;
-	// unsigned int	u;
-	// unsigned int	x;
-	// unsigned int	mj_x;
-	// float			f;
+	t_type_d		d;
 }					t_unit_union;
 
 typedef struct		s_unit

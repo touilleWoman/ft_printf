@@ -43,7 +43,7 @@ void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 	char				buf[100];
 	int					len;
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
-		{'c', parse_type_c},{'s', parse_type_s}
+		{'c', parse_type_c},{'s', parse_type_s}, {'d', parse_type_d}
 		};
 
 

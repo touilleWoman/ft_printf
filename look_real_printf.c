@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "./srcs/ft_printf.h"
 // ** one capsule is [flags][width][.precision][modifier][conversion][literal],
 
 int main()
@@ -10,14 +11,13 @@ int main()
 	// modifier l (but not exiged in this project)
 
 
-		int	d;
-		char c = 'a';
-		// // printf("+c:%+c\n", c);
-		// d = printf("------c:%-------10c|\n", c);
-		d = printf("-10cc:%-10lc|\n", c);
-		d = printf("-10cc:%-10llc|\n", c);
-		d = printf("10c:%10c|\n", c);
-		printf("ret:%d\n", d);
+		// int	d;
+		// char c = 'a';
+		printf("lc:%lc\n", (wint_t)60);
+		// // d = printf("------c:%-------10c|\n", c);
+		// d = printf("-10cc:%-10lc|\n", c);
+		// d = printf("10c:%10c|\n", c);
+		// printf("ret:%d\n", d);
 		// // printf("spacec:% c\n", c);
 		// // printf("#c:%#c\n", c);
 		// // printf("0c:%0c\n", c);
@@ -60,12 +60,11 @@ int main()
 	// printf("%d\n", d);
 
 
-	printf("d:%d\n", 5);
-	printf("d:%+d\n", 5);
-	printf("d:%+++++++++d\n", 5);
-	printf("d:%05d\n", 5);
-	printf("d:%-d\n", 5);
-	printf("d:%--d\n", 5);
+	// printf("d:%ld\n", 5);
+	// printf("d:%lld\n", 5);
+	// printf("d:%hhd\n", 5);
+	// printf("d:%hllld\n", 5);
+	// printf("d:%--d\n", 5);
 
 
 	return 0;

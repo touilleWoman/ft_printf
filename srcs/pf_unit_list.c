@@ -35,6 +35,7 @@ void		unit_lstadd_literal(t_list **alst, const char *literal_piece)
 	t_unit		unit;
 
 	unit.type = TYPE_LTR;
+	// printf("add typeLTR%d\n", unit.type );
 	unit.val.ltr.literal = literal_piece;
 	unit_lstadd_bot(alst, &unit);
 }

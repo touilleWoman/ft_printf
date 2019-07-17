@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int			get_digits(int *digits, char *buf, int buf_len)
+int				get_digits(int *digits, char *buf, int buf_len)
 {
 	int		i;
 	char	s1[buf_len];
@@ -30,14 +30,14 @@ int			get_digits(int *digits, char *buf, int buf_len)
 	return (i);
 }
 
-int		is_flags(char c, char *valid_flags)
+static int		is_flags(char c, char *valid_flags)
 {
 	if (ft_strchr(valid_flags, c) == 0)
 		return (FALSE);
 	return (TRUE);
 }
 
-int		get_flags(char *flags, char *buf, char *valid_flags)
+int				get_flags(char *flags, char *buf, char *valid_flags)
 {
 	int		i;
 

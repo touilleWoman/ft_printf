@@ -32,6 +32,18 @@ void 	show_list(t_list   *lst)
 			printf("modifier_l:%d|\n", unit->val.c.modifier_l);
 			printf("character:%c|\n", unit->val.c.character);
 		}
+		if (unit->type == TYPE_D)
+		{
+			printf("content of TYPE_D is:\n");
+			printf("flag_minus:%d|\n", unit->val.d.flag_minus);
+			printf("flag_plus:%d|\n", unit->val.d.flag_plus);
+			printf("flag_zero:%d|\n", unit->val.d.flag_zero);
+			printf("flag_blank:%d|\n", unit->val.d.flag_blank);
+			printf("width:%d|\n", unit->val.d.width);
+			printf("precision:%d|\n", unit->val.d.precision);
+			printf("modifier:%d|\n", unit->val.d.modifier);
+			printf("int:%ld|\n", (long int)unit->val.d.integer);
+		}
 		if (unit->type == TYPE_S)
 		{
 			printf("content of TYPE_S is:\n");
