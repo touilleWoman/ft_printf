@@ -46,13 +46,12 @@ int		print_s(t_unit *unit)
 	int		print_len;
 	char	s[unit->val.s.width];
 
-
 	print_len = ft_strlen(unit->val.s.string);
 	precision = unit->val.s.precision;
 	width = unit->val.s.width;
 	if (precision != FALSE && precision < print_len)
 		print_len = precision;
-	if (width != FALSE && width > print_len)
+	if (width > print_len)
 	{
 		ft_memset(s, ' ', width);
 		if (unit->val.s.flag_minus == FALSE)

@@ -22,7 +22,7 @@
 #include <wchar.h>
 
 #define PARSE_FUNS_NB 3
-#define PRINT_FUNS_NB 3
+#define PRINT_FUNS_NB 4
 #define ERROR -1
 
 typedef struct	s_parse_funs
@@ -57,5 +57,7 @@ void			parse_type_d(t_list **alst, char *buf, va_list args);
 int				print_ltr(t_unit *unit);
 int				print_c(t_unit *unit);
 int				print_s(t_unit *unit);
+int				print_d(t_unit *unit);
+
 
 #endif

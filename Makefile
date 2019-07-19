@@ -27,6 +27,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_unit_list.c\
 					pf_field_check.c \
 					pf_print_c_s_ltr.c\
+					pf_print_d.c\
 					ft_strlen.c\
 					ft_strdup.c\
 					ft_lstadd_top.c\
@@ -38,7 +39,9 @@ SOURCE_NAME = ft_printf.c \
 					ft_bzero.c \
 					ft_memcpy.c\
 					ft_memset.c\
+					ft_memalloc.c\
 					ft_atoi.c\
+					ft_itoa.c\
 					ft_isdigit.c\
 					ft_putstr.c\
 					ft_strcat.c\

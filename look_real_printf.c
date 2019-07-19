@@ -60,10 +60,23 @@ int main()
 	// printf("%d\n", d);
 
 
-	printf("%+d\n%10.1d\n%.10d\n", 543, 543, 543);
-	printf("%lld\n", (long long)53545135213513);
-	printf("d:%--d\n", 5);
+	printf("%d\n",  2147483647);
+	printf("d:%hhd\n",  (signed char)20);
 
+	printf("d:%.2d\n", 22);
+	printf("d:%+.2d\n", 22);
+	printf("d:%2d\n",22);
+	printf("d:%+2d\n",22);
+	printf("d:%+3d\n",22);
+	printf("d:% 10d\n",33);
+	printf("d:%+05d\n",55);
+	printf("d:%05d\n",55);
+	printf("d:%+5d\n",55);
+	printf("d:%-05d\n",66);
+	printf("d:%+10d\n",33);
+	printf("d:%.2d\n", +7);
+	printf("d:%+15.13d\n", +7777777);
+	printf("d:%2.10d\n", +7777777);
 
 	return 0;
 }

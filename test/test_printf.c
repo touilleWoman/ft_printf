@@ -58,6 +58,24 @@ void Test_final_result_type_s(CuTest *tc)
 }
 
 
+void Test_final_result_type_d(CuTest *tc)
+{
+	CuAssertIntEquals(tc, printf("%d\n", 123212341),
+		ft_printf("%d\n", 123212341));
+	CuAssertIntEquals(tc, printf("%10.2d%%second%+015d\n", 22, 333),
+		ft_printf("%10.2d%%second%+015d\n", 22, 333));
+	CuAssertIntEquals(tc, printf("%-10.5d|\n", 4444),
+		ft_printf("%-10.5d|\n", 4444));
+	CuAssertIntEquals(tc, printf("%+-1.15d|\n", 4444),
+		ft_printf("%+-1.15d|\n", 4444));
+	CuAssertIntEquals(tc, printf("%+-1.15d|\n", 4444),
+		ft_printf("%+-1.15d|\n", 4444));
+	CuAssertIntEquals(tc, printf("%+-1.50ld|\n", (long)87120928344444),
+		ft_printf("%+-1.50ld|\n", (long)87120928344444));
+	CuAssertIntEquals(tc, printf("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30),
+		ft_printf("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30));
+}
+
 
 
 

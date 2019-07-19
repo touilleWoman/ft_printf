@@ -18,7 +18,7 @@ int		print_list(t_list *lst)
 {
 	t_unit				*unit;
 	static t_print_funs	funs[PRINT_FUNS_NB] = {{TYPE_LTR, print_ltr},
-	{TYPE_C, print_c}, {TYPE_S, print_s}};
+	{TYPE_C, print_c}, {TYPE_S, print_s}, {TYPE_D, print_d}};
 	int					index;
 	int					printed_nb;
 
