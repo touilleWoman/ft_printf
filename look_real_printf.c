@@ -67,7 +67,8 @@ int main()
 	printf("d:%+.2d\n", 22);
 	printf("d:%2d\n",22);
 	printf("d:%+2d\n",22);
-	printf("d:%+3d\n",22);
+	printf("d:%+3d\n",33);
+	printf("d:%+4d\n",33);
 	printf("d:% 10d\n",33);
 	printf("d:%+05d\n",55);
 	printf("d:%05d\n",55);

@@ -17,72 +17,27 @@
 **		warning: flag '0' is ignored when flag '-' is present"
 */
 
-static char		*deal_with_precision(char *str_int, unsigned int *print_nb, unsigned int precision)
+static char		*deal_with_precision(char *integer,
+							unsigned int *print_nb,
+							unsigned int precision)
 {
 	char *ret;
 
 	if (*print_nb >= precision)
-		return (str_int);
+		return (integer);
 	ret = ft_memalloc(precision + 1);
 	ft_memset(ret, '0', precision - (*print_nb));
-	ft_strncpy(ret + precision - (*print_nb), str_int, *print_nb);
-	free(str_int);
-	str_int = NULL;
+	ft_strncpy(ret + precision - (*print_nb), integer, *print_nb);
+	free(integer);
+	integer = NULL;
 	*print_nb = precision;
 	return (ret);
 }
 
-int				print_d(t_unit *unit)
+int				print_int_with_flagplus_or_blank(t_unit *unit,
+												char *integer,
+												int print_nb)
 {
-	char	*str_int;
-	unsigned int	print_nb;
-	char	s[unit->val.d.width];
-	int		step;
-
-	step = 0;
-	str_int = ft_itoa(unit->val.d.integer);
-	print_nb = ft_strlen(str_int);
-	str_int = deal_with_precision(str_int, &print_nb, unit->val.d.precision);
-	if (unit->val.d.width > print_nb)
-	{
-		ft_memset(s, ' ', unit->val.d.width);
-		if (unit->val.d.flag_minus == FALSE)
-		{
-			if (unit->val.d.flag_zero == TRUE)
-			{
-				ft_memset(s, '0', unit->val.d.width);
-				ft_strncpy((s +  unit->val.d.width - print_nb), str_int, print_nb);
-				if (unit->val.d.flag_plus == TRUE)
-					*s = '+';
-				else if (unit->val.d.flag_blank == TRUE)
-					*s = ' ';
-			}
-			else
-			{
-				ft_strncpy((s +unit->val.d.width - print_nb), str_int, print_nb);
-				if (unit->val.d.flag_plus == TRUE)
-					s[unit->val.d.width - print_nb - 1] = '+';
-				else if (unit->val.d.flag_blank == TRUE)
-					s[unit->val.d.width - print_nb - 1] = ' ';
-			}
-		}
-		else
-		{
-			if (unit->val.d.flag_plus == TRUE)
-			{
-				*s = '+';
-				step = 1;
-			}
-			else if (unit->val.d.flag_blank == TRUE)
-			{
-				*s = ' ';
-				step = 1;
-			}
-			ft_strncpy(s + step, str_int, print_nb);
-		}
-		write(1, s, unit->val.d.width);
-		return( unit->val.d.width);
-	}
 	if (unit->val.d.flag_plus == TRUE)
 	{
 		write(1, "+", 1);
@@ -93,7 +48,75 @@ int				print_d(t_unit *unit)
 		write(1, " ", 1);
 		print_nb++;
 	}
-	write(1, str_int, print_nb);
+	write(1, integer, ft_strlen(integer));
 	return (print_nb);
 }
 
+
+
+static int		create_buf_of_width_size_then_print(t_unit *unit,
+							char *integer, int int_len, int width)
+{
+	char			s[width];
+	int				step;
+
+	ft_memset(s, ' ', width);
+	step = 0;
+	if (unit->val.d.flag_minus == FALSE)
+	{
+		if (unit->val.d.flag_zero == TRUE)
+		{
+			ft_memset(s, '0', width);
+			ft_strncpy((s +  width - int_len), integer, int_len);
+			if (unit->val.d.flag_plus == TRUE)
+				*s = '+';
+			else if (unit->val.d.flag_blank == TRUE)
+				*s = ' ';
+		}
+		else
+		{
+			ft_strncpy((s +width - int_len), integer, int_len);
+			if (unit->val.d.flag_plus == TRUE)
+				s[width - int_len - 1] = '+';
+			else if (unit->val.d.flag_blank == TRUE)
+				s[width - int_len - 1] = ' ';
+		}
+	}
+	else
+	{
+		if (unit->val.d.flag_plus == TRUE)
+		{
+			*s = '+';
+			step = 1;
+		}
+		else if (unit->val.d.flag_blank == TRUE)
+		{
+			*s = ' ';
+			step = 1;
+		}
+		ft_strncpy(s + step, integer, int_len);
+	}
+	write(1, s, width);
+	return (width);
+}
+
+/*
+** 		print_nb is initialted at the lenth of integer,
+**		it will change depending on precision, width, then flags
+*/
+int				print_d(t_unit *unit)
+{
+	char			*integer;
+	unsigned int	print_nb;
+
+	integer = ft_itoa(unit->val.d.integer);
+	print_nb = ft_strlen(integer);
+	integer = deal_with_precision(integer, &print_nb, unit->val.d.precision);
+	if (unit->val.d.width > print_nb)
+	{
+		print_nb = create_buf_of_width_size_then_print(unit, integer, print_nb, unit->val.d.width);
+	}
+	else
+		print_nb = print_int_with_flagplus_or_blank(unit, integer, print_nb);
+	return (print_nb);
+}

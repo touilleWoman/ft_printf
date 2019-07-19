@@ -94,6 +94,6 @@ t_list		*parse_string(const char *format, va_list args)
 
 	new_format = deal_with_double_percentage(format, &real_p_nb, &new_len);
 	lst = cut_to_capsule(new_format,new_len, args);
-	// show_list(lst);
+	show_list(lst);
 	return (lst);
 }
