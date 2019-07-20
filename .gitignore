@@ -2,5 +2,6 @@ libftprintf.a
 a.out*
 *.o
 /test/testrun
-/test/AllTests.c
+/test/all_tests.c
+.DS_Store
 

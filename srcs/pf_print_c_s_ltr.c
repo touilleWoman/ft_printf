@@ -59,10 +59,8 @@ int		print_s(t_unit *unit)
 		else
 			ft_strncpy(s, unit->val.s.string, print_len);
 		write(1, s, width);
-		printf("aaaaaaaaaaa\n");
 		return (width);
 	}
 	write(1, unit->val.s.string, print_len);
-	printf("fffffff:%d\n", print_len );
 	return (print_len);
 }
