@@ -15,7 +15,7 @@
 
 int		is_conversion(char c)
 {
-	if (ft_strchr("cspdiouxX", c) == 0)
+	if (ft_strchr("cspdfiouxX", c) == 0)
 		return (FALSE);
 	return (TRUE);
 }

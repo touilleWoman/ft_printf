@@ -21,6 +21,7 @@ typedef	enum 		e_unit_type
 	TYPE_C,
 	TYPE_S,
 	TYPE_D,
+	TYPE_F,
 }					t_unit_type;
 
 typedef enum 		e_modifier
@@ -29,6 +30,7 @@ typedef enum 		e_modifier
 	MD_HH,
 	MD_L,
 	MD_LL,
+	MD_MAG_L,
 }					t_modifier;
 
 typedef struct 		s_type_ltr
@@ -65,12 +67,26 @@ typedef struct 		s_type_d
 	intmax_t		integer;
 }					t_type_d;
 
+typedef struct 		s_type_f
+{
+	t_bool			flag_minus;
+	t_bool			flag_plus;
+	t_bool			flag_zero;
+	t_bool			flag_blank;
+	t_bool			flag_hash;
+	unsigned int	width;
+	unsigned int	precision;
+	int				modifier;
+	long double		doub;
+}					t_type_f;
+
 typedef	union		u_unit_union
 {
 	t_type_ltr		ltr;
 	t_type_c		c;
 	t_type_s		s;
 	t_type_d		d;
+	t_type_f		f;
 }					t_unit_union;
 
 typedef struct		s_unit

@@ -12,6 +12,13 @@
 
 #include "ft_printf.h"
 
+/*
+**	a capsule is defined as :
+** 	[flags][width][precision][modifier][conversion][litetral]
+**	excepte the first capsule which may contains only literal
+** 	then we seperate literal part with the rest
+*/
+
 int		find_conversion_in_capsule(const char *capsule)
 {
 	int		len;
@@ -43,7 +50,9 @@ void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 	char				buf[100];
 	int					len;
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
-		{'c', parse_type_c},{'s', parse_type_s}, {'d', parse_type_d}
+		{'c', parse_type_c},{'s', parse_type_s}, {'d', parse_type_d},
+		{'f', parse_type_f}
+
 		};
 
 
@@ -94,6 +103,7 @@ t_list		*parse_string(const char *format, va_list args)
 
 	new_format = deal_with_double_percentage(format, &real_p_nb, &new_len);
 	lst = cut_to_capsule(new_format,new_len, args);
-	// show_list(lst);
+	show_list(lst);
 	return (lst);
 }
+

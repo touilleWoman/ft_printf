@@ -11,28 +11,28 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-void	free_unit(t_unit *unit)
-{
-	unit->type == TYPE_LTR ? free()
-}
+// void	free_unit(t_unit *unit)
+// {
+// 	unit->type == TYPE_LTR ? free()
+// }
 
 
 
-void	freelst_print_errormsg(t_list *list, char *msg)
-{
-	t_unit		*unit;
-	t_list		*keep;
+// void	freelst_and_errormsg(t_list *list, char *msg)
+// {
+// 	t_unit		*unit;
+// 	t_list		*keep;
 
-	while (lst != NULL)
-	{
-		keep = lst->next;
+// 	while (lst != NULL)
+// 	{
+// 		keep = lst->next;
 
 
-		lst = keep;
+// 		lst = keep;
 
-	}
-	ft_putstr(msg);
-}
+// 	}
+// 	ft_putstr(msg);
+// }
 
 
 
