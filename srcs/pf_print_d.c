@@ -34,27 +34,27 @@ static char		*deal_with_precision(char *integer,
 	return (ret);
 }
 
-int				print_int_with_flagplus_or_blank(t_unit *unit,
+int				print_int_with_flagplus_or_blank(int fd, t_unit *unit,
 												char *integer,
 												int print_nb)
 {
 	if (unit->val.d.flag_plus == TRUE)
 	{
-		write(1, "+", 1);
+		write(fd, "+", 1);
 		print_nb++;
 	}
 	else if (unit->val.d.flag_blank == TRUE)
 	{
-		write(1, " ", 1);
+		write(fd, " ", 1);
 		print_nb++;
 	}
-	write(1, integer, ft_strlen(integer));
+	write(fd, integer, ft_strlen(integer));
 	return (print_nb);
 }
 
 
 
-static int		create_buf_of_width_size_then_print(t_unit *unit,
+static int		create_buf_of_width_size_then_print(int fd, t_unit *unit,
 							char *integer, int int_len, int width)
 {
 	char			s[width];
@@ -96,7 +96,7 @@ static int		create_buf_of_width_size_then_print(t_unit *unit,
 		}
 		ft_strncpy(s + step, integer, int_len);
 	}
-	write(1, s, width);
+	write(fd, s, width);
 	return (width);
 }
 
@@ -104,7 +104,7 @@ static int		create_buf_of_width_size_then_print(t_unit *unit,
 ** 		print_nb is initialted at the lenth of integer,
 **		it will change depending on precision, width, then flags
 */
-int				print_d(t_unit *unit)
+int				print_d(int fd, t_unit *unit)
 {
 	char			*integer;
 	unsigned int	print_nb;
@@ -114,9 +114,9 @@ int				print_d(t_unit *unit)
 	integer = deal_with_precision(integer, &print_nb, unit->val.d.precision);
 	if (unit->val.d.width > print_nb)
 	{
-		print_nb = create_buf_of_width_size_then_print(unit, integer, print_nb, unit->val.d.width);
+		print_nb = create_buf_of_width_size_then_print(fd, unit, integer, print_nb, unit->val.d.width);
 	}
 	else
-		print_nb = print_int_with_flagplus_or_blank(unit, integer, print_nb);
+		print_nb = print_int_with_flagplus_or_blank(fd, unit, integer, print_nb);
 	return (print_nb);
 }

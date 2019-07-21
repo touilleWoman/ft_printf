@@ -44,7 +44,7 @@ SOURCE_NAME = ft_printf.c \
 					ft_atoi.c\
 					ft_itoa.c\
 					ft_isdigit.c\
-					ft_putstr.c\
+					ft_putstr_fd.c\
 					ft_strcat.c\
 					pf_test_functions.c\
 
@@ -66,7 +66,7 @@ $(NAME): $(OBJ)
 
 
 check:all
-	$(CC) $(CFLAGS) $(NAME) srcs/test.c  -g -ggdb -fsanitize=address -I ./srcs
+	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -ggdb -fsanitize=address -I ./srcs
 
 clean:
 	rm -f $(OBJ)

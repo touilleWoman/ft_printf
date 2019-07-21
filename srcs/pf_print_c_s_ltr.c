@@ -12,13 +12,13 @@
 
 #include "ft_printf.h"
 
-int		print_ltr(t_unit *unit)
+int		print_ltr(int fd, t_unit *unit)
 {
-	ft_putstr(unit->val.ltr.literal);
+	ft_putstr_fd(unit->val.ltr.literal, fd);
 	return (ft_strlen(unit->val.ltr.literal));
 }
 
-int		print_c(t_unit *unit)
+int		print_c(int fd, t_unit *unit)
 {
 	char	s[unit->val.c.width + 1];
 	int		width;
@@ -32,14 +32,14 @@ int		print_c(t_unit *unit)
 			s[width - 1] = unit->val.c.character;
 		else
 			s[0] = unit->val.c.character;
-		ft_putstr(s);
+		ft_putstr_fd(s, fd);
 		return (ft_strlen(s));
 	}
 	write(1, &(unit->val.c.character), 1);
 	return (1);
 }
 
-int		print_s(t_unit *unit)
+int		print_s(int fd, t_unit *unit)
 {
 	int		width;
 	int		precision;
@@ -58,9 +58,9 @@ int		print_s(t_unit *unit)
 			ft_strncpy((s + width - print_len), unit->val.s.string, print_len);
 		else
 			ft_strncpy(s, unit->val.s.string, print_len);
-		write(1, s, width);
+		write(fd, s, width);
 		return (width);
 	}
-	write(1, unit->val.s.string, print_len);
+	write(fd, unit->val.s.string, print_len);
 	return (print_len);
 }

@@ -24,6 +24,7 @@
 #define PARSE_FUNS_NB 4
 #define PRINT_FUNS_NB 4
 #define ERROR -1
+#define STD_OUT 1
 
 typedef struct	s_parse_funs
 {
@@ -38,7 +39,7 @@ typedef struct	s_print_funs
 }				t_print_funs;
 
 int			get_digits(int *digits, char *buf, int buf_len);
-int		get_flags(char *flags, char *buf, char *valid_flags);
+int			get_flags(char *flags, char *buf, char *valid_flags);
 
 
 int				ft_printf(const char *restrict format, ...);
@@ -55,10 +56,10 @@ void			parse_type_f(t_list **alst, char *buf, va_list args);
 
 
 //print
-int				print_ltr(t_unit *unit);
-int				print_c(t_unit *unit);
-int				print_s(t_unit *unit);
-int				print_d(t_unit *unit);
+int				print_ltr(int fd, t_unit *unit);
+int				print_c(int fd, t_unit *unit);
+int				print_s(int fd, t_unit *unit);
+int				print_d(int fd, t_unit *unit);
 
 
 #endif
