@@ -14,6 +14,8 @@
 # define PF_UNIT_H
 
 #include "libft.h"
+#include <stdint.h>
+
 
 typedef	enum 		e_unit_type
 {
