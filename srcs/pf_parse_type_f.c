@@ -19,7 +19,7 @@ static char		*type_f_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 	char	flags[buf_len];
 	int		flags_len;
 
-	if ((flags_len = get_flags(flags, buf, "+- 0#")) != FALSE)
+	if ((flags_len = get_flags(flags, buf, "+- 0#")))
 	{
 		if (ft_strchr(flags, '+'))
 			unit->val.f.flag_plus = TRUE;
@@ -33,7 +33,8 @@ static char		*type_f_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 			unit->val.f.flag_hash = TRUE;
 		buf += flags_len;
 	}
-	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))) != FALSE)
+	digits = 0;
+	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
 	{
 		unit->val.f.width = digits;
 		buf += digits_len;
@@ -46,11 +47,11 @@ static char		*type_f_get_precision(char *buf, t_unit *unit)
 	int		digits;
 	int		digits_len;
 
+	digits = 0;
 	if (*buf == '.')
 	{
 		buf++;
-		digits_len = get_digits(&digits, buf, ft_strlen(buf));
-		if (digits_len != FALSE)
+		if (digits_len = get_digits(&digits, buf, ft_strlen(buf)))
 		{
 			unit->val.f.precision = digits;
 			buf += digits_len;

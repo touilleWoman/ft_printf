@@ -66,14 +66,13 @@ static char		*type_s_get_flags_and_width(char *buf,
 	char	flags[buf_len];
 	int		flags_len;
 
-	flags_len = get_flags(flags, buf, "-");
-	if (flags_len != FALSE)
+	if (flags_len = get_flags(flags, buf, "-"))
 	{
 		unit->val.s.flag_minus = TRUE;
 		buf += flags_len;
 	}
-	digits_len = get_digits(&digits, buf, ft_strlen(buf));
-	if (digits != FALSE)
+	digits = 0;
+	if (digits_len = get_digits(&digits, buf, ft_strlen(buf)))
 	{
 		unit->val.s.width = digits;
 		buf += digits_len;
