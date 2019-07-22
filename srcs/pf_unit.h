@@ -52,7 +52,7 @@ typedef struct 		s_type_s
 	unsigned int	width;
 	unsigned int	precision;
 	t_bool			modifier_l;
-	char			*string;
+	const char		*string;
 }					t_type_s;
 
 typedef struct 		s_type_d

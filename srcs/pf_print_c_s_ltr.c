@@ -24,7 +24,7 @@ int		print_c(int fd, t_unit *unit)
 	int		width;
 
 	width = unit->val.c.width;
-	if (width != FALSE)
+	if (width != 0)
 	{
 		s[width] = '\0';
 		ft_memset(s, ' ', width);

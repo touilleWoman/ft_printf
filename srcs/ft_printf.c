@@ -84,17 +84,17 @@ int		ft_dprintf(int fd, const char * restrict format, ...)
 	return(printed_nb);
 }
 
-// int		ft_printf(const char * restrict format, ...)
-// {
-// 	va_list			args;
-// 	int				printed_nb;
+int		ft_printf(const char * restrict format, ...)
+{
+	va_list			args;
+	int				printed_nb;
 
-// 	va_start(args, format);
-// 	printed_nb = ft_vdprintf(1, format, args);
-// 	va_end(args);
-// 	return(printed_nb);
-// }
-/*
-**	The va_list is nothing more than a byte pointer.
-**	#define va_start(args, param) (args = (((va_list)&param) + sizeof(param)))
-*/
+	va_start(args, format);
+	printed_nb = ft_vdprintf(1, format, args);
+	va_end(args);
+	return(printed_nb);
+}
+
+// **	The va_list is nothing more than a byte pointer.
+// **	#define va_start(args, param) (args = (((va_list)&param) + sizeof(param)))
+
