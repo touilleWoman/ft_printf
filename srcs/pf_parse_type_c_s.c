@@ -72,7 +72,7 @@ static char		*type_s_get_flags_and_width(char *buf,
 		buf += flags_len;
 	}
 	digits = 0;
-	if (digits_len = get_digits(&digits, buf, ft_strlen(buf)))
+	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
 	{
 		unit->val.s.width = digits;
 		buf += digits_len;
