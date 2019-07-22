@@ -1,14 +1,13 @@
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
 int     ft_dprintf(int fd, const char * restrict format, ...);
 
 
 
-#define ORACLE_DPRINTF dprintf
-#define TEST_DPRINTF ft_dprintf
+#define ORACLE_DPRINTF vdprintf
+#define TEST_DPRINTF ft_vdprintf
 // #define TEST_DPRINTF dprintf
 
 
@@ -18,60 +17,71 @@ fprintf(stderr, "Line %d: ", __LINE__);                                         
 fprintf(stderr, msg, __VA_ARGS__); current_test_result = -1;                    \
 }
 
+static  int tests_total = 0;
+static  int tests_failures = 0;
 
-#define TESTCASE(fmt, ...) {                                                    \
-    int current_test_result = 0;                                                \
-    /* Avoid gcc to do static checks */                                         \
-    char dyn_fmt[sizeof(fmt)];                                                  \
-    strcpy(dyn_fmt, fmt);                                                       \
-    /* Open a file for each */                                                  \
-    int fd_oracle = fileno(tmpfile());                                          \
-    int fd_test = fileno(tmpfile());                                            \
-    if (fd_oracle == -1 || fd_test == -1) { FAIL_AND_EXIT("Cannot create temp file\n"); } \
-    /* Run the implementations */                                               \
-    int ret_oracle = ORACLE_DPRINTF(fd_oracle, dyn_fmt, __VA_ARGS__);           \
-    int ret_test = TEST_DPRINTF(fd_test, dyn_fmt, __VA_ARGS__);                 \
-    /* Compare the results */                                                   \
-    if (ret_oracle != ret_test) {                                               \
-        FAIL("Return values differ: %d != %d\n", ret_test, ret_oracle);         \
-    }                                                                           \
-    int out_size_oracle = lseek(fd_oracle, 0, SEEK_END);                        \
-    int out_size_test = lseek(fd_test, 0, SEEK_END);                            \
-    char out_oracle[out_size_oracle + 1];                                       \
-    char out_test[out_size_test + 1];                                           \
-    lseek(fd_oracle, 0, SEEK_SET);                                              \
-    lseek(fd_test, 0, SEEK_SET);                                                \
-    read(fd_oracle, out_oracle, out_size_oracle);                               \
-    read(fd_test, out_test, out_size_test);                                     \
-    out_oracle[out_size_oracle] = '\0';                                         \
-    out_test[out_size_test] = '\0';                                             \
-    if (strcmp(out_oracle, out_test)) {                                         \
-        FAIL("Output differ: `%s` != `%s`\n", out_test, out_oracle);            \
-    }                                                                           \
-    /* Cleanup */                                                               \
-    close(fd_oracle);                                                           \
-    close(fd_test);                                                             \
-    tests_total += 1;                                                           \
-    if (current_test_result == 0) {                                             \
-        printf(".");                                                            \
-    } else {                                                                    \
-        tests_failures += 1;                                                    \
-    }                                                                           \
+void     testcase(const char *fmt, ...) 
+{
+
+    va_list args1, args2;
+    va_start(args1, fmt); 
+    va_copy(args2, args1);
+
+    int current_test_result = 0;
+    /* Avoid gcc to do static checks */
+    char dyn_fmt[ft_strlen(fmt) + 1];
+    strcpy(dyn_fmt, fmt);
+    /* Open a file for each */
+    int fd_oracle = fileno(tmpfile());
+    int fd_test = fileno(tmpfile());
+    if (fd_oracle == -1 || fd_test == -1) { FAIL_AND_EXIT("Cannot create temp file\n"); }
+    /* Run the implementations */
+    int ret_oracle = ORACLE_DPRINTF(fd_oracle, dyn_fmt, args1);
+    int ret_test = TEST_DPRINTF(fd_test, dyn_fmt, args2);
+    /* Compare the results */
+    if (ret_oracle != ret_test) {
+        FAIL("Return values differ: %d != %d\n", ret_test, ret_oracle);
+    }
+    int out_size_oracle = lseek(fd_oracle, 0, SEEK_END);
+    int out_size_test = lseek(fd_test, 0, SEEK_END);
+    char out_oracle[out_size_oracle + 1];
+    char out_test[out_size_test + 1];
+    lseek(fd_oracle, 0, SEEK_SET);
+    lseek(fd_test, 0, SEEK_SET);
+    read(fd_oracle, out_oracle, out_size_oracle);
+    read(fd_test, out_test, out_size_test);
+    out_oracle[out_size_oracle] = '\0';
+    out_test[out_size_test] = '\0';
+    if (strcmp(out_oracle, out_test)) {
+        FAIL("Output differ: `%s` != `%s`\n", out_test, out_oracle);
+    }
+    else
+    {
+        printf("%s\n",out_test);
+    }
+    /* Cleanup */
+    close(fd_oracle);
+    close(fd_test);
+    tests_total += 1;
+    if (current_test_result == 0) {
+        printf(".");
+    } else {
+        tests_failures += 1;
+    }
+    va_end(args1);
+    va_end(args2);
 }
 
 
 int main()
 {
-    int tests_total = 0;
-    int tests_failures = 0;
 
-    // TODO: add more tests !
-    // TESTCASE("helloee", "");
-    TESTCASE("hello%s\n", "world");
-    TESTCASE("%s%s\n", "bonjour", "toi");
-    // TESTCASE("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
-    // TESTCASE("hello%s\n", "world");
-    // TESTCASE("hello %s\t%d\n", "world", 42);
+    testcase("helloee", "");
+    testcase("he\\llo%s\n", "world");
+    testcase("%s%s\n", "bonjour", "toi");
+    testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
+    testcase("hello%s\n", "world");
+    testcase("hello %s\t%d\n", "world", 42);
 
     if (tests_failures)
     {

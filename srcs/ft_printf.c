@@ -1,3 +1,5 @@
+
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -18,14 +20,16 @@
 
 
 
+
 // void	freelst_and_errormsg(t_list *list, char *msg)
-// {
+// {				
 // 	t_unit		*unit;
 // 	t_list		*keep;
 
 // 	while (lst != NULL)
 // 	{
 // 		keep = lst->next;
+
 
 
 // 		lst = keep;
@@ -65,24 +69,14 @@ int		print_list(int fd, t_list *lst)
 int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 {
 	t_list			*lst;
-	int				printed_nb;
 
 	lst = parse_string(format, args);
-	printed_nb = print_list(fd, lst);
-	return (printed_nb);
+	if (lst != NULL)
+		return (print_list(fd, lst));
+	else
+		return (ERROR);
 }
 
-
-int		ft_dprintf(int fd, const char * restrict format, ...)
-{
-	va_list			args;
-	int				printed_nb;
-
-	va_start(args, format);
-	printed_nb = ft_vdprintf(fd, format, args);
-	va_end(args);
-	return(printed_nb);
-}
 
 int		ft_printf(const char * restrict format, ...)
 {
@@ -90,7 +84,7 @@ int		ft_printf(const char * restrict format, ...)
 	int				printed_nb;
 
 	va_start(args, format);
-	printed_nb = ft_vdprintf(1, format, args);
+	printed_nb = ft_vdprintf(STD_OUT, format, args);
 	va_end(args);
 	return(printed_nb);
 }
