@@ -14,29 +14,30 @@
 
 static char		*type_d_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 {
-	 	int		digits;
-	 	int		digits_len;
-	 	char	flags[buf_len];
-	 	int		flags_len;
+ 	int		digits;
+ 	int		digits_len;
+ 	char	flags[buf_len];
+ 	int		flags_len;
 
-	 	if ((flags_len = get_flags(flags, buf, "+- 0")) != FALSE)
-	 	{
-	 		if (ft_strchr(flags, '+'))
-	 			unit->val.d.flag_plus = TRUE;
-	 		if (ft_strchr(flags, '-'))
-	 			unit->val.d.flag_minus = TRUE;
-	 		if (ft_strchr(flags, ' '))
-	 			unit->val.d.flag_blank = TRUE;
-	 		if (ft_strchr(flags, '0'))
-	 			unit->val.d.flag_zero = TRUE;
-	 		buf += flags_len;
-	 	}
-		if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))) != FALSE)
-		{
-			unit->val.d.width = digits;
-			buf += digits_len;
-		}
-		return (buf);
+ 	if ((flags_len = get_flags(flags, buf, "+- 0")))
+ 	{
+ 		if (ft_strchr(flags, '+'))
+ 			unit->val.d.flag_plus = TRUE;
+ 		if (ft_strchr(flags, '-'))
+ 			unit->val.d.flag_minus = TRUE;
+ 		if (ft_strchr(flags, ' '))
+ 			unit->val.d.flag_blank = TRUE;
+ 		if (ft_strchr(flags, '0'))
+ 			unit->val.d.flag_zero = TRUE;
+ 		buf += flags_len;
+ 	}
+ 	digits = 0;
+	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
+	{
+		unit->val.d.width = digits;
+		buf += digits_len;
+	}
+	return (buf);
 }
 
 static char		*type_d_get_precision(char *buf, t_unit *unit)
@@ -44,6 +45,7 @@ static char		*type_d_get_precision(char *buf, t_unit *unit)
 		int		digits;
 		int		digits_len;
 
+		digits = 0;
 		if (*buf == '.')
 		{
 			buf++;

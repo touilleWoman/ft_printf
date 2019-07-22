@@ -19,7 +19,7 @@ int				get_digits(int *digits, char *buf, int buf_len)
 
 	i = 0;
 	if (ft_isdigit(*buf) == FALSE)
-		return (FALSE);
+		return (0);
 	while (ft_isdigit(buf[i]))
 	{
 		s1[i] = buf[i];
@@ -43,7 +43,7 @@ int				get_flags(char *flags, char *buf, char *valid_flags)
 
 	i = 0;
 	if (is_flags(*buf, valid_flags) == FALSE)
-		return(FALSE);
+		return(0);
 	while(is_flags(buf[i], valid_flags))
 	{
 		flags[i] = buf[i];

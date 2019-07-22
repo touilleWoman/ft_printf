@@ -20,12 +20,13 @@ static char		*type_c_get_flags_width_modifier(char *buf, t_unit *unit,
 	char	flags[buf_len];
 	int		flags_len;
 
-	if ((flags_len = get_flags(flags, buf, "-")) != FALSE)
+	if ((flags_len = get_flags(flags, buf, "-")))
 	{
 		unit->val.c.flag_minus = TRUE;
 		buf += flags_len;
 	}
-	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))) != FALSE)
+	digits = 0;
+	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
 	{
 		unit->val.c.width = digits;
 		buf += digits_len;
@@ -85,10 +86,11 @@ static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit)
 	int		digits;
 	int		digits_len;
 
+	digits = 0;
 	if (*buf == '.')
 	{
 		buf++;
-		if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))) != FALSE)
+		if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
 		{
 			unit->val.s.precision = digits;
 			buf += digits_len;
