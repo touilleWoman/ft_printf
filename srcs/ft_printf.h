@@ -29,7 +29,7 @@
 typedef struct	s_parse_funs
 {
 	char		type;
-	void		(*f)();
+	int			(*f)();
 }				t_parse_funs;
 
 typedef struct	s_print_funs
@@ -51,11 +51,11 @@ char			*deal_with_double_percentage(const char*format, int *unit_nb, int *new_le
 t_list			*parse_string(const char *format, va_list args);
 t_list			*cut_to_capsule(char *s, int len, va_list args);
 int				is_conversion(char c);
-void			parse_type_c(t_list **alst, char *buf, va_list args);
-void			parse_type_s(t_list **alst, char *buf, va_list args);
-void			parse_type_d(t_list **alst, char *buf, va_list args);
-void			parse_type_f(t_list **alst, char *buf, va_list args);
-void			parse_type_p(t_list **alst, char *buf, va_list args);
+int				parse_type_c(t_list **alst, char *buf, va_list args);
+int				parse_type_s(t_list **alst, char *buf, va_list args);
+int				parse_type_d(t_list **alst, char *buf, va_list args);
+int				parse_type_f(t_list **alst, char *buf, va_list args);
+int				parse_type_p(t_list **alst, char *buf, va_list args);
 
 
 //print

@@ -18,6 +18,8 @@ CFLAGS = -Wall -Werror -Wextra -g
 
 NAME = libftprintf.a
 
+
+
 SOURCE_NAME = ft_printf.c \
 					pf_parse.c\
 					pf_deal_with_double_percentage.c\

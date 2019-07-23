@@ -82,9 +82,9 @@ int main()
 	// char *ptr = "ok";
 	// void *ptr2 = ptr;
 	// printf("%lp|%hp\n", ptr, ptr2);
+	printf(1);
+    // printf("====================%+-5.3rc\n", 'n');
 
-	const char *s = "bonjour";
 
-	printf("%lu\n", sizeof(s));
 	return 0;
 }

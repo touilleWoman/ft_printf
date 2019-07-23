@@ -46,7 +46,7 @@ typedef struct 		s_type_c
 	t_bool			flag_minus;
 	unsigned int	width;
 	t_bool			modifier_l;
-	unsigned char	character;
+	wchar_t		character;
 }					t_type_c;
 
 typedef struct 		s_type_s
@@ -85,7 +85,7 @@ typedef struct 		s_type_f
 
 typedef struct 		s_type_p
 {
-	void			*pointer;
+	 uintmax_t		pointer;
 }					t_type_p;
 
 typedef	union		u_unit_union

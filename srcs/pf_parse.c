@@ -43,7 +43,7 @@ int		find_conversion_in_capsule(const char *capsule)
 		return (posi);
 }
 
-void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_list args)
+int			seperate_conversion_and_literal(t_list **alst, const char *capsule, va_list args)
 {
 	int					index;
 	int					posi;
@@ -52,7 +52,6 @@ void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
 		{'c', parse_type_c},{'s', parse_type_s}, {'d', parse_type_d},
 		{'f', parse_type_f}, {'p', parse_type_p}
-
 		};
 
 	len = ft_strlen(capsule);
@@ -64,12 +63,14 @@ void		seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 		{
 			ft_strncpy(buf, capsule, posi + 1); //check later
 			buf[posi + 1] = '\0';
-			funs[index].f(alst, buf, args);
+			if (funs[index].f(alst, buf, args) == ERROR)
+				return (ERROR);
 		}
 		index++;
 	}
 	if (posi != len - 1) // if there are literal after conversion, add ne literal unit
 		unit_lstadd_literal(alst, ft_strdup(capsule + posi + 1));
+	return(0);
 }
 
 t_list		*cut_to_capsule(char *s, int len, va_list args)
@@ -77,6 +78,7 @@ t_list		*cut_to_capsule(char *s, int len, va_list args)
 	int		start;
 	t_list	*lst;
 	char	*capsule;
+	int		err_check;
 
 	lst = NULL;
 	if (*s != '\0')
@@ -85,9 +87,11 @@ t_list		*cut_to_capsule(char *s, int len, va_list args)
 	while (start < len)
 	{
 		capsule = ft_strdup(s + start);
-		seperate_conversion_and_literal(&lst, capsule, args);
+		err_check = seperate_conversion_and_literal(&lst, capsule, args);
 		free(capsule);
 		capsule = NULL;
+		if (err_check == ERROR)
+			return (NULL);
 		start += ft_strlen(s + start) + 1;
 	}
 	return (lst);

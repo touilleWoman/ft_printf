@@ -84,7 +84,7 @@ static char		*type_d_get_modifier(char *buf, t_unit *unit)
 	return (buf);
 }
 
-void			parse_type_d(t_list **alst, char *buf, va_list args)
+int			parse_type_d(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 
@@ -94,8 +94,8 @@ void			parse_type_d(t_list **alst, char *buf, va_list args)
 	buf = type_d_get_modifier(buf, &unit);
 	if (*buf != 'd')
 	{
-		printf("error: %%d format wrong\n");
-		exit(0);
+		freelst_and_errormsg(*alst, "error : %%d format wrong\n");
+		return (ERROR);
 	}
 	unit.type = TYPE_D;
 	if (unit.val.d.modifier == MD_LL)
@@ -109,4 +109,5 @@ void			parse_type_d(t_list **alst, char *buf, va_list args)
 	else
 		unit.val.d.integer =va_arg(args, int);
 	unit_lstadd_bot(alst, &unit);
+	return (0);
 }

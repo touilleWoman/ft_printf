@@ -13,8 +13,6 @@
 
 #include "ft_printf.h"
 
-
-
 int		print_list(int fd, t_list *lst)
 {
 	t_unit				*unit;
@@ -38,8 +36,6 @@ int		print_list(int fd, t_list *lst)
 	}
 	return (printed_nb);
 }
-
-
 
 int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 {

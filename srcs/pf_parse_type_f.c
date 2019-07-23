@@ -75,7 +75,7 @@ static char		*type_f_get_modifier(char *buf, t_unit *unit)
 	return (buf);
 }
 
-void		parse_type_f(t_list **alst, char *buf, va_list args)
+int		parse_type_f(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 
@@ -85,8 +85,8 @@ void		parse_type_f(t_list **alst, char *buf, va_list args)
 	buf = type_f_get_modifier(buf, &unit);
 	if (*buf != 'f')
 	{
-		printf("error: %%f format wrong\n");
-		exit(0);
+		freelst_and_errormsg(*alst, "error: %%f format wrong\n");
+		return(ERROR);
 	}
 	unit.type = TYPE_F;
 	if (unit.val.f.modifier == MD_MAG_L)
@@ -94,4 +94,5 @@ void		parse_type_f(t_list **alst, char *buf, va_list args)
 	else
 		unit.val.f.doub = (long double)va_arg(args, double);
 	unit_lstadd_bot(alst, &unit);
+	return (0);
 }

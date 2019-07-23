@@ -51,8 +51,6 @@ void Test_final_result_type_s(CuTest *tc)
 		ft_printf("%2s\n", "why"));
 	CuAssertIntEquals(tc, printf("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va"),
 		ft_printf("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va"));
-	CuAssertIntEquals(tc, printf("%2s%c\n", "bonjour", 'a'),
-		ft_printf("%2s%c\n", "bonjour", 'a'));
 	CuAssertIntEquals(tc, printf("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va"),
 		ft_printf("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va"));
 
