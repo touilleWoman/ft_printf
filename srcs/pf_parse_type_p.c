@@ -79,7 +79,6 @@ int			parse_type_p(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 
-	ft_putstr("bbbbb:");
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_p_flags_check(buf, ft_strlen(buf));
 	buf = type_p_width_precision_check(buf);

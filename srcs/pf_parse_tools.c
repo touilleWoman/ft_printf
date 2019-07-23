@@ -12,6 +12,9 @@
 
 #include "ft_printf.h"
 
+
+
+
 int				get_digits(int *digits, char *buf, int buf_len)
 {
 	int		i;
