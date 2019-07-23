@@ -74,15 +74,23 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
+// type c
+    testcase("okone%-20coktwo%-lcokthree\n", 'a', 'b');
+    testcase("okone%-20coktwo%-lcokthree\n", 'a', 'b');
+    testcase("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e');
 
+ //type s
+    testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
+    testcase("%2s%c\n", "bonjour", 'a');
+    testcase("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va");
     testcase("helloee", "");
-    testcase("he\\llo%s\n", "world");
+    testcase("hello%s\n", "world");
     testcase("%s%s\n", "bonjour", "toi");
     testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
     testcase("hello%s\n", "world");
     testcase("hello %s\t%d\n", "world", 42);
     testcase("hello %s\t%d\n", "world", 42);
-    // //type p
+    //type p
     // char *ptr = "pointer test";
     // void *ptr2 = NULL;
     // void *ptr3 = ptr;

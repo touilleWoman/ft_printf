@@ -35,7 +35,7 @@ int		print_c(int fd, t_unit *unit)
 		ft_putstr_fd(s, fd);
 		return (ft_strlen(s));
 	}
-	write(1, &(unit->val.c.character), 1);
+	write(fd, &(unit->val.c.character), 1);
 	return (1);
 }
 
