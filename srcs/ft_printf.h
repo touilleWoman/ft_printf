@@ -21,7 +21,7 @@
 #include "libft.h"
 #include <wchar.h>
 
-#define PARSE_FUNS_NB 4
+#define PARSE_FUNS_NB 5
 #define PRINT_FUNS_NB 4
 #define ERROR -1
 #define STD_OUT 1
@@ -55,6 +55,7 @@ void			parse_type_c(t_list **alst, char *buf, va_list args);
 void			parse_type_s(t_list **alst, char *buf, va_list args);
 void			parse_type_d(t_list **alst, char *buf, va_list args);
 void			parse_type_f(t_list **alst, char *buf, va_list args);
+void			parse_type_p(t_list **alst, char *buf, va_list args);
 
 
 //print

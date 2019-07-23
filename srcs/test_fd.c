@@ -2,7 +2,6 @@
 #include <string.h>
 #include "ft_printf.h"
 
-int     ft_dprintf(int fd, const char * restrict format, ...);
 
 
 
@@ -20,11 +19,11 @@ fprintf(stderr, msg, __VA_ARGS__); current_test_result = -1;                    
 static  int tests_total = 0;
 static  int tests_failures = 0;
 
-void     testcase(const char *fmt, ...) 
+void     testcase(const char *fmt, ...)
 {
 
     va_list args1, args2;
-    va_start(args1, fmt); 
+    va_start(args1, fmt);
     va_copy(args2, args1);
 
     int current_test_result = 0;
@@ -55,10 +54,10 @@ void     testcase(const char *fmt, ...)
     if (strcmp(out_oracle, out_test)) {
         FAIL("Output differ: `%s` != `%s`\n", out_test, out_oracle);
     }
-    else
-    {
-        printf("%s\n",out_test);
-    }
+    // else
+    // {
+    //     printf("%s\n",out_test);
+    // }
     /* Cleanup */
     close(fd_oracle);
     close(fd_test);
@@ -82,6 +81,12 @@ int main()
     testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
     testcase("hello%s\n", "world");
     testcase("hello %s\t%d\n", "world", 42);
+    testcase("hello %s\t%d\n", "world", 42);
+    // //type p
+    // char *ptr = "pointer test";
+    // void *ptr2 = NULL;
+    // void *ptr3 = ptr;
+    // testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
 
     if (tests_failures)
     {
@@ -94,9 +99,9 @@ int main()
         return 0;
     }
 }
-
-// int main()
+// int main(void)
 // {
-//     ft_dprintf(1, "hello%s\n", "world");
-//     ft_dprintf(1, "%s%s\n", "bonjour", "toi");
+
+//     ft_printf("%s%s\n", "bonjour", "toi");
+//     return 0;
 // }

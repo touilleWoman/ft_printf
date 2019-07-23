@@ -1,5 +1,4 @@
 
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -13,30 +12,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-// void	free_unit(t_unit *unit)
-// {
-// 	unit->type == TYPE_LTR ? free()
-// }
-
-
-
-
-// void	freelst_and_errormsg(t_list *list, char *msg)
-// {				
-// 	t_unit		*unit;
-// 	t_list		*keep;
-
-// 	while (lst != NULL)
-// 	{
-// 		keep = lst->next;
-
-
-
-// 		lst = keep;
-
-// 	}
-// 	ft_putstr(msg);
-// }
 
 
 
@@ -69,10 +44,15 @@ int		print_list(int fd, t_list *lst)
 int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 {
 	t_list			*lst;
+	int				printed_nb;
 
 	lst = parse_string(format, args);
 	if (lst != NULL)
-		return (print_list(fd, lst));
+	{
+		printed_nb = print_list(fd, lst);
+		freelst_and_errormsg(lst, NULL);
+		return (printed_nb);
+	}
 	else
 		return (ERROR);
 }
@@ -88,6 +68,8 @@ int		ft_printf(const char * restrict format, ...)
 	va_end(args);
 	return(printed_nb);
 }
+
+
 
 // **	The va_list is nothing more than a byte pointer.
 // **	#define va_start(args, param) (args = (((va_list)&param) + sizeof(param)))

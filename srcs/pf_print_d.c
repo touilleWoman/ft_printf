@@ -113,10 +113,10 @@ int				print_d(int fd, t_unit *unit)
 	print_nb = ft_strlen(integer);
 	integer = deal_with_precision(integer, &print_nb, unit->val.d.precision);
 	if (unit->val.d.width > print_nb)
-	{
 		print_nb = create_buf_of_width_size_then_print(fd, unit, integer, print_nb, unit->val.d.width);
-	}
 	else
 		print_nb = print_int_with_flagplus_or_blank(fd, unit, integer, print_nb);
+	free(integer);
+	integer = NULL;
 	return (print_nb);
 }

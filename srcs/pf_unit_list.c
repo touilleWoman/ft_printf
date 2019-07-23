@@ -12,6 +12,29 @@
 
 #include "ft_printf.h"
 
+void	freelst_and_errormsg(t_list *lst, char *msg)
+{
+	t_unit		*unit;
+	t_list		*keep;
+
+	while (lst != NULL)
+	{
+		keep = lst->next;
+		unit = unit_access(lst);
+		if (unit->type == TYPE_LTR)
+		{
+			free(unit->val.ltr.literal);
+			unit->val.ltr.literal = NULL;
+		}
+		free(lst->content);
+		lst->content = NULL;
+		free(lst);
+		lst = keep;
+	}
+	ft_putstr_fd(msg, 2);
+}
+
+
 t_list		*unit_list_new(t_unit const *unit)
 {
 	t_list *lst;
@@ -30,12 +53,11 @@ t_unit		*unit_access(t_list *lst)
 	return ((t_unit*)lst->content);
 }
 
-void		unit_lstadd_literal(t_list **alst, const char *literal_piece)
+void		unit_lstadd_literal(t_list **alst, char *literal_piece)
 {
 	t_unit		unit;
 
 	unit.type = TYPE_LTR;
-	// printf("add typeLTR%d\n", unit.type );
 	unit.val.ltr.literal = literal_piece;
 	unit_lstadd_bot(alst, &unit);
 }

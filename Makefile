@@ -14,7 +14,7 @@
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g -ggdb
+CFLAGS = -Wall -Werror -Wextra -g
 
 NAME = libftprintf.a
 
@@ -25,6 +25,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_parse_type_c_s.c\
 					pf_parse_type_d.c\
 					pf_parse_type_f.c\
+					pf_parse_type_p.c\
 					pf_unit_list.c\
 					pf_field_check.c \
 					pf_print_c_s_ltr.c\
@@ -45,6 +46,7 @@ SOURCE_NAME = ft_printf.c \
 					ft_itoa.c\
 					ft_isdigit.c\
 					ft_putstr_fd.c\
+					ft_putstr.c \
 					ft_strcat.c\
 					pf_test_functions.c\
 
@@ -66,7 +68,8 @@ $(NAME): $(OBJ)
 
 
 check:all
-	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -ggdb -fsanitize=address -I ./srcs
+	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -I ./srcs
+# 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
 
 clean:
 	rm -f $(OBJ)

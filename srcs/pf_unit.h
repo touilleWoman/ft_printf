@@ -24,6 +24,7 @@ typedef	enum 		e_unit_type
 	TYPE_S,
 	TYPE_D,
 	TYPE_F,
+	TYPE_P,
 }					t_unit_type;
 
 typedef enum 		e_modifier
@@ -37,7 +38,7 @@ typedef enum 		e_modifier
 
 typedef struct 		s_type_ltr
 {
-	const char		*literal;
+	char		*literal;
 }					t_type_ltr;
 
 typedef struct 		s_type_c
@@ -82,6 +83,11 @@ typedef struct 		s_type_f
 	long double		doub;
 }					t_type_f;
 
+typedef struct 		s_type_p
+{
+	void			*pointer;
+}					t_type_p;
+
 typedef	union		u_unit_union
 {
 	t_type_ltr		ltr;
@@ -89,6 +95,7 @@ typedef	union		u_unit_union
 	t_type_s		s;
 	t_type_d		d;
 	t_type_f		f;
+	t_type_p		p;
 }					t_unit_union;
 
 typedef struct		s_unit
@@ -99,7 +106,9 @@ typedef struct		s_unit
 
 t_unit				*unit_access(t_list *lst);
 void				unit_lstadd_bot(t_list **alst, t_unit const *unit);
-void				unit_lstadd_literal(t_list **alst, const char *literal_piece);
+// void				unit_lstadd_literal(t_list **alst, const char *literal_piece);
+void		unit_lstadd_literal(t_list **alst, char *literal_piece);
+void	freelst_and_errormsg(t_list *list, char *msg);
 
 
 //test functions

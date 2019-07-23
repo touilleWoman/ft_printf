@@ -120,8 +120,6 @@ void			parse_type_s(t_list **alst, char *buf, va_list args)
 	}
 	unit.type = TYPE_S;
 	if ((unit.val.s.string = va_arg(args, char *)) == NULL)
-		unit.val.s.string = "(null)";	
-	// else
-		// printf("==================%s\n", unit.val.s.string);
+		unit.val.s.string = "(null)";
 	unit_lstadd_bot(alst, &unit);
 }
