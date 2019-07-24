@@ -13,37 +13,42 @@
 #include "ft_printf.h"
 
 /*
-** 		warning: flag ' ' is ignored when flag '+' is present"
-**		warning: flag '0' is ignored when flag '-' is present"
+** 		flag ' ' is ignored when flag '+' is present"
+**		flag '0' is ignored when flag '-' is present"
 */
 
-static char		*deal_with_precision(char *integer,
+static char		*d_precision_handler(char *integer,
 							unsigned int *print_nb,
 							unsigned int precision)
 {
-	char *ret;
+	char	*new;
+	int		neg;
 
-	if (*print_nb >= precision)
+	if (*print_nb > precision)
 		return (integer);
-	ret = ft_memalloc(precision + 1);
-	ft_memset(ret, '0', precision - (*print_nb));
-	ft_strncpy(ret + precision - (*print_nb), integer, *print_nb);
+	neg = ((*integer == '-') ? 1 : 0);
+	new = ft_memalloc(precision + neg + 1);
+	ft_memset(new, '0', precision + neg);
+	new[precision + neg] = '\0';
+	if (neg == 1)
+		new[0] = '-';
+	ft_strncpy(new + precision + neg - (*print_nb) + neg, integer + neg, (*print_nb) - neg);
 	free(integer);
 	integer = NULL;
-	*print_nb = precision;
-	return (ret);
+	*print_nb = precision + neg;
+	return (new);
 }
 
 int				print_int_with_flagplus_or_blank(int fd, t_unit *unit,
 												char *integer,
 												int print_nb)
 {
-	if (unit->val.d.flag_plus == TRUE)
+	if (unit->val.d.flag_plus == TRUE && unit->val.d.integer >= 0)
 	{
 		write(fd, "+", 1);
 		print_nb++;
 	}
-	else if (unit->val.d.flag_blank == TRUE)
+	else if (unit->val.d.flag_blank == TRUE && unit->val.d.integer >= 0)
 	{
 		write(fd, " ", 1);
 		print_nb++;
@@ -76,7 +81,7 @@ static int		create_buf_of_width_size_then_print(int fd, t_unit *unit,
 		else
 		{
 			ft_strncpy((s +width - int_len), integer, int_len);
-			if (unit->val.d.flag_plus == TRUE)
+			if (unit->val.d.flag_plus == TRUE && unit->val.d.integer >= 0)
 				s[width - int_len - 1] = '+';
 			else if (unit->val.d.flag_blank == TRUE)
 				s[width - int_len - 1] = ' ';
@@ -84,12 +89,12 @@ static int		create_buf_of_width_size_then_print(int fd, t_unit *unit,
 	}
 	else
 	{
-		if (unit->val.d.flag_plus == TRUE)
+		if (unit->val.d.flag_plus == TRUE && unit->val.d.integer >= 0)
 		{
 			*s = '+';
 			step = 1;
 		}
-		else if (unit->val.d.flag_blank == TRUE)
+		else if (unit->val.d.flag_blank == TRUE && unit->val.d.integer >= 0)
 		{
 			*s = ' ';
 			step = 1;
@@ -104,6 +109,7 @@ static int		create_buf_of_width_size_then_print(int fd, t_unit *unit,
 ** 		print_nb is initialted at the lenth of integer,
 **		it will change depending on precision, width, then flags
 */
+
 int				print_d(int fd, t_unit *unit)
 {
 	char			*integer;
@@ -111,7 +117,7 @@ int				print_d(int fd, t_unit *unit)
 
 	integer = ft_itoa(unit->val.d.integer);
 	print_nb = ft_strlen(integer);
-	integer = deal_with_precision(integer, &print_nb, unit->val.d.precision);
+	integer = d_precision_handler(integer, &print_nb, unit->val.d.precision);
 	if (unit->val.d.width > print_nb)
 		print_nb = create_buf_of_width_size_then_print(fd, unit, integer, print_nb, unit->val.d.width);
 	else

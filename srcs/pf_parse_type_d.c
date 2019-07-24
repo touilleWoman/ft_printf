@@ -92,7 +92,7 @@ int			parse_type_d(t_list **alst, char *buf, va_list args)
 	buf = type_d_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_d_get_precision(buf, &unit);
 	buf = type_d_get_modifier(buf, &unit);
-	if (*buf != 'd')
+	if (*buf != 'd' && *buf != 'i')
 	{
 		freelst_and_errormsg(*alst, "error : %%d format wrong\n");
 		return (ERROR);

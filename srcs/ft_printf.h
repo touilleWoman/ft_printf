@@ -21,7 +21,7 @@
 #include "libft.h"
 #include <wchar.h>
 
-#define PARSE_FUNS_NB 5
+#define PARSE_FUNS_NB 6
 #define PRINT_FUNS_NB 5
 #define ERROR -1
 #define STD_OUT 1
@@ -64,7 +64,7 @@ int				print_c(int fd, t_unit *unit);
 int				print_s(int fd, t_unit *unit);
 int				print_d(int fd, t_unit *unit);
 int				print_p(int fd, t_unit *unit);
-char		*pf_itoa_base(uintmax_t nbr, int base);
+char			*pf_itoa_base(uintmax_t nbr, int base);
 
 
 #endif

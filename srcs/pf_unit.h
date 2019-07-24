@@ -38,7 +38,7 @@ typedef enum 		e_modifier
 
 typedef struct 		s_type_ltr
 {
-	char		*literal;
+	 char			*literal;
 }					t_type_ltr;
 
 typedef struct 		s_type_c
@@ -69,6 +69,18 @@ typedef struct 		s_type_d
 	int				modifier;
 	intmax_t		integer;
 }					t_type_d;
+
+// typedef struct 		s_type_u
+// {
+// 	t_bool			flag_minus;
+// 	t_bool			flag_plus;
+// 	t_bool			flag_zero;
+// 	t_bool			flag_blank;
+// 	unsigned int	width;
+// 	unsigned int	precision;
+// 	int				modifier;
+// 	intmax_t		integer;
+// }					t_type_u;
 
 typedef struct 		s_type_f
 {

@@ -82,7 +82,8 @@ int main()
 	// char *ptr = "ok";
 	// void *ptr2 = ptr;
 	// printf("%lp|%hp\n", ptr, ptr2);
-	printf(1);
+	printf("%+10d\n", 22);
+	printf("%+010d\n", 22);
     // printf("====================%+-5.3rc\n", 'n');
 
 
