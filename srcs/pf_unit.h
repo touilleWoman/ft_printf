@@ -25,6 +25,7 @@ typedef	enum 		e_unit_type
 	TYPE_D,
 	TYPE_F,
 	TYPE_P,
+	TYPE_OXX,
 }					t_unit_type;
 
 typedef enum 		e_modifier
@@ -70,6 +71,18 @@ typedef struct 		s_type_d
 	intmax_t		integer;
 }					t_type_d;
 
+typedef struct 		s_type_oxx
+{
+	t_bool			flag_minus;
+	t_bool			flag_hash;
+	t_bool			flag_zero;
+	int				width;
+	unsigned int	precision;
+	int				modifier;
+	uintmax_t		un_int;
+	t_bool			x_majuscule;
+}					t_type_oxx;
+
 // typedef struct 		s_type_u
 // {
 // 	t_bool			flag_minus;
@@ -108,6 +121,7 @@ typedef	union		u_unit_union
 	t_type_d		d;
 	t_type_f		f;
 	t_type_p		p;
+	t_type_oxx		oxx;
 }					t_unit_union;
 
 typedef struct		s_unit

@@ -82,11 +82,15 @@ int main()
 	// char *ptr = "ok";
 	// void *ptr2 = ptr;
 	// printf("%lp|%hp\n", ptr, ptr2);
-	printf("%+2d\n", 33);
+	printf("%#x\n", 22);
+	printf("%#X\n",22);
+	printf("%#o\n", 22);
+	printf("%x\n", 0);
+	printf("%X\n", 0);
+	printf("%o\n", 0);
 	printf("%+3d\n", 22);
 	printf("%+4d\n", 22);
     // printf("====================%+-5.3rc\n", 'n');
-
 
 	return 0;
 }

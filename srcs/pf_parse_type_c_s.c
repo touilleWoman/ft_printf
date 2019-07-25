@@ -40,7 +40,7 @@ static char		*type_c_get_flags_width_modifier(char *buf, t_unit *unit,
 	return (buf);
 }
 
-int				parse_type_c(t_list **alst, char *buf, va_list args)
+int				parse_c(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 
@@ -107,7 +107,7 @@ static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit)
 	return (buf);
 }
 
-int			parse_type_s(t_list **alst, char *buf, va_list args)
+int			parse_s(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 

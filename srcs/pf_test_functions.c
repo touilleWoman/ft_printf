@@ -66,6 +66,18 @@ void 	show_list(t_list   *lst)
 			printf("modifier:%d|\n", unit->val.f.modifier);
 			printf("double:%Lf|\n", unit->val.f.doub);
 		}
+		if (unit->type == TYPE_OXX)
+		{
+			printf("content of TYPE_OXX is:\n");
+			printf("flag_minus:%d|\n", unit->val.oxx.flag_minus);
+			printf("flag_zero:%d|\n", unit->val.oxx.flag_zero);
+			printf("flag_hash:%d|\n", unit->val.oxx.flag_hash);
+			printf("width:%d|\n", unit->val.oxx.width);
+			printf("precision:%d|\n", unit->val.oxx.precision);
+			printf("modifier:%d|\n", unit->val.oxx.modifier);
+			printf("unsigned int:%ju|\n", unit->val.oxx.un_int);
+		}
+
 		printf("\n\n");
 		lst = lst->next;
 		index++;

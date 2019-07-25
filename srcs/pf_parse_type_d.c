@@ -84,7 +84,7 @@ static char		*type_d_get_modifier(char *buf, t_unit *unit)
 	return (buf);
 }
 
-int			parse_type_d(t_list **alst, char *buf, va_list args)
+int			parse_d(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 

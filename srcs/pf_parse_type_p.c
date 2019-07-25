@@ -75,7 +75,7 @@ static char		*type_p_modifier_check(char *buf)
 	return (buf);
 }
 
-int			parse_type_p(t_list **alst, char *buf, va_list args)
+int			parse_p(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 

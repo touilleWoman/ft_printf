@@ -1,0 +1,103 @@
+
+#include "ft_printf.h"
+
+static char		*type_oxX_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
+{
+	int		digits;
+	int		digits_len;
+	char	flags[buf_len];
+	int		flags_len;
+
+ 	if ((flags_len = get_flags(flags, buf, "#-0")))
+	{
+		if (ft_strchr(flags, '#'))
+			unit->val.oxx.flag_hash = TRUE;
+		if (ft_strchr(flags, '-'))
+			unit->val.oxx.flag_minus = TRUE;
+		if (ft_strchr(flags, '0'))
+			unit->val.oxx.flag_zero = TRUE;
+		buf += flags_len;
+	}
+ 	digits = 0;
+	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
+	{
+		unit->val.oxx.width = digits;
+		buf += digits_len;
+	}
+	return (buf);
+}
+
+static char		*type_oxX_get_precision(char *buf, t_unit *unit)
+{
+		int		digits;
+		int		digits_len;
+
+		digits = 0;
+		if (*buf == '.')
+		{
+			buf++;
+			digits_len = get_digits(&digits, buf, ft_strlen(buf));
+			if (digits_len)
+			{
+				unit->val.oxx.precision = digits;
+				buf += digits_len;
+			}
+		}
+		return (buf);
+}
+
+static char		*type_oxX_get_modifier(char *buf, t_unit *unit)
+{
+	if (*buf == 'l' && buf[1] == 'l')
+	{
+		unit->val.oxx.modifier = MD_LL;
+		buf += 2;
+	}
+	else if (*buf == 'h' && buf[1] == 'h')
+	{
+		unit->val.oxx.modifier = MD_HH;
+		buf += 2;
+	}
+	else if (*buf == 'l')
+	{
+		unit->val.oxx.modifier= MD_L;
+		buf++;
+	}
+	else if (*buf == 'h')
+	{
+		unit->val.oxx.modifier= MD_H;
+		buf++;
+	}
+	return (buf);
+}
+
+int			parse_oxx(t_list **alst, char *buf, va_list args)
+{
+	t_unit	unit;
+
+	ft_bzero(&unit, sizeof(t_unit));
+	buf = type_oxX_get_flags_and_width(buf, &unit, ft_strlen(buf));
+	buf = type_oxX_get_precision(buf, &unit);
+	buf = type_oxX_get_modifier(buf, &unit);
+	if (*buf != 'o' && *buf != 'x' && *buf != 'X')
+	{
+		freelst_and_errormsg(*alst, 
+			"error : conversion 'o' 'x' or 'X' format wrong\n");
+		return (ERROR);
+	}
+	unit.type = TYPE_OXX;
+	if (*buf == 'X')
+		unit.val.oxx.x_majuscule = TRUE;
+	if (unit.val.oxx.modifier == MD_LL)
+		unit.val.oxx.un_int = va_arg(args,  unsigned long long);
+	else if (unit.val.oxx.modifier == MD_L)
+		unit.val.oxx.un_int = va_arg(args, unsigned long);
+	else if (unit.val.oxx.modifier == MD_HH)
+		unit.val.oxx.un_int = (unsigned char)va_arg(args, unsigned int);
+	else if (unit.val.oxx.modifier == MD_H)
+		unit.val.oxx.un_int =(unsigned short)va_arg(args, unsigned int);
+	else
+		unit.val.oxx.un_int =va_arg(args, unsigned int);
+	unit_lstadd_bot(alst, &unit);
+	return (0);
+}

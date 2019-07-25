@@ -14,24 +14,44 @@
 
 
 
-char		*pf_itoa_base(uintmax_t nbr, int base)
+char		*pf_itoa_base(uintmax_t nbr, int base, t_unit *unit)
 {
-	int		count;
+	int		posi;
 	char	buf[100];
 
-	count = 0;
-	buf[99] = '\0';
-	if (nbr == 0 && base == 16)
-		return (ft_strdup("0x0"));
+	posi_handler = 0;
+	posi = 99;
+	buf[posi] = '\0';
+	if (nbr == 0)
+	{
+		posi--;
+		buf[posi] = '0';
+	}
 	while (nbr > 0 )
 	{
-		count++;
-		buf[99 - count] = nbr % base + ((nbr % base < 10) ? '0' : 'a'- 10);
+		posi--;
+		if (base == 16 && unit->type.val.oxx.x_majusclue == TRUE)
+			buf[posi] = nbr % base + ((nbr % base < 10) ? '0' : 'A'- 10);
+		else
+			buf[posi] = nbr % base + ((nbr % base < 10) ? '0' : 'a'- 10);
 		nbr = nbr / base;
 	}
-	buf[99 - count - 1] = 'x';
-	buf[99 - count - 2] = '0';
-	return (ft_strdup(buf + 99 - count - 2));
+	if ((unit->type == TYPE_P) || (base == 16 && unit->type == TYPE_OXX &&  unit->val.oxx.flag_hash == TRUE))
+	{
+		posi--;
+		if (unit->val.oxx.x_majuscule == TRUE)
+			buf[posi] = 'X';
+		else
+			buf[posi] = 'x';
+		posi--;
+		buf[posi] = '0';
+	}
+	if (base == 8 && unit->val.oxx.flag_hash == TRUE)
+	{
+		posi--;
+		buf[posi] = '0'; 
+	}
+	return (ft_strdup(buf + 99 - posi));
 }
 
 
@@ -40,7 +60,7 @@ int				print_p(int fd, t_unit *unit)
 	char	*s;
 	int		len;
 
-	s = pf_itoa_base(unit->val.p.pointer, 16);
+	s = pf_itoa_base(unit->val.p.pointer, 16, unit);
 	ft_putstr_fd(s, fd);
 	len = ft_strlen(s);
 	free (s);

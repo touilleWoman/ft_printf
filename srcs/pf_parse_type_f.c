@@ -75,7 +75,7 @@ static char		*type_f_get_modifier(char *buf, t_unit *unit)
 	return (buf);
 }
 
-int		parse_type_f(t_list **alst, char *buf, va_list args)
+int		parse_f(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 

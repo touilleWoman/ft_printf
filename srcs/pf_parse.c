@@ -50,8 +50,8 @@ int			seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 	char				buf[ft_strlen(capsule)];
 	int					len;
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
-		{'c', parse_type_c},{'s', parse_type_s}, {'d', parse_type_d}, {'i', parse_type_d},
-		{'f', parse_type_f}, {'p', parse_type_p},
+		{'c', parse_c},{'s', parse_s}, {'d', parse_d}, {'i', parse_d},
+		{'f', parse_f}, {'p', parse_p}, {'o', parse_oxx}, {'x', parse_oxx}, {'X', parse_oxx} 
 		};
 
 	len = ft_strlen(capsule);
@@ -108,7 +108,7 @@ t_list		*parse_string(const char *format, va_list args)
 	lst = cut_to_capsule(new_format,new_len, args);
 	free(new_format);
 	new_format = NULL;
-	// show_list(lst);
+	show_list(lst);
 	return (lst);
 }
 
