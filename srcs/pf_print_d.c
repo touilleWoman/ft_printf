@@ -12,117 +12,112 @@
 
 #include "ft_printf.h"
 
-/*
-** 		flag ' ' is ignored when flag '+' is present"
-**		flag '0' is ignored when flag '-' is present"
-*/
-
-static char		*d_precision_handler(char *integer,
-							unsigned int *print_nb,
-							unsigned int precision)
+static unsigned int		d_precision_handler(char *s, char *integer,
+														int precision)
 {
-	char	*new;
 	int		neg;
+	int		dy_len;
 
-	if (*print_nb > precision)
-		return (integer);
-	neg = ((*integer == '-') ? 1 : 0);
-	new = ft_memalloc(precision + neg + 1);
-	ft_memset(new, '0', precision + neg);
-	new[precision + neg] = '\0';
-	if (neg == 1)
-		new[0] = '-';
-	ft_strncpy(new + precision + neg - (*print_nb) + neg, integer + neg, (*print_nb) - neg);
-	free(integer);
-	integer = NULL;
-	*print_nb = precision + neg;
-	return (new);
+	dy_len = ft_strlen(integer);
+	if (dy_len > precision)
+		ft_strcpy(s, integer);
+	else
+	{
+		neg = ((*integer == '-') ? 1 : 0);
+		s[precision + neg] = '\0';
+		ft_memset(s, '0', precision + neg);
+		if (neg == 1)
+			s[0] = '-';
+		ft_strncpy(s + precision + neg - dy_len + neg, integer + neg, dy_len - neg);
+		dy_len = precision + neg;
+	}
+	return (dy_len);
 }
 
-int				print_int_with_flagplus_or_blank(int fd, t_unit *unit,
-												char *integer,
-												int print_nb)
+static void				sub_d_width_handler(char *s, int dy_len, t_unit *unit, int width)
 {
-	if (unit->val.d.flag_plus == TRUE && unit->val.d.integer >= 0)
+	char 	s_keep[dy_len + 1];
+	int 	mark;
+
+	ft_strcpy(s_keep, s);
+	mark = 0;
+	if (unit->val.d.flag_zero == TRUE && unit->val.d.precision == 0)
 	{
-		write(fd, "+", 1);
-		print_nb++;
-	}
-	else if (unit->val.d.flag_blank == TRUE && unit->val.d.integer >= 0)
-	{
-		write(fd, " ", 1);
-		print_nb++;
-	}
-	write(fd, integer, ft_strlen(integer));
-	return (print_nb);
-}
-
-
-
-static int		create_buf_of_width_size_then_print(int fd, t_unit *unit,
-							char *integer, int int_len, int width)
-{
-	char			s[width];
-	int				step;
-
-	ft_memset(s, ' ', width);
-	step = 0;
-	if (unit->val.d.flag_minus == FALSE)
-	{
-		if (unit->val.d.flag_zero == TRUE)
+		ft_memset(s, '0', width);
+		if (*s_keep == '-' || *s_keep == '+') 
 		{
-			ft_memset(s, '0', width);
-			ft_strncpy((s +  width - int_len), integer, int_len);
-			if (unit->val.d.flag_plus == TRUE)
-				*s = '+';
-			else if (unit->val.d.flag_blank == TRUE)
-				*s = ' ';
+			s[0] = s_keep[0];
+			mark = 1;
 		}
-		else
-		{
-			ft_strncpy((s +width - int_len), integer, int_len);
-			if (unit->val.d.flag_plus == TRUE && unit->val.d.integer >= 0)
-				s[width - int_len - 1] = '+';
-			else if (unit->val.d.flag_blank == TRUE)
-				s[width - int_len - 1] = ' ';
-		}
+		ft_strncpy(s + width + mark - dy_len, s_keep + mark, dy_len - mark);
 	}
 	else
 	{
-		if (unit->val.d.flag_plus == TRUE && unit->val.d.integer >= 0)
-		{
-			*s = '+';
-			step = 1;
-		}
-		else if (unit->val.d.flag_blank == TRUE && unit->val.d.integer >= 0)
-		{
-			*s = ' ';
-			step = 1;
-		}
-		ft_strncpy(s + step, integer, int_len);
+		ft_memset(s, ' ', width);
+		ft_strncpy(s + width - dy_len, s_keep , dy_len);
 	}
-	write(fd, s, width);
-	return (width);
 }
 
 /*
-** 		print_nb is initialted at the lenth of integer,
+**		flag '0' is ignored when flag '-' or precision present"
+*/
+
+static unsigned int		d_width_handler(char *s, int dy_len, t_unit *unit, int width)
+{
+
+
+	if (width <= dy_len)
+		return (dy_len);
+	if (unit->val.d.flag_minus == TRUE)
+		ft_memset(s + dy_len, ' ', width - dy_len);
+	else
+		sub_d_width_handler(s, dy_len, unit, width);
+	s[width] = '\0';
+	return(width);
+}
+
+/*
+** 		flag ' ' is ignored when flag '+' is present"
+*/
+
+static unsigned int		d_flag_plus_and_blank_handler(char *s, int dy_len, t_unit *unit)
+{
+	unsigned int 	i;
+
+	if (unit->val.d.flag_plus == FALSE && unit->val.d.flag_blank == FALSE)
+		return (dy_len);
+	i = dy_len + 1;
+	while (i > 0)
+	{
+		s[i] = s[i - 1];
+		i--;
+	}
+	if (unit->val.d.flag_plus == TRUE)
+		s[0] = '+';
+	else if (unit->val.d.flag_blank == TRUE)
+		s[0] = ' ';
+
+	return (dy_len + 1);
+}
+
+/*
+** 		dy_len is initialted at the lenth of integer,
 **		it will change depending on precision, width, then flags
 */
 
 int				print_d(int fd, t_unit *unit)
 {
 	char			*integer;
-	unsigned int	print_nb;
+	unsigned int	dy_len;
+	char			s[unit->val.d.precision + unit->val.d.precision + 30];
 
 	integer = ft_itoa(unit->val.d.integer);
-	print_nb = ft_strlen(integer);
-	integer = d_precision_handler(integer, &print_nb, unit->val.d.precision);
-	if (unit->val.d.width > print_nb)
-		print_nb = create_buf_of_width_size_then_print(fd, unit, integer, print_nb, unit->val.d.width);
-	else
-		print_nb = print_int_with_flagplus_or_blank(fd, unit, integer, print_nb);
+	dy_len = d_precision_handler(s, integer, unit->val.d.precision);
 	free(integer);
 	integer = NULL;
-	return (print_nb);
+	if (unit->val.d.integer >= 0)
+		dy_len = d_flag_plus_and_blank_handler(s, dy_len, unit);
+	dy_len = d_width_handler(s, dy_len, unit, unit->val.d.width);
+	ft_putstr_fd(s, fd);
+	return (dy_len);
 }

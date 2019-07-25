@@ -44,7 +44,7 @@ typedef struct 		s_type_ltr
 typedef struct 		s_type_c
 {
 	t_bool			flag_minus;
-	unsigned int	width;
+	int				width;
 	t_bool			modifier_l;
 	wchar_t		character;
 }					t_type_c;
@@ -52,7 +52,7 @@ typedef struct 		s_type_c
 typedef struct 		s_type_s
 {
 	t_bool			flag_minus;
-	unsigned int	width;
+	int				width;
 	unsigned int	precision;
 	t_bool			modifier_l;
 	const char		*string;
@@ -64,7 +64,7 @@ typedef struct 		s_type_d
 	t_bool			flag_plus;
 	t_bool			flag_zero;
 	t_bool			flag_blank;
-	unsigned int	width;
+	int				width;
 	unsigned int	precision;
 	int				modifier;
 	intmax_t		integer;
@@ -76,7 +76,7 @@ typedef struct 		s_type_d
 // 	t_bool			flag_plus;
 // 	t_bool			flag_zero;
 // 	t_bool			flag_blank;
-// 	unsigned int	width;
+// 	int				width;
 // 	unsigned int	precision;
 // 	int				modifier;
 // 	intmax_t		integer;
@@ -89,7 +89,7 @@ typedef struct 		s_type_f
 	t_bool			flag_zero;
 	t_bool			flag_blank;
 	t_bool			flag_hash;
-	unsigned int	width;
+	int				width;
 	unsigned int	precision;
 	int				modifier;
 	long double		doub;
