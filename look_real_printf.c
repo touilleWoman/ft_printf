@@ -95,9 +95,8 @@ int main()
 	// printf("%+3d\n", 22);
 	// printf("%+4d\n", 22);
  //    printf("%#-10.6u|\n", 4444);
-	printf("%f\n", 0.0);
-    printf("one%f|\n", 1);
-    printf("one%#sf|\n", 1);
+	printf("%.x\n", 0);
+    printf("%.-4x|\n", 1);
 
     // printf("====================%+-5.3rc\n", 'n');
 

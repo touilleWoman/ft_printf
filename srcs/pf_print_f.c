@@ -107,7 +107,6 @@ long double	round_fractional_part(long double frac, int precision)
 		i++;
 	}
 	return (keep_frac + round_val);
-
 }
 
 long double	pf_double_abs(long double nbr)

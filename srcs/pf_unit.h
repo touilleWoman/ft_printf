@@ -16,6 +16,7 @@
 #include "libft.h"
 #include <stdint.h>
 
+#define PRECISION_NULL -1
 
 typedef	enum 		e_unit_type
 {
@@ -81,7 +82,7 @@ typedef struct 		s_type_oxx
 	t_bool			flag_hash;
 	t_bool			flag_zero;
 	int				width;
-	unsigned int	precision;
+	int				precision;
 	int				modifier;
 	uintmax_t		un_int;
 	t_unit_type		sub_type;

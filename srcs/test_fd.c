@@ -11,7 +11,6 @@
 
 #define FAIL_AND_EXIT(msg) { fprintf(stderr, "%s\n", msg); exit(-1); }
 #define FAIL(msg, ...) {                                                        \
-fprintf(stderr, "Line %d: ", __LINE__);                                         \
 fprintf(stderr, msg, __VA_ARGS__); current_test_result = -1;                    \
 }
 
@@ -137,71 +136,84 @@ int main()
 //     testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 
 // type oxX
-    testcase("%x|\n", 4444);
-    testcase("%#o|\n", 4444);
-    testcase("%#X|\n", 4444);
-    testcase("%#-10.6x|\n", 4444);
-    testcase("%-10.5o|\n", 4444);
-    testcase("%-10.6o|\n", 4444);
-    testcase("%#-10.6o|\n", 4444);
-    testcase("%#10.6X|\n", 4444);
-    testcase("%#-10.7x|\n", 4444);
-    testcase("%#-010.7o|\n", 4444);
-    testcase("%#010.7o|\n", 4444);
-    testcase("%#-10.7o|\n", 4444);
-    testcase("%#-2.7X|\n", 4444);
-    testcase("%#-10.7X|\n", 4444);
-    testcase("%#10.7X|\n", 4444);
-    testcase("%#10.7X|\n", 4444);
-    testcase("%#10.7X|\n", 4444);
-    testcase("%#10.7llX|\n", (long long)9287539484444);
-    testcase("%#20.7llX|\n", (long long)9287539484444);
-    testcase("%#10.7lX|\n", (long)9287539484444);
-    testcase("%#10.7hX|\n", (short)9287539484444);
-    testcase("%#10.7hhX|\n", 9287539484444);
 
-// type u
-    testcase("%u|\n", 4444);
-    testcase("%-10.6u|\n", 4444);
-    testcase("%10.6u|\n", 4444);
-    testcase("%-10.7u|\n", 4444);
-    testcase("%-010.7u|\n", 4444);
-    testcase("%010.7u|\n", 4444);
-    testcase("%-5.7u|\n", 4444);
-    testcase("%-2.7u|\n", 4444);
-    testcase("%-1.7u|\n", 4444);
-    testcase("%10.7u|\n", 4444);
-    testcase("%10.7u|\n", 4444);
-    testcase("%10.7llu|\n", (long long)9287539484444);
-    testcase("%20.7llu|\n", (long long)9287539484444);
-    testcase("%10.7lu|\n", (long)9287539484444);
-    testcase("%10.7hu|\n", (short)9287539484444);
-    testcase("%10.7hhu|\n", 9287539484444);
-    testcase("%u|\n", 5);
-    // // type p
-    char *ptr = "pointer test";
-    void *ptr2 = NULL;
-    void *ptr3 = ptr;
-    testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
 
-// type f
-    testcase("%f\n", 2.345);
-    testcase("%4.5f\n", 2.345);
-    testcase("%5.2f\n", 2.325);
-    testcase("%5.2f\n", 2.395);
-    testcase("%+5.5f\n", 2.345);
-    testcase("%+05.5f\n", 2.345);
-    testcase("% 05.5f\n", 2.345);
-    testcase("%f\n", -2.345);
-    testcase("%4.5f\n", -2.345);
-    testcase("%5.2f\n", -2.345);
-    testcase("%+5.5f\n", -2.345);
-    testcase("%+05.5f\n", -2.345);
-    testcase("% 05.5f\n", -2.345);
-    testcase("zero%f|\n", 0.0);
-    testcase("one%f|\n", 1);
-    testcase("six%f|\n", 6.0);
-    testcase("six%#6.10f|\n", 6.0);
+    testcase("%#X", 0);
+    testcase("%X", 0);
+    testcase("%#-.X", 0);
+    testcase("%.X", 1);
+    testcase("%X", 0);
+    testcase("%#08x", 42);
+    testcase("@moulitest: %#.x %#.0x", 0, 0);
+    testcase("@moulitest: %5.x %5.0x", 0, 0);
+
+
+
+//     testcase("%x|\n", 4444);
+//     testcase("%#o|\n", 4444);
+//     testcase("%#X|\n", 4444);
+//     testcase("%#-10.6x|\n", 4444);
+//     testcase("%-10.5o|\n", 4444);
+//     testcase("%-10.6o|\n", 4444);
+//     testcase("%#-10.6o|\n", 4444);
+//     testcase("%#10.6X|\n", 4444);
+//     testcase("%#-10.7x|\n", 4444);
+//     testcase("%#-010.7o|\n", 4444);
+//     testcase("%#010.7o|\n", 4444);
+//     testcase("%#-10.7o|\n", 4444);
+//     testcase("%#-2.7X|\n", 4444);
+//     testcase("%#-10.7X|\n", 4444);
+//     testcase("%#10.7X|\n", 4444);
+//     testcase("%#10.7X|\n", 4444);
+//     testcase("%#10.7X|\n", 4444);
+//     testcase("%#10.7llX|\n", (long long)9287539484444);
+//     testcase("%#20.7llX|\n", (long long)9287539484444);
+//     testcase("%#10.7lX|\n", (long)9287539484444);
+//     testcase("%#10.7hX|\n", (short)9287539484444);
+//     testcase("%#10.7hhX|\n", 9287539484444);
+
+// // type u
+//     testcase("%u|\n", 4444);
+//     testcase("%-10.6u|\n", 4444);
+//     testcase("%10.6u|\n", 4444);
+//     testcase("%-10.7u|\n", 4444);
+//     testcase("%-010.7u|\n", 4444);
+//     testcase("%010.7u|\n", 4444);
+//     testcase("%-5.7u|\n", 4444);
+//     testcase("%-2.7u|\n", 4444);
+//     testcase("%-1.7u|\n", 4444);
+//     testcase("%10.7u|\n", 4444);
+//     testcase("%10.7u|\n", 4444);
+//     testcase("%10.7llu|\n", (long long)9287539484444);
+//     testcase("%20.7llu|\n", (long long)9287539484444);
+//     testcase("%10.7lu|\n", (long)9287539484444);
+//     testcase("%10.7hu|\n", (short)9287539484444);
+//     testcase("%10.7hhu|\n", 9287539484444);
+//     testcase("%u|\n", 5);
+//     // // type p
+//     char *ptr = "pointer test";
+//     void *ptr2 = NULL;
+//     void *ptr3 = ptr;
+//     testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
+
+// // type f
+//     testcase("%f\n", 2.345);
+//     testcase("%4.5f\n", 2.345);
+//     testcase("%5.2f\n", 2.325);
+//     testcase("%5.2f\n", 2.395);
+//     testcase("%+5.5f\n", 2.345);
+//     testcase("%+05.5f\n", 2.345);
+//     testcase("% 05.5f\n", 2.345);
+//     testcase("%f\n", -2.345);
+//     testcase("%4.5f\n", -2.345);
+//     testcase("%5.2f\n", -2.345);
+//     testcase("%+5.5f\n", -2.345);
+//     testcase("%+05.5f\n", -2.345);
+//     testcase("% 05.5f\n", -2.345);
+//     testcase("zero%f|\n", 0.0);
+//     testcase("one%f|\n", 1);
+//     testcase("six%f|\n", 6.0);
+//     testcase("six%#6.10f|\n", 6.0);
 
 
     // testcase("one%#sf|\n", 1);   printf seg fault in this case

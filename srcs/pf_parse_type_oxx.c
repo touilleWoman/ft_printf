@@ -48,12 +48,14 @@ static char		*type_oxx_get_precision(char *buf, t_unit *unit)
 		{
 			buf++;
 			digits_len = get_digits(&digits, buf, ft_strlen(buf));
-			if (digits_len)
+			if (digits_len == 0 || digits == 0)
+				unit->val.oxx.precision = PRECISION_NULL;
+			else
 			{
 				unit->val.oxx.precision = digits;
 				buf += digits_len;
 			}
-		}
+ 		}
 		return (buf);
 }
 

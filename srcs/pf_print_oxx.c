@@ -33,12 +33,20 @@ static unsigned int		oxx_precision_handler(char *s, char *str_uint,
 static void				sub_oxx_width_handler(char *s, int dy_len, t_unit *unit, int width)
 {
 	char 	s_keep[dy_len + 1];
+	int		mark;
 
+	mark = 0;
 	ft_strcpy(s_keep, s);
 	if (unit->val.oxx.flag_zero == TRUE && unit->val.oxx.precision == 0)
 	{
 		ft_memset(s, '0', width);
-		ft_strncpy(s + width - dy_len, s_keep, dy_len);
+		if (s_keep[0] == '0' && (s_keep[1] == 'x' || s_keep[1] == 'X'))
+		{
+			s[0] = s_keep[0];
+			s[1] = s_keep[1];
+			mark = 2;
+		}
+		ft_strncpy(s + width + mark - dy_len, s_keep + mark, dy_len - mark);
 	}
 	else
 	{
@@ -104,15 +112,17 @@ int				print_oxx(int fd, t_unit *unit)
 	unsigned int	dy_len;
 	char			s[unit->val.oxx.precision + unit->val.oxx.width + 50];
 
+	if (unit->val.oxx.un_int == 0 && unit->val.oxx.precision == PRECISION_NULL && unit->val.oxx.sub_type != TYPE_O)
+		return (0);
 	if (unit->val.oxx.sub_type == TYPE_O)
 		str_uint = pf_itoa_base(unit->val.oxx.un_int, 8, unit);
 	else
 		str_uint = pf_itoa_base(unit->val.oxx.un_int, 16, unit);
+
 	dy_len = oxx_precision_handler(s, str_uint, unit->val.oxx.precision);
 	free(str_uint);
 	str_uint = NULL;
-
-	if (unit->val.oxx.flag_hash == TRUE)
+	if (unit->val.oxx.flag_hash == TRUE && unit->val.oxx.un_int != 0)
 		dy_len = oxx_prefix_handler(s, dy_len, unit->val.oxx.sub_type);
 	dy_len = oxx_width_handler(s, dy_len, unit, unit->val.oxx.width);
 	ft_putstr_fd(s, fd);
