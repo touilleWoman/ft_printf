@@ -104,7 +104,7 @@ int				print_oxx(int fd, t_unit *unit)
 {
 	char			*str_uint;
 	unsigned int	dy_len;
-	char			s[unit->val.oxx.precision + unit->val.oxx.width + 39];
+	char			s[unit->val.oxx.precision + unit->val.oxx.width + 50];
 
 	if (unit->val.oxx.sub_type == TYPE_O)
 		str_uint = pf_itoa_base(unit->val.oxx.un_int, 8, unit);
