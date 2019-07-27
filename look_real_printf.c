@@ -92,6 +92,8 @@ int main()
 	printf("%o\n", 0);
 	printf("%+3d\n", 22);
 	printf("%+4d\n", 22);
+    printf("%#-10.6u|\n", 4444);
+
     // printf("====================%+-5.3rc\n", 'n');
 
 	return 0;

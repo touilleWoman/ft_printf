@@ -159,6 +159,25 @@ int main()
     testcase("%#10.7lX|\n", (long)9287539484444);
     testcase("%#10.7hX|\n", (short)9287539484444);
     testcase("%#10.7hhX|\n", 9287539484444);
+
+// type u
+    testcase("%u|\n", 4444);
+    testcase("%-10.6u|\n", 4444);
+    testcase("%10.6u|\n", 4444);
+    testcase("%-10.7u|\n", 4444);
+    testcase("%-010.7u|\n", 4444);
+    testcase("%010.7u|\n", 4444);
+    testcase("%-5.7u|\n", 4444);
+    testcase("%-2.7u|\n", 4444);
+    testcase("%-1.7u|\n", 4444);
+    testcase("%10.7u|\n", 4444);
+    testcase("%10.7u|\n", 4444);
+    testcase("%10.7llu|\n", (long long)9287539484444);
+    testcase("%20.7llu|\n", (long long)9287539484444);
+    testcase("%10.7lu|\n", (long)9287539484444);
+    testcase("%10.7hu|\n", (short)9287539484444);
+    testcase("%10.7hhu|\n", 9287539484444);
+    testcase("%u|\n", 5);
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
