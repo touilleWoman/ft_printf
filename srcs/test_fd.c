@@ -71,72 +71,72 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
-// random Strings
-    testcase("#nyancat inside");
-    testcase("\x7f");
-    testcase("The Game.");
-    testcase("I know what you are doing.");
-    testcase("You should better not go to sleep.");
-    testcase("Drop the keyboard and RUN!");
-    testcase("Any invalid command will remove a random file from your home.");
-    testcase("You will die before this tests ends.");
-    testcase("I love the smell of bugs in the morning.");
-    testcase("What do you want to debug today?");
-    testcase("rm: /: Permission denied.");
-    testcase("Already up-to-date.");
-    testcase(":(){ :|:& };:");
-    testcase("Do you want to print 333.5K chars? (y/N)");
-    testcase("Try with ASAN, and be amazed");
-    testcase("Remember that word: C H A I R");
-    testcase("Good morning, pal *<:-)");
-    testcase("WASTED");
-    testcase("Too old to crash");
-    testcase("don’t feed the bugs! (except delicious stacktraces)!");
-    testcase("Beer in mind.");
-    testcase("3nl4r9e y0\\/r pr1ntf");
-    testcase("Don't do this.");
-    testcase("No fix, no sleep");
-    testcase("/dev/brain: No such file or directory.");
-    testcase("こんにちは、私はprintf単体テストです");
-    testcase("中文测试");
+// // random Strings
+//     testcase("#nyancat inside");
+//     testcase("\x7f");
+//     testcase("The Game.");
+//     testcase("I know what you are doing.");
+//     testcase("You should better not go to sleep.");
+//     testcase("Drop the keyboard and RUN!");
+//     testcase("Any invalid command will remove a random file from your home.");
+//     testcase("You will die before this tests ends.");
+//     testcase("I love the smell of bugs in the morning.");
+//     testcase("What do you want to debug today?");
+//     testcase("rm: /: Permission denied.");
+//     testcase("Already up-to-date.");
+//     testcase(":(){ :|:& };:");
+//     testcase("Do you want to print 333.5K chars? (y/N)");
+//     testcase("Try with ASAN, and be amazed");
+//     testcase("Remember that word: C H A I R");
+//     testcase("Good morning, pal *<:-)");
+//     testcase("WASTED");
+//     testcase("Too old to crash");
+//     testcase("don’t feed the bugs! (except delicious stacktraces)!");
+//     testcase("Beer in mind.");
+//     testcase("3nl4r9e y0\\/r pr1ntf");
+//     testcase("Don't do this.");
+//     testcase("No fix, no sleep");
+//     testcase("/dev/brain: No such file or directory.");
+//     testcase("こんにちは、私はprintf単体テストです");
+//     testcase("中文测试");
 
-// type c
-    testcase("okone%-20coktwo%-lcokthree\n", 'a', (wchar_t)'b');
-    testcase("okone%-20coktwo%-lcokthree\n", 'a', 'b');
-    testcase("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e');
-    testcase("========%lc\n", (wchar_t)'&');
- // type s
-    testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
-    testcase("%2s%c\n", "bonjour", 'a');
-    testcase("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va");
-    testcase("helloee", "");
-    testcase("hello%s\n", "world");
-    testcase("%s%s\n", "bonjour", "toi");
-    testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
-    testcase("hello%s\n", "world");
-    testcase("hello %s\t%d\n", "world", 42);
-    testcase("hello %s\t%d\n", "world", 42);
-//type d
-    testcase("%.2d\n", -22);
-    testcase("%.3d\n", -22);
-    testcase("%+10.4d|\n", -22);
-    testcase("%+ 10.4d\n", 22);
-    testcase("%+010.4d\n", 22);
-    testcase("%+d\n", 123212341);
-    testcase("%d\n", 123212341);
-    testcase("%+d\n", -123212341);
-    testcase("% d|\n", -123212341);
-    testcase("% d|\n", 123212341);
-    testcase("%+ d\n", -123212341);
-    testcase("%10.2d%%second%+015d\n", 22, 333);
-    testcase("%-10.5d|\n", 4444);
-    testcase("%+-1.15d|\n", 4444);
-    testcase("%+-1.15d|\n", 4444);
-    testcase("%+-1.50ld|\n", (long)87120928344444);
-    testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
-    testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
+// // type c
+//     testcase("okone%-20coktwo%-lcokthree\n", 'a', (wchar_t)'b');
+//     testcase("okone%-20coktwo%-lcokthree\n", 'a', 'b');
+//     testcase("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e');
+//     testcase("========%lc\n", (wchar_t)'&');
+//  // type s
+//     testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
+//     testcase("%2s%c\n", "bonjour", 'a');
+//     testcase("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va");
+//     testcase("helloee", "");
+//     testcase("hello%s\n", "world");
+//     testcase("%s%s\n", "bonjour", "toi");
+//     testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
+//     testcase("hello%s\n", "world");
+//     testcase("hello %s\t%d\n", "world", 42);
+//     testcase("hello %s\t%d\n", "world", 42);
+// //type d
+//     testcase("%.2d\n", -22);
+//     testcase("%.3d\n", -22);
+//     testcase("%+10.4d|\n", -22);
+//     testcase("%+ 10.4d\n", 22);
+//     testcase("%+010.4d\n", 22);
+//     testcase("%+d\n", 123212341);
+//     testcase("%d\n", 123212341);
+//     testcase("%+d\n", -123212341);
+//     testcase("% d|\n", -123212341);
+//     testcase("% d|\n", 123212341);
+//     testcase("%+ d\n", -123212341);
+//     testcase("%10.2d%%second%+015d\n", 22, 333);
+//     testcase("%-10.5d|\n", 4444);
+//     testcase("%+-1.15d|\n", 4444);
+//     testcase("%+-1.15d|\n", 4444);
+//     testcase("%+-1.50ld|\n", (long)87120928344444);
+//     testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
+//     testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 
-
+// type oxX
     testcase("%x|\n", 4444);
     testcase("%#o|\n", 4444);
     testcase("%#X|\n", 4444);
@@ -154,6 +154,11 @@ int main()
     testcase("%#10.7X|\n", 4444);
     testcase("%#10.7X|\n", 4444);
     testcase("%#10.7X|\n", 4444);
+    testcase("%#10.7llX|\n", (long long)9287539484444);
+    testcase("%#20.7llX|\n", (long long)9287539484444);
+    testcase("%#10.7lX|\n", (long)9287539484444);
+    testcase("%#10.7hX|\n", (short)9287539484444);
+    testcase("%#10.7hhX|\n", 9287539484444);
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -174,11 +179,4 @@ int main()
         return 0;
     }
 }
-// int main(void)
-// {
-//     int ret = 0;
-//     ret = printf("%lc", (wint_t) -1);
-//     printf("%d\n", ret);
 
-//     return 0;
-// }

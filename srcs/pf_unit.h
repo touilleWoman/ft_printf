@@ -29,8 +29,7 @@ typedef	enum 		e_unit_type
 	TYPE_O,
 	TYPE_X,
 	TYPE_X_MAJ,
-
-
+	TYPE_U,
 }					t_unit_type;
 
 typedef enum 		e_modifier
@@ -88,17 +87,15 @@ typedef struct 		s_type_oxx
 	t_unit_type		sub_type;
 }					t_type_oxx;
 
-// typedef struct 		s_type_u
-// {
-// 	t_bool			flag_minus;
-// 	t_bool			flag_plus;
-// 	t_bool			flag_zero;
-// 	t_bool			flag_blank;
-// 	int				width;
-// 	unsigned int	precision;
-// 	int				modifier;
-// 	intmax_t		integer;
-// }					t_type_u;
+typedef struct 		s_type_u
+{
+	t_bool			flag_minus;
+	t_bool			flag_zero;
+	int				width;
+	unsigned int	precision;
+	int				modifier;
+	uintmax_t		un_int;
+}					t_type_u;
 
 typedef struct 		s_type_f
 {
@@ -127,6 +124,7 @@ typedef	union		u_unit_union
 	t_type_f		f;
 	t_type_p		p;
 	t_type_oxx		oxx;
+	t_type_u		u;
 }					t_unit_union;
 
 typedef struct		s_unit
@@ -138,8 +136,8 @@ typedef struct		s_unit
 t_unit				*unit_access(t_list *lst);
 void				unit_lstadd_bot(t_list **alst, t_unit const *unit);
 // void				unit_lstadd_literal(t_list **alst, const char *literal_piece);
-void		unit_lstadd_literal(t_list **alst, char *literal_piece);
-void	freelst_and_errormsg(t_list *list, char *msg);
+void				unit_lstadd_literal(t_list **alst, char *literal_piece);
+void				freelst_and_errormsg(t_list *list, char *msg);
 
 
 //test functions

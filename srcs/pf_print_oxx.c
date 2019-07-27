@@ -53,8 +53,10 @@ static void				sub_oxx_width_handler(char *s, int dy_len, t_unit *unit, int widt
 
 static unsigned int		oxx_width_handler(char *s, int dy_len, t_unit *unit, int width)
 {
+	printf("width%d, len%d\n", width, dy_len);
 	if (width <= dy_len)
 		return (dy_len);
+	printf("aaaaaaa\n");
 	if (unit->val.oxx.flag_minus == TRUE)
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
@@ -88,6 +90,7 @@ static unsigned int		oxx_prefix_handler(char *s, int dy_len, t_unit_type sub_typ
 		sign = 2;
 	}
 	ft_strncpy(s + sign, s_keep, dy_len);
+	s[dy_len + sign] = '\0';
 	return(dy_len + sign);
 }
 
@@ -101,7 +104,7 @@ int				print_oxx(int fd, t_unit *unit)
 {
 	char			*str_uint;
 	unsigned int	dy_len;
-	char			s[unit->val.oxx.precision + unit->val.oxx.precision + 30];
+	char			s[unit->val.oxx.precision + unit->val.oxx.width + 39];
 
 	if (unit->val.oxx.sub_type == TYPE_O)
 		str_uint = pf_itoa_base(unit->val.oxx.un_int, 8, unit);
@@ -110,6 +113,7 @@ int				print_oxx(int fd, t_unit *unit)
 	dy_len = oxx_precision_handler(s, str_uint, unit->val.oxx.precision);
 	free(str_uint);
 	str_uint = NULL;
+
 	if (unit->val.oxx.flag_hash == TRUE)
 		dy_len = oxx_prefix_handler(s, dy_len, unit->val.oxx.sub_type);
 	dy_len = oxx_width_handler(s, dy_len, unit, unit->val.oxx.width);

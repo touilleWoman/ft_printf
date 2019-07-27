@@ -51,8 +51,8 @@ int			seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 	int					len;
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
 		{'c', parse_c},{'s', parse_s}, {'d', parse_d}, {'i', parse_d},
-		{'f', parse_f}, {'p', parse_p}, {'o', parse_oxx}, {'x', parse_oxx}, {'X', parse_oxx}
-		};
+		{'f', parse_f}, {'p', parse_p}, {'o', parse_oxx}, {'x', parse_oxx}, {'X', parse_oxx},
+		{'u', parse_u}};
 
 	len = ft_strlen(capsule);
 	index = 0;

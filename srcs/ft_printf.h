@@ -21,8 +21,8 @@
 #include "libft.h"
 #include <wchar.h>
 
-#define PARSE_FUNS_NB 9
-#define PRINT_FUNS_NB 6
+#define PARSE_FUNS_NB 10
+#define PRINT_FUNS_NB 7
 #define ERROR -1
 #define STD_OUT 1
 
@@ -57,6 +57,7 @@ int				parse_d(t_list **alst, char *buf, va_list args);
 int				parse_f(t_list **alst, char *buf, va_list args);
 int				parse_p(t_list **alst, char *buf, va_list args);
 int				parse_oxx(t_list **alst, char *buf, va_list args);
+int				parse_u(t_list **alst, char *buf, va_list args);
 
 
 //print
@@ -66,6 +67,7 @@ int				print_s(int fd, t_unit *unit);
 int				print_d(int fd, t_unit *unit);
 int				print_p(int fd, t_unit *unit);
 int				print_oxx(int fd, t_unit *unit);
+int				print_u(int fd, t_unit *unit);
 
 char			*pf_itoa_base(uintmax_t nbr, int base, t_unit *unit);
 
