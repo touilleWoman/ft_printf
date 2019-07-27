@@ -187,6 +187,7 @@ int main()
 // type f
     testcase("%f\n", 2.345);
     testcase("%4.5f\n", 2.345);
+    testcase("%5.2f\n", 2.325);
     testcase("%5.2f\n", 2.395);
     testcase("%+5.5f\n", 2.345);
     testcase("%+05.5f\n", 2.345);
@@ -197,6 +198,14 @@ int main()
     testcase("%+5.5f\n", -2.345);
     testcase("%+05.5f\n", -2.345);
     testcase("% 05.5f\n", -2.345);
+    testcase("zero%f|\n", 0.0);
+    testcase("one%f|\n", 1);
+    testcase("six%f|\n", 6.0);
+    testcase("six%#6.10f|\n", 6.0);
+
+
+    // testcase("one%#sf|\n", 1);   printf seg fault in this case
+
 
     // testcase("+++++++++++++%lc%c", 1);
     // testcase("-------------------%lc", (wint_t)-1);

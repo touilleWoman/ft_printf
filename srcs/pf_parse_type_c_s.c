@@ -48,7 +48,7 @@ int				parse_c(t_list **alst, char *buf, va_list args)
 	buf = type_c_get_flags_width_modifier(buf, &unit, ft_strlen(buf));
 	if (*buf != 'c')
 	{
-		freelst_and_errormsg(*alst, "error: %%c format wrong\n");
+		freelst_and_errormsg(*alst, "error: %c format wrong\n");
 		return (ERROR);
 	}
 	unit.type = TYPE_C;
@@ -116,7 +116,7 @@ int			parse_s(t_list **alst, char *buf, va_list args)
 	buf = type_s_get_precision_and_modifier(buf, &unit);
 	if (*buf != 's')
 	{
-		freelst_and_errormsg(*alst, "error: %%s format wrong\n");
+		freelst_and_errormsg(*alst, "error: %s format wrong\n");
 		return (ERROR);
 	}
 	unit.type = TYPE_S;

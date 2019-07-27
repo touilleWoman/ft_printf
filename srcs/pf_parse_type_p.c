@@ -85,7 +85,7 @@ int			parse_p(t_list **alst, char *buf, va_list args)
 	buf = type_p_modifier_check(buf);
 	if (*buf != 'p')
 	{
-		freelst_and_errormsg(*alst, "error: %%p format wrong\n");
+		freelst_and_errormsg(*alst, "error: %p format wrong\n");
 		return (ERROR);
 	}
 	unit.type = TYPE_P;

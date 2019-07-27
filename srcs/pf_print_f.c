@@ -97,7 +97,7 @@ long double	round_fractional_part(long double frac, int precision)
 		frac = frac * 10;
 		i++;
 	}
-	if (frac % 10 < 5)
+	if (((long int)frac) % 10 < 5)
 		return (keep_frac);
 	i = 0;
 	round_val = 1.0;

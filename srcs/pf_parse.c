@@ -19,7 +19,7 @@
 ** 	then we seperate literal part with the rest
 */
 
-int		find_conversion_in_capsule(const char *capsule)
+int		find_conversion_in_capsule(t_list **alst, const char *capsule)
 {
 	int		len;
 	int		posi;
@@ -34,10 +34,8 @@ int		find_conversion_in_capsule(const char *capsule)
 	}
 	if (posi == len)
 	{
-		printf("format error: no conversion in capsule");
-		exit(0);
-		//need to free the list
-		// return (FALSE) ;
+		freelst_and_errormsg(*alst, "format error: no conversion found\n");
+		return (ERROR);
 	}
 	else
 		return (posi);
@@ -56,7 +54,9 @@ int			seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 
 	len = ft_strlen(capsule);
 	index = 0;
-	posi = find_conversion_in_capsule(capsule);
+	posi = find_conversion_in_capsule(alst, capsule);
+	if (posi == ERROR)
+		return (ERROR);
 	while (index < PARSE_FUNS_NB)
 	{
 		if(capsule[posi] ==  funs[index].type)
