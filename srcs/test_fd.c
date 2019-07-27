@@ -145,8 +145,14 @@ int main()
     testcase("%-10.6o|\n", 4444);
     testcase("%#-10.6o|\n", 4444);
     testcase("%#10.6X|\n", 4444);
-        testcase("%#-10.7x|\n", 4444);
+    testcase("%#-10.7x|\n", 4444);
+    testcase("%#-010.7o|\n", 4444);
+    testcase("%#010.7o|\n", 4444);
     testcase("%#-10.7o|\n", 4444);
+    testcase("%#-2.7X|\n", 4444);
+    testcase("%#-10.7X|\n", 4444);
+    testcase("%#10.7X|\n", 4444);
+    testcase("%#10.7X|\n", 4444);
     testcase("%#10.7X|\n", 4444);
     // // type p
     char *ptr = "pointer test";
