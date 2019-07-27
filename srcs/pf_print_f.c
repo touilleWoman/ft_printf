@@ -82,6 +82,34 @@ static unsigned int		f_flag_plus_and_blank_handler(char *s, int dy_len, t_unit *
 **		it will change depending on precision, width, then flags
 */
 
+long double	round_fractional_part(long double frac, int precision)
+{
+	int			i;
+	long double	round_val;
+	long double keep_frac;
+
+	keep_frac = frac;
+	if (precision <= 0)
+		precision = 6;
+	i = 0;
+	while (i < precision + 1)
+	{
+		frac = frac * 10;
+		i++;
+	}
+	if (frac % 10 < 5)
+		return (keep_frac);
+	i = 0;
+	round_val = 1.0;
+	while (i < precision)
+	{
+		round_val = round_val * 0.1;
+		i++;
+	}
+	return (keep_frac + round_val);
+
+}
+
 long double	pf_double_abs(long double nbr)
 {
 	return (nbr >= 0 ? nbr : -nbr);
@@ -97,6 +125,7 @@ void		pf_dtoa(long double nbr, int precision, char *buf)
 	count = (precision > 0 ? precision : 6);
 	str_int_part = ft_itoa((long long)nbr);
 	frac_part = pf_double_abs(nbr - (long long)nbr);
+	frac_part = round_fractional_part(frac_part, precision);
 	ft_strcpy(buf, str_int_part);
 	free(str_int_part);
 	str_int_part = NULL;
