@@ -184,6 +184,20 @@ int main()
     void *ptr3 = ptr;
     testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
 
+// type f
+    testcase("%f\n", 2.345);
+    testcase("%4.5f\n", 2.345);
+    testcase("%5.2f\n", 2.395);
+    testcase("%+5.5f\n", 2.345);
+    testcase("%+05.5f\n", 2.345);
+    testcase("% 05.5f\n", 2.345);
+    testcase("%f\n", -2.345);
+    testcase("%4.5f\n", -2.345);
+    testcase("%5.2f\n", -2.345);
+    testcase("%+5.5f\n", -2.345);
+    testcase("%+05.5f\n", -2.345);
+    testcase("% 05.5f\n", -2.345);
+
     // testcase("+++++++++++++%lc%c", 1);
     // testcase("-------------------%lc", (wint_t)-1);
     // testcase("====================%+-5.3rc\n", 'n');

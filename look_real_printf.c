@@ -4,6 +4,14 @@
 
 int main()
 {
+
+	float a = - 0.123;
+
+
+	char c = (unsigned int) ( -a * 10 ) + '0';
+
+	printf("char:%c\n", c);
+
 // c takes:
 	// -
 	// width
@@ -82,17 +90,17 @@ int main()
 	// char *ptr = "ok";
 	// void *ptr2 = ptr;
 	// printf("%lp|%hp\n", ptr, ptr2);
-	printf("%.2x\n", -22);
-	printf("%.3x\n", -22);
-	printf("%.4x\n", -22);
-	printf("%#X\n",22);
-	printf("%#o\n", 22);
-	printf("%x\n", 0);
-	printf("%X\n", 0);
-	printf("%o\n", 0);
-	printf("%+3d\n", 22);
-	printf("%+4d\n", 22);
-    printf("%#-10.6u|\n", 4444);
+	// printf("%.2x\n", -22);
+	// printf("%.3x\n", -22);
+	// printf("%.4x\n", -22);
+	// printf("%#X\n",22);
+	// printf("%#o\n", 22);
+	// printf("%x\n", 0);
+	// printf("%X\n", 0);
+	// printf("%o\n", 0);
+	// printf("%+3d\n", 22);
+	// printf("%+4d\n", 22);
+ //    printf("%#-10.6u|\n", 4444);
 
     // printf("====================%+-5.3rc\n", 'n');
 

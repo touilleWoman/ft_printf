@@ -37,6 +37,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_print_p.c\
 					pf_print_oxx.c\
 					pf_print_u.c\
+					pf_print_f.c\
 					ft_strlen.c\
 					ft_strdup.c\
 					ft_lstadd_top.c\
