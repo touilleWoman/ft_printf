@@ -1,7 +1,7 @@
 
 #include "ft_printf.h"
 
-static char		*type_oxX_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
+static char		*type_oxx_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 {
 	int		digits;
 	int		digits_len;
@@ -27,7 +27,7 @@ static char		*type_oxX_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 	return (buf);
 }
 
-static char		*type_oxX_get_precision(char *buf, t_unit *unit)
+static char		*type_oxx_get_precision(char *buf, t_unit *unit)
 {
 		int		digits;
 		int		digits_len;
@@ -46,7 +46,7 @@ static char		*type_oxX_get_precision(char *buf, t_unit *unit)
 		return (buf);
 }
 
-static char		*type_oxX_get_modifier(char *buf, t_unit *unit)
+static char		*type_oxx_get_modifier(char *buf, t_unit *unit)
 {
 	if (*buf == 'l' && buf[1] == 'l')
 	{
@@ -76,18 +76,22 @@ int			parse_oxx(t_list **alst, char *buf, va_list args)
 	t_unit	unit;
 
 	ft_bzero(&unit, sizeof(t_unit));
-	buf = type_oxX_get_flags_and_width(buf, &unit, ft_strlen(buf));
-	buf = type_oxX_get_precision(buf, &unit);
-	buf = type_oxX_get_modifier(buf, &unit);
+	buf = type_oxx_get_flags_and_width(buf, &unit, ft_strlen(buf));
+	buf = type_oxx_get_precision(buf, &unit);
+	buf = type_oxx_get_modifier(buf, &unit);
 	if (*buf != 'o' && *buf != 'x' && *buf != 'X')
 	{
-		freelst_and_errormsg(*alst, 
+		freelst_and_errormsg(*alst,
 			"error : conversion 'o' 'x' or 'X' format wrong\n");
 		return (ERROR);
 	}
 	unit.type = TYPE_OXX;
 	if (*buf == 'X')
-		unit.val.oxx.x_majuscule = TRUE;
+		unit.val.oxx.sub_type = TYPE_X_MAJ;
+	if (*buf == 'x')
+		unit.val.oxx.sub_type = TYPE_X;
+	if (*buf == 'o')
+		unit.val.oxx.sub_type = TYPE_O;
 	if (unit.val.oxx.modifier == MD_LL)
 		unit.val.oxx.un_int = va_arg(args,  unsigned long long);
 	else if (unit.val.oxx.modifier == MD_L)

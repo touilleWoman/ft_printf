@@ -34,6 +34,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_print_c_s_ltr.c\
 					pf_print_d.c\
 					pf_print_p.c\
+					pf_print_oxx.c\
 					ft_strlen.c\
 					ft_strdup.c\
 					ft_lstadd_top.c\
@@ -72,8 +73,8 @@ $(NAME): $(OBJ)
 
 
 check:all
-	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -I ./srcs
-# 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
+# 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -I ./srcs
+	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
 
 clean:
 	rm -f $(OBJ)

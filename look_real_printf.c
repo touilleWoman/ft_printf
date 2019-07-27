@@ -82,7 +82,9 @@ int main()
 	// char *ptr = "ok";
 	// void *ptr2 = ptr;
 	// printf("%lp|%hp\n", ptr, ptr2);
-	printf("%#x\n", 22);
+	printf("%.2x\n", -22);
+	printf("%.3x\n", -22);
+	printf("%.4x\n", -22);
 	printf("%#X\n",22);
 	printf("%#o\n", 22);
 	printf("%x\n", 0);
