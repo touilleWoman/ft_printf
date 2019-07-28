@@ -20,10 +20,18 @@ static char		*type_c_get_flags_width_modifier(char *buf, t_unit *unit,
 	char	flags[buf_len];
 	int		flags_len;
 
-	flags_len = get_flags(flags, buf, "-");
+	flags_len = get_flags(flags, buf, "-0+ #");
 	if (flags_len)
 	{
-		unit->val.c.flag_minus = TRUE;
+		(ft_strchr(flags, '-')) ? unit->val.c.flag_minus = TRUE : 0;
+		if (ft_strchr(flags, ' '))
+			ft_putstr_fd("%c doesn't accept flag' '\n", 2);
+		if (ft_strchr(flags, '+'))
+			ft_putstr_fd("%c doesn't accept flag'+'\n", 2);
+		if (ft_strchr(flags, '#'))
+			ft_putstr_fd("%c doesn't accept flag'#'\n", 2);
+		if (ft_strchr(flags, '0'))
+			ft_putstr_fd("%c doesn't accept flag'0'\n", 2);
 		buf += flags_len;
 	}
 	digits = 0;

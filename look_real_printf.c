@@ -4,7 +4,26 @@
 
 int main()
 {
+    // printf("%5%");
+    // printf("%-5%");
+    // printf("%.0%");
+    // printf("%   %", "test");
+    // printf("%.2c", NULL);
+    // printf("%2c", 0);
+    // printf("% c", 0);
+    // printf("@moulitest: %.o %.0o", 0, 0);
+    // printf("@moulitest: %5.o %5.0o", 0, 0);
+    // printf("%lld", -9223372036854775808);
+    // printf("@moulitest: %.d %.0d", 0, 0);
+    // printf("@moulitest: %5.d %5.0d", 0, 0);
+    // printf("%.2c|", 5);
+   printf("%5%");
+    // printf("aaaaa:%2c", 0);
 
+    // printf("% u", 4294967295);
+    // printf("%+u", 4294967295);
+    // printf("%#u", 4294967295);
+    // printf("%au", 4294967295);
 
 // c takes:
 	// -
@@ -95,8 +114,8 @@ int main()
 	// printf("%+3d\n", 22);
 	// printf("%+4d\n", 22);
  //    printf("%#-10.6u|\n", 4444);
-	printf("%.x\n", 0);
-    printf("%.-4x|\n", 1);
+	// printf("%.x\n", 0);
+ //    printf("%.-4x|\n", 1);
 
     // printf("====================%+-5.3rc\n", 'n');
 

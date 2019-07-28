@@ -13,10 +13,13 @@
 #include "ft_printf.h"
 
 static unsigned int		oxx_precision_handler(char *s, char *str_uint,
-									int precision)
+									int precision, t_unit *unit)
 {
 	int		dy_len;
 
+	if (unit->val.oxx.un_int == 0 && precision == PRECISION_NULL
+		&& unit->val.oxx.sub_type != TYPE_O)
+		return (0);
 	dy_len = ft_strlen(str_uint);
 	if (dy_len > precision)
 		ft_strcpy(s, str_uint);
@@ -100,7 +103,6 @@ static unsigned int		oxx_prefix_handler(char *s, int dy_len, t_unit_type sub_typ
 	return(dy_len + sign);
 }
 
-
 /*
 ** 		dy_len is initialted at the lenth of un_int,
 **		it will change depending on precision, width, then flags
@@ -112,14 +114,12 @@ int				print_oxx(int fd, t_unit *unit)
 	unsigned int	dy_len;
 	char			s[unit->val.oxx.precision + unit->val.oxx.width + 50];
 
-	if (unit->val.oxx.un_int == 0 && unit->val.oxx.precision == PRECISION_NULL && unit->val.oxx.sub_type != TYPE_O)
-		return (0);
+	ft_memset(s, 0, unit->val.oxx.precision + unit->val.oxx.width + 50);
 	if (unit->val.oxx.sub_type == TYPE_O)
 		str_uint = pf_itoa_base(unit->val.oxx.un_int, 8, unit);
 	else
 		str_uint = pf_itoa_base(unit->val.oxx.un_int, 16, unit);
-
-	dy_len = oxx_precision_handler(s, str_uint, unit->val.oxx.precision);
+	dy_len = oxx_precision_handler(s, str_uint, unit->val.oxx.precision, unit);
 	free(str_uint);
 	str_uint = NULL;
 	if (unit->val.oxx.flag_hash == TRUE && unit->val.oxx.un_int != 0)

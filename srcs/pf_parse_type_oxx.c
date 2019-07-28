@@ -19,14 +19,15 @@ static char		*type_oxx_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 	char	flags[buf_len];
 	int		flags_len;
 
- 	if ((flags_len = get_flags(flags, buf, "#-0")))
+ 	if ((flags_len = get_flags(flags, buf, "#-0+ ")))
 	{
-		if (ft_strchr(flags, '#'))
-			unit->val.oxx.flag_hash = TRUE;
-		if (ft_strchr(flags, '-'))
-			unit->val.oxx.flag_minus = TRUE;
-		if (ft_strchr(flags, '0'))
-			unit->val.oxx.flag_zero = TRUE;
+		(ft_strchr(flags, '#')) ? unit->val.oxx.flag_hash = TRUE : 0;
+		(ft_strchr(flags, '-')) ? unit->val.oxx.flag_minus = TRUE : 0;
+		(ft_strchr(flags, '0')) ? unit->val.oxx.flag_zero = TRUE : 0;
+		if (ft_strchr(flags, ' '))
+			ft_putstr_fd("conversion oxX don't accept flag' '\n", 2);
+		if (ft_strchr(flags, '+'))
+			ft_putstr_fd("conversion oxX don't accept flag'+'\n", 2);
 		buf += flags_len;
 	}
  	digits = 0;
@@ -48,8 +49,13 @@ static char		*type_oxx_get_precision(char *buf, t_unit *unit)
 		{
 			buf++;
 			digits_len = get_digits(&digits, buf, ft_strlen(buf));
-			if (digits_len == 0 || digits == 0)
+			if (digits_len == 0)
 				unit->val.oxx.precision = PRECISION_NULL;
+			else if (digits_len == 1 && digits == 0)
+			{
+				unit->val.oxx.precision = PRECISION_NULL;
+				buf++;
+			}
 			else
 			{
 				unit->val.oxx.precision = digits;

@@ -70,6 +70,25 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
+//special case
+    // testcase("%5%");
+    // testcase("%-5%");
+    // testcase("%5.11%");
+    // testcase("%.0%");
+    // testcase("%   %", "test");
+    // testcase("%.2c", 5);
+    // testcase("%.2c", 0);
+    // testcase("%.2c", NULL);
+    // testcase("%2c", 0);
+    // printf("aaaaa:%2c", 0);
+    // testcase("% c", 0);
+    // testcase("@moulitest: %.o %.0o", 0, 0);
+    // testcase("@moulitest: %5.o %5.0o", 0, 0);
+    // testcase("%lld", -9223372036854775808);
+    // testcase("@moulitest: %.d %.0d", 0, 0);
+    // testcase("@moulitest: %5.d %5.0d", 0, 0);
+    // testcase("% u", 4294967295);
+    // testcase("%+u", 4294967295);
 // // random Strings
 //     testcase("#nyancat inside");
 //     testcase("\x7f");
@@ -106,34 +125,34 @@ int main()
 //     testcase("========%lc\n", (wchar_t)'&');
 //  // type s
 //     testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
-//     testcase("%2s%c\n", "bonjour", 'a');
-//     testcase("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va");
-//     testcase("helloee", "");
-//     testcase("hello%s\n", "world");
-//     testcase("%s%s\n", "bonjour", "toi");
-//     testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
-//     testcase("hello%s\n", "world");
-//     testcase("hello %s\t%d\n", "world", 42);
-//     testcase("hello %s\t%d\n", "world", 42);
-// //type d
-//     testcase("%.2d\n", -22);
-//     testcase("%.3d\n", -22);
-//     testcase("%+10.4d|\n", -22);
-//     testcase("%+ 10.4d\n", 22);
-//     testcase("%+010.4d\n", 22);
-//     testcase("%+d\n", 123212341);
-//     testcase("%d\n", 123212341);
-//     testcase("%+d\n", -123212341);
-//     testcase("% d|\n", -123212341);
-//     testcase("% d|\n", 123212341);
-//     testcase("%+ d\n", -123212341);
-//     testcase("%10.2d%%second%+015d\n", 22, 333);
-//     testcase("%-10.5d|\n", 4444);
-//     testcase("%+-1.15d|\n", 4444);
-//     testcase("%+-1.15d|\n", 4444);
-//     testcase("%+-1.50ld|\n", (long)87120928344444);
-//     testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
-//     testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
+    testcase("%2s%c\n", "bonjour", 'a');
+    testcase("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va");
+    testcase("helloee", "");
+    testcase("hello%s\n", "world");
+    testcase("%s%s\n", "bonjour", "toi");
+    testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
+    testcase("hello%s\n", "world");
+    testcase("hello %s\t%d\n", "world", 42);
+    testcase("hello %s\t%d\n", "world", 42);
+//type d
+    testcase("%.2d\n", -22);
+    testcase("%.3d\n", -22);
+    testcase("%+10.4d|\n", -22);
+    testcase("%+ 10.4d\n", 22);
+    testcase("%+010.4d\n", 22);
+    testcase("%+d\n", 123212341);
+    testcase("%d\n", 123212341);
+    testcase("%+d\n", -123212341);
+    testcase("% d|\n", -123212341);
+    testcase("% d|\n", 123212341);
+    testcase("%+ d\n", -123212341);
+    testcase("%10.2d%%second%+015d\n", 22, 333);
+    testcase("%-10.5d|\n", 4444);
+    testcase("%+-1.15d|\n", 4444);
+    testcase("%+-1.15d|\n", 4444);
+    testcase("%+-1.50ld|\n", (long)87120928344444);
+    testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
+    testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 
 // type oxX
 
@@ -141,12 +160,14 @@ int main()
     testcase("%#X", 0);
     testcase("%X", 0);
     testcase("%#-.X", 0);
-    testcase("%.X", 1);
+    testcase("%.0X", 0);
+    testcase("%.5X", 0);
     testcase("%X", 0);
     testcase("%#08x", 42);
     testcase("@moulitest: %#.x %#.0x", 0, 0);
     testcase("@moulitest: %5.x %5.0x", 0, 0);
-
+    testcase("@moulitest: %5.x", 0);
+    testcase("@moulitest: %5.0x", 0);
 
 
 //     testcase("%x|\n", 4444);

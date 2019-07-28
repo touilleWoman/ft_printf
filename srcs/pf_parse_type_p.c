@@ -20,7 +20,7 @@ static char 	*type_p_flags_check(char *buf, int buf_len)
 
  	if ((flags_len = get_flags(flags, buf, "+- 0#")))
 	{
-		ft_putstr("warning : 'p' conversion specifier doesn't take flags\n");
+		ft_putstr_fd("%p doesn't accept flags\n", 2);
 		buf += flags_len;
 	}
 	return (buf);
