@@ -24,7 +24,8 @@ SOURCE_NAME = ft_printf.c \
 					pf_parse.c\
 					pf_deal_with_double_percentage.c\
 					pf_parse_tools.c\
-					pf_parse_type_c_s.c\
+					pf_parse_type_c.c\
+					pf_parse_type_s.c\
 					pf_parse_type_d.c\
 					pf_parse_type_f.c\
 					pf_parse_type_p.c\

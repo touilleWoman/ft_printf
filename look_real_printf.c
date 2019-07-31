@@ -4,6 +4,10 @@
 
 int main()
 {
+    printf("%.2c", 5);
+    printf("%.2c", 0);
+    printf("%.2c", NULL);
+    printf("%2c", 0);
     // printf("%5%");
     // printf("%-5%");
     // printf("%.0%");
@@ -17,7 +21,7 @@ int main()
     // printf("@moulitest: %.d %.0d", 0, 0);
     // printf("@moulitest: %5.d %5.0d", 0, 0);
     // printf("%.2c|", 5);
-   printf("%5%");
+   // printf("%5%");
     // printf("aaaaa:%2c", 0);
 
     // printf("% u", 4294967295);

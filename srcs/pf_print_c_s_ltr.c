@@ -24,7 +24,7 @@ int		print_c(int fd, t_unit *unit)
 	int		width;
 
 	width = unit->val.c.width;
-	if (width != 0)
+	if (width)
 	{
 		s[width] = '\0';
 		ft_memset(s, ' ', width);
@@ -33,7 +33,7 @@ int		print_c(int fd, t_unit *unit)
 		else
 			s[0] = unit->val.c.character;
 		ft_putstr_fd(s, fd);
-		return (ft_strlen(s));
+		return (width);
 	}
 	write(fd, &(unit->val.c.character), 1);
 	return (1);
