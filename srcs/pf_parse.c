@@ -99,6 +99,10 @@ t_list		*cut_to_capsule(char *s, int len, va_list args)
 		len_cnt += ft_strlen(s + len_cnt) + 1;
 		if (len_cnt > len)
 			break;
+		if (s[ft_strlen(s + len_cnt) + 1] == 0 && (len_cnt + ft_strlen(s + len_cnt) + 1) < len)
+		{
+			printf("type percentage\n");
+		}
 		capsule = s + len_cnt;
 		err_check = parse_capsule(&lst, capsule, args);
 		if (err_check == ERROR)
