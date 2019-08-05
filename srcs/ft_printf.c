@@ -52,7 +52,7 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 		return (printed_nb);
 	}
 	else
-		return (ERROR);
+		return (0);
 }
 
 

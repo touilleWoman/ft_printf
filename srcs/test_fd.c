@@ -59,7 +59,7 @@ void     testcase(const char *fmt, ...)
     {
         printf(".");
         /* show printed */
-        printf("%s\n",out_test);
+        // printf("%s\n",out_test);
     }
     else
         tests_failures += 1;
@@ -71,10 +71,12 @@ void     testcase(const char *fmt, ...)
 int main()
 {
 //special case
-    testcase("%5%");
-    testcase("%-5%");
-    testcase("%5.11%");
-    testcase("%.0%");
+    // testcase("%5");
+    // testcase("%5%");
+    // testcase("%5%%d", 4);
+    // testcase("%-5%");
+    // testcase("%5.11%");
+    // testcase("%.0%");
     // testcase("%   %", "test");
     // testcase("@moulitest: %.o %.0o", 0, 0);
     // testcase("@moulitest: %5.o %5.0o", 0, 0);
@@ -110,99 +112,99 @@ int main()
 //     testcase("No fix, no sleep");
 //     testcase("/dev/brain: No such file or directory.");
 //     testcase("こんにちは、私はprintf単体テストです");
-//     testcase("中文测试");
+    testcase("中文测试");
 
-// // type c
-//     testcase("okone%-20coktwo%-lcokthree\n", 'a', (wchar_t)'b');
-//     testcase("okone%-20coktwo%-lcokthree\n", 'a', 'b');
-//     testcase("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e');
-//     testcase("========%lc\n", (wchar_t)'&');
-//     testcase("%.2c", 5);
-//     testcase("%.2c", 0);
-//     testcase("%.2c", NULL);
-//     testcase("%2c", 0);
-//     testcase("% c", 0);
+// type c
+    testcase("okone%-20coktwo%-lcokthree\n", 'a', (wchar_t)'b');
+    testcase("okone%-20coktwo%-lcokthree\n", 'a', 'b');
+    testcase("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e');
+    testcase("========%lc\n", (wchar_t)'&');
+    testcase("%.2c", 5);
+    testcase("%.2c", 0);
+    testcase("%.2c", NULL);
+    testcase("%2c", 0);
+    testcase("% c", 0);
 
-//  // type s
-//     testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
-//     testcase("%2s%c\n", "bonjour", 'a');
-//     testcase("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va");
-//     testcase("helloee", "");
-//     testcase("hello%s\n", "world");
-//     testcase("%s%s\n", "bonjour", "toi");
-//     testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
-//     testcase("hello%s\n", "world");
-//     testcase("hello %s\t%d\n", "world", 42);
-//     testcase("hello %s\t%d\n", "world", 42);
-// //type d
-//     testcase("%.2d\n", -22);
-//     testcase("%.3d\n", -22);
-//     testcase("%+10.4d|\n", -22);
-//     testcase("%+ 10.4d\n", 22);
-//     testcase("%+010.4d\n", 22);
-//     testcase("%+d\n", 123212341);
-//     testcase("%d\n", 123212341);
-//     testcase("%+d\n", -123212341);
-//     testcase("% d|\n", -123212341);
-//     testcase("% d|\n", 123212341);
-//     testcase("%+ d\n", -123212341);
-//     testcase("%10.2d%%second%+015d\n", 22, 333);
-//     testcase("%-10.5d|\n", 4444);
-//     testcase("%+-1.15d|\n", 4444);
-//     testcase("%+-1.15d|\n", 4444);
-//     testcase("%+-1.50ld|\n", (long)87120928344444);
-//     testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
-//     testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
+ // type s
+    testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
+    testcase("%2s%c\n", "bonjour", 'a');
+    testcase("%-10.2s_unit2_%-1.50s\n", "bonjour", "ca va");
+    testcase("helloee", "");
+    testcase("hello%s\n", "world");
+    testcase("%s%s\n", "bonjour", "toi");
+    testcase("_unit0_%s%-s%---s%s%s%10.2s\n", "bonjour1\n", "bonjour2\n", "bonjour3\n", "bonjour4\n", "bonjour5\n", (wchar_t*)"bonjour6\n");
+    testcase("hello%s\n", "world");
+    testcase("hello %s\t%d\n", "world", 42);
+    testcase("hello %s\t%d\n", "world", 42);
+//type d
+    testcase("%.2d\n", -22);
+    testcase("%.3d\n", -22);
+    testcase("%+10.4d|\n", -22);
+    testcase("%+ 10.4d\n", 22);
+    testcase("%+010.4d\n", 22);
+    testcase("%+d\n", 123212341);
+    testcase("%d\n", 123212341);
+    testcase("%+d\n", -123212341);
+    testcase("% d|\n", -123212341);
+    testcase("% d|\n", 123212341);
+    testcase("%+ d\n", -123212341);
+    testcase("%10.2d%%second%+015d\n", 22, 333);
+    testcase("%-10.5d|\n", 4444);
+    testcase("%+-1.15d|\n", 4444);
+    testcase("%+-1.15d|\n", 4444);
+    testcase("%+-1.50ld|\n", (long)87120928344444);
+    testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
+    testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 
-// // type oxX
-
-
-//     testcase("%#X", 0);
-//     testcase("%X", 0);
-//     testcase("%#-.X", 0);
-//     testcase("%.0X", 0);
-//     testcase("%.5X", 0);
-//     testcase("%X", 0);
-//     testcase("%#08x", 42);
-//     testcase("@moulitest: %#.x %#.0x", 0, 0);
-//     testcase("@moulitest: %5.x %5.0x", 0, 0);
-//     testcase("@moulitest: %5.x", 0);
-//     testcase("@moulitest: %5.0x", 0);
+// type oxX
 
 
-//     testcase("%x|\n", 4444);
-//     testcase("%#o|\n", 4444);
-//     testcase("%#X|\n", 4444);
-//     testcase("%#-10.6x|\n", 4444);
-//     testcase("%-10.5o|\n", 4444);
-//     testcase("%-10.6o|\n", 4444);
-//     testcase("%#-10.6o|\n", 4444);
-//     testcase("%#10.6X|\n", 4444);
-//     testcase("%#-10.7x|\n", 4444);
-//     testcase("%#-010.7o|\n", 4444);
-//     testcase("%#010.7o|\n", 4444);
-//     testcase("%#-10.7o|\n", 4444);
-//     testcase("%#-2.7X|\n", 4444);
-//     testcase("%#-10.7X|\n", 4444);
-//     testcase("%#10.7X|\n", 4444);
-//     testcase("%#10.7X|\n", 4444);
-//     testcase("%#10.7X|\n", 4444);
-//     testcase("%#10.7llX|\n", (long long)9287539484444);
-//     testcase("%#20.7llX|\n", (long long)9287539484444);
-//     testcase("%#10.7lX|\n", (long)9287539484444);
-//     testcase("%#10.7hX|\n", (short)9287539484444);
-//     testcase("%#10.7hhX|\n", 9287539484444);
+    testcase("%#X", 0);
+    testcase("%X", 0);
+    testcase("%#-.X", 0);
+    testcase("%.0X", 0);
+    testcase("%.5X", 0);
+    testcase("%X", 0);
+    testcase("%#08x", 42);
+    testcase("@moulitest: %#.x %#.0x", 0, 0);
+    testcase("@moulitest: %5.x %5.0x", 0, 0);
+    testcase("@moulitest: %5.x", 0);
+    testcase("@moulitest: %5.0x", 0);
 
-// // type u
-//     testcase("%u|\n", 4444);
-//     testcase("%-10.6u|\n", 4444);
-//     testcase("%10.6u|\n", 4444);
-//     testcase("%-10.7u|\n", 4444);
-//     testcase("%-010.7u|\n", 4444);
-//     testcase("%010.7u|\n", 4444);
-//     testcase("%-5.7u|\n", 4444);
-//     testcase("%-2.7u|\n", 4444);
-//     testcase("%-1.7u|\n", 4444);
+
+    testcase("%x|\n", 4444);
+    testcase("%#o|\n", 4444);
+    testcase("%#X|\n", 4444);
+    testcase("%#-10.6x|\n", 4444);
+    testcase("%-10.5o|\n", 4444);
+    testcase("%-10.6o|\n", 4444);
+    testcase("%#-10.6o|\n", 4444);
+    testcase("%#10.6X|\n", 4444);
+    testcase("%#-10.7x|\n", 4444);
+    testcase("%#-010.7o|\n", 4444);
+    testcase("%#010.7o|\n", 4444);
+    testcase("%#-10.7o|\n", 4444);
+    testcase("%#-2.7X|\n", 4444);
+    testcase("%#-10.7X|\n", 4444);
+    testcase("%#10.7X|\n", 4444);
+    testcase("%#10.7X|\n", 4444);
+    testcase("%#10.7X|\n", 4444);
+    testcase("%#10.7llX|\n", (long long)9287539484444);
+    testcase("%#20.7llX|\n", (long long)9287539484444);
+    testcase("%#10.7lX|\n", (long)9287539484444);
+    testcase("%#10.7hX|\n", (short)9287539484444);
+    testcase("%#10.7hhX|\n", 9287539484444);
+
+// type u
+    testcase("%u|\n", 4444);
+    testcase("%-10.6u|\n", 4444);
+    testcase("%10.6u|\n", 4444);
+    testcase("%-10.7u|\n", 4444);
+    testcase("%-010.7u|\n", 4444);
+    testcase("%010.7u|\n", 4444);
+    testcase("%-5.7u|\n", 4444);
+    testcase("%-2.7u|\n", 4444);
+    testcase("%-1.7u|\n", 4444);
 //     testcase("%10.7u|\n", 4444);
 //     testcase("%10.7u|\n", 4444);
 //     testcase("%10.7llu|\n", (long long)9287539484444);

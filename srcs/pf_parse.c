@@ -16,8 +16,8 @@
 **	a capsule is defined as :
 ** 	[flags][width][precision][modifier][conversion][litetral]
 **	excepte the first capsule which may contains only literal
-** 	then we seperate literal part with the rest
 */
+
 
 int		find_conversion_in_capsule(t_list **alst, const char *capsule)
 {
@@ -28,20 +28,21 @@ int		find_conversion_in_capsule(t_list **alst, const char *capsule)
 	len = ft_strlen(capsule);
 	while (posi < len)
 	{
-		if (is_conversion(capsule[posi]) == TRUE)
+		if (is_conversion(capsule[posi]))
 			break;
 		posi++;
 	}
-	if (posi == len)
-	{
-		freelst_and_errormsg(*alst, "format error: no conversion found\n");
-		return (ERROR);
-	}
-	else
+	if (posi != len)
 		return (posi);
+	freelst_and_errormsg(*alst, "format error: no conversion found\n");
+	return (ERROR);
 }
 
-int			seperate_conversion_and_literal(t_list **alst, const char *capsule, va_list args)
+/*
+** 	seperate literal part with the rest when parsing capsul
+*/
+
+int			parse_capsule(t_list **alst, const char *capsule, va_list args)
 {
 	int					index;
 	int					posi;
@@ -68,14 +69,14 @@ int			seperate_conversion_and_literal(t_list **alst, const char *capsule, va_lis
 		}
 		index++;
 	}
-	if (posi != len - 1) // if there are literal after conversion, add ne literal unit
+	if (posi != len - 1) // if there are literal after conversion, add the literal unit
 		unit_lstadd_literal(alst, ft_strdup(capsule + posi + 1));
 	return(0);
 }
 
 t_list		*cut_to_capsule(char *s, int len, va_list args)
 {
-	int		start;
+	int		len_cnt;
 	t_list	*lst;
 	char	*capsule;
 	int		err_check;
@@ -83,16 +84,25 @@ t_list		*cut_to_capsule(char *s, int len, va_list args)
 	lst = NULL;
 	if (*s != '\0')
 		unit_lstadd_literal(&lst, ft_strdup(s));
-	start = ft_strlen(s) + 1;
-	while (start < len)
+	// len_cnt = ft_strlen(s) + 1;
+	// while (len_cnt < len)
+	// {
+	// 	capsule = s + len_cnt;
+	// 	err_check = parse_capsule(&lst, capsule, args);
+	// 	if (err_check == ERROR)
+	// 		return (NULL);
+	// 	len_cnt += ft_strlen(s + len_cnt) + 1;
+	// }
+	len_cnt = 0;
+	while (1)
 	{
-		capsule = ft_strdup(s + start);
-		err_check = seperate_conversion_and_literal(&lst, capsule, args);
-		free(capsule);
-		capsule = NULL;
+		len_cnt += ft_strlen(s + len_cnt) + 1;
+		if (len_cnt > len)
+			break;
+		capsule = s + len_cnt;
+		err_check = parse_capsule(&lst, capsule, args);
 		if (err_check == ERROR)
-			return (NULL);
-		start += ft_strlen(s + start) + 1;
+			break;
 	}
 	return (lst);
 }
@@ -105,7 +115,7 @@ t_list		*parse_string(const char *format, va_list args)
 	t_list			*lst;
 
 	new_format = deal_with_double_percentage(format, &real_p_nb, &new_len);
-	lst = cut_to_capsule(new_format,new_len, args);
+	lst = cut_to_capsule(new_format, new_len, args);
 	free(new_format);
 	new_format = NULL;
 	// show_list(lst);

@@ -33,7 +33,6 @@ char		*pf_itoa_base(uintmax_t nbr, int base, t_unit *unit)
 			buf[posi] = nbr % base + ((nbr % base < 10) ? '0' : 'a'- 10);
 		nbr = nbr / base;
 	}
-
 	return (ft_strdup(buf + posi));
 }
 

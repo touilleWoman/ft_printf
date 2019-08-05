@@ -58,6 +58,7 @@ int				parse_f(t_list **alst, char *buf, va_list args);
 int				parse_p(t_list **alst, char *buf, va_list args);
 int				parse_oxx(t_list **alst, char *buf, va_list args);
 int				parse_u(t_list **alst, char *buf, va_list args);
+int				parse_percentage(t_list **alst, char *buf, va_list args);
 
 
 //print
