@@ -98,12 +98,12 @@ int			parse_oxx(t_list **alst, char *buf, va_list args)
 	buf = type_oxx_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_oxx_get_precision(buf, &unit);
 	buf = type_oxx_get_modifier(buf, &unit);
-	if (*buf != 'o' && *buf != 'x' && *buf != 'X')
-	{
-		freelst_and_errormsg(*alst,
-			"error : conversion 'o' 'x' or 'X' format wrong\n");
-		return (ERROR);
-	}
+	// if (*buf != 'o' && *buf != 'x' && *buf != 'X')
+	// {
+	// 	freelst_and_errormsg(*alst,
+	// 		"error : conversion 'o' 'x' or 'X' format wrong\n");
+	// 	return (ERROR);
+	// }
 	unit.type = TYPE_OXX;
 	if (*buf == 'X')
 		unit.val.oxx.sub_type = TYPE_X_MAJ;

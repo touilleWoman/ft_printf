@@ -63,11 +63,11 @@ int				parse_c(t_list **alst, char *buf, va_list args)
 	buf = type_c_get_flags(buf, &unit, ft_strlen(buf));
 	buf = type_c_width_precision_handler(buf, &unit);
 	buf = type_c_get_modifier(buf, &unit);
-	if (*buf != 'c')
-	{
-		freelst_and_errormsg(*alst, "error: %c format wrong\n");
-		return (ERROR);
-	}
+	// if (*buf != 'c')
+	// {
+	// 	freelst_and_errormsg(*alst, "error: %c format wrong\n");
+	// 	return (ERROR);
+	// }
 	unit.type = TYPE_C;
 	if (unit.val.c.modifier_l == TRUE)
 		unit.val.c.character = (wchar_t)va_arg(args, wint_t);

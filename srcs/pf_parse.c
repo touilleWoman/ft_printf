@@ -74,6 +74,25 @@ int			parse_capsule(t_list **alst, const char *capsule, va_list args)
 	return(0);
 }
 
+int			parse_capsule_type_percent(t_list **alst, char *capsule)
+{
+	int		width;
+	int		width_len;
+	char 	*ltr;
+	
+	width_len = get_digits(&width, capsule, ft_strlen(capsule));
+	if (width_len)
+	{
+		ft_memset(ltr, ' ', width);
+		ltr[width] = 0;
+		ltr[width - 1] = '%';
+		unit_lstadd_literal(alst, ltr);
+		return (0);
+	}
+	return(ERROR);
+}
+
+
 t_list		*cut_to_capsule(char *s, int len, va_list args)
 {
 	int		len_cnt;
@@ -84,29 +103,21 @@ t_list		*cut_to_capsule(char *s, int len, va_list args)
 	lst = NULL;
 	if (*s != '\0')
 		unit_lstadd_literal(&lst, ft_strdup(s));
-	// len_cnt = ft_strlen(s) + 1;
-	// while (len_cnt < len)
-	// {
-	// 	capsule = s + len_cnt;
-	// 	err_check = parse_capsule(&lst, capsule, args);
-	// 	if (err_check == ERROR)
-	// 		return (NULL);
-	// 	len_cnt += ft_strlen(s + len_cnt) + 1;
-	// }
 	len_cnt = 0;
 	while (1)
 	{
 		len_cnt += ft_strlen(s + len_cnt) + 1;
 		if (len_cnt > len)
 			break;
-		if (s[ft_strlen(s + len_cnt) + 1] == 0 && (len_cnt + ft_strlen(s + len_cnt) + 1) < len)
-		{
-			printf("type percentage\n");
-		}
 		capsule = s + len_cnt;
-		err_check = parse_capsule(&lst, capsule, args);
-		if (err_check == ERROR)
-			break;
+		if (s[len_cnt + ft_strlen(s + len_cnt) + 1] == 0 && (len_cnt + ft_strlen(s + len_cnt)) < len)
+			err_check = parse_capsule_type_percent(&lst, capsule);
+		else
+		{
+			err_check = parse_capsule(&lst, capsule, args);
+			if (err_check == ERROR)
+				break;
+		}
 	}
 	return (lst);
 }

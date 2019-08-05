@@ -83,11 +83,11 @@ int			parse_p(t_list **alst, char *buf, va_list args)
 	buf = type_p_flags_check(buf, ft_strlen(buf));
 	buf = type_p_width_precision_check(buf);
 	buf = type_p_modifier_check(buf);
-	if (*buf != 'p')
-	{
-		freelst_and_errormsg(*alst, "error: %p format wrong\n");
-		return (ERROR);
-	}
+	// if (*buf != 'p')
+	// {
+	// 	freelst_and_errormsg(*alst, "error: %p format wrong\n");
+	// 	return (ERROR);
+	// }
 	unit.type = TYPE_P;
 	unit.val.p.pointer = (uintmax_t)va_arg(args, void *);
 	unit_lstadd_bot(alst, &unit);
