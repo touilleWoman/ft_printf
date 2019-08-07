@@ -152,7 +152,7 @@ testcase("%-32s", "abc");
 testcase("%-16s", "nark nark");
 testcase("%-5s", "goes over");
 testcase("%.7s", "hello");
-#if 0
+#if 1
 testcase("%.3s", "hello");
 testcase("%.s", "hello");
 testcase("%.0s", "hello");

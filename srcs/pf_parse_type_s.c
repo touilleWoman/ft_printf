@@ -56,11 +56,11 @@ int			parse_s(t_list **alst, char *buf, va_list args)
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_s_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_s_get_precision_and_modifier(buf, &unit);
-	if (*buf != 's')
-	{
-		freelst_and_errormsg(*alst, "error: %s format wrong\n");
-		return (ERROR);
-	}
+	// if (*buf != 's')
+	// {
+	// 	freelst_and_errormsg(*alst, "error: %s format wrong\n");
+	// 	return (ERROR);
+	// }
 	unit.type = TYPE_S;
 	if ((unit.val.s.string = va_arg(args, char *)) == NULL)
 		unit.val.s.string = "(null)";

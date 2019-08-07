@@ -74,8 +74,8 @@ int main()
     // testcase("%d%5kkkkkkk", 42);
 
 //special case
-#if 0
-    testcase("touille%5");
+#if 1
+    // testcase("touille%5");
     testcase("%5");
     testcase("%5%");
     testcase("%5%%d", 4);

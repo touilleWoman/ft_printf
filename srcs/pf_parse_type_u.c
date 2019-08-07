@@ -92,11 +92,11 @@ int			parse_u(t_list **alst, char *buf, va_list args)
 	buf = type_u_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_u_get_precision(buf, &unit);
 	buf = type_u_get_modifier(buf, &unit);
-	if (*buf != 'u')
-	{
-		freelst_and_errormsg(*alst, "error : %u format wrong\n");
-		return (ERROR);
-	}
+	// if (*buf != 'u')
+	// {
+	// 	freelst_and_errormsg(*alst, "error : %u format wrong\n");
+	// 	return (ERROR);
+	// }
 	unit.type = TYPE_U;
 	if (unit.val.u.modifier == MD_LL)
 		unit.val.u.un_int = va_arg(args,  unsigned long long);

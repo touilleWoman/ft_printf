@@ -72,7 +72,7 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 		{'u', parse_u}, {'%', parse_percent}
 	};
 
-	len = ft_strlen(capsule);
+	// len = ft_strlen(capsule);
 	index = 0;
 	// posi = find_conversion_in_capsule(capsule);
 	// if (posi == ERROR)
@@ -82,7 +82,6 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 	// }
 	if (capsule[end] == '\0')
 		return (ERROR);
-
 	while (index < PARSE_FUNS_NB)
 	{
 		if(capsule[end] ==  funs[index].type)
@@ -98,38 +97,6 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 	return(0);
 }
 
-void		unit_lstadd_literal(t_list **alst, const char *literal_piece, int len)
-{
-	t_unit		unit;
-
-	ft_bzero(&unit, sizeof(t_unit));
-	unit.type = TYPE_LTR;
-	unit.val.ltr.len = len;
-	unit.val.ltr.literal = literal_piece;
-	unit_lstadd_bot(alst, &unit);
-}
-
-
-static int		parse_literal_substring(const char *capsule, t_list **alst, int *r_capsule_ok)
-{
-	int		i;
-	// char	*buff;
-
-	*r_capsule_ok = TRUE;
-	i = 0;
-	while (capsule[i] != '\0' && capsule[i] != '%')
-		i++;
-	// buff = (char*)malloc(sizeof(char) * (i + 1));
-	// if (buff == NULL)
-	// 	*r_capsule_ok = FALSE;
-	// ft_strncpy(buff, capsule, i);
-	// buff[i] = '\0';
-	unit_lstadd_literal(alst, capsule, i);
-	// TODO: missing free in list teardown
-	return (i);
-}
-
-
 static int		parse_percent_substring(const char *capsule, t_list **alst, va_list args, int *r_capsule_ok)
 {
 	int end;
@@ -137,20 +104,28 @@ static int		parse_percent_substring(const char *capsule, t_list **alst, va_list 
 
 	*r_capsule_ok = TRUE;
 	end = find_end_of_capsule(capsule);
-
-	// {
-	// 	char buff[i + 1];
-
-	// 	ft_strncpy(buff, capsule, i);
-	// 	buff[i] = '\0';
-
-		ret = parse_capsule(alst, capsule, end, args);
-		if (ret == ERROR)
-		{
-			*r_capsule_ok = FALSE;
-		}
-	// }
+	ret = parse_capsule(alst, capsule, end, args);
+	if (ret == ERROR)
+		*r_capsule_ok = FALSE;
 	return (end + 1);
+}
+
+static int		parse_literal_substring(const char *capsule, t_list **alst, int *r_capsule_ok)
+{
+	int			i;
+	t_unit		unit;
+
+
+	*r_capsule_ok = TRUE;
+	i = 0;
+	while (capsule[i] != '\0' && capsule[i] != '%')
+		i++;
+	ft_bzero(&unit, sizeof(t_unit));
+	unit.type = TYPE_LTR;
+	unit.val.ltr.len = i;
+	unit.val.ltr.literal = capsule;
+	unit_lstadd_bot(alst, &unit);
+	return (i);
 }
 
 
@@ -160,11 +135,13 @@ t_list		*parse_string(const char *format, va_list args, int *r_format_ok)
 	int		ret;
 	int		substring_format_ok;
 	t_list	*lst;
+	int		len;
 
 	*r_format_ok = TRUE;
 	lst = NULL;
 	i = 0;
-	while (format[i] != '\0')
+	len = ft_strlen(format);
+	while (i < len)
 	{
 		if (format[i] == '%')
 		{
