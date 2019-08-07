@@ -70,27 +70,42 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
-    // testcase("");
-    // testcase("%d%5kkkkkkk", 42);
+    // testcase("====================%+-5.3rc\n", 'n');
 
 //special case
 #if 1
+    // testcase("%lc", (wint_t)-1);
+    // testcase("-------------------%lc", (wint_t)-1);
+
+    // ft_printf("%hhld", 128);
+    // ft_printf("@main_ftprintf: %####0000 33..1..#00d\n", 256); 
+    // testcase("%2c", 0);
+    // testcase("%.0%");
+    // testcase("");
+    // testcase("%d%5", 42);
+    // testcase("%d%5ttttttt", 42);
+    // // testcase("%d%5kkkkkkk", 42);
     // testcase("touille%5");
-    testcase("%5");
-    testcase("%5%");
-    testcase("%5%%d", 4);
-    testcase("%-5%");
-    testcase("%5.11%");
-    testcase("%.0%");
-    testcase("%   %", "test");
-#endif
-    // testcase("@moulitest: %.o %.0o", 0, 0);
-    // testcase("@moulitest: %5.o %5.0o", 0, 0);
+    // testcase("%5");
+    // testcase("%5%");
+    // testcase("%5%%d", 4);
+    // testcase("%-5%");
+    // testcase("%5.11%");
+    // testcase("%.0%");
+    // testcase("%   %", "test");
+    testcase("1@moulitest: %.o %.0o", 0, 0);
+    testcase("2@moulitest: %5.o %5.0o", 0, 0);
     // testcase("%lld", -9223372036854775808);
-    // testcase("@moulitest: %.d %.0d", 0, 0);
-    // testcase("@moulitest: %5.d %5.0d", 0, 0);
-    // testcase("% u", 4294967295);
-    // testcase("%+u", 4294967295);
+    testcase("3@moulitest: %#.o %#.0o", 0, 0);
+    testcase("4@moulitest: %.d %.0d", 0, 0);
+    testcase("5@moulitest: %5.d %5.0d", 0, 0);
+    testcase("6@moulitest: %#.x %#.0x", 0, 0);
+    testcase("7@moulitest: %5.x %5.0x", 0, 0);
+    testcase("8@moulitest: %5.x", 0);
+    testcase("9@moulitest: %5.0x", 0);
+    testcase("% u", 4294967295);
+    testcase("%+u", 4294967295);
+#endif
 
 // random Strings
 #if 1
@@ -174,10 +189,7 @@ int main()
     testcase("%.5X", 0);
     testcase("%X", 0);
     testcase("%#08x", 42);
-    testcase("@moulitest: %#.x %#.0x", 0, 0);
-    testcase("@moulitest: %5.x %5.0x", 0, 0);
-    testcase("@moulitest: %5.x", 0);
-    testcase("@moulitest: %5.0x", 0);
+
 
 
     testcase("%x|\n", 4444);
@@ -213,46 +225,44 @@ int main()
     testcase("%-5.7u|\n", 4444);
     testcase("%-2.7u|\n", 4444);
     testcase("%-1.7u|\n", 4444);
-//     testcase("%10.7u|\n", 4444);
-//     testcase("%10.7u|\n", 4444);
-//     testcase("%10.7llu|\n", (long long)9287539484444);
-//     testcase("%20.7llu|\n", (long long)9287539484444);
-//     testcase("%10.7lu|\n", (long)9287539484444);
-//     testcase("%10.7hu|\n", (short)9287539484444);
-//     testcase("%10.7hhu|\n", 9287539484444);
-//     testcase("%u|\n", 5);
+    testcase("%10.7u|\n", 4444);
+    testcase("%10.7u|\n", 4444);
+    testcase("%10.7llu|\n", (long long)9287539484444);
+    testcase("%20.7llu|\n", (long long)9287539484444);
+    testcase("%10.7lu|\n", (long)9287539484444);
+    testcase("%10.7hu|\n", (short)9287539484444);
+    testcase("%10.7hhu|\n", 9287539484444);
+    testcase("%u|\n", 5);
 //     // // type p
-//     char *ptr = "pointer test";
-//     void *ptr2 = NULL;
-//     void *ptr3 = ptr;
-//     testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
+    char *ptr = "pointer test";
+    void *ptr2 = NULL;
+    void *ptr3 = ptr;
+    testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
 
-// // type f
-//     testcase("%f\n", 2.345);
-//     testcase("%4.5f\n", 2.345);
-//     testcase("%5.2f\n", 2.325);
-//     testcase("%5.2f\n", 2.395);
-//     testcase("%+5.5f\n", 2.345);
-//     testcase("%+05.5f\n", 2.345);
-//     testcase("% 05.5f\n", 2.345);
-//     testcase("%f\n", -2.345);
-//     testcase("%4.5f\n", -2.345);
-//     testcase("%5.2f\n", -2.345);
-//     testcase("%+5.5f\n", -2.345);
-//     testcase("%+05.5f\n", -2.345);
-//     testcase("% 05.5f\n", -2.345);
-//     testcase("zero%f|\n", 0.0);
-//     testcase("one%f|\n", 1);
-//     testcase("six%f|\n", 6.0);
-//     testcase("six%#6.10f|\n", 6.0);
+// type f
+    testcase("%f\n", 2.345);
+    testcase("%4.5f\n", 2.345);
+    testcase("%5.2f\n", 2.325);
+    testcase("%5.2f\n", 2.395);
+    testcase("%+5.5f\n", 2.345);
+    testcase("%+05.5f\n", 2.345);
+    testcase("% 05.5f\n", 2.345);
+    testcase("%f\n", -2.345);
+    testcase("%4.5f\n", -2.345);
+    testcase("%5.2f\n", -2.345);
+    testcase("%+5.5f\n", -2.345);
+    testcase("%+05.5f\n", -2.345);
+    testcase("% 05.5f\n", -2.345);
+    testcase("zero%f|\n", 0.0);
+    testcase("one%f|\n", 1);
+    testcase("six%f|\n", 6.0);
+    testcase("six%#6.10f|\n", 6.0);
 
 
     // testcase("one%#sf|\n", 1);   printf seg fault in this case
 
 
-    // testcase("+++++++++++++%lc%c", 1);
-    // testcase("-------------------%lc", (wint_t)-1);
-    // testcase("====================%+-5.3rc\n", 'n');
+    testcase("+++++++++++++%lc%c", 1);
 
 #endif
     if (tests_failures)

@@ -35,31 +35,6 @@ static int		find_end_of_capsule(const char *format)
 	return (i);
 }
 
-
-// static int		find_conversion_in_capsule(const char *capsule)
-// {
-// 	int		len;
-// 	int		posi;
-
-// 	posi = 0;
-// 	len = ft_strlen(capsule);
-// 	while (posi < len)
-// 	{
-// 		if (is_conversion(capsule[posi]))
-// 			break;
-// 		posi++;
-// 	}
-// 	if (posi != len)
-// 		return (posi);
-// 	return (ERROR);
-// }
-
-
-/*
-** 	seperate literal part with the rest when parsing capsul
-*/
-
-
 static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list args)
 {
 	int					index;
@@ -145,7 +120,7 @@ t_list		*parse_string(const char *format, va_list args, int *r_format_ok)
 	{
 		if (format[i] == '%')
 		{
-			i++;  // Ignore percent
+			i++;
 			i += parse_percent_substring(format + i, &lst, args, &substring_format_ok);
 		}
 		else

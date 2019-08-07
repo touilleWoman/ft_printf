@@ -17,9 +17,13 @@ static unsigned int		oxx_precision_handler(char *s, char *str_uint,
 {
 	int		dy_len;
 
-	if (unit->val.oxx.un_int == 0 && precision == PRECISION_NULL
-		&& unit->val.oxx.sub_type != TYPE_O)
-		return (0);
+	if (unit->val.oxx.un_int == 0 && precision == PRECISION_NULL)
+	{
+		if (unit->val.oxx.sub_type != TYPE_O 
+			|| (unit->val.oxx.sub_type == TYPE_O 
+				&& unit->val.oxx.flag_hash != TRUE))
+			return (0);
+	}
 	dy_len = ft_strlen(str_uint);
 	if (dy_len > precision)
 		ft_strcpy(s, str_uint);

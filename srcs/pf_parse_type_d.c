@@ -50,7 +50,14 @@ static char		*type_d_get_precision(char *buf, t_unit *unit)
 		{
 			buf++;
 			digits_len = get_digits(&digits, buf, ft_strlen(buf));
-			if (digits_len)
+			if (digits_len == 0)
+				unit->val.d.precision = PRECISION_NULL;
+			else if (digits_len == 1 && digits == 0)
+			{
+				unit->val.d.precision = PRECISION_NULL;
+				buf++;
+			}
+			else
 			{
 				unit->val.d.precision = digits;
 				buf += digits_len;
@@ -99,7 +106,7 @@ int			parse_d(t_list **alst, char *buf, va_list args)
 	// }
 	unit.type = TYPE_D;
 	if (unit.val.d.modifier == MD_LL)
-		unit.val.d.integer = va_arg(args, long long);
+		unit.val.d.integer = va_arg(args, unsigned long long);
 	else if (unit.val.d.modifier == MD_L)
 		unit.val.d.integer = va_arg(args, long);
 	else if (unit.val.d.modifier == MD_HH)

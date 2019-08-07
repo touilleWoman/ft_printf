@@ -20,7 +20,7 @@ static char 	*type_p_flags_check(char *buf, int buf_len)
 
  	if ((flags_len = get_flags(flags, buf, "+- 0#")))
 	{
-		ft_putstr_fd("%p doesn't accept flags\n", 2);
+		// ft_putstr_fd("%p doesn't accept flags\n", 2);
 		buf += flags_len;
 	}
 	return (buf);
@@ -34,7 +34,7 @@ static char *type_p_width_precision_check(char *buf)
  	digits = 0;
 	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
 	{
-		ft_putstr("warning:'p' conversion specifier doesn't take width\n");
+		// ft_putstr("warning:'p' conversion specifier doesn't take width\n");
 		buf += digits_len;
 	}
 	if (*buf == '.')
@@ -43,7 +43,7 @@ static char *type_p_width_precision_check(char *buf)
 		digits_len = get_digits(&digits, buf, ft_strlen(buf));
 		if (digits_len)
 		{
-			ft_putstr("warning:'p' conversion specifier doesn't take precision\n");
+			// ft_putstr("warning:'p' conversion specifier doesn't take precision\n");
 			buf += digits_len;
 		}
 	}
@@ -54,22 +54,22 @@ static char		*type_p_modifier_check(char *buf)
 {
 	if (*buf == 'l' && buf[1] == 'l')
 	{
-		ft_putstr("warning:'p' conversion specifier doesn't take 'll' modifier\n");
+		// ft_putstr("warning:'p' conversion specifier doesn't take 'll' modifier\n");
 		buf += 2;
 	}
 	else if (*buf == 'h' && buf[1] == 'h')
 	{
-		ft_putstr("warning:'p' conversion specifier doesn't take 'hh' modifier\n");
+		// ft_putstr("warning:'p' conversion specifier doesn't take 'hh' modifier\n");
 		buf += 2;
 	}
 	else if (*buf == 'l')
 	{
-		ft_putstr("warning:'p' conversion specifier doesn't take 'l' modifier\n");
+		// ft_putstr("warning:'p' conversion specifier doesn't take 'l' modifier\n");
 		buf++;
 	}
 	else if (*buf == 'h')
 	{
-		ft_putstr("warning:'p' conversion specifier doesn't take 'h' modifier\n");
+		// ft_putstr("warning:'p' conversion specifier doesn't take 'h' modifier\n");
 		buf++;
 	}
 	return (buf);

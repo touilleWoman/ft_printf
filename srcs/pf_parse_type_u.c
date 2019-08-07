@@ -23,12 +23,12 @@ static char		*type_u_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 	{
 		(ft_strchr(flags, '-')) ? unit->val.u.flag_minus = TRUE : 0;
 		(ft_strchr(flags, '0')) ? unit->val.u.flag_zero = TRUE : 0;
-		if (ft_strchr(flags, ' '))
-			ft_putstr_fd("%u doesn't accept flag' '\n", 2);
-		if (ft_strchr(flags, '+'))
-			ft_putstr_fd("%u doesn't accept flag'+'\n", 2);
-		if (ft_strchr(flags, '#'))
-			ft_putstr_fd("%u doesn't accept flag'#'\n", 2);
+		// if (ft_strchr(flags, ' '))
+		// 	ft_putstr_fd("warning : flag' ' is ignored with %u\n", 2);
+		// if (ft_strchr(flags, '+'))
+		// 	ft_putstr_fd("warning : flag'+' is ignored with %u\n", 2);
+		// if (ft_strchr(flags, '#'))
+		// 	ft_putstr_fd("warning : flag'#' is ignored with %u\n", 2);
 		buf += flags_len;
 	}
  	digits = 0;
