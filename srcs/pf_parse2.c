@@ -36,23 +36,23 @@ static int		find_end_of_capsule(const char *format)
 }
 
 
-static int		find_conversion_in_capsule(const char *capsule)
-{
-	int		len;
-	int		posi;
+// static int		find_conversion_in_capsule(const char *capsule)
+// {
+// 	int		len;
+// 	int		posi;
 
-	posi = 0;
-	len = ft_strlen(capsule);
-	while (posi < len)
-	{
-		if (is_conversion(capsule[posi]))
-			break;
-		posi++;
-	}
-	if (posi != len)
-		return (posi);
-	return (ERROR);
-}
+// 	posi = 0;
+// 	len = ft_strlen(capsule);
+// 	while (posi < len)
+// 	{
+// 		if (is_conversion(capsule[posi]))
+// 			break;
+// 		posi++;
+// 	}
+// 	if (posi != len)
+// 		return (posi);
+// 	return (ERROR);
+// }
 
 
 /*
@@ -82,6 +82,7 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 	// }
 	if (capsule[end] == '\0')
 		return (ERROR);
+
 	while (index < PARSE_FUNS_NB)
 	{
 		if(capsule[end] ==  funs[index].type)
@@ -97,20 +98,33 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 	return(0);
 }
 
+void		unit_lstadd_literal(t_list **alst, const char *literal_piece, int len)
+{
+	t_unit		unit;
+
+	ft_bzero(&unit, sizeof(t_unit));
+	unit.type = TYPE_LTR;
+	unit.val.ltr.len = len;
+	unit.val.ltr.literal = literal_piece;
+	unit_lstadd_bot(alst, &unit);
+}
+
 
 static int		parse_literal_substring(const char *capsule, t_list **alst, int *r_capsule_ok)
 {
 	int		i;
-	char	*buff;
+	// char	*buff;
 
 	*r_capsule_ok = TRUE;
 	i = 0;
 	while (capsule[i] != '\0' && capsule[i] != '%')
 		i++;
-	buff = (char*)malloc(sizeof(char) * (i + 1));
-	ft_strncpy(buff, capsule, i);
-	buff[i] = '\0';
-	unit_lstadd_literal(alst, buff);
+	// buff = (char*)malloc(sizeof(char) * (i + 1));
+	// if (buff == NULL)
+	// 	*r_capsule_ok = FALSE;
+	// ft_strncpy(buff, capsule, i);
+	// buff[i] = '\0';
+	unit_lstadd_literal(alst, capsule, i);
 	// TODO: missing free in list teardown
 	return (i);
 }

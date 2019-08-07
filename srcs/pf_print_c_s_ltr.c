@@ -14,8 +14,10 @@
 
 int		print_ltr(int fd, t_unit *unit)
 {
-	ft_putstr_fd(unit->val.ltr.literal, fd);
-	return (ft_strlen(unit->val.ltr.literal));
+	write(fd, unit->val.ltr.literal, (unit->val.ltr.len));
+	// ft_putstr_fd(unit->val.ltr.literal, fd);
+	// return (ft_strlen(unit->val.ltr.literal));
+	return (unit->val.ltr.len);
 }
 
 int		print_c(int fd, t_unit *unit)

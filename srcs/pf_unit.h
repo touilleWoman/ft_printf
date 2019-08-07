@@ -44,7 +44,8 @@ typedef enum 		e_modifier
 
 typedef struct 		s_type_ltr
 {
-	 char			*literal;
+	 const char		*literal;
+	 int 			len;
 }					t_type_ltr;
 
 typedef struct 		s_type_c
@@ -136,8 +137,8 @@ typedef struct		s_unit
 
 t_unit				*unit_access(t_list *lst);
 void				unit_lstadd_bot(t_list **alst, t_unit const *unit);
-// void				unit_lstadd_literal(t_list **alst, const char *literal_piece);
-void				unit_lstadd_literal(t_list **alst, char *literal_piece);
+// void		unit_lstadd_literal(t_list **alst, char *literal_piece, int len);
+
 void				freelst_and_errormsg(t_list *list, char *msg);
 
 

@@ -52,10 +52,10 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 		printed_nb = print_list(fd, lst);
 		freelst_and_errormsg(lst, NULL);
 	}
-	if (format_ok)
+	// if (format_ok)
 		return (printed_nb);
-	else
-		return (-1);
+// 	else
+// 		return (-1);
 }
 
 

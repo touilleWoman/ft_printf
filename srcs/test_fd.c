@@ -70,19 +70,19 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
-    testcase("");
+    // testcase("");
     // testcase("%d%5kkkkkkk", 42);
 
 //special case
-#if 1
-    // testcase("touille%5");
-    // testcase("%5");
+#if 0
+    testcase("touille%5");
+    testcase("%5");
     testcase("%5%");
     testcase("%5%%d", 4);
     testcase("%-5%");
-    // testcase("%5.11%");
-    // testcase("%.0%");
-    // testcase("%   %", "test");
+    testcase("%5.11%");
+    testcase("%.0%");
+    testcase("%   %", "test");
 #endif
     // testcase("@moulitest: %.o %.0o", 0, 0);
     // testcase("@moulitest: %5.o %5.0o", 0, 0);
@@ -93,7 +93,7 @@ int main()
     // testcase("%+u", 4294967295);
 
 // random Strings
-#if 0
+#if 1
     testcase("#nyancat inside");
     testcase("\x7f");
     testcase("The Game.");

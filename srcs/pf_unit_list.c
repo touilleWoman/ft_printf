@@ -21,11 +21,11 @@ void	freelst_and_errormsg(t_list *lst, char *msg)
 	{
 		keep = lst->next;
 		unit = unit_access(lst);
-		if (unit->type == TYPE_LTR)
-		{
-			free(unit->val.ltr.literal);
-			unit->val.ltr.literal = NULL;
-		}
+		// if (unit->type == TYPE_LTR)
+		// {
+		// 	free(unit->val.ltr.literal);
+		// 	unit->val.ltr.literal = NULL;
+		// }
 		free(lst->content);
 		lst->content = NULL;
 		free(lst);
@@ -53,11 +53,3 @@ t_unit		*unit_access(t_list *lst)
 	return ((t_unit*)lst->content);
 }
 
-void		unit_lstadd_literal(t_list **alst, char *literal_piece)
-{
-	t_unit		unit;
-
-	unit.type = TYPE_LTR;
-	unit.val.ltr.literal = literal_piece;
-	unit_lstadd_bot(alst, &unit);
-}
