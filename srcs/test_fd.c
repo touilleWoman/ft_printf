@@ -37,7 +37,7 @@ void     testcase(const char *fmt, ...)
     int ret_test = TEST_DPRINTF(fd_test, dyn_fmt, args2);
     /* Compare the results */
     if (ret_oracle != ret_test)
-        FAIL("Return values differ: %d != %d\n", ret_test, ret_oracle);
+        FAIL("`%s` return values differ: %d != %d\n", fmt, ret_test, ret_oracle);
     int out_size_oracle = lseek(fd_oracle, 0, SEEK_END);
     int out_size_test = lseek(fd_test, 0, SEEK_END);
     char out_oracle[out_size_oracle + 1];
@@ -49,7 +49,7 @@ void     testcase(const char *fmt, ...)
     out_oracle[out_size_oracle] = '\0';
     out_test[out_size_test] = '\0';
     if (strcmp(out_oracle, out_test)) {
-        FAIL("Output differ: `%s` != `%s`\n", out_test, out_oracle);
+        FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
     }
     /* Cleanup */
     close(fd_oracle);
@@ -70,14 +70,20 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
+    testcase("");
+    // testcase("%d%5kkkkkkk", 42);
+
 //special case
+#if 1
+    // testcase("touille%5");
     // testcase("%5");
-    // testcase("%5%");
-    // testcase("%5%%d", 4);
-    // testcase("%-5%");
+    testcase("%5%");
+    testcase("%5%%d", 4);
+    testcase("%-5%");
     // testcase("%5.11%");
     // testcase("%.0%");
     // testcase("%   %", "test");
+#endif
     // testcase("@moulitest: %.o %.0o", 0, 0);
     // testcase("@moulitest: %5.o %5.0o", 0, 0);
     // testcase("%lld", -9223372036854775808);
@@ -85,7 +91,9 @@ int main()
     // testcase("@moulitest: %5.d %5.0d", 0, 0);
     // testcase("% u", 4294967295);
     // testcase("%+u", 4294967295);
+
 // random Strings
+#if 0
     testcase("#nyancat inside");
     testcase("\x7f");
     testcase("The Game.");
@@ -245,6 +253,8 @@ int main()
     // testcase("+++++++++++++%lc%c", 1);
     // testcase("-------------------%lc", (wint_t)-1);
     // testcase("====================%+-5.3rc\n", 'n');
+
+#endif
     if (tests_failures)
     {
         printf("\n%d/%d tests passed :'-(\n", tests_total - tests_failures, tests_total);

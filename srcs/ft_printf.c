@@ -43,16 +43,19 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 {
 	t_list			*lst;
 	int				printed_nb;
+	int				format_ok;
 
-	lst = parse_string(format, args);
+	printed_nb = 0;
+	lst = parse_string(format, args, &format_ok);
 	if (lst != NULL)
 	{
 		printed_nb = print_list(fd, lst);
 		freelst_and_errormsg(lst, NULL);
-		return (printed_nb);
 	}
+	if (format_ok)
+		return (printed_nb);
 	else
-		return (0);
+		return (-1);
 }
 
 

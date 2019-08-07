@@ -21,7 +21,7 @@
 #include "libft.h"
 #include <wchar.h>
 
-#define PARSE_FUNS_NB 10
+#define PARSE_FUNS_NB 11
 #define PRINT_FUNS_NB 8
 #define ERROR -1
 #define STD_OUT 1
@@ -48,10 +48,11 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args);
 
 //parse
 char			*deal_with_double_percentage(const char*format, int *unit_nb, int *new_len);
-t_list			*parse_string(const char *format, va_list args);
+t_list			*parse_string(const char *format, va_list args, int *r_format_ok);
 t_list			*cut_to_capsule(char *s, int len, va_list args);
 int				is_conversion(char c);
 int				parse_c(t_list **alst, char *buf, va_list args);
+int				parse_percent(t_list **alst, char *buf, va_list args);
 int				parse_s(t_list **alst, char *buf, va_list args);
 int				parse_d(t_list **alst, char *buf, va_list args);
 int				parse_f(t_list **alst, char *buf, va_list args);

@@ -21,11 +21,10 @@ NAME = libftprintf.a
 
 
 SOURCE_NAME = ft_printf.c \
-					pf_parse.c\
+					pf_parse2.c\
 					pf_deal_with_double_percentage.c\
 					pf_parse_tools.c\
 					pf_parse_type_c.c\
-					pf_parse_type_percentage.c\
 					pf_parse_type_s.c\
 					pf_parse_type_d.c\
 					pf_parse_type_f.c\
@@ -66,7 +65,7 @@ SOURCE = $(addprefix $(SOURCE_PATH)/, $(SOURCE_NAME))
 
 OBJ = $(SOURCE:.c=.o)
 
-HEADER = ft_printf.h pf_unit.h
+HEADER = $(SOURCE_PATH)/ft_printf.h $(SOURCE_PATH)/pf_unit.h
 
 all:$(NAME)
 
@@ -81,11 +80,25 @@ check:all
 # 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -I ./srcs
 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
 
+
 clean:
 	rm -f $(OBJ)
+	rm -f $(SOURCE_PATH)/test_fd.o
+	rm -f $(SOURCE_PATH)/test_pft.o
+	rm -f run_tests
 
 fclean: clean
 	rm -f $(NAME)
 
+
 re:fclean all
 
+
+test: $(NAME)
+	$(CC) $(SOURCE_PATH)/test_fd.c $(NAME) -o run_tests $(CFLAGS)
+	./run_tests
+
+
+test2: $(NAME)
+	$(CC) $(SOURCE_PATH)/test_pft.c $(NAME) -o run_tests $(CFLAGS)
+	./run_tests

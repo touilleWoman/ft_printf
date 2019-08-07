@@ -76,3 +76,19 @@ int				parse_c(t_list **alst, char *buf, va_list args)
 	unit_lstadd_bot(alst, &unit);
 	return (0);
 }
+
+int				parse_percent(t_list **alst, char *buf, va_list args)
+{
+	t_unit	unit;
+
+	ft_bzero(&unit, sizeof(t_unit));
+	buf = type_c_get_flags(buf, &unit, ft_strlen(buf));
+	buf = type_c_width_precision_handler(buf, &unit);
+	buf = type_c_get_modifier(buf, &unit);
+	unit.type = TYPE_C;
+	unit.val.c.character = (char)'%';
+	// Width doesn't seem to be taken into account...
+	// unit.val.c.width = 1;
+	unit_lstadd_bot(alst, &unit);
+	return (0);
+}
