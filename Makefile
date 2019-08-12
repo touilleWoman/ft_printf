@@ -73,11 +73,9 @@ $(NAME): $(OBJ)
 %.o: %.c $(HEADER)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
-
 check:all
 # 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -I ./srcs
 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
-
 
 clean:
 	rm -f $(OBJ)
@@ -87,7 +85,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-
 
 re:fclean all
 
