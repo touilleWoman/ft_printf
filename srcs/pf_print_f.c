@@ -89,7 +89,7 @@ long double	round_fractional_part(long double frac, int precision)
 	long double keep_frac;
 
 	keep_frac = frac;
-	if (precision <= 0)
+	if (precision == 0)
 		precision = 6;
 	i = 0;
 	while (i < precision + 1)
@@ -114,21 +114,30 @@ long double	pf_double_abs(long double nbr)
 	return (nbr >= 0 ? nbr : -nbr);
 }
 
-void		pf_dtoa(long double nbr, int precision, char *buf)
+void		pf_dtoa(long double nbr, int precision, char *buf, t_bool flag_hash)
 {
 	int			posi;
 	long double frac_part;
+	int 		int_part;
 	char		*str_int_part;
 	int 		count;
 
-	count = (precision > 0 ? precision : 6);
+	if (precision == PRECISION_NULL && flag_hash == FALSE)
+	{
+		round_int_part(nbr);
+	}
+	if (precision > 0)
+		count = precision;
+	else
+		count = 6;
 	str_int_part = ft_itoa((long long)nbr);
-	frac_part = pf_double_abs(nbr - (long long)nbr);
-	frac_part = round_fractional_part(frac_part, precision);
 	ft_strcpy(buf, str_int_part);
 	free(str_int_part);
 	str_int_part = NULL;
 	posi = ft_strlen(buf);
+
+	frac_part = pf_double_abs(nbr - (long long)nbr);
+	frac_part = round_fractional_part(frac_part, precision);
 	buf[posi] = '.';
 	while (count > 0)
 	{
@@ -148,7 +157,7 @@ int				print_f(int fd, t_unit *unit)
 	unsigned int	dy_len;
 	char			s[unit->val.f.precision + unit->val.f.precision + 30];
 
-	pf_dtoa(unit->val.f.doub, unit->val.f.precision, s);
+	pf_dtoa(unit->val.f.doub, unit->val.f.precision, s, unit->val.f.flag_hash);
 	dy_len = ft_strlen(s);
 	if (unit->val.f.doub >= 0)
 		dy_len = f_flag_plus_and_blank_handler(s, dy_len, unit);

@@ -19,7 +19,7 @@ CFLAGS = -g
 NAME = libftprintf.a
 
 SOURCE_NAME = ft_printf.c \
-					pf_parse2.c\
+					pf_parse.c\
 					pf_deal_with_double_percentage.c\
 					pf_parse_tools.c\
 					pf_parse_type_c.c\

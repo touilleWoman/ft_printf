@@ -106,7 +106,7 @@ int			parse_d(t_list **alst, char *buf, va_list args)
 	// }
 	unit.type = TYPE_D;
 	if (unit.val.d.modifier == MD_LL)
-		unit.val.d.integer = va_arg(args, unsigned long long);
+		unit.val.d.integer = va_arg(args, long long);
 	else if (unit.val.d.modifier == MD_L)
 		unit.val.d.integer = va_arg(args, long);
 	else if (unit.val.d.modifier == MD_HH)

@@ -51,7 +51,15 @@ static char		*type_f_get_precision(char *buf, t_unit *unit)
 	if (*buf == '.')
 	{
 		buf++;
-		if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
+		digits_len = get_digits(&digits, buf, ft_strlen(buf));
+		if (digits_len == 0)
+			unit->val.f.precision = PRECISION_NULL;
+		else if (digits_len == 1 && digits == 0)
+		{
+			unit->val.f.precision = PRECISION_NULL;
+			buf++;
+		}
+		else
 		{
 			unit->val.f.precision = digits;
 			buf += digits_len;

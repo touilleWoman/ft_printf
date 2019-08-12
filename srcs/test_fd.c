@@ -59,7 +59,7 @@ void     testcase(const char *fmt, ...)
     {
         printf(".");
         /* show printed */
-        // printf("%s\n",out_test);
+        printf("%s\n",out_test);
     }
     else
         tests_failures += 1;
@@ -70,32 +70,76 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
+    // testcase("-------------------%lc", (wint_t)-1);
     // testcase("====================%+-5.3rc\n", 'n');
 
 //special case
 #if 1
-    // testcase("%lc", (wint_t)-1);
-    // testcase("-------------------%lc", (wint_t)-1);
-
-    // ft_printf("%hhld", 128);
-    // ft_printf("@main_ftprintf: %####0000 33..1..#00d\n", 256); 
-    // testcase("%2c", 0);
-    // testcase("%.0%");
-    // testcase("");
-    // testcase("%d%5", 42);
+    testcase("six%f|\n", 6.0);
+    testcase("six%#6.10f|\n", 6.0);
+    // testcase("%lld", -9223372036854775808);
     // testcase("%d%5ttttttt", 42);
-    // // testcase("%d%5kkkkkkk", 42);
-    // testcase("touille%5");
-    // testcase("%5");
-    // testcase("%5%");
-    // testcase("%5%%d", 4);
-    // testcase("%-5%");
-    // testcase("%5.11%");
-    // testcase("%.0%");
-    // testcase("%   %", "test");
+    // testcase("%d%5kkkkkkk", 42);
+    double nb = -12547.58;
+    // testcase( "space:% f\n", nb);
+    // testcase( "plus:%+f\n", nb);
+    // testcase( "hash:%#f\n", nb);
+    // testcase( "precision:%.2f\n", nb);
+    // testcase( "big prec:%.14f\n", nb);
+    testcase( "precision = 0:%.0f\n", nb);
+    testcase( "precision + hash:%#.0f\n", nb);
+    // testcase( "space + prec:% .5f\n", nb);
+    // testcase( "space + prec + hash:%# .0f\n", nb);
+    // testcase( "space + prec + hash:% #.0f\n", nb);
+    // testcase( "Plus + prec / grande:%+.5f\n", nb);
+    // testcase( "Plus + prec / petite:%+.0f\n", nb);
+    // testcase( "Plus + prec + hash:%#+.0f\n", nb);
+    // testcase( "Prec + 0:%0.5f\n", nb);
+    // testcase( "Prec + minus:%-.5f\n", nb);
+    // testcase( "size:%5f\n", nb);
+    // testcase( "size + space:% 5f\n", nb);
+    // testcase( "size + plus:%+5f\n", nb);
+    // testcase( "size + space:%# 5f\n", nb);
+    // testcase( "size + plus:%#+5f\n", nb);
+    // testcase( "size + minus:%-5f\n", nb);
+    // testcase( "size + 0:%05f\n", nb);
+    // testcase( "size + 0 + plus:%+05f\n", nb);
+    // testcase( "size + 0 + plus:%0+5f\n", nb);
+    // testcase( "size + 0 + prec:%05.3f\n", nb);
+    // testcase( "size + 0 + prec + hash:%0#5.0f\n", nb);
+    // testcase( "size + minus + prec:%-5.3f\n", nb);
+    // testcase( "size + minus + prec + hash:%-#5.0f\n", nb);
+    // testcase( "size + plus + 0 + prec:%+05.3f\n", nb);
+    // testcase( "size + plus + 0 + prec + hash:%0+#5.0f\n", nb);
+    // testcase( "size + espace + zero + prec:%0 5.3f\n", nb);
+    // testcase( "size + espace + zero + prec:% 05.3f\n", nb);
+    // testcase( "size + espace + zero + prec + hash:%#0 5.0f\n", nb);
+    // testcase( "size + minus + plus + prec:%-+5.3f\n", nb);
+    // testcase( "size + minus + plus + prec + hash:%-#+5.0f\n", nb);
+
+
+
+#endif
+
+#if 0
+    testcase("%2c", 0);
+
+    ft_printf("%hhld", 128);
+    ft_printf("@main_ftprintf: %####0000 33..1..#00d\n", 256);
+    testcase("%2c", 0);
+    testcase("%.0%");
+    testcase("");
+    testcase("%d%5", 42);
+    testcase("touille%5");
+    testcase("%5");
+    testcase("%5%");
+    testcase("%5%%d", 4);
+    testcase("%-5%");
+    testcase("%5.11%");
+    testcase("%.0%");
+    testcase("%   %", "test");
     testcase("1@moulitest: %.o %.0o", 0, 0);
     testcase("2@moulitest: %5.o %5.0o", 0, 0);
-    // testcase("%lld", -9223372036854775808);
     testcase("3@moulitest: %#.o %#.0o", 0, 0);
     testcase("4@moulitest: %.d %.0d", 0, 0);
     testcase("5@moulitest: %5.d %5.0d", 0, 0);
@@ -108,7 +152,7 @@ int main()
 #endif
 
 // random Strings
-#if 1
+#if 0
     testcase("#nyancat inside");
     testcase("\x7f");
     testcase("The Game.");
@@ -255,14 +299,12 @@ int main()
     testcase("% 05.5f\n", -2.345);
     testcase("zero%f|\n", 0.0);
     testcase("one%f|\n", 1);
-    testcase("six%f|\n", 6.0);
-    testcase("six%#6.10f|\n", 6.0);
+
 
 
     // testcase("one%#sf|\n", 1);   printf seg fault in this case
 
 
-    testcase("+++++++++++++%lc%c", 1);
 
 #endif
     if (tests_failures)
