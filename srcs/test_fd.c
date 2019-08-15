@@ -71,7 +71,7 @@ void     testcase(const char *fmt, ...)
 int main()
 {
 
-#if 1
+#if 0
         // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -102,7 +102,7 @@ int main()
     // testcase("====================%+-5.3rc\n", 'n');
 
 //type f
-#if 1
+#if 0
     testcase("%p", NULL);
     // testcase(NULL);
     testcase("six%f|\n", 6.0);
@@ -161,7 +161,11 @@ int main()
     testcase("zero%f|\n", 0.0);
     testcase("one%f|\n", 1);
 
+#endif
+
+#if 1
     double db = 0;
+    // testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
     testcase("test basique:");
     testcase("space:% f\n", db);
     testcase("plus:%+f\n", db);
@@ -194,8 +198,46 @@ int main()
     testcase("size + plus + 0 + prec + hash:%0+#5.0f\n", db);
     testcase("size + espace + zero + prec:%0 5.3f\n", db);
     testcase("size + espace + zero + prec:% 05.3f\n", db);
-    testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
     testcase("size + minus + plus + prec:%-+5.3f\n", db);
+
+    double db2 = 45.123456789;
+    testcase("size + espace + zero + prec:%0 5.0f\n", db2);
+    // testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db2);
+
+    testcase("space:% f\n", db2);
+    testcase("plus:%+f\n", db2);
+    testcase("hash:%#f\n", db2);
+    testcase("precision:%.2f\n", db2);
+    testcase("big prec:%.14f\n", db2);
+    testcase("precision + hash:%#.0f\n", db2);
+    testcase("space + prec:% .5f\n", db2);
+    testcase("space + prec + hash:%# .0f\n", db2);
+    testcase("space + prec + hash:% #.0f\n", db2);
+    testcase("Plus + prec / grande:%+.5f\n", db2);
+    testcase("Plus + prec / petite:%+.0f\n", db2);
+    testcase("Plus + prec + hash:%#+.0f\n", db2);
+    testcase("Prec + 0:%0.5f\n", db2);
+    testcase("Prec + minus:%-.5f\n", db2);
+    testcase("size:%5f\n", db2);
+    testcase("size + space:% 5f\n", db2);
+    testcase("size + plus:%+5f\n", db2);
+    testcase("size + space:%# 5f\n", db2);
+    testcase("size + plus:%#+5f\n", db2);
+    testcase("size + minus:%-5f\n", db2);
+    testcase("size + 0:%05f\n", db2);
+    testcase("size + 0 + plus:%+05f\n", db2);
+    testcase("size + 0 + plus:%0+5f\n", db2);
+    testcase("size + 0 + prec:%05.3f\n", db2);
+    testcase("size + 0 + prec + hash:%0#5.0f\n", db2);
+    testcase("size + minus + prec:%-5.3f\n", db2);
+    testcase("size + minus + prec + hash:%-#5.0f\n", db2);
+    testcase("size + plus + 0 + prec:%+05.3f\n", db2);
+    testcase("size + plus + 0 + prec + hash:%0+#5.0f\n", db2);
+    testcase("size + espace + zero + prec:%0 5.3f\n", db2);
+    testcase("size + espace + zero + prec:% 05.3f\n", db2);
+    testcase("size + minus + plus + prec:%-+5.3f\n", db2);
+    testcase("size + minus + plus + prec + hash:%-#+5.0f\n", db2);
+
 
 
 
