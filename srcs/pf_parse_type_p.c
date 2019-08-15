@@ -12,29 +12,30 @@
 
 #include "ft_printf.h"
 
-static char 	*type_p_flags_check(char *buf, int buf_len)
+static char 	*type_p_get_flags(char *buf, int buf_len, t_unit *unit)
 {
 	char	flags[buf_len];
 	int		flags_len;
 
-
  	if ((flags_len = get_flags(flags, buf, "+- 0#")))
 	{
-		// ft_putstr_fd("%p doesn't accept flags\n", 2);
+		if (ft_strchr(flags, '-'))
+			unit->val.p.flag_minus = TRUE;
 		buf += flags_len;
 	}
 	return (buf);
 }
 
-static char *type_p_width_precision_check(char *buf)
+static char *type_p_width_precision_check(char *buf, t_unit *unit)
  {
 	int		digits;
 	int		digits_len;
 
  	digits = 0;
-	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
+ 	digits_len = get_digits(&digits, buf, ft_strlen(buf));
+	if (digits_len)
 	{
-		// ft_putstr("warning:'p' conversion specifier doesn't take width\n");
+		unit->val.p.width = digits;
 		buf += digits_len;
 	}
 	if (*buf == '.')
@@ -43,7 +44,7 @@ static char *type_p_width_precision_check(char *buf)
 		digits_len = get_digits(&digits, buf, ft_strlen(buf));
 		if (digits_len)
 		{
-			// ft_putstr("warning:'p' conversion specifier doesn't take precision\n");
+			ft_putstr_fd("warning:'p' conversion specifier doesn't take precision\n", 2);
 			buf += digits_len;
 		}
 	}
@@ -80,14 +81,11 @@ int			parse_p(t_list **alst, char *buf, va_list args)
 	t_unit	unit;
 
 	ft_bzero(&unit, sizeof(t_unit));
-	buf = type_p_flags_check(buf, ft_strlen(buf));
-	buf = type_p_width_precision_check(buf);
+	buf = type_p_get_flags(buf, ft_strlen(buf), &unit);
+	buf = type_p_width_precision_check(buf, &unit);
 	buf = type_p_modifier_check(buf);
-	// if (*buf != 'p')
-	// {
-	// 	freelst_and_errormsg(*alst, "error: %p format wrong\n");
-	// 	return (ERROR);
-	// }
+	if (*buf != 'p')
+		return (ERROR);
 	unit.type = TYPE_P;
 	unit.val.p.pointer = (uintmax_t)va_arg(args, void *);
 	unit_lstadd_bot(alst, &unit);

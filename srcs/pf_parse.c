@@ -38,7 +38,6 @@ static int		find_end_of_capsule(const char *format)
 static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list args)
 {
 	int					index;
-	// int					posi;
 	char				buf[ft_strlen(capsule)];
 	int					len;
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
@@ -47,14 +46,7 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 		{'u', parse_u}, {'%', parse_percent}
 	};
 
-	// len = ft_strlen(capsule);
 	index = 0;
-	// posi = find_conversion_in_capsule(capsule);
-	// if (posi == ERROR)
-	// {
-	// 	// freelst_and_errormsg(*alst, "format error: no conversion found\n");
-	// 	return (ERROR);
-	// }
 	if (capsule[end] == '\0')
 		return (ERROR);
 	while (index < PARSE_FUNS_NB)

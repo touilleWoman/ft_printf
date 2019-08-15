@@ -45,6 +45,8 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 	int				printed_nb;
 	int				format_ok;
 
+	if (format == NULL)
+		return (-1);
 	printed_nb = 0;
 	lst = parse_string(format, args, &format_ok);
 	if (lst != NULL)

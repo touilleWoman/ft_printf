@@ -38,14 +38,39 @@ char		*pf_itoa_base(uintmax_t nbr, int base, t_unit *unit)
 
 int				print_p(int fd, t_unit *unit)
 {
-	char	*s;
+	char	*str_p;
 	int		len;
+	char	s[unit->val.p.width + 30];
+	int		width;
 
-	s = pf_itoa_base(unit->val.p.pointer, 16, unit);
-	ft_putstr_fd("0x", fd);
+	width =  unit->val.p.width;
+	ft_memset(s, ' ', width + 30);
+	str_p = pf_itoa_base(unit->val.p.pointer, 16, unit);
+	len = ft_strlen(str_p) + 2;
+	if (width > len && unit->val.p.flag_minus == FALSE)
+	{
+		ft_strncpy(s + width - len, "0x", 2);
+		ft_strncpy(s + width - len + 2, str_p, len - 2);
+		s[width] = 0;
+	}
+	else
+	{
+		ft_strncpy(s, "0x", 2);
+		ft_strncpy(s + 2, str_p, len - 2);
+		if (width > len)
+			s[width] = 0;
+		else
+			s[len] = 0;
+	}
 	ft_putstr_fd(s, fd);
-	len = ft_strlen(s) + 2;
-	free (s);
-	s = NULL;
-	return (len);
+	free (str_p);
+	str_p = NULL;
+	return(width > len ? width : len);
+
+
+	// ft_putstr_fd("0x", fd);
+	// ft_putstr_fd(str_p, fd);
+	// len = ft_strlen(str_p) + 2;
+
+	// return (len);
 }

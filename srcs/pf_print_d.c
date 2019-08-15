@@ -46,7 +46,7 @@ static void				sub_d_width_handler(char *s, int dy_len, t_unit *unit, int width)
 	if (unit->val.d.flag_zero == TRUE && unit->val.d.precision == 0)
 	{
 		ft_memset(s, '0', width);
-		if (*s_keep == '-' || *s_keep == '+') 
+		if (*s_keep == '-' || *s_keep == '+')
 		{
 			s[0] = s_keep[0];
 			mark = 1;
@@ -111,7 +111,7 @@ int				print_d(int fd, t_unit *unit)
 {
 	char			*integer;
 	unsigned int	dy_len;
-	char			s[unit->val.d.precision + unit->val.d.precision + 30];
+	char			s[unit->val.d.precision + unit->val.d.width + 30];
 
 	ft_memset(s, 0, unit->val.d.precision + unit->val.d.width + 30);
 	integer = ft_itoa(unit->val.d.integer);

@@ -59,7 +59,7 @@ void     testcase(const char *fmt, ...)
     {
         printf(".");
         /* show printed */
-        printf("%s\n",out_test);
+        // printf("%s\n",out_test);
     }
     else
         tests_failures += 1;
@@ -70,60 +70,81 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
-    testcase("hello%s\n", "world");
-    testcase("hello %s\t%d\n", "world", 42);
-    testcase("hello %s\t%d\n", "world", 42);
-    testcase("%.2d\n", -22);
-    testcase("%.3d\n", -22);
-    testcase("%+10.4d|\n", -22);
-    testcase("%+ 10.4d\n", 22);
-    testcase("%+010.4d\n", 22);
+
+#if 1
+        // // type p
+    char *ptr = "pointer test";
+    void *ptr2 = NULL;
+    void *ptr3 = ptr;
+    testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
+
+    int     nb;
+    char    c;
+    nb = 0;
+    c = 'W';
+    testcase("%5p\n", &nb);
+    testcase("%-15p\n", &nb);
+    testcase("%-5p\n", &nb);
+    testcase("%42p\n", &nb);
+    testcase("%-18p\n", &nb);
+    testcase("%42p\n", &nb);
+    testcase("%5p\n", &c);
+    testcase("%-15p\n", &c);
+    testcase("%-5p\n", &c);
+    testcase("%42p\n", &c);
+    testcase("%-18p\n", &c);
+    testcase("%42p\n", &c);
+#endif
+
+
+
     // testcase("-------------------%lc", (wint_t)-1);
     // testcase("====================%+-5.3rc\n", 'n');
 
 //type f
 #if 1
+    testcase("%p", NULL);
+    // testcase(NULL);
     testcase("six%f|\n", 6.0);
     testcase("six%#6.10f|\n", 6.0);
     // testcase("%lld", -9223372036854775808);
     testcase("%d%5ttttttt", 42);
     // testcase("%d%5kkkkkkk", 42);
-    double nb = -12547.58;
-    testcase( "space:% f\n", nb);
-    testcase( "plus:%+f\n", nb);
-    testcase( "hash:%#f\n", nb);
-    testcase( "precision:%.2f\n", nb);
-    testcase( "big prec:%.14f\n", nb);
-    testcase( "precision = 0:%.0f\n", nb);
-    testcase( "precision + hash:%#.0f\n", nb);
-    testcase( "space + prec:% .5f\n", nb);
-    testcase( "space + prec + hash:%# .0f\n", nb);
-    testcase( "space + prec + hash:% #.0f\n", nb);
-    testcase( "Plus + prec / grande:%+.5f\n", nb);
-    testcase( "Plus + prec / petite:%+.0f\n", nb);
-    testcase( "Plus + prec + hash:%#+.0f\n", nb);
-    testcase( "Prec + 0:%0.5f\n", nb);
-    testcase( "Prec + minus:%-.5f\n", nb);
-    testcase( "size:%5f\n", nb);
-    testcase( "size + space:% 5f\n", nb);
-    testcase( "size + plus:%+5f\n", nb);
-    testcase( "size + space:%# 5f\n", nb);
-    testcase( "size + plus:%#+5f\n", nb);
-    testcase( "size + minus:%-5f\n", nb);
-    testcase( "size + 0:%05f\n", nb);
-    testcase( "size + 0 + plus:%+05f\n", nb);
-    testcase( "size + 0 + plus:%0+5f\n", nb);
-    testcase( "size + 0 + prec:%05.3f\n", nb);
-    testcase( "size + 0 + prec + hash:%0#5.0f\n", nb);
-    testcase( "size + minus + prec:%-5.3f\n", nb);
-    testcase( "size + minus + prec + hash:%-#5.0f\n", nb);
-    testcase( "size + plus + 0 + prec:%+05.3f\n", nb);
-    testcase( "size + plus + 0 + prec + hash:%0+#5.0f\n", nb);
-    testcase( "size + espace + zero + prec:%0 5.3f\n", nb);
-    testcase( "size + espace + zero + prec:% 05.3f\n", nb);
-    testcase( "size + espace + zero + prec + hash:%#0 5.0f\n", nb);
-    testcase( "size + minus + plus + prec:%-+5.3f\n", nb);
-    testcase( "size + minus + plus + prec + hash:%-#+5.0f\n", nb);
+    testcase( "space:% f\n", -12547.58);
+    testcase( "plus:%+f\n", -12547.58);
+    testcase( "hash:%#f\n", -12547.58);
+    testcase( "precision:%.2f\n", -12547.58);
+    testcase( "big prec:%.14f\n", -12547.58);
+    testcase( "precision = 0:%.0f\n", -12547.58);
+    testcase( "precision + hash:%#.0f\n", -12547.58);
+    testcase( "space + prec:% .5f\n", -12547.58);
+    testcase( "space + prec + hash:%# .0f\n", -12547.58);
+    testcase( "space + prec + hash:% #.0f\n", -12547.58);
+    testcase( "Plus + prec / grande:%+.5f\n", -12547.58);
+    testcase( "Plus + prec / petite:%+.0f\n", -12547.58);
+    testcase( "Plus + prec + hash:%#+.0f\n", -12547.58);
+    testcase( "Prec + 0:%0.5f\n", -12547.58);
+    testcase( "Prec + minus:%-.5f\n", -12547.58);
+    testcase( "size:%5f\n", -12547.58);
+    testcase( "size + space:% 5f\n", -12547.58);
+    testcase( "size + plus:%+5f\n", -12547.58);
+    testcase( "size + space:%# 5f\n", -12547.58);
+    testcase( "size + plus:%#+5f\n", -12547.58);
+    testcase( "size + minus:%-5f\n", -12547.58);
+    testcase( "size + 0:%05f\n", -12547.58);
+    testcase( "size + 0 + plus:%+05f\n", -12547.58);
+    testcase( "size + 0 + plus:%0+5f\n", -12547.58);
+    testcase( "size + 0 + prec:%05.3f\n", -12547.58);
+    testcase( "size + 0 + prec + hash:%0#5.0f\n", -12547.58);
+    testcase( "size + minus + prec:%-5.3f\n", -12547.58);
+    testcase( "size + minus + prec + hash:%-#5.0f\n", -12547.58);
+    testcase( "size + plus + 0 + prec:%+05.3f\n", -12547.58);
+    testcase( "size + plus + 0 + prec + hash:%0+#5.0f\n", -12547.58);
+    testcase( "size + espace + zero + prec:%0 5.3f\n", -12547.58);
+    testcase( "size + espace + zero + prec:% 05.3f\n", -12547.58);
+    testcase( "size + espace + zero + prec + hash:%#0 5.0f\n", -12547.58);
+    testcase( "size + minus + plus + prec:%-+5.3f\n", -12547.58);
+    testcase( "size + minus + plus + prec + hash:%-#+5.0f\n", -12547.58);
     testcase("%f\n", 2.345);
     testcase("%4.5f\n", 2.345);
     testcase("%5.2f\n", 2.325);
@@ -140,41 +161,72 @@ int main()
     testcase("zero%f|\n", 0.0);
     testcase("one%f|\n", 1);
 
+    double db = 0;
+    testcase("test basique:");
+    testcase("space:% f\n", db);
+    testcase("plus:%+f\n", db);
+    testcase("hash:%#f\n", db);
+    testcase("precision:%.2f\n", db);
+    testcase("big prec:%.14f\n", db);
+    testcase("precision + hash:%#.0f\n", db);
+    testcase("space + prec:% .5f\n", db);
+    testcase("space + prec + hash:%# .0f\n", db);
+    testcase("space + prec + hash:% #.0f\n", db);
+    testcase("Plus + prec / grande:%+.5f\n", db);
+    testcase("Plus + prec / petite:%+.0f\n", db);
+    testcase("Plus + prec + hash:%#+.0f\n", db);
+    testcase("Prec + 0:%0.5f\n", db);
+    testcase("Prec + minus:%-.5f\n", db);
+    testcase("size:%5f\n", db);
+    testcase("size + space:% 5f\n", db);
+    testcase("size + plus:%+5f\n", db);
+    testcase("size + space:%# 5f\n", db);
+    testcase("size + plus:%#+5f\n", db);
+    testcase("size + minus:%-5f\n", db);
+    testcase("size + 0:%05f\n", db);
+    testcase("size + 0 + plus:%+05f\n", db);
+    testcase("size + 0 + plus:%0+5f\n", db);
+    testcase("size + 0 + prec:%05.3f\n", db);
+    testcase("size + 0 + prec + hash:%0#5.0f\n", db);
+    testcase("size + minus + prec:%-5.3f\n", db);
+    testcase("size + minus + prec + hash:%-#5.0f\n", db);
+    testcase("size + plus + 0 + prec:%+05.3f\n", db);
+    testcase("size + plus + 0 + prec + hash:%0+#5.0f\n", db);
+    testcase("size + espace + zero + prec:%0 5.3f\n", db);
+    testcase("size + espace + zero + prec:% 05.3f\n", db);
+    testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
+    testcase("size + minus + plus + prec:%-+5.3f\n", db);
+
+
 
 #endif
 
-#if 1
-    testcase("%2c", 0);
-
-    ft_printf("%hhld", 128);
-    ft_printf("@main_ftprintf: %####0000 33..1..#00d\n", 256);
-    testcase("%2c", 0);
+#if 0
+    // testcase("%2c", 0);
     testcase("%.0%");
-    testcase("");
-    testcase("%d%5", 42);
-    testcase("touille%5");
-    testcase("%5");
-    testcase("%5%");
-    testcase("%5%%d", 4);
-    testcase("%-5%");
-    testcase("%5.11%");
-    testcase("%.0%");
-    testcase("%   %", "test");
-    testcase("1@moulitest: %.o %.0o", 0, 0);
-    testcase("2@moulitest: %5.o %5.0o", 0, 0);
-    testcase("3@moulitest: %#.o %#.0o", 0, 0);
-    testcase("4@moulitest: %.d %.0d", 0, 0);
-    testcase("5@moulitest: %5.d %5.0d", 0, 0);
-    testcase("6@moulitest: %#.x %#.0x", 0, 0);
-    testcase("7@moulitest: %5.x %5.0x", 0, 0);
-    testcase("8@moulitest: %5.x", 0);
-    testcase("9@moulitest: %5.0x", 0);
-    testcase("% u", 4294967295);
-    testcase("%+u", 4294967295);
-#endif
+    // testcase("");
+    // testcase("%d%5", 42);
+    // testcase("touille%5");
+    // testcase("%5");
+    // testcase("%5%");
+    // testcase("%5%%d", 4);
+    // testcase("%-5%");
+    // testcase("%5.11%");
+    // testcase("%.0%");
+    // testcase("%   %", "test");
+    // testcase("1@moulitest: %.o %.0o", 0, 0);
+    // testcase("2@moulitest: %5.o %5.0o", 0, 0);
+    // testcase("3@moulitest: %#.o %#.0o", 0, 0);
+    // testcase("4@moulitest: %.d %.0d", 0, 0);
+    // testcase("5@moulitest: %5.d %5.0d", 0, 0);
+    // testcase("6@moulitest: %#.x %#.0x", 0, 0);
+    // testcase("7@moulitest: %5.x %5.0x", 0, 0);
+    // testcase("8@moulitest: %5.x", 0);
+    // testcase("9@moulitest: %5.0x", 0);
+    // testcase("% u", 4294967295);
+    // testcase("%+u", 4294967295);
 
 // random Strings
-#if 1
     testcase("#nyancat inside");
     testcase("\x7f");
     testcase("The Game.");
@@ -299,11 +351,7 @@ int main()
     testcase("%10.7hu|\n", (short)9287539484444);
     testcase("%10.7hhu|\n", 9287539484444);
     testcase("%u|\n", 5);
-//     // // type p
-    char *ptr = "pointer test";
-    void *ptr2 = NULL;
-    void *ptr3 = ptr;
-    testcase("p1:%#-+ 0p P2:%+p P3:%p\n", ptr, ptr2, ptr3);
+
 
 
 

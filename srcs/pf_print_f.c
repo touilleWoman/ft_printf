@@ -143,15 +143,15 @@ void		pf_dtoa(long double nbr, int precision, char *buf, t_bool flag_hash)
 	int 		int_part;
 	char		*str_int_part;
 
+	int_part = (long long)nbr;
 	precision = (precision == 0 ? 6 : precision);
 	if (precision == PRECISION_NULL)
 		int_part = round_int_part(nbr);
-	else
-		int_part = (long long)nbr;
 	str_int_part = ft_itoa(int_part);
 	ft_strcpy(buf, str_int_part);
 	free(str_int_part);
 	str_int_part = NULL;
+	posi = 0;
 	posi = ft_strlen(buf);
 	if (precision == PRECISION_NULL && flag_hash == FALSE)
 		return ;

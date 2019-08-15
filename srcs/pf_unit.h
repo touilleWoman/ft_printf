@@ -114,7 +114,9 @@ typedef struct 		s_type_f
 
 typedef struct 		s_type_p
 {
-	 uintmax_t		pointer;
+	t_bool			flag_minus;
+	int				width;
+	uintmax_t		pointer;
 }					t_type_p;
 
 typedef	union		u_unit_union
