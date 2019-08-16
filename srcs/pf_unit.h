@@ -13,12 +13,12 @@
 #ifndef PF_UNIT_H
 # define PF_UNIT_H
 
-#include "libft.h"
-#include <stdint.h>
+# include "libft.h"
+# include <stdint.h>
 
-#define PRECISION_NULL -1
+# define PRECISION_NULL -1
 
-typedef	enum 		e_unit_type
+typedef	enum		e_unit_type
 {
 	TYPE_LTR = 1,
 	TYPE_C,
@@ -33,7 +33,7 @@ typedef	enum 		e_unit_type
 	TYPE_U,
 }					t_unit_type;
 
-typedef enum 		e_modifier
+typedef enum		e_modifier
 {
 	MD_H = 1,
 	MD_HH,
@@ -42,13 +42,13 @@ typedef enum 		e_modifier
 	MD_MAG_L,
 }					t_modifier;
 
-typedef struct 		s_type_ltr
+typedef struct		s_type_ltr
 {
-	 const char		*literal;
-	 int 			len;
+	const char		*literal;
+	int				len;
 }					t_type_ltr;
 
-typedef struct 		s_type_c
+typedef struct		s_type_c
 {
 	t_bool			flag_minus;
 	int				width;
@@ -56,7 +56,7 @@ typedef struct 		s_type_c
 	wchar_t			character;
 }					t_type_c;
 
-typedef struct 		s_type_s
+typedef struct		s_type_s
 {
 	t_bool			flag_minus;
 	int				width;
@@ -65,7 +65,7 @@ typedef struct 		s_type_s
 	const char		*string;
 }					t_type_s;
 
-typedef struct 		s_type_d
+typedef struct		s_type_d
 {
 	t_bool			flag_minus;
 	t_bool			flag_plus;
@@ -77,7 +77,7 @@ typedef struct 		s_type_d
 	intmax_t		integer;
 }					t_type_d;
 
-typedef struct 		s_type_oxx
+typedef struct		s_type_oxx
 {
 	t_bool			flag_minus;
 	t_bool			flag_hash;
@@ -89,7 +89,7 @@ typedef struct 		s_type_oxx
 	t_unit_type		sub_type;
 }					t_type_oxx;
 
-typedef struct 		s_type_u
+typedef struct		s_type_u
 {
 	t_bool			flag_minus;
 	t_bool			flag_zero;
@@ -99,7 +99,7 @@ typedef struct 		s_type_u
 	uintmax_t		un_int;
 }					t_type_u;
 
-typedef struct 		s_type_f
+typedef struct		s_type_f
 {
 	t_bool			flag_minus;
 	t_bool			flag_plus;
@@ -112,7 +112,7 @@ typedef struct 		s_type_f
 	long double		doub;
 }					t_type_f;
 
-typedef struct 		s_type_p
+typedef struct		s_type_p
 {
 	t_bool			flag_minus;
 	int				width;
@@ -133,18 +133,13 @@ typedef	union		u_unit_union
 
 typedef struct		s_unit
 {
-		t_unit_union	val;
-		t_unit_type		type;
+	t_unit_union	val;
+	t_unit_type		type;
 }					t_unit;
 
 t_unit				*unit_access(t_list *lst);
 void				unit_lstadd_bot(t_list **alst, t_unit const *unit);
-// void		unit_lstadd_literal(t_list **alst, char *literal_piece, int len);
-
 void				freelst_and_errormsg(t_list *list, char *msg);
+void				show_list(t_list *lst);
 
-
-//test functions
-void 				show_list(t_list   *lst);
-
-# endif
+#endif

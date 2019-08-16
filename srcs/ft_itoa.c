@@ -56,7 +56,7 @@ char			*ft_itoa(long long x)
 	int			neg;
 
 	if (x == -9223372036854775808)
-		return(ft_strdup("-9223372036854775808"));
+		return (ft_strdup("-9223372036854775808"));
 	len = lenth(x);
 	ptr = (char*)malloc(sizeof(char) * (len + 1));
 	if (ptr == 0)

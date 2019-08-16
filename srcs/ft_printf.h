@@ -71,7 +71,7 @@ int				print_oxx(int fd, t_unit *unit);
 int				print_u(int fd, t_unit *unit);
 int				print_f(int fd, t_unit *unit);
 
-char			*pf_itoa_base(uintmax_t nbr, int base, t_unit *unit);
-
+void			pf_itoa_base(uintmax_t nbr, int base, t_unit *unit,
+							char *buf, int buf_size);
 
 #endif

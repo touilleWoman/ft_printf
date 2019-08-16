@@ -53,7 +53,8 @@ static void				sub_u_width_handler(char *s, int dy_len, t_unit *unit, int width)
 **		flag '0' is ignored when flag '-' or precision present"
 */
 
-static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit, int width)
+static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit,
+										int width)
 {
 	if (width <= dy_len)
 		return (dy_len);
@@ -62,7 +63,7 @@ static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit, int widt
 	else
 		sub_u_width_handler(s, dy_len, unit, width);
 	s[width] = '\0';
-	return(width);
+	return (width);
 }
 
 /*
@@ -72,15 +73,15 @@ static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit, int widt
 
 int				print_u(int fd, t_unit *unit)
 {
-	char			*str_uint;
+	char			str_uint[30];
 	unsigned int	dy_len;
 	char			s[unit->val.u.precision + unit->val.u.width + 50];
 
 	ft_memset(s, 0, unit->val.u.precision + unit->val.u.width + 50);
-	str_uint = pf_itoa_base(unit->val.u.un_int, 10, unit);
+	pf_itoa_base(unit->val.u.un_int, 10, unit, str_uint, 30);
 	dy_len = u_precision_handler(s, str_uint, unit->val.u.precision, unit);
-	free(str_uint);
-	str_uint = NULL;
+	// free(str_uint);
+	// str_uint = NULL;
 	dy_len = u_width_handler(s, dy_len, unit, unit->val.u.width);
 	ft_putstr_fd(s, fd);
 	return (dy_len);

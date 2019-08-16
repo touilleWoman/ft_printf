@@ -49,7 +49,7 @@ static unsigned int		f_width_handler(char *s, int dy_len, t_unit *unit, int widt
 	else
 		sub_f_width_handler(s, dy_len, unit, width);
 	s[width] = '\0';
-	return(width);
+	return (width);
 }
 
 /*

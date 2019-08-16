@@ -13,33 +13,35 @@
 #include "ft_printf.h"
 
 static unsigned int		d_precision_handler(char *s, char *integer,
-														int precision, t_unit *unit)
+												int preci, t_unit *unit)
 {
 	int		neg;
 	int		dy_len;
 
-	if (unit->val.d.integer == 0 && precision == PRECISION_NULL)
+	if (unit->val.d.integer == 0 && preci == PRECISION_NULL)
 		return (0);
 	dy_len = ft_strlen(integer);
-	if (dy_len > precision)
+	if (dy_len > preci)
 		ft_strcpy(s, integer);
 	else
 	{
 		neg = ((*integer == '-') ? 1 : 0);
-		s[precision + neg] = '\0';
-		ft_memset(s, '0', precision + neg);
+		s[preci + neg] = '\0';
+		ft_memset(s, '0', preci + neg);
 		if (neg == 1)
 			s[0] = '-';
-		ft_strncpy(s + precision + neg - dy_len + neg, integer + neg, dy_len - neg);
-		dy_len = precision + neg;
+		ft_strncpy(s + preci + neg - dy_len + neg,
+			integer + neg, dy_len - neg);
+		dy_len = preci + neg;
 	}
 	return (dy_len);
 }
 
-static void				sub_d_width_handler(char *s, int dy_len, t_unit *unit, int width)
+static void				sub_d_width_handler(char *s, int dy_len,
+										t_unit *unit, int width)
 {
-	char 	s_keep[dy_len + 1];
-	int 	mark;
+	char	s_keep[dy_len + 1];
+	int		mark;
 
 	ft_strcpy(s_keep, s);
 	mark = 0;
@@ -56,7 +58,7 @@ static void				sub_d_width_handler(char *s, int dy_len, t_unit *unit, int width)
 	else
 	{
 		ft_memset(s, ' ', width);
-		ft_strncpy(s + width - dy_len, s_keep , dy_len);
+		ft_strncpy(s + width - dy_len, s_keep, dy_len);
 	}
 }
 
@@ -64,10 +66,9 @@ static void				sub_d_width_handler(char *s, int dy_len, t_unit *unit, int width)
 **		flag '0' is ignored when flag '-' or precision present"
 */
 
-static unsigned int		d_width_handler(char *s, int dy_len, t_unit *unit, int width)
+static unsigned int		d_width_handler(char *s, int dy_len,
+									t_unit *unit, int width)
 {
-
-
 	if (width <= dy_len)
 		return (dy_len);
 	if (unit->val.d.flag_minus == TRUE)
@@ -75,16 +76,16 @@ static unsigned int		d_width_handler(char *s, int dy_len, t_unit *unit, int widt
 	else
 		sub_d_width_handler(s, dy_len, unit, width);
 	s[width] = '\0';
-	return(width);
+	return (width);
 }
 
 /*
 ** 		flag ' ' is ignored when flag '+' is present"
 */
 
-static unsigned int		d_flag_plus_and_blank_handler(char *s, int dy_len, t_unit *unit)
+static unsigned int		d_flag_plus_and_blank(char *s, int dy_len, t_unit *unit)
 {
-	unsigned int 	i;
+	unsigned int	i;
 
 	if (unit->val.d.flag_plus == FALSE && unit->val.d.flag_blank == FALSE)
 		return (dy_len);
@@ -106,7 +107,7 @@ static unsigned int		d_flag_plus_and_blank_handler(char *s, int dy_len, t_unit *
 **		it will change depending on precision, width, then flags
 */
 
-int				print_d(int fd, t_unit *unit)
+int						print_d(int fd, t_unit *unit)
 {
 	char			*integer;
 	unsigned int	dy_len;
@@ -118,7 +119,7 @@ int				print_d(int fd, t_unit *unit)
 	free(integer);
 	integer = NULL;
 	if (unit->val.d.integer >= 0)
-		dy_len = d_flag_plus_and_blank_handler(s, dy_len, unit);
+		dy_len = d_flag_plus_and_blank(s, dy_len, unit);
 	dy_len = d_width_handler(s, dy_len, unit, unit->val.d.width);
 	ft_putstr_fd(s, fd);
 	return (dy_len);

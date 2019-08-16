@@ -50,7 +50,7 @@ int		print_s(int fd, t_unit *unit)
 	precision = unit->val.s.precision;
 	width = unit->val.s.width;
 	if (precision == PRECISION_NULL)
-		return(0);
+		return (0);
 	if (precision != FALSE && precision < print_len)
 		print_len = precision;
 	if (width > print_len)

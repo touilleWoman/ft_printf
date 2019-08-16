@@ -92,7 +92,7 @@ int		parse_f(t_list **alst, char *buf, va_list args)
 	buf = type_f_get_precision(buf, &unit);
 	buf = type_f_get_modifier(buf, &unit);
 	if (*buf != 'f')
-		return(ERROR);
+		return (ERROR);
 	unit.type = TYPE_F;
 	if (unit.val.f.modifier == MD_MAG_L)
 		unit.val.f.doub = va_arg(args, long double);

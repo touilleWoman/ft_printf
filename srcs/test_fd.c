@@ -72,7 +72,7 @@ void     testcase(const char *fmt, ...)
 int main()
 {
 
-#if 0
+#if 1
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -96,15 +96,15 @@ int main()
     testcase("%-18p\n", &c);
     testcase("%42p\n", &c);
 #endif
-
-
-
+testcase("%2c", 0);
+testcase("% u", 4294967295);
+testcase("%+u", 4294967295);
     // testcase("-------------------%lc", (wint_t)-1);
     // testcase("====================%+-5.3rc\n", 'n');
 
 //type f
 
-#if 1
+#if 0
     //     float      fl2;
     //    fl2 = -0.000;
 
@@ -219,7 +219,7 @@ int main()
         testcase("size + minus + plus + prec:%-+5.3f\n", db3);
         testcase("size + minus + plus + prec + hash:%-#+5.0f\n", db3);
 #endif
-#if 0
+#if 1
     testcase("%p", NULL);
     // testcase(NULL);
     testcase("six%f|\n", 6.0);
@@ -280,7 +280,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
     double db = 0;
     // testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
     testcase("test basique:");
@@ -319,7 +319,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
     double db2 = 45.123456789;
     testcase("size + espace + zero + prec:%010.0f\n", db2);
     testcase("size + espace + zero + prec:%0 10.2f\n", db2);
@@ -366,7 +366,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
     // testcase("%2c", 0);
     testcase("%.0%");
     testcase("");
@@ -391,7 +391,7 @@ int main()
     testcase("% u", 4294967295);
     testcase("%+u", 4294967295);
 #endif
-#if 0
+#if 1
 // random Strings
     testcase("#nyancat inside");
     testcase("\x7f");
@@ -538,34 +538,34 @@ int main()
     testcase("%#10.7hhX|\n", 9287539484444);
 #endif
 
-#if 1
+#if 0
 // type u
-    unsigned int        nb;
-    nb = 0;
-    testcase("null prec : %.0u\n", nb);
-    nb = 8;
-    testcase("null prec : %.0u\n", nb);
-    nb = -1234212;
-    testcase("null prec : %.0u\n", nb);
-    nb = -1;
-    testcase("null prec : %.0u\n", nb);
-    nb = 12354;
-    testcase("null prec : %.0u\n", nb);
-    // nb = 45;
-    // testcase("precision:%.5u\n", nb);
-    // testcase("Prec + 0:%0.5u\n", nb);
-    // testcase("Prec + minus:%-.5u\n", nb);
-    // testcase("size:%5u\n", nb);
-    // testcase("size + minus:%-5u\n", nb);
-    // testcase("size + 0:%05u\n", nb);
-    // testcase("size + 0 + prec:%05.3u\n", nb);
-    // testcase("size + minus + prec:%-5.3u\n", nb);
-    // testcase("%-5.3u\n", nb);
-    // testcase("%050.5u\n", nb);
-    // testcase("%050u\n", nb);
-    // testcase("%050.u\n", nb);
-    // testcase("%-1.45u\n", nb);
-    // testcase("%-55.35u\n", nb);
+    unsigned int        un_int;
+    un_int = 0;
+    testcase("null prec : %.0u\n", un_int);
+    un_int = 8;
+    testcase("null prec : %.0u\n", un_int);
+    un_int = -1234212;
+    testcase("null prec : %.0u\n", un_int);
+    un_int = -1;
+    testcase("null prec : %.0u\n", un_int);
+    un_int = 12354;
+    testcase("null prec : %.0u\n", un_int);
+    // un_int = 45;
+    // testcase("precision:%.5u\n", un_int);
+    // testcase("Prec + 0:%0.5u\n", un_int);
+    // testcase("Prec + minus:%-.5u\n", un_int);
+    // testcase("size:%5u\n", un_int);
+    // testcase("size + minus:%-5u\n", un_int);
+    // testcase("size + 0:%05u\n", un_int);
+    // testcase("size + 0 + prec:%05.3u\n", un_int);
+    // testcase("size + minus + prec:%-5.3u\n", un_int);
+    // testcase("%-5.3u\n", un_int);
+    // testcase("%050.5u\n", un_int);
+    // testcase("%050u\n", un_int);
+    // testcase("%050.u\n", un_int);
+    // testcase("%-1.45u\n", un_int);
+    // testcase("%-55.35u\n", un_int);
     // testcase("%u|\n", 4444);
     // testcase("%-10.6u|\n", 4444);
     // testcase("%10.6u|\n", 4444);

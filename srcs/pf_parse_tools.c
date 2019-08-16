@@ -43,7 +43,7 @@ int				get_flags(char *flags, char *buf, char *valid_flags)
 
 	i = 0;
 	if (is_flags(*buf, valid_flags) == FALSE)
-		return(0);
+		return (0);
 	while(is_flags(buf[i], valid_flags))
 	{
 		flags[i] = buf[i];

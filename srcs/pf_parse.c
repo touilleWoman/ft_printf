@@ -61,7 +61,7 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 		}
 		index++;
 	}
-	return(0);
+	return (0);
 }
 
 static int		parse_percent_substring(const char *capsule, t_list **alst, va_list args, int *r_capsule_ok)
