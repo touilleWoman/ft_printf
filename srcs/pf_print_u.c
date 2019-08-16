@@ -78,7 +78,7 @@ int				print_u(int fd, t_unit *unit)
 	char			s[unit->val.u.precision + unit->val.u.width + 50];
 
 	ft_memset(s, 0, unit->val.u.precision + unit->val.u.width + 50);
-	pf_itoa_base(unit->val.u.un_int, 10, unit, str_uint, 30);
+	pf_itoa_base(unit->val.u.un_int, 10, unit, str_uint);
 	dy_len = u_precision_handler(s, str_uint, unit->val.u.precision, unit);
 	// free(str_uint);
 	// str_uint = NULL;

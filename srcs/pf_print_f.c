@@ -12,9 +12,10 @@
 
 #include "ft_printf.h"
 
-static void				sub_f_width_handler(char *s, int dy_len, t_unit *unit, int width)
+static void				sub_f_width_handler(char *s, int dy_len,
+							t_unit *unit, int width)
 {
-	char 	s_keep[dy_len + 1];
+	char	s_keep[dy_len + 1];
 	int		mark;
 
 	ft_strcpy(s_keep, s);
@@ -32,7 +33,7 @@ static void				sub_f_width_handler(char *s, int dy_len, t_unit *unit, int width)
 	else
 	{
 		ft_memset(s, ' ', width);
-		ft_strncpy(s + width - dy_len, s_keep , dy_len);
+		ft_strncpy(s + width - dy_len, s_keep, dy_len);
 	}
 }
 
@@ -40,7 +41,8 @@ static void				sub_f_width_handler(char *s, int dy_len, t_unit *unit, int width)
 **		flag '0' is ignored when flag '-' or precision present"
 */
 
-static unsigned int		f_width_handler(char *s, int dy_len, t_unit *unit, int width)
+static unsigned int		f_width_handler(char *s, int dy_len, t_unit *unit,
+										int width)
 {
 	if (width <= dy_len)
 		return (dy_len);
@@ -56,9 +58,9 @@ static unsigned int		f_width_handler(char *s, int dy_len, t_unit *unit, int widt
 ** 		flag ' ' is ignored when flag '+' is present"
 */
 
-static unsigned int		f_flag_plus_and_blank_handler(char *s, int dy_len, t_unit *unit)
+static unsigned int		f_flag_plus_and_blank(char *s, int dy_len, t_unit *unit)
 {
-	unsigned int 	i;
+	unsigned int	i;
 
 	if (unit->val.f.flag_plus == FALSE && unit->val.f.flag_blank == FALSE)
 		return (dy_len);
@@ -80,7 +82,7 @@ static unsigned int		f_flag_plus_and_blank_handler(char *s, int dy_len, t_unit *
 **		it will change depending on precision, width, then flags
 */
 
-long double	round_fractional_part(long double frac, int precision)
+long double				round_fractional_part(long double frac, int precision)
 {
 	int			i;
 	long double	round_val;
@@ -105,13 +107,12 @@ long double	round_fractional_part(long double frac, int precision)
 	return (keep_frac + round_val);
 }
 
-long double	pf_double_abs(long double nbr)
+long double				pf_double_abs(long double nbr)
 {
 	return (nbr >= 0 ? nbr : -nbr);
 }
 
-
-long long		round_int_part(long double nbr)
+long long				round_int_part(long double nbr)
 {
 	long long		int_part;
 	int				neg_mark;
@@ -134,10 +135,29 @@ long long		round_int_part(long double nbr)
 	return (int_part * neg_mark);
 }
 
-void		pf_dtoa(long double nbr, int precision, char *buf, t_bool flag_hash)
+void					write_fractionl_on_buf(char *buf, long double nbr,
+							int precision, int posi)
+{
+	long double frac_part;
+
+	buf[posi] = '.';
+	frac_part = pf_double_abs(nbr - (long long)nbr);
+	frac_part = round_fractional_part(frac_part, precision);
+	while (precision > 0)
+	{
+		posi++;
+		buf[posi] = (int)(frac_part * 10) + '0';
+		frac_part = frac_part * 10 - (int)(frac_part * 10);
+		precision--;
+	}
+	posi++;
+	buf[posi] = '\0';
+}
+
+void					pf_dtoa(long double nbr, int precision,
+							char *buf, t_bool flag_hash)
 {
 	int			posi;
-	long double frac_part;
 	long long	int_part;
 	char		*str_int_part;
 
@@ -159,23 +179,10 @@ void		pf_dtoa(long double nbr, int precision, char *buf, t_bool flag_hash)
 		buf[posi + 1] = 0;
 	}
 	else
-	{
-		buf[posi] = '.';
-		frac_part = pf_double_abs(nbr - (long long)nbr);
-		frac_part = round_fractional_part(frac_part, precision);
-		while (precision > 0)
-		{
-			posi++;
-			buf[posi] =(int)(frac_part * 10) + '0';
-			frac_part = frac_part * 10 - (int)(frac_part * 10);
-			precision--;
-		}
-		posi++;
-		buf[posi] = '\0';
-	}
+		write_fractionl_on_buf(buf, nbr, precision, posi);
 }
 
-int				print_f(int fd, t_unit *unit)
+int						print_f(int fd, t_unit *unit)
 {
 	unsigned int	dy_len;
 	char			s[unit->val.f.precision + unit->val.f.width + 30];
@@ -183,7 +190,7 @@ int				print_f(int fd, t_unit *unit)
 	pf_dtoa(unit->val.f.doub, unit->val.f.precision, s, unit->val.f.flag_hash);
 	dy_len = ft_strlen(s);
 	if (unit->val.f.doub >= 0)
-		dy_len = f_flag_plus_and_blank_handler(s, dy_len, unit);
+		dy_len = f_flag_plus_and_blank(s, dy_len, unit);
 	dy_len = f_width_handler(s, dy_len, unit, unit->val.f.width);
 	ft_putstr_fd(s, fd);
 	return (dy_len);

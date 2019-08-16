@@ -13,12 +13,12 @@
 #include "ft_printf.h"
 
 void		pf_itoa_base(uintmax_t nbr, int base, t_unit *unit,
-							char *str, int str_size)
+							char *str)
 {
 	int		posi;
-	char	buf[str_size];
+	char	buf[30];
 
-	posi = str_size - 1;
+	posi = 29;
 	buf[posi] = '\0';
 	if (nbr == 0)
 	{
@@ -41,28 +41,26 @@ int			print_p(int fd, t_unit *unit)
 {
 	int		len;
 	char	s[unit->val.p.width + 30];
-	int		width;
-	char	str_p[40];
+	char	str_p[30];
 
-	width = unit->val.p.width;
-	ft_memset(s, ' ', width + 30);
-	pf_itoa_base(unit->val.p.pointer, 16, unit, str_p, 40);
+	ft_memset(s, ' ', unit->val.p.width + 30);
+	pf_itoa_base(unit->val.p.pointer, 16, unit, str_p);
 	len = ft_strlen(str_p) + 2;
-	if (width > len && unit->val.p.flag_minus == FALSE)
+	if (unit->val.p.width > len && unit->val.p.flag_minus == FALSE)
 	{
-		ft_strncpy(s + width - len, "0x", 2);
-		ft_strncpy(s + width - len + 2, str_p, len - 2);
-		s[width] = 0;
+		ft_strncpy(s + unit->val.p.width - len, "0x", 2);
+		ft_strncpy(s + unit->val.p.width - len + 2, str_p, len - 2);
+		s[unit->val.p.width] = 0;
 	}
 	else
 	{
 		ft_strncpy(s, "0x", 2);
 		ft_strncpy(s + 2, str_p, len - 2);
-		if (width > len)
-			s[width] = 0;
+		if (unit->val.p.width > len)
+			s[unit->val.p.width] = 0;
 		else
 			s[len] = 0;
 	}
 	ft_putstr_fd(s, fd);
-	return (width > len ? width : len);
+	return (unit->val.p.width > len ? unit->val.p.width : len);
 }

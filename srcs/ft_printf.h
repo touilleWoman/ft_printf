@@ -44,7 +44,7 @@ int			get_flags(char *flags, char *buf, char *valid_flags);
 
 
 int				ft_printf(const char *restrict format, ...);
-int		ft_vdprintf(int fd, const char * restrict format, va_list args);
+int				ft_vdprintf(int fd, const char * restrict format, va_list args);
 
 //parse
 t_list			*parse_string(const char *format, va_list args, int *r_format_ok);
@@ -71,7 +71,6 @@ int				print_oxx(int fd, t_unit *unit);
 int				print_u(int fd, t_unit *unit);
 int				print_f(int fd, t_unit *unit);
 
-void			pf_itoa_base(uintmax_t nbr, int base, t_unit *unit,
-							char *buf, int buf_size);
+void			pf_itoa_base(uintmax_t nbr, int base, t_unit *unit, char *buf);
 
 #endif

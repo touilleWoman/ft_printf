@@ -122,9 +122,9 @@ int					print_oxx(int fd, t_unit *unit)
 
 	ft_memset(s, 0, unit->val.oxx.precision + unit->val.oxx.width + 50);
 	if (unit->val.oxx.sub_type == TYPE_O)
-		pf_itoa_base(unit->val.oxx.un_int, 8, unit, str_uint, 30);
+		pf_itoa_base(unit->val.oxx.un_int, 8, unit, str_uint);
 	else
-		pf_itoa_base(unit->val.oxx.un_int, 16, unit, str_uint, 30);
+		pf_itoa_base(unit->val.oxx.un_int, 16, unit, str_uint);
 	dy_len = oxx_precision_handler(s, str_uint, unit->val.oxx.precision, unit);
 	// free(str_uint);
 	// str_uint = NULL;
