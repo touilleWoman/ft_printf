@@ -99,16 +99,13 @@ int			parse_d(t_list **alst, char *buf, va_list args)
 	buf = type_d_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_d_get_precision(buf, &unit);
 	buf = type_d_get_modifier(buf, &unit);
-	// if (*buf != 'd' && *buf != 'i')
-	// {
-	// 	freelst_and_errormsg(*alst, "error : %%d format wrong\n");
-	// 	return (ERROR);
-	// }
+	if (*buf != 'd' && *buf != 'i')
+		return (ERROR);
 	unit.type = TYPE_D;
 	if (unit.val.d.modifier == MD_LL)
-		unit.val.d.integer = va_arg(args, long long);
+		unit.val.d.integer = (intmax_t)va_arg(args, long long);
 	else if (unit.val.d.modifier == MD_L)
-		unit.val.d.integer = va_arg(args, long);
+		unit.val.d.integer = (intmax_t)va_arg(args, long);
 	else if (unit.val.d.modifier == MD_HH)
 		unit.val.d.integer = (signed char)va_arg(args, int);
 	else if (unit.val.d.modifier == MD_H)

@@ -98,7 +98,6 @@ static unsigned int		d_flag_plus_and_blank_handler(char *s, int dy_len, t_unit *
 		s[0] = '+';
 	else if (unit->val.d.flag_blank == TRUE)
 		s[0] = ' ';
-
 	return (dy_len + 1);
 }
 

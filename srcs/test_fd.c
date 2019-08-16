@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "ft_printf.h"
+#include <limits.h>
 
 
 
@@ -357,7 +358,9 @@ int main()
     testcase("%.2c", NULL);
     testcase("%2c", 0);
     testcase("% c", 0);
+#endif
 
+#if 0
  // type s
     testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
     testcase("%2s%c\n", "bonjour", 'a');
@@ -369,7 +372,47 @@ int main()
     testcase("hello%s\n", "world");
     testcase("hello %s\t%d\n", "world", 42);
     testcase("hello %s\t%d\n", "world", 42);
+
+    char    *str;
+    str = "Okalm";
+    testcase("precision / zero:%.0s", str);
+    testcase("precision / zero:%.s", str);
+    testcase("precision / petite:%.5s", str);
+    testcase("precision / grande:%.15s", str);
+    testcase("prec + minus:%-.5s", str);
+    testcase("size / petite:%5s", str);
+    testcase("size / grande:%15s", str);
+    testcase("Minus + size / petite:%-5s", str);
+    testcase("Minus + size / grande:%-15s", str);
+    testcase("Minus + size + prec:%-15.5s", str);
+    testcase("NULL:%12s", NULL);
+    testcase("NULL:%1s", NULL);
+    testcase("NULL:%-5.6s", NULL);
+    testcase("NULL:%-.8s", NULL);
+    testcase("NULL:%.12s", NULL);
+    testcase("empty:%-.5s", "");
+    testcase("empty:%-1.32s", "");
+    testcase("empty:%1.4s", "");
+    testcase("empty:%23s", "");
+
+#endif
+#if 1
+
 //type d
+    // testcase("max int :  %d", INT16_MAX);
+    // testcase("min int :  %d", INT16_MIN);
+    // testcase("max int :  %d", INT32_MAX);
+    // testcase("min int :  %d", INT32_MIN);
+    // testcase("max long :  %ld", LONG_MAX);
+    // testcase("min long less one :  %ld", -9223372036854775807);
+    // testcase("max long long :  %lld", __LONG_LONG_MAX__);
+    // !!!!!!!!!!!!!!!!!
+    testcase("-9223372036854775808 :  %lld", -9223372036854775808);
+
+    // testcase("min long long :  %lld",LLONG_MIN);
+    // testcase("min long :  %ld", LONG_MIN);
+
+
     testcase("%.2d\n", -22);
     testcase("%.3d\n", -22);
     testcase("%+10.4d|\n", -22);
@@ -385,10 +428,12 @@ int main()
     testcase("%-10.5d|\n", 4444);
     testcase("%+-1.15d|\n", 4444);
     testcase("%+-1.15d|\n", 4444);
-    testcase("%+-1.50ld|\n", (long)87120928344444);
-    testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
-    testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
+    // testcase("%+-1.50ld|\n", (long)87120928344444);
+    // testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
+    // testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
+#endif
 
+#if 0
 // type oxX
 
 
@@ -424,43 +469,53 @@ int main()
     testcase("%#10.7lX|\n", (long)9287539484444);
     testcase("%#10.7hX|\n", (short)9287539484444);
     testcase("%#10.7hhX|\n", 9287539484444);
+#endif
 
+#if 0
 // type u
-    int     nb;
+    unsigned int        nb;
+    nb = 0;
+    testcase("null prec : %.0u\n", nb);
+    nb = 8;
+    testcase("null prec : %.0u\n", nb);
+    nb = -1234212;
+    testcase("null prec : %.0u\n", nb);
+    nb = -1;
+    testcase("null prec : %.0u\n", nb);
+    nb = 12354;
+    testcase("null prec : %.0u\n", nb);
     nb = 45;
-    testcase("precision:%.5u\n", nb);
-    testcase("Prec + 0:%0.5u\n", nb);
-    testcase("Prec + minus:%-.5u\n", nb);
-    testcase("size:%5u\n", nb);
-    testcase("size + minus:%-5u\n", nb);
-    testcase("size + 0:%05u\n", nb);
-    testcase("size + 0 + prec:%05.3u\n", nb);
-    testcase("size + minus + prec:%-5.3u\n", nb);
-    testcase("%-5.3u\n", nb);
-    testcase("%050.5u\n", nb);
-    testcase("%050u\n", nb);
-    testcase("%050.u\n", nb);
-    testcase("%-1.45u\n", nb);
-    testcase("%-55.35u\n", nb);
-    testcase("%u|\n", 4444);
-    testcase("%-10.6u|\n", 4444);
-    testcase("%10.6u|\n", 4444);
-    testcase("%-10.7u|\n", 4444);
-    testcase("%-010.7u|\n", 4444);
-    testcase("%010.7u|\n", 4444);
-    testcase("%-5.7u|\n", 4444);
-    testcase("%-2.7u|\n", 4444);
-    testcase("%-1.7u|\n", 4444);
-    testcase("%10.7u|\n", 4444);
-    testcase("%10.7u|\n", 4444);
-    testcase("%10.7llu|\n", (long long)9287539484444);
-    testcase("%20.7llu|\n", (long long)9287539484444);
-    testcase("%10.7lu|\n", (long)9287539484444);
-    testcase("%10.7hu|\n", (short)9287539484444);
-    testcase("%10.7hhu|\n", 9287539484444);
-    testcase("%u|\n", 5);
-
-
+    // testcase("precision:%.5u\n", nb);
+    // testcase("Prec + 0:%0.5u\n", nb);
+    // testcase("Prec + minus:%-.5u\n", nb);
+    // testcase("size:%5u\n", nb);
+    // testcase("size + minus:%-5u\n", nb);
+    // testcase("size + 0:%05u\n", nb);
+    // testcase("size + 0 + prec:%05.3u\n", nb);
+    // testcase("size + minus + prec:%-5.3u\n", nb);
+    // testcase("%-5.3u\n", nb);
+    // testcase("%050.5u\n", nb);
+    // testcase("%050u\n", nb);
+    // testcase("%050.u\n", nb);
+    // testcase("%-1.45u\n", nb);
+    // testcase("%-55.35u\n", nb);
+    // testcase("%u|\n", 4444);
+    // testcase("%-10.6u|\n", 4444);
+    // testcase("%10.6u|\n", 4444);
+    // testcase("%-10.7u|\n", 4444);
+    // testcase("%-010.7u|\n", 4444);
+    // testcase("%010.7u|\n", 4444);
+    // testcase("%-5.7u|\n", 4444);
+    // testcase("%-2.7u|\n", 4444);
+    // testcase("%-1.7u|\n", 4444);
+    // testcase("%10.7u|\n", 4444);
+    // testcase("%10.7u|\n", 4444);
+    // testcase("%10.7llu|\n", (long long)9287539484444);
+    // testcase("%20.7llu|\n", (long long)9287539484444);
+    // testcase("%10.7lu|\n", (long)9287539484444);
+    // testcase("%10.7hu|\n", (short)9287539484444);
+    // testcase("%10.7hhu|\n", 9287539484444);
+    // testcase("%u|\n", 5);
 
 
 

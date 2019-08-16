@@ -18,9 +18,7 @@ static int		lenth(long long n)
 
 	len = 0;
 	if (n == 0)
-	{
 		return (1);
-	}
 	if (n < 0)
 	{
 		n = -n;
@@ -39,6 +37,7 @@ static char		*convert(long long n, int len, char *ptr)
 	int			count;
 
 	count = 1;
+	ptr[len] = '\0';
 	while (1)
 	{
 		ptr[len - count] = n % 10 + '0';
@@ -55,21 +54,20 @@ char			*ft_itoa(long long x)
 	int			len;
 	char		*ptr;
 	int			neg;
-	long long	n;
 
-	n = x;
-	len = lenth(n);
+	if (x == -9223372036854775808)
+		return(ft_strdup("-9223372036854775808"));
+	len = lenth(x);
 	ptr = (char*)malloc(sizeof(char) * (len + 1));
 	if (ptr == 0)
 		return (NULL);
 	neg = 0;
-	if (n < 0)
+	if (x < 0)
 	{
-		n = -n;
+		x = -x;
 		neg = 1;
 	}
-	ptr = convert(n, len, ptr);
-	ptr[len] = '\0';
+	ptr = convert(x, len, ptr);
 	if (neg == 1)
 		ptr[0] = '-';
 	return (ptr);

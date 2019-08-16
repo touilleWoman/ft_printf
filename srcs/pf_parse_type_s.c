@@ -35,7 +35,15 @@ static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit)
 	if (*buf == '.')
 	{
 		buf++;
-		if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
+		digits_len = get_digits(&digits, buf, ft_strlen(buf));
+		if (digits_len == 0)
+			unit->val.s.precision = PRECISION_NULL;
+		else if (digits_len == 1 && digits == 0)
+		{
+			unit->val.s.precision = PRECISION_NULL;
+			buf++;
+		}
+		else
 		{
 			unit->val.s.precision = digits;
 			buf += digits_len;

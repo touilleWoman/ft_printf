@@ -73,8 +73,8 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 check:all
-# 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -ggdb -I ./srcs
-	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
+	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -I ./srcs
+# 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
 
 clean:
 	rm -f $(OBJ)
