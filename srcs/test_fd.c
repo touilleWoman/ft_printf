@@ -72,7 +72,7 @@ void     testcase(const char *fmt, ...)
 int main()
 {
 
-#if 1
+#if 0
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -97,8 +97,8 @@ int main()
     testcase("%42p\n", &c);
 #endif
 testcase("%2c", 0);
-testcase("% u", 4294967295);
-testcase("%+u", 4294967295);
+testcase("% u|", 4294967295);
+testcase("%+u|", 4294967295);
     // testcase("-------------------%lc", (wint_t)-1);
     // testcase("====================%+-5.3rc\n", 'n');
 
@@ -280,7 +280,7 @@ testcase("%+u", 4294967295);
 
 #endif
 
-#if 1
+#if 0
     double db = 0;
     // testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
     testcase("test basique:");
@@ -319,7 +319,7 @@ testcase("%+u", 4294967295);
 
 #endif
 
-#if 1
+#if 0
     double db2 = 45.123456789;
     testcase("size + espace + zero + prec:%010.0f\n", db2);
     testcase("size + espace + zero + prec:%0 10.2f\n", db2);
@@ -366,7 +366,7 @@ testcase("%+u", 4294967295);
 
 #endif
 
-#if 1
+#if 0
     // testcase("%2c", 0);
     testcase("%.0%");
     testcase("");
@@ -391,7 +391,7 @@ testcase("%+u", 4294967295);
     testcase("% u", 4294967295);
     testcase("%+u", 4294967295);
 #endif
-#if 1
+#if 0
 // random Strings
     testcase("#nyancat inside");
     testcase("\x7f");
