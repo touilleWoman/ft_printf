@@ -104,10 +104,83 @@ int main()
 
 //type f
 
-#if 0
-// !!!!!!!!!!!!!!!!!!!!!!!
+#if 1
+    //     float      fl2;
+    //    fl2 = -0.000;
+
+    // testcase("test basique:");
+    // testcase("space:% f\n",fl2);
+    // testcase("plus:%+f\n",fl2);
+    // testcase("hash:%#f\n",fl2);
+    // testcase("precision:%.2f\n",fl2);
+    // testcase("big prec:%.14f\n",fl2);
+    // testcase("precision + hash:%#.0f\n",fl2);
+    // testcase("space + prec:% .5f\n",fl2);
+    // testcase("space + prec + hash:%# .0f\n",fl2);
+    // testcase("space + prec + hash:% #.0f\n",fl2);
+    // testcase("Plus + prec / grande:%+.5f\n",fl2);
+    // testcase("Plus + prec / petite:%+.0f\n",fl2);
+    // testcase("Plus + prec + hash:%#+.0f\n",fl2);
+    // testcase("Prec + 0:%0.5f\n",fl2);
+    // testcase("Prec + minus:%-.5f\n",fl2);
+    // testcase("size:%5f\n",fl2);
+    // testcase("size + space:% 5f\n",fl2);
+    // testcase("size + plus:%+5f\n",fl2);
+    // testcase("size + space:%# 5f\n",fl2);
+    // testcase("size + plus:%#+5f\n",fl2);
+    // testcase("size + minus:%-5f\n",fl2);
+    // testcase("size + 0:%05f\n",fl2);
+    // testcase("size + 0 + plus:%+05f\n",fl2);
+    // testcase("size + 0 + plus:%0+5f\n",fl2);
+    // testcase("size + 0 + prec:%05.3f\n",fl2);
+    // testcase("size + 0 + prec + hash:%0#5.0f\n",fl2);
+    // testcase("size + minus + prec:%-5.3f\n",fl2);
+    // testcase("size + minus + prec + hash:%-#5.0f\n",fl2);
+    // testcase("size + plus + 0 + prec:%+05.3f\n",fl2);
+    // testcase("size + plus + 0 + prec + hash:%0+#5.0f\n",fl2);
+    // testcase("size + espace + zero + prec:%0 5.3f\n",fl2);
+    // testcase("size + espace + zero + prec:% 05.3f\n",fl2);
+    // testcase("size + espace + zero + prec + hash:%#0 5.0f\n",fl2);
+    // testcase("size + minus + plus + prec:%-+5.3f\n",fl2);
+    // testcase("size + minus + plus + prec + hash:%-#+5.0f\n",fl2);
+
+    // testcase("%.20f\n", 1.0 / 3.0);
+    // testcase("%.20Lf\n", 1.0L / 3.0L);
+
+        // double      db4;
+
+        // db4 = 1.0/0.0;
+        // testcase("%f\n", db4);
+        // testcase("%12f\n", db4);
+        // testcase("%-12f\n", db4);
+        // testcase("%5.9f\n", db4);
+
+
+        // db4 = -1.0/0.0;
+        // testcase("%f\n", db4);
+        // testcase("%12f\n", db4);
+        // testcase("%-12f\n", db4);
+        // testcase("%5.9f\n", db4);
+
+
+        // db4 = 0.0/0.0;
+        // testcase("%f\n", db4);
+        // testcase("%12f\n", db4);
+        // testcase("%-12f\n", db4);
+        // testcase("%5.9f\n", db4);
+
+    float       fl;
+    fl = 0;
+    testcase("null prec : %+.0f\n", fl);
+    // fl = 12.5;
+    // testcase("null prec : %+.0f\n", fl);
+    fl = -25632.2541;
+    testcase("null prec : %+.0f\n", fl);
+    fl = -1.0123;
+    testcase("null prec : %+.0f\n", fl);
+    fl = 12354;
+    testcase("null prec : %+.0f\n", fl);
         double      db3;
-        // db3 = 1.2;
         db3 = 12389123798;
 
         testcase("space:%lf\n", db3);
@@ -115,7 +188,7 @@ int main()
         testcase("plus:%+f\n", db3);
         testcase("hash:%#f\n", db3);
         testcase("precision:%.2f\n", db3);
-    //    testcase("big prec:%.14f\n", db3);
+       testcase("big prec:%.14f\n", db3);
         testcase("precision + hash:%#.0f\n", db3);
         testcase("space + prec:% .5f\n", db3);
         testcase("space + prec + hash:%# .0f\n", db3);
@@ -396,23 +469,17 @@ int main()
     testcase("empty:%23s", "");
 
 #endif
-#if 1
+#if 0
 
 //type d
-    // testcase("max int :  %d", INT16_MAX);
-    // testcase("min int :  %d", INT16_MIN);
-    // testcase("max int :  %d", INT32_MAX);
-    // testcase("min int :  %d", INT32_MIN);
-    // testcase("max long :  %ld", LONG_MAX);
-    // testcase("min long less one :  %ld", -9223372036854775807);
-    // testcase("max long long :  %lld", __LONG_LONG_MAX__);
-    // !!!!!!!!!!!!!!!!!
-    testcase("-9223372036854775808 :  %lld", -9223372036854775808);
-
-    // testcase("min long long :  %lld",LLONG_MIN);
-    // testcase("min long :  %ld", LONG_MIN);
-
-
+    testcase("max int :  %d", INT16_MAX);
+    testcase("min int :  %d", INT16_MIN);
+    testcase("max int :  %d", INT32_MAX);
+    testcase("min int :  %d", INT32_MIN);
+    testcase("max long :  %ld", LONG_MAX);
+    testcase("max long long :  %lld", __LONG_LONG_MAX__);
+    testcase("min long long :  %lld",LLONG_MIN);
+    testcase("min long :  %ld", LONG_MIN);
     testcase("%.2d\n", -22);
     testcase("%.3d\n", -22);
     testcase("%+10.4d|\n", -22);
@@ -428,9 +495,9 @@ int main()
     testcase("%-10.5d|\n", 4444);
     testcase("%+-1.15d|\n", 4444);
     testcase("%+-1.15d|\n", 4444);
-    // testcase("%+-1.50ld|\n", (long)87120928344444);
-    // testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
-    // testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
+    testcase("%+-1.50ld|\n", (long)87120928344444);
+    testcase("%+-ld|%0+lld|%+-0 hd|%hhd|\n", (long)255, (long long)99999999999999999, (short)333, (signed char)30);
+    testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 #endif
 
 #if 0
@@ -471,7 +538,7 @@ int main()
     testcase("%#10.7hhX|\n", 9287539484444);
 #endif
 
-#if 0
+#if 1
 // type u
     unsigned int        nb;
     nb = 0;
@@ -484,7 +551,7 @@ int main()
     testcase("null prec : %.0u\n", nb);
     nb = 12354;
     testcase("null prec : %.0u\n", nb);
-    nb = 45;
+    // nb = 45;
     // testcase("precision:%.5u\n", nb);
     // testcase("Prec + 0:%0.5u\n", nb);
     // testcase("Prec + minus:%-.5u\n", nb);

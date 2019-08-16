@@ -39,7 +39,7 @@ static char		*type_f_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 		unit->val.f.width = digits;
 		buf += digits_len;
 	}
-			return (buf);
+	return (buf);
 }
 
 static char		*type_f_get_precision(char *buf, t_unit *unit)

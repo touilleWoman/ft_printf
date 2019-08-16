@@ -13,10 +13,12 @@
 #include "ft_printf.h"
 
 static unsigned int		u_precision_handler(char *s, char *str_uint,
-									int precision)
+									int precision, t_unit *unit)
 {
 	int		dy_len;
 
+	if (unit->val.u.un_int == 0 && precision == PRECISION_NULL)
+		return (0);
 	dy_len = ft_strlen(str_uint);
 	if (dy_len > precision)
 		ft_strcpy(s, str_uint);
@@ -74,8 +76,9 @@ int				print_u(int fd, t_unit *unit)
 	unsigned int	dy_len;
 	char			s[unit->val.u.precision + unit->val.u.width + 50];
 
+	ft_memset(s, 0, unit->val.u.precision + unit->val.u.width + 50);
 	str_uint = pf_itoa_base(unit->val.u.un_int, 10, unit);
-	dy_len = u_precision_handler(s, str_uint, unit->val.u.precision);
+	dy_len = u_precision_handler(s, str_uint, unit->val.u.precision, unit);
 	free(str_uint);
 	str_uint = NULL;
 	dy_len = u_width_handler(s, dy_len, unit, unit->val.u.width);

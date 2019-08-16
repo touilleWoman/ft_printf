@@ -111,9 +111,9 @@ long double	pf_double_abs(long double nbr)
 }
 
 
-int		round_int_part(long double nbr)
+long long		round_int_part(long double nbr)
 {
-	int				int_part;
+	long long		int_part;
 	int				neg_mark;
 	long double 	abs_nbr;
 
@@ -138,7 +138,7 @@ void		pf_dtoa(long double nbr, int precision, char *buf, t_bool flag_hash)
 {
 	int			posi;
 	long double frac_part;
-	int 		int_part;
+	long long	int_part;
 	char		*str_int_part;
 
 	int_part = (long long)nbr;
@@ -175,14 +175,10 @@ void		pf_dtoa(long double nbr, int precision, char *buf, t_bool flag_hash)
 	}
 }
 
-
-
 int				print_f(int fd, t_unit *unit)
 {
 	unsigned int	dy_len;
 	char			s[unit->val.f.precision + unit->val.f.width + 30];
-
-	// printf("============================%f\n", unit->val.f.doub);
 
 	pf_dtoa(unit->val.f.doub, unit->val.f.precision, s, unit->val.f.flag_hash);
 	dy_len = ft_strlen(s);
