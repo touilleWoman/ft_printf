@@ -63,7 +63,6 @@ static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit, int widt
 	return(width);
 }
 
-
 /*
 ** 		dy_len is initialted at the lenth of un_int,
 **		it will change depending on precision, width, then flags

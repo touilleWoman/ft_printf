@@ -23,12 +23,12 @@ static char		*type_u_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 	{
 		(ft_strchr(flags, '-')) ? unit->val.u.flag_minus = TRUE : 0;
 		(ft_strchr(flags, '0')) ? unit->val.u.flag_zero = TRUE : 0;
-		// if (ft_strchr(flags, ' '))
-		// 	ft_putstr_fd("warning : flag' ' is ignored with %u\n", 2);
-		// if (ft_strchr(flags, '+'))
-		// 	ft_putstr_fd("warning : flag'+' is ignored with %u\n", 2);
-		// if (ft_strchr(flags, '#'))
-		// 	ft_putstr_fd("warning : flag'#' is ignored with %u\n", 2);
+		if (ft_strchr(flags, ' '))
+			ft_putstr_fd("warning : flag' ' is ignored with %u\n", 2);
+		if (ft_strchr(flags, '+'))
+			ft_putstr_fd("warning : flag'+' is ignored with %u\n", 2);
+		if (ft_strchr(flags, '#'))
+			ft_putstr_fd("warning : flag'#' is ignored with %u\n", 2);
 		buf += flags_len;
 	}
  	digits = 0;
@@ -50,7 +50,14 @@ static char		*type_u_get_precision(char *buf, t_unit *unit)
 		{
 			buf++;
 			digits_len = get_digits(&digits, buf, ft_strlen(buf));
-			if (digits_len)
+			if (digits_len == 0)
+				unit->val.u.precision = PRECISION_NULL;
+			else if (digits_len == 1 && digits == 0)
+			{
+				unit->val.u.precision = PRECISION_NULL;
+				buf++;
+			}
+			else
 			{
 				unit->val.u.precision = digits;
 				buf += digits_len;
@@ -92,11 +99,8 @@ int			parse_u(t_list **alst, char *buf, va_list args)
 	buf = type_u_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_u_get_precision(buf, &unit);
 	buf = type_u_get_modifier(buf, &unit);
-	// if (*buf != 'u')
-	// {
-	// 	freelst_and_errormsg(*alst, "error : %u format wrong\n");
-	// 	return (ERROR);
-	// }
+	if (*buf != 'u')
+		return (ERROR);
 	unit.type = TYPE_U;
 	if (unit.val.u.modifier == MD_LL)
 		unit.val.u.un_int = va_arg(args,  unsigned long long);

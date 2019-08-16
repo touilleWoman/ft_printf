@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
-
 
 static void				sub_f_width_handler(char *s, int dy_len, t_unit *unit, int width)
 {
@@ -24,7 +22,7 @@ static void				sub_f_width_handler(char *s, int dy_len, t_unit *unit, int width)
 	if (unit->val.f.flag_zero == TRUE)
 	{
 		ft_memset(s, '0', width);
-		if (*s_keep == '-' || *s_keep == '+')
+		if (*s_keep == '-' || *s_keep == '+' || *s_keep == ' ')
 		{
 			s[0] = s_keep[0];
 			mark = 1;
@@ -183,6 +181,8 @@ int				print_f(int fd, t_unit *unit)
 {
 	unsigned int	dy_len;
 	char			s[unit->val.f.precision + unit->val.f.width + 30];
+
+	// printf("============================%f\n", unit->val.f.doub);
 
 	pf_dtoa(unit->val.f.doub, unit->val.f.precision, s, unit->val.f.flag_hash);
 	dy_len = ft_strlen(s);

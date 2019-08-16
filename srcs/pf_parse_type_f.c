@@ -91,16 +91,13 @@ int		parse_f(t_list **alst, char *buf, va_list args)
 	buf = type_f_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_f_get_precision(buf, &unit);
 	buf = type_f_get_modifier(buf, &unit);
-	// if (*buf != 'f')
-	// {
-	// 	freelst_and_errormsg(*alst, "error: %f format wrong\n");
-	// 	return(ERROR);
-	// }
+	if (*buf != 'f')
+		return(ERROR);
 	unit.type = TYPE_F;
 	if (unit.val.f.modifier == MD_MAG_L)
 		unit.val.f.doub = va_arg(args, long double);
 	else
-		unit.val.f.doub = va_arg(args, double);
+		unit.val.f.doub = (long double)va_arg(args, double);
 	unit_lstadd_bot(alst, &unit);
 	return (0);
 }
