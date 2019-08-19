@@ -42,7 +42,10 @@ void     testcase(const char *fmt, ...)
             FAIL_AND_EXIT("Cannot create temp file\n");
     } 
     else 
+    {
         ftruncate(fileno(fd_oracle_p), 0);
+        fseek(fd_oracle_p, 0, SEEK_SET);        
+    }
     int fd_oracle = fileno(fd_oracle_p);
 
     if (fd_test_p == NULL) 
@@ -56,6 +59,7 @@ void     testcase(const char *fmt, ...)
     else 
     {
         ftruncate(fileno(fd_test_p), 0);
+        fseek(fd_test_p, 0, SEEK_SET);        
     }
     int fd_test = fileno(fd_test_p);
     /* Run the implementations */
@@ -74,7 +78,8 @@ void     testcase(const char *fmt, ...)
     read(fd_test, out_test, out_size_test);
     out_oracle[out_size_oracle] = '\0';
     out_test[out_size_test] = '\0';
-    if (strcmp(out_oracle, out_test)) {
+    if (strcmp(out_oracle, out_test)) 
+    {
         FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
     }
 
@@ -128,44 +133,44 @@ testcase("%+u|", 4294967295);
 //type f
 
 #if 1
-    //     float      fl2;
-    //    fl2 = -0.000;
+        float      fl2;
+       fl2 = -0.000;
 
-    // testcase("test basique:");
-    // testcase("space:% f\n",fl2);
-    // testcase("plus:%+f\n",fl2);
-    // testcase("hash:%#f\n",fl2);
-    // testcase("precision:%.2f\n",fl2);
-    // testcase("big prec:%.14f\n",fl2);
-    // testcase("precision + hash:%#.0f\n",fl2);
-    // testcase("space + prec:% .5f\n",fl2);
-    // testcase("space + prec + hash:%# .0f\n",fl2);
-    // testcase("space + prec + hash:% #.0f\n",fl2);
-    // testcase("Plus + prec / grande:%+.5f\n",fl2);
-    // testcase("Plus + prec / petite:%+.0f\n",fl2);
-    // testcase("Plus + prec + hash:%#+.0f\n",fl2);
-    // testcase("Prec + 0:%0.5f\n",fl2);
-    // testcase("Prec + minus:%-.5f\n",fl2);
-    // testcase("size:%5f\n",fl2);
-    // testcase("size + space:% 5f\n",fl2);
-    // testcase("size + plus:%+5f\n",fl2);
-    // testcase("size + space:%# 5f\n",fl2);
-    // testcase("size + plus:%#+5f\n",fl2);
-    // testcase("size + minus:%-5f\n",fl2);
-    // testcase("size + 0:%05f\n",fl2);
-    // testcase("size + 0 + plus:%+05f\n",fl2);
-    // testcase("size + 0 + plus:%0+5f\n",fl2);
-    // testcase("size + 0 + prec:%05.3f\n",fl2);
-    // testcase("size + 0 + prec + hash:%0#5.0f\n",fl2);
-    // testcase("size + minus + prec:%-5.3f\n",fl2);
-    // testcase("size + minus + prec + hash:%-#5.0f\n",fl2);
-    // testcase("size + plus + 0 + prec:%+05.3f\n",fl2);
-    // testcase("size + plus + 0 + prec + hash:%0+#5.0f\n",fl2);
-    // testcase("size + espace + zero + prec:%0 5.3f\n",fl2);
-    // testcase("size + espace + zero + prec:% 05.3f\n",fl2);
-    // testcase("size + espace + zero + prec + hash:%#0 5.0f\n",fl2);
-    // testcase("size + minus + plus + prec:%-+5.3f\n",fl2);
-    // testcase("size + minus + plus + prec + hash:%-#+5.0f\n",fl2);
+    testcase("test basique:");
+    testcase("space:% f\n",fl2);
+    testcase("plus:%+f\n",fl2);
+    testcase("hash:%#f\n",fl2);
+    testcase("precision:%.2f\n",fl2);
+    testcase("big prec:%.14f\n",fl2);
+    testcase("precision + hash:%#.0f\n",fl2);
+    testcase("space + prec:% .5f\n",fl2);
+    testcase("space + prec + hash:%# .0f\n",fl2);
+    testcase("space + prec + hash:% #.0f\n",fl2);
+    testcase("Plus + prec / grande:%+.5f\n",fl2);
+    testcase("Plus + prec / petite:%+.0f\n",fl2);
+    testcase("Plus + prec + hash:%#+.0f\n",fl2);
+    testcase("Prec + 0:%0.5f\n",fl2);
+    testcase("Prec + minus:%-.5f\n",fl2);
+    testcase("size:%5f\n",fl2);
+    testcase("size + space:% 5f\n",fl2);
+    testcase("size + plus:%+5f\n",fl2);
+    testcase("size + space:%# 5f\n",fl2);
+    testcase("size + plus:%#+5f\n",fl2);
+    testcase("size + minus:%-5f\n",fl2);
+    testcase("size + 0:%05f\n",fl2);
+    testcase("size + 0 + plus:%+05f\n",fl2);
+    testcase("size + 0 + plus:%0+5f\n",fl2);
+    testcase("size + 0 + prec:%05.3f\n",fl2);
+    testcase("size + 0 + prec + hash:%0#5.0f\n",fl2);
+    testcase("size + minus + prec:%-5.3f\n",fl2);
+    testcase("size + minus + prec + hash:%-#5.0f\n",fl2);
+    testcase("size + plus + 0 + prec:%+05.3f\n",fl2);
+    testcase("size + plus + 0 + prec + hash:%0+#5.0f\n",fl2);
+    testcase("size + espace + zero + prec:%0 5.3f\n",fl2);
+    testcase("size + espace + zero + prec:% 05.3f\n",fl2);
+    testcase("size + espace + zero + prec + hash:%#0 5.0f\n",fl2);
+    testcase("size + minus + plus + prec:%-+5.3f\n",fl2);
+    testcase("size + minus + plus + prec + hash:%-#+5.0f\n",fl2);
 
     // testcase("%.20f\n", 1.0 / 3.0);
     // testcase("%.20Lf\n", 1.0L / 3.0L);
