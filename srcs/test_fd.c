@@ -18,6 +18,11 @@ fprintf(stderr, msg, __VA_ARGS__); current_test_result = -1;                    
 static  int tests_total = 0;
 static  int tests_failures = 0;
 
+
+FILE *fd_oracle_p = NULL;
+FILE *fd_test_p = NULL;
+
+
 void     testcase(const char *fmt, ...)
 {
 
@@ -30,9 +35,37 @@ void     testcase(const char *fmt, ...)
     char dyn_fmt[ft_strlen(fmt) + 1];
     strcpy(dyn_fmt, fmt);
     /* Open a file for each */
-    int fd_oracle = fileno(tmpfile());
-    int fd_test = fileno(tmpfile());
-    if (fd_oracle == -1 || fd_test == -1) { FAIL_AND_EXIT("Cannot create temp file\n"); }
+    if (fd_oracle_p == NULL) {
+        fd_oracle_p = tmpfile();
+        if (fd_oracle_p == NULL)
+        {
+            FAIL_AND_EXIT("Cannot create temp file\n");
+        }
+    } else {
+        ftruncate(fileno(fd_oracle_p), 0);
+    }
+    // FILE *fd_oracle_p = tmpfile();
+    // if (fd_oracle_p == NULL)
+    // {
+    //     FAIL_AND_EXIT("Cannot create temp file\n");
+    // }
+    int fd_oracle = fileno(fd_oracle_p);
+
+    if (fd_test_p == NULL) {
+        fd_test_p = tmpfile();
+        if (fd_test_p == NULL)
+        {
+            FAIL_AND_EXIT("Cannot create temp file\n");
+        }
+    } else {
+        ftruncate(fileno(fd_test_p), 0);
+    }
+    // FILE *fd_test_p = tmpfile();
+    // if (fd_test_p == NULL)
+    // { 
+    //     FAIL_AND_EXIT("Cannot create temp file\n");
+    // }
+    int fd_test = fileno(fd_test_p);
     /* Run the implementations */
     int ret_oracle = ORACLE_DPRINTF(fd_oracle, dyn_fmt, args1);
     int ret_test = TEST_DPRINTF(fd_test, dyn_fmt, args2);
@@ -53,8 +86,8 @@ void     testcase(const char *fmt, ...)
         FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
     }
     /* Cleanup */
-    close(fd_oracle);
-    close(fd_test);
+    // close(fd_oracle);
+    // close(fd_test);
     tests_total += 1;
     if (current_test_result == 0)
     {
@@ -72,7 +105,7 @@ void     testcase(const char *fmt, ...)
 int main()
 {
 
-#if 0
+#if 1
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -104,7 +137,7 @@ testcase("%+u|", 4294967295);
 
 //type f
 
-#if 0
+#if 1
     //     float      fl2;
     //    fl2 = -0.000;
 
@@ -280,7 +313,7 @@ testcase("%+u|", 4294967295);
 
 #endif
 
-#if 0
+#if 1
     double db = 0;
     // testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
     testcase("test basique:");
@@ -319,7 +352,7 @@ testcase("%+u|", 4294967295);
 
 #endif
 
-#if 0
+#if 1
     double db2 = 45.123456789;
     testcase("size + espace + zero + prec:%010.0f\n", db2);
     testcase("size + espace + zero + prec:%0 10.2f\n", db2);
@@ -366,7 +399,7 @@ testcase("%+u|", 4294967295);
 
 #endif
 
-#if 0
+#if 1
     // testcase("%2c", 0);
     testcase("%.0%");
     testcase("");
@@ -391,7 +424,7 @@ testcase("%+u|", 4294967295);
     testcase("% u", 4294967295);
     testcase("%+u", 4294967295);
 #endif
-#if 0
+#if 1
 // random Strings
     testcase("#nyancat inside");
     testcase("\x7f");
@@ -433,7 +466,7 @@ testcase("%+u|", 4294967295);
     testcase("% c", 0);
 #endif
 
-#if 0
+#if 1
  // type s
     testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
     testcase("%2s%c\n", "bonjour", 'a');
@@ -469,7 +502,7 @@ testcase("%+u|", 4294967295);
     testcase("empty:%23s", "");
 
 #endif
-#if 0
+#if 1
 
 //type d
     testcase("max int :  %d", INT16_MAX);
@@ -500,7 +533,7 @@ testcase("%+u|", 4294967295);
     testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 #endif
 
-#if 0
+#if 1
 // type oxX
 
 
@@ -538,7 +571,7 @@ testcase("%+u|", 4294967295);
     testcase("%#10.7hhX|\n", 9287539484444);
 #endif
 
-#if 0
+#if 1
 // type u
     unsigned int        un_int;
     un_int = 0;

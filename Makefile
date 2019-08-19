@@ -12,7 +12,7 @@
 
 .PHONY: all clean fclean re
 
-CC = gcc
+CC ?= gcc
 
 CFLAGS = -g
 
