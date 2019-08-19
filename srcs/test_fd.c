@@ -35,36 +35,28 @@ void     testcase(const char *fmt, ...)
     char dyn_fmt[ft_strlen(fmt) + 1];
     strcpy(dyn_fmt, fmt);
     /* Open a file for each */
-    if (fd_oracle_p == NULL) {
+    if (fd_oracle_p == NULL) 
+    {
         fd_oracle_p = tmpfile();
         if (fd_oracle_p == NULL)
-        {
             FAIL_AND_EXIT("Cannot create temp file\n");
-        }
-    } else {
+    } 
+    else 
         ftruncate(fileno(fd_oracle_p), 0);
-    }
-    // FILE *fd_oracle_p = tmpfile();
-    // if (fd_oracle_p == NULL)
-    // {
-    //     FAIL_AND_EXIT("Cannot create temp file\n");
-    // }
     int fd_oracle = fileno(fd_oracle_p);
 
-    if (fd_test_p == NULL) {
+    if (fd_test_p == NULL) 
+    {
         fd_test_p = tmpfile();
         if (fd_test_p == NULL)
         {
             FAIL_AND_EXIT("Cannot create temp file\n");
         }
-    } else {
+    } 
+    else 
+    {
         ftruncate(fileno(fd_test_p), 0);
     }
-    // FILE *fd_test_p = tmpfile();
-    // if (fd_test_p == NULL)
-    // { 
-    //     FAIL_AND_EXIT("Cannot create temp file\n");
-    // }
     int fd_test = fileno(fd_test_p);
     /* Run the implementations */
     int ret_oracle = ORACLE_DPRINTF(fd_oracle, dyn_fmt, args1);
@@ -85,14 +77,12 @@ void     testcase(const char *fmt, ...)
     if (strcmp(out_oracle, out_test)) {
         FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
     }
-    /* Cleanup */
-    // close(fd_oracle);
-    // close(fd_test);
+
     tests_total += 1;
     if (current_test_result == 0)
     {
         printf(".");
-        /* show printed */
+        /* show printed content */
         printf("%s\n",out_test);
     }
     else
@@ -623,7 +613,8 @@ testcase("%+u|", 4294967295);
     // testcase("one%#sf|\n", 1);   printf seg fault in this case
 
 
-
+    fclose(fd_oracle_p);
+    fclose(fd_test_p);
 #endif
     if (tests_failures)
     {
