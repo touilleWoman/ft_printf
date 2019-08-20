@@ -79,7 +79,7 @@ void     testcase(const char *fmt, ...)
     out_oracle[out_size_oracle] = '\0';
     out_test[out_size_test] = '\0';
     if (out_size_test != out_size_oracle) {
-        FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
+        FAIL("`%s` printed nb differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
     }
     else
     {
@@ -95,7 +95,7 @@ void     testcase(const char *fmt, ...)
     {
         printf(".");
         /* show printed content */
-        // printf("%s\n",out_test);
+        printf("%s\n",out_test);
     }
     else
         tests_failures += 1;
@@ -108,7 +108,7 @@ int main()
 {
     // testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 
-#if 1
+#if 0
 // flag *
 
 	testcase("%*.*d", 8, 7, 1000);
@@ -117,7 +117,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -153,121 +153,124 @@ int main()
 //type f
 
 #if 1
-    // float      fl2;
-    // fl2 = -0.000;
+    float      fl2;
+    fl2 = -0.000;
 
-    // testcase("space:%f\n",fl2);
-    // testcase("space:% f\n",fl2);
-    // testcase("plus:%+f\n",fl2);
-    // testcase("hash:%#f\n",fl2);
-    // testcase("precision:%.2f\n",fl2);
-    // testcase("big prec:%.14f\n",fl2);
-    // testcase("precision + hash:%#.0f\n",fl2);
-    // testcase("space + prec:% .5f\n",fl2);
-    // testcase("space + prec + hash:%# .0f\n",fl2);
-    // testcase("space + prec + hash:% #.0f\n",fl2);
-    // testcase("Plus + prec / grande:%+.5f\n",fl2);
-    // testcase("Plus + prec / petite:%+.0f\n",fl2);
-    // testcase("Plus + prec + hash:%#+.0f\n",fl2);
-    // testcase("Prec + 0:%0.5f\n",fl2);
-    // testcase("Prec + minus:%-.5f\n",fl2);
-    // testcase("size:%5f\n",fl2);
-    // testcase("size + space:% 5f\n",fl2);
-    // testcase("size + plus:%+5f\n",fl2);
-    // testcase("size + space:%# 5f\n",fl2);
-    // testcase("size + plus:%#+5f\n",fl2);
-    // testcase("size + minus:%-5f\n",fl2);
-    // testcase("size + 0:%05f\n",fl2);
-    // testcase("size + 0 + plus:%+05f\n",fl2);
-    // testcase("size + 0 + plus:%0+5f\n",fl2);
-    // testcase("size + 0 + prec:%05.3f\n",fl2);
-    // testcase("size + 0 + prec + hash:%0#5.0f\n",fl2);
-    // testcase("size + minus + prec:%-5.3f\n",fl2);
-    // testcase("size + minus + prec + hash:%-#5.0f\n",fl2);
-    // testcase("size + plus + 0 + prec:%+05.3f\n",fl2);
-    // testcase("size + plus + 0 + prec + hash:%0+#5.0f\n",fl2);
-    // testcase("size + espace + zero + prec:%0 5.3f\n",fl2);
-    // testcase("size + espace + zero + prec:% 05.3f\n",fl2);
-    // testcase("size + espace + zero + prec + hash:%#0 5.0f\n",fl2);
-    // testcase("size + minus + plus + prec:%-+5.3f\n",fl2);
-    // testcase("size + minus + plus + prec + hash:%-#+5.0f\n",fl2);
+    testcase("%f\n",fl2);
+    testcase("space:% f\n",0.123);
+    testcase("space:% f\n",fl2);
+    testcase("plus:%+f\n",fl2);
+    testcase("hash:%#f\n",fl2);
+    testcase("precision:%.2f\n",fl2);
+    testcase("big prec:%.14f\n",fl2);
+    testcase("precision + hash:%#.0f\n",fl2);
+    testcase("space + prec:% .5f\n",fl2);
+    testcase("space + prec + hash:%# .0f\n",fl2);
+    testcase("space + prec + hash:% #.0f\n",fl2);
+    testcase("Plus + prec / grande:%+.5f\n",fl2);
+    testcase("Plus + prec / petite:%+.0f\n",fl2);
+    testcase("Plus + prec + hash:%#+.0f\n",fl2);
+    testcase("Prec + 0:%0.5f\n",fl2);
+    testcase("Prec + minus:%-.5f\n",fl2);
+    testcase("size:%5f\n",fl2);
+    testcase("size + space:% 5f\n",fl2);
+    testcase("size + plus:%+5f\n",fl2);
+    testcase("size + space:%# 5f\n",fl2);
+    testcase("size + plus:%#+5f\n",fl2);
+    testcase("size + minus:%-5f\n",fl2);
+    testcase("size + 0:%05f\n",fl2);
+    testcase("size + 0 + plus:%+05f\n",fl2);
+    testcase("size + 0 + plus:%0+5f\n",fl2);
+    testcase("size + 0 + prec:%05.3f\n",fl2);
+    testcase("size + 0 + prec + hash:%0#5.0f\n",fl2);
+    testcase("size + minus + prec:%-5.3f\n",fl2);
+    testcase("size + minus + prec + hash:%-#5.0f\n",fl2);
+    testcase("size + plus + 0 + prec:%+05.3f\n",fl2);
+    testcase("size + plus + 0 + prec + hash:%0+#5.0f\n",fl2);
+    testcase("size + espace + zero + prec:%0 5.3f\n",fl2);
+    testcase("size + espace + zero + prec:% 05.3f\n",fl2);
+    testcase("size + espace + zero + prec + hash:%#0 5.0f\n",fl2);
+    testcase("size + minus + plus + prec:%-+5.3f\n",fl2);
+    testcase("size + minus + plus + prec + hash:%-#+5.0f\n",fl2);
 
     // testcase("%.20f\n", 1.0 / 3.0);
     // testcase("%.20Lf\n", 1.0L / 3.0L);
 
-        // double      db4;
+    //     double      db4;
 
-        // db4 = 1.0/0.0;
-        // testcase("%f\n", db4);
-        // testcase("%12f\n", db4);
-        // testcase("%-12f\n", db4);
-        // testcase("%5.9f\n", db4);
-
-
-        // db4 = -1.0/0.0;
-        // testcase("%f\n", db4);
-        // testcase("%12f\n", db4);
-        // testcase("%-12f\n", db4);
-        // testcase("%5.9f\n", db4);
+    //     db4 = 1.0/0.0;
+    //     testcase("%f\n", db4);
+    //     testcase("%12f\n", db4);
+    //     testcase("%-12f\n", db4);
+    //     testcase("%5.9f\n", db4);
 
 
-        // db4 = 0.0/0.0;
-        // testcase("%f\n", db4);
-        // testcase("%12f\n", db4);
-        // testcase("%-12f\n", db4);
-        // testcase("%5.9f\n", db4);
+    //     db4 = -1.0/0.0;
+    //     testcase("%f\n", db4);
+    //     testcase("%12f\n", db4);
+    //     testcase("%-12f\n", db4);
+    //     testcase("%5.9f\n", db4);
 
-    // float       fl;
-    // fl = 0;
+
+    //     db4 = 0.0/0.0;
+    //     testcase("%f\n", db4);
+    //     testcase("%12f\n", db4);
+    //     testcase("%-12f\n", db4);
+    //     testcase("%5.9f\n", db4);
+
+    float       fl;
+    fl = 0;
+    testcase("null prec : %+.0f\n", fl);
+    // fl = 12.5;
     // testcase("null prec : %+.0f\n", fl);
-    // // fl = 12.5;
-    // // testcase("null prec : %+.0f\n", fl);
-    // fl = -25632.2541;
-    // testcase("null prec : %+.0f\n", fl);
-    // fl = -1.0123;
-    // testcase("null prec : %+.0f\n", fl);
-    // fl = 12354;
-    // testcase("null prec : %+.0f\n", fl);
-    //     double      db3;
-    //     db3 = 12389123798;
+    fl = -25632.2541;
+    testcase("null prec : %+.0f\n", fl);
+    fl = -1.0123;
+    testcase("null prec : %+.0f\n", fl);
+    fl = 12354;
+    testcase("null prec : %+.0f\n", fl);
 
-    //     testcase("space:%lf\n", db3);
-    //     testcase("space:% f\n", db3);
-    //     testcase("plus:%+f\n", db3);
-    //     testcase("hash:%#f\n", db3);
-    //     testcase("precision:%.2f\n", db3);
-    //    testcase("big prec:%.14f\n", db3);
-    //     testcase("precision + hash:%#.0f\n", db3);
-    //     testcase("space + prec:% .5f\n", db3);
-    //     testcase("space + prec + hash:%# .0f\n", db3);
-    //     testcase("space + prec + hash:% #.0f\n", db3);
-    //     testcase("Plus + prec / grande:%+.5f\n", db3);
-    //     testcase("Plus + prec / petite:%+.0f\n", db3);
-    //     testcase("Plus + prec + hash:%#+.0f\n", db3);
-    //     testcase("Prec + 0:%0.5f\n", db3);
-    //     testcase("Prec + minus:%-.5f\n", db3);
-    //     testcase("size:%5f\n", db3);
-    //     testcase("size + space:% 5f\n", db3);
-    //     testcase("size + plus:%+5f\n", db3);
-    //     testcase("size + space:%# 5f\n", db3);
-    //     testcase("size + plus:%#+5f\n", db3);
-    //     testcase("size + minus:%-5f\n", db3);
-    //     testcase("size + 0:%05f\n", db3);
-    //     testcase("size + 0 + plus:%+05f\n", db3);
-    //     testcase("size + 0 + plus:%0+5f\n", db3);
-    //     testcase("size + 0 + prec:%05.3f\n", db3);
-    //     testcase("size + 0 + prec + hash:%0#5.0f\n", db3);
-    //     testcase("size + minus + prec:%-5.3f\n", db3);
-    //     testcase("size + minus + prec + hash:%-#5.0f\n", db3);
-    //     testcase("size + plus + 0 + prec:%+05.3f\n", db3);
-    //     testcase("size + plus + 0 + prec + hash:%0+#5.0f\n", db3);
-    //     testcase("size + espace + zero + prec:%0 5.3f\n", db3);
-    //     testcase("size + espace + zero + prec:% 05.3f\n", db3);
-    //     testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db3);
-    //     testcase("size + minus + plus + prec:%-+5.3f\n", db3);
-    //     testcase("size + minus + plus + prec + hash:%-#+5.0f\n", db3);
+    
+    double      db3;
+    db3 = 12389123798;
+
+    testcase("space:%lf\n", db3);
+    testcase("space:% f\n", db3);
+    testcase("plus:%+f\n", db3);
+    testcase("hash:%#f\n", db3);
+    testcase("precision:%.2f\n", db3);
+    testcase("big prec:%.14f\n", db3);
+    testcase("precision + hash:%#.0f\n", db3);
+    testcase("space + prec:% .5f\n", db3);
+    testcase("space + prec + hash:%# .0f\n", db3);
+    testcase("space + prec + hash:% #.0f\n", db3);
+    testcase("Plus + prec / grande:%+.5f\n", db3);
+    testcase("Plus + prec / petite:%+.0f\n", db3);
+    testcase("Plus + prec + hash:%#+.0f\n", db3);
+    testcase("Prec + 0:%0.5f\n", db3);
+    testcase("Prec + minus:%-.5f\n", db3);
+    testcase("size:%5f\n", db3);
+    testcase("size + space:% 5f\n", db3);
+    testcase("size + plus:%+5f\n", db3);
+    testcase("size + space:%# 5f\n", db3);
+    testcase("size + plus:%#+5f\n", db3);
+    testcase("size + minus:%-5f\n", db3);
+    testcase("size + 0:%05f\n", db3);
+    testcase("size + 0 + plus:%+05f\n", db3);
+    testcase("size + 0 + plus:%0+5f\n", db3);
+    testcase("size + 0 + prec:%05.3f\n", db3);
+    testcase("size + 0 + prec + hash:%0#5.0f\n", db3);
+    testcase("size + minus + prec:%-5.3f\n", db3);
+    testcase("size + minus + prec + hash:%-#5.0f\n", db3);
+    testcase("size + plus + 0 + prec:%+05.3f\n", db3);
+    testcase("size + plus + 0 + prec + hash:%0+#5.0f\n", db3);
+    testcase("size + espace + zero + prec:%0 5.3f\n", db3);
+    testcase("size + espace + zero + prec:% 05.3f\n", db3);
+    testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db3);
+    testcase("size + minus + plus + prec:%-+5.3f\n", db3);
+    testcase("size + minus + plus + prec + hash:%-#+5.0f\n", db3);
 #endif
-#if 1
+#if 0
     testcase("%p", NULL);
     // testcase(NULL);
     testcase("six%f|\n", 6.0);
@@ -328,7 +331,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
 	double db = 0;
 	// testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
 	testcase("test basique:");
@@ -367,7 +370,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
 	double db2 = 45.123456789;
 	testcase("size + espace + zero + prec:%010.0f\n", db2);
 	testcase("size + espace + zero + prec:%0 10.2f\n", db2);
@@ -414,7 +417,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
 	// testcase("%2c", 0);
 	testcase("%.0%");
 	testcase("");
@@ -439,7 +442,7 @@ int main()
 	testcase("% u", 4294967295);
 	testcase("%+u", 4294967295);
 #endif
-#if 1
+#if 0
 
 // type c
     testcase("{%3c}\n", 0);
@@ -455,7 +458,7 @@ int main()
 	testcase("% c", 0);
 #endif
 
-#if 1
+#if 0
  // type s
     testcase("#nyancat inside");
     testcase("\x7f");
@@ -520,7 +523,7 @@ int main()
 	testcase("empty:%23s", "");
 
 #endif
-#if 1
+#if 0
 
 //type d
     testcase("{% 03d}", 0);
@@ -552,7 +555,7 @@ int main()
 	testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 #endif
 
-#if 1
+#if 0
 // type oxX
 
 
@@ -590,7 +593,7 @@ int main()
 	testcase("%#10.7hhX|\n", 9287539484444);
 #endif
 
-#if 1
+#if 0
 // type u
     unsigned int        un_int;
     un_int = 0;

@@ -157,26 +157,15 @@ void					write_fractionl_on_buf(char *buf, long double nbr,
 void					pf_dtoa(long double nbr, int precision,
 							char *buf, t_bool flag_hash)
 {
-	int			posi;
-	long long	int_part;
-	char		*str_int_part;
-	// union ieee854_long_double u;
-	// int is_neg = 0;
-	// u.d = nbr;
-	// if (u.ieee.negative != 0)
-	// {
-	// 	is_neg = 1;
-	// }
-	// printf("is_neg%d\n", is_neg);
-	int_part = (long long)nbr;
+	int				posi;
+	long long		int_part;
+
 	precision = (precision == 0 ? 6 : precision);
 	if (precision == PRECISION_NULL)
 		int_part = round_int_part(nbr);
-	str_int_part = ft_itoa(int_part);
-	ft_strcpy(buf, str_int_part);
-	free(str_int_part);
-	str_int_part = NULL;
-	posi = 0;
+	else
+		int_part = (long long)nbr;
+	pf_itoa_base(int_part, 10, NULL, buf);
 	posi = ft_strlen(buf);
 	if (precision == PRECISION_NULL && flag_hash == FALSE)
 		return ;
@@ -193,10 +182,22 @@ int						print_f(int fd, t_unit *unit)
 {
 	unsigned int	dy_len;
 	char			s[unit->val.f.precision + unit->val.f.width + 30];
+	int 			neg_sign;
+	long double 	abs_doub;
 
-	pf_dtoa(unit->val.f.doub, unit->val.f.precision, s, unit->val.f.flag_hash);
+	neg_sign = 0;
+	ft_memset(s, 0, unit->val.f.precision + unit->val.f.width + 30);
+	if(1.0 / unit->val.f.doub < 0)
+	{
+		*s = '-';
+		abs_doub = -(unit->val.f.doub);
+		neg_sign = 1;
+	}
+	else
+		abs_doub = (unit->val.f.doub);
+	pf_dtoa(abs_doub, unit->val.f.precision, s + neg_sign, unit->val.f.flag_hash);
 	dy_len = ft_strlen(s);
-	if (unit->val.f.doub >= 0)
+	if (neg_sign == 0)
 		dy_len = f_flag_plus_and_blank(s, dy_len, unit);
 	dy_len = f_width_handler(s, dy_len, unit, unit->val.f.width);
 	write(fd, s, dy_len);
