@@ -26,7 +26,7 @@ static char 	*type_p_get_flags(char *buf, int buf_len, t_unit *unit)
 	return (buf);
 }
 
-static char *type_p_width_precision_check(char *buf, t_unit *unit)
+static char 	*type_p_get_width(char *buf, t_unit *unit)
  {
 	int		digits;
 	int		digits_len;
@@ -38,18 +38,33 @@ static char *type_p_width_precision_check(char *buf, t_unit *unit)
 		unit->val.p.width = digits;
 		buf += digits_len;
 	}
+	return (buf);
+}
+
+static char 	*type_p_null_precision_check(char *buf, t_unit *unit)
+ {
+	int		digits;
+	int		digits_len;
+
+ 	digits = 0;
 	if (*buf == '.')
 	{
 		buf++;
 		digits_len = get_digits(&digits, buf, ft_strlen(buf));
-		if (digits_len)
+		if (digits_len == 0 || (digits_len == 1 && digits == 0))
 		{
-			ft_putstr_fd("warning:'p' conversion specifier doesn't take precision\n", 2);
+			unit->val.p.precision = PRECISION_NULL;
+			buf += digits_len;
+		}
+		else
+		{
+			ft_putstr_fd("format error : non-null precision is ignored with %p\n", 2);
 			buf += digits_len;
 		}
 	}
 	return (buf);
 }
+
 
 static char		*type_p_modifier_check(char *buf)
 {
@@ -76,13 +91,14 @@ static char		*type_p_modifier_check(char *buf)
 	return (buf);
 }
 
-int			parse_p(t_list **alst, char *buf, va_list args)
+int				parse_p(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_p_get_flags(buf, ft_strlen(buf), &unit);
-	buf = type_p_width_precision_check(buf, &unit);
+	buf = type_p_get_width(buf, &unit);
+	buf = type_p_null_precision_check(buf, &unit);
 	buf = type_p_modifier_check(buf);
 	if (*buf != 'p')
 		return (ERROR);
@@ -91,4 +107,3 @@ int			parse_p(t_list **alst, char *buf, va_list args)
 	unit_lstadd_bot(alst, &unit);
 	return (0);
 }
-

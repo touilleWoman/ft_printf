@@ -66,6 +66,7 @@ int		ft_printf(const char * restrict format, ...)
 	va_list			args;
 	int				printed_nb;
 
+
 	va_start(args, format);
 	printed_nb = ft_vdprintf(STD_OUT, format, args);
 	va_end(args);

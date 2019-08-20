@@ -1,7 +1,6 @@
 
 #include "ft_printf.h"
 
-
 static char		*type_s_get_flags_and_width(char *buf,
 	t_unit *unit, int buf_len)
 {
@@ -36,18 +35,11 @@ static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit)
 	{
 		buf++;
 		digits_len = get_digits(&digits, buf, ft_strlen(buf));
-		if (digits_len == 0)
+		if (digits_len == 0 || (digits_len == 1 && digits == 0))
 			unit->val.s.precision = PRECISION_NULL;
-		else if (digits_len == 1 && digits == 0)
-		{
-			unit->val.s.precision = PRECISION_NULL;
-			buf++;
-		}
 		else
-		{
 			unit->val.s.precision = digits;
-			buf += digits_len;
-		}
+		buf += digits_len;
 	}
 	if (*buf == 'l')
 	{
@@ -64,11 +56,8 @@ int			parse_s(t_list **alst, char *buf, va_list args)
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_s_get_flags_and_width(buf, &unit, ft_strlen(buf));
 	buf = type_s_get_precision_and_modifier(buf, &unit);
-	// if (*buf != 's')
-	// {
-	// 	freelst_and_errormsg(*alst, "error: %s format wrong\n");
-	// 	return (ERROR);
-	// }
+	if (*buf != 's')
+		return (ERROR);
 	unit.type = TYPE_S;
 	if ((unit.val.s.string = va_arg(args, char *)) == NULL)
 		unit.val.s.string = "(null)";

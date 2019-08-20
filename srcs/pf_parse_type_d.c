@@ -50,12 +50,10 @@ static char		*type_d_get_precision(char *buf, t_unit *unit)
 		{
 			buf++;
 			digits_len = get_digits(&digits, buf, ft_strlen(buf));
-			if (digits_len == 0)
-				unit->val.d.precision = PRECISION_NULL;
-			else if (digits_len == 1 && digits == 0)
+			if (digits_len == 0 || (digits_len == 1 && digits == 0))
 			{
 				unit->val.d.precision = PRECISION_NULL;
-				buf++;
+				buf += digits_len;
 			}
 			else
 			{

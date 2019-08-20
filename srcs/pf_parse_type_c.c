@@ -10,13 +10,13 @@ static char		*type_c_get_flags(char *buf, t_unit *unit, int buf_len)
 	{
 		(ft_strchr(flags, '-')) ? unit->val.c.flag_minus = TRUE : 0;
 		// if (ft_strchr(flags, ' '))
-		// 	ft_putstr_fd("warning : flag' ' is ignored with %c\n", 2);
+		// 	ft_putstr_fd("format error : flag' ' is ignored with %c\n", 2);
 		// if (ft_strchr(flags, '+'))
-		// 	ft_putstr_fd("warning : flag'+' is ignored with %c\n", 2);
+		// 	ft_putstr_fd("format error : flag'+' is ignored with %c\n", 2);
 		// if (ft_strchr(flags, '#'))
-		// 	ft_putstr_fd("warning : flag'#' is ignored with %c\n", 2);
+		// 	ft_putstr_fd("format error : flag'#' is ignored with %c\n", 2);
 		// if (ft_strchr(flags, '0'))
-		// 	ft_putstr_fd("warning : flag'0' is ignored with %c\n", 2);
+		// 	ft_putstr_fd("format error : flag'0' is ignored with %c\n", 2);
 		buf += flags_len;
 	}
 	return (buf);
@@ -36,7 +36,7 @@ static char		*type_c_width_precision_handler(char *buf, t_unit *unit)
 	}
 	if (*buf == '.')
 	{
-		// ft_putstr_fd("warning : precesion value is ignored with %c\n", 2);
+		// ft_putstr_fd("format error : precesion value is ignored with %c\n", 2);
 		buf++;
 		while (ft_isdigit(*buf))
 			buf++;

@@ -116,6 +116,7 @@ typedef struct		s_type_p
 {
 	t_bool			flag_minus;
 	int				width;
+	unsigned int	precision;
 	uintmax_t		pointer;
 }					t_type_p;
 
