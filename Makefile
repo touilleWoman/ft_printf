@@ -29,7 +29,6 @@ SOURCE_NAME = ft_printf.c \
 					pf_parse_type_oxx.c\
 					pf_parse_type_u.c\
 					pf_unit_list.c\
-					pf_field_check.c \
 					pf_print_c_s_ltr.c\
 					pf_print_d.c\
 					pf_print_p.c\

@@ -110,16 +110,12 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
+    // testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 
-    testcase("{% 03d}", 0);
-    testcase("% u", 4294967295);
-	// testcase("%*.*d", 8, 7, 1000);
-	// testcase("%*.*d", 0, 3, 0);
-	// testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
-	// testcase("%*d", 5, 42);
-    testcase("%c\n", 0);
-	testcase("{%3c}\n", 0);
-	// testcase("{% 03d}", 0);
+// flag *
+	testcase("%*.*d", 8, 7, 1000);
+	testcase("%*.*d", 0, 3, 0);
+	testcase("%*d", 5, 42);
 #if 0
     // // type p
     char *ptr = "pointer test";
@@ -155,9 +151,9 @@ int main()
 
 //type f
 
-#if 0
-        float      fl2;
-       fl2 = -0.000;
+#if 1
+    float      fl2;
+    fl2 = -0.000;
 
     testcase("test basique:");
     testcase("space:% f\n",fl2);
@@ -331,7 +327,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
 	double db = 0;
 	// testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
 	testcase("test basique:");
@@ -443,36 +439,10 @@ int main()
 	testcase("%+u", 4294967295);
 #endif
 #if 0
-// random Strings
-	testcase("#nyancat inside");
-	testcase("\x7f");
-	testcase("The Game.");
-	testcase("I know what you are doing.");
-	testcase("You should better not go to sleep.");
-	testcase("Drop the keyboard and RUN!");
-	testcase("Any invalid command will remove a random file from your home.");
-	testcase("You will die before this tests ends.");
-	testcase("I love the smell of bugs in the morning.");
-	testcase("What do you want to debug today?");
-	testcase("rm: /: Permission denied.");
-	testcase("Already up-to-date.");
-	testcase(":(){ :|:& };:");
-	testcase("Do you want to print 333.5K chars? (y/N)");
-	testcase("Try with ASAN, and be amazed");
-	testcase("Remember that word: C H A I R");
-	testcase("Good morning, pal *<:-)");
-	testcase("WASTED");
-	testcase("Too old to crash");
-	testcase("don’t feed the bugs! (except delicious stacktraces)!");
-	testcase("Beer in mind.");
-	testcase("3nl4r9e y0\\/r pr1ntf");
-	testcase("Don't do this.");
-	testcase("No fix, no sleep");
-	testcase("/dev/brain: No such file or directory.");
-	testcase("こんにちは、私はprintf単体テストです");
-	testcase("中文测试");
 
 // type c
+    testcase("{%3c}\n", 0);
+    testcase("%c\n", 0);
 	testcase("okone%-20coktwo%-lcokthree\n", 'a', (wchar_t)'b');
 	testcase("okone%-20coktwo%-lcokthree\n", 'a', 'b');
 	testcase("%c%12c%%%%oktwo%-lcokthree%-10c%50c\n",'a', 'b', 'c', 'd', 'e');
@@ -486,6 +456,34 @@ int main()
 
 #if 0
  // type s
+    testcase("#nyancat inside");
+    testcase("\x7f");
+    testcase("The Game.");
+    testcase("I know what you are doing.");
+    testcase("You should better not go to sleep.");
+    testcase("Drop the keyboard and RUN!");
+    testcase("Any invalid command will remove a random file from your home.");
+    testcase("You will die before this tests ends.");
+    testcase("I love the smell of bugs in the morning.");
+    testcase("What do you want to debug today?");
+    testcase("rm: /: Permission denied.");
+    testcase("Already up-to-date.");
+    testcase(":(){ :|:& };:");
+    testcase("Do you want to print 333.5K chars? (y/N)");
+    testcase("Try with ASAN, and be amazed");
+    testcase("Remember that word: C H A I R");
+    testcase("Good morning, pal *<:-)");
+    testcase("WASTED");
+    testcase("Too old to crash");
+    testcase("don’t feed the bugs! (except delicious stacktraces)!");
+    testcase("Beer in mind.");
+    testcase("3nl4r9e y0\\/r pr1ntf");
+    testcase("Don't do this.");
+    testcase("No fix, no sleep");
+    testcase("/dev/brain: No such file or directory.");
+    testcase("こんにちは、私はprintf単体テストです");
+    testcase("中文测试");
+
 	testcase("%4.s", "42");
 	testcase("%10.2s_unit2_%-20.5s\n", "bonjour", "ca va");
 	testcase("%2s%c\n", "bonjour", 'a');
@@ -524,6 +522,7 @@ int main()
 #if 0
 
 //type d
+    testcase("{% 03d}", 0);
 	testcase("max int :  %d", INT16_MAX);
 	testcase("min int :  %d", INT16_MIN);
 	testcase("max int :  %d", INT32_MAX);

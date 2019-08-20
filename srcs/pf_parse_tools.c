@@ -12,6 +12,13 @@
 
 #include "ft_printf.h"
 
+int		is_conversion(char c)
+{
+	if (ft_strchr("cspdfiouxX%", c) == 0)
+		return (FALSE);
+	return (TRUE);
+}
+
 int				get_digits(int *digits, char *buf, int buf_len)
 {
 	int		i;
