@@ -75,7 +75,7 @@ static unsigned int	oxx_width_handler(char *s, int dy_len, t_unit *unit, int wid
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
 		sub_oxx_width_handler(s, dy_len, unit, width);
-	s[width] = '\0';
+	// s[width] = '\0';
 	return (width);
 }
 
@@ -131,6 +131,7 @@ int					print_oxx(int fd, t_unit *unit)
 	if (unit->val.oxx.flag_hash == TRUE && unit->val.oxx.un_int != 0)
 		dy_len = oxx_prefix_handler(s, dy_len, unit->val.oxx.sub_type);
 	dy_len = oxx_width_handler(s, dy_len, unit, unit->val.oxx.width);
-	ft_putstr_fd(s, fd);
+	write(fd, s, dy_len);
+	// ft_putstr_fd(s, fd);
 	return (dy_len);
 }

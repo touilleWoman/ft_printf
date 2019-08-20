@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	freelst_and_errormsg(t_list *lst, char *msg)
+void	freelst(t_list *lst)
 {
 	t_unit		*unit;
 	t_list		*keep;
@@ -21,17 +21,11 @@ void	freelst_and_errormsg(t_list *lst, char *msg)
 	{
 		keep = lst->next;
 		unit = unit_access(lst);
-		// if (unit->type == TYPE_LTR)
-		// {
-		// 	free(unit->val.ltr.literal);
-		// 	unit->val.ltr.literal = NULL;
-		// }
 		free(lst->content);
 		lst->content = NULL;
 		free(lst);
 		lst = keep;
 	}
-	ft_putstr_fd(msg, 2);
 }
 
 

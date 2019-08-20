@@ -64,7 +64,8 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 	return (0);
 }
 
-static int		parse_percent_substring(const char *capsule, t_list **alst, va_list args, int *r_capsule_ok)
+static int		parse_percent_substring(const char *capsule, t_list **alst,
+											va_list args, int *r_capsule_ok)
 {
 	int end;
 	int ret;
@@ -77,11 +78,11 @@ static int		parse_percent_substring(const char *capsule, t_list **alst, va_list 
 	return (end + 1);
 }
 
-static int		parse_literal_substring(const char *capsule, t_list **alst, int *r_capsule_ok)
+static int		parse_literal_substring(const char *capsule, t_list **alst,
+										int *r_capsule_ok)
 {
 	int			i;
 	t_unit		unit;
-
 
 	*r_capsule_ok = TRUE;
 	i = 0;
@@ -100,24 +101,23 @@ t_list		*parse_string(const char *format, va_list args, int *r_format_ok)
 {
 	int		i;
 	int		ret;
-	int		substring_format_ok;
+	int		substr_format_ok;
 	t_list	*lst;
-	int		len;
 
 	*r_format_ok = TRUE;
 	lst = NULL;
 	i = 0;
-	len = ft_strlen(format);
-	while (i < len)
+	while (i < ft_strlen(format))
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			i += parse_percent_substring(format + i, &lst, args, &substring_format_ok);
+			i += parse_percent_substring(format + i, &lst,
+									args, &substr_format_ok);
 		}
 		else
-			i += parse_literal_substring(format + i, &lst, &substring_format_ok);
-		if (!substring_format_ok)
+			i += parse_literal_substring(format + i, &lst, &substr_format_ok);
+		if (!substr_format_ok)
 			*r_format_ok = FALSE;
 	}
 	// show_list(lst);

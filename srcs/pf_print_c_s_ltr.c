@@ -20,19 +20,18 @@ int		print_ltr(int fd, t_unit *unit)
 
 int		print_c(int fd, t_unit *unit)
 {
-	char	s[unit->val.c.width + 1];
+	char	s[unit->val.c.width];
 	int		width;
 
 	width = unit->val.c.width;
 	if (width)
 	{
-		s[width] = '\0';
 		ft_memset(s, ' ', width);
 		if (unit->val.c.flag_minus == FALSE)
 			s[width - 1] = unit->val.c.character;
 		else
 			s[0] = unit->val.c.character;
-		ft_putstr_fd(s, fd);
+		write(fd, s, width);
 		return (width);
 	}
 	write(fd, &(unit->val.c.character), 1);

@@ -14,8 +14,6 @@
 
 static char		*type_d_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 {
-	int		digits;
-	int		digits_len;
 	char	flags[buf_len];
 	int		flags_len;
 
@@ -31,37 +29,58 @@ static char		*type_d_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 			unit->val.d.flag_zero = TRUE;
 		buf += flags_len;
 	}
+	return (buf);
+}
+
+static char		*type_d_get_width(char *buf, t_unit *unit, va_list args)
+{
+	int		digits;
+	int		digits_len;
+
  	digits = 0;
-	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
+ 	if (*buf == '*')
 	{
-		unit->val.d.width = digits;
-		buf += digits_len;
+		unit->val.d.width = va_arg(args, int);
+		buf++;
+	}
+	else
+	{
+		digits_len = get_digits(&digits, buf, ft_strlen(buf));
+		if (digits_len)
+		{
+			unit->val.d.width = digits;
+			buf += digits_len;
+		}
 	}
 	return (buf);
 }
 
-static char		*type_d_get_precision(char *buf, t_unit *unit)
-{
-		int		digits;
-		int		digits_len;
 
-		digits = 0;
-		if (*buf == '.')
-		{
+static char		*type_d_get_precision(char *buf, t_unit *unit, va_list args)
+{
+	int		digits;
+	int		digits_len;
+
+	digits = 0;
+	if (*buf == '.')
+	{
+		buf++;
+		if (*buf == '*')
+		{	
+			unit->val.d.precision = va_arg(args, int);
 			buf++;
+		}
+		else
+		{
 			digits_len = get_digits(&digits, buf, ft_strlen(buf));
 			if (digits_len == 0 || (digits_len == 1 && digits == 0))
-			{
 				unit->val.d.precision = PRECISION_NULL;
-				buf += digits_len;
-			}
 			else
-			{
 				unit->val.d.precision = digits;
-				buf += digits_len;
-			}
+			buf += digits_len;
 		}
-		return (buf);
+	}
+	return (buf);
 }
 
 static char		*type_d_get_modifier(char *buf, t_unit *unit)
@@ -95,7 +114,8 @@ int			parse_d(t_list **alst, char *buf, va_list args)
 
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_d_get_flags_and_width(buf, &unit, ft_strlen(buf));
-	buf = type_d_get_precision(buf, &unit);
+	buf = type_d_get_width(buf, &unit, args);
+	buf = type_d_get_precision(buf, &unit, args);
 	buf = type_d_get_modifier(buf, &unit);
 	if (*buf != 'd' && *buf != 'i')
 		return (ERROR);

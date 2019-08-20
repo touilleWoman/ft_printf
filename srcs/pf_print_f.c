@@ -50,7 +50,7 @@ static unsigned int		f_width_handler(char *s, int dy_len, t_unit *unit,
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
 		sub_f_width_handler(s, dy_len, unit, width);
-	s[width] = '\0';
+	// s[width] = '\0';
 	return (width);
 }
 
@@ -192,6 +192,6 @@ int						print_f(int fd, t_unit *unit)
 	if (unit->val.f.doub >= 0)
 		dy_len = f_flag_plus_and_blank(s, dy_len, unit);
 	dy_len = f_width_handler(s, dy_len, unit, unit->val.f.width);
-	ft_putstr_fd(s, fd);
+	write(fd, s, dy_len);
 	return (dy_len);
 }

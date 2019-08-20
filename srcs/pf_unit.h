@@ -140,7 +140,7 @@ typedef struct		s_unit
 
 t_unit				*unit_access(t_list *lst);
 void				unit_lstadd_bot(t_list **alst, t_unit const *unit);
-void				freelst_and_errormsg(t_list *list, char *msg);
+void				freelst(t_list *list);
 void				show_list(t_list *lst);
 
 #endif

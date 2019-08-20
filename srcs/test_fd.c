@@ -78,10 +78,21 @@ void     testcase(const char *fmt, ...)
     read(fd_test, out_test, out_size_test);
     out_oracle[out_size_oracle] = '\0';
     out_test[out_size_test] = '\0';
-    if (strcmp(out_oracle, out_test)) 
-    {
+    if (out_size_test != out_size_oracle) {
         FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
     }
+    else
+    {
+        for (int i = 0; i < out_size_test; ++i)
+            if (out_test[i] != out_oracle[i]) {
+                FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
+                break;
+            }
+    }
+    // if (strcmp(out_oracle, out_test)) 
+    // {
+    //     FAIL("`%s` output differ: `%s` != `%s`\n", fmt, out_test, out_oracle);
+    // }
 
     tests_total += 1;
     if (current_test_result == 0)
@@ -100,14 +111,16 @@ void     testcase(const char *fmt, ...)
 int main()
 {
 
-
-	testcase("{%*3d}", 5, 0);
+    testcase("{% 03d}", 0);
+    testcase("% u", 4294967295);
+	// testcase("%*.*d", 8, 7, 1000);
 	// testcase("%*.*d", 0, 3, 0);
 	// testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 	// testcase("%*d", 5, 42);
-	// testcase("{%3c}", 0);
+    testcase("%c\n", 0);
+	testcase("{%3c}\n", 0);
 	// testcase("{% 03d}", 0);
-#if 1
+#if 0
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -134,9 +147,9 @@ int main()
     testcase("%-18p\n", &c);
     testcase("%42p\n", &c);
 #endif
-testcase("%2c", 0);
-testcase("% u|", 4294967295);
-testcase("%+u|", 4294967295);
+// testcase("%2c", 0);
+// testcase("% u|", 4294967295);
+// testcase("%+u|", 4294967295);
     // testcase("-------------------%lc", (wint_t)-1);
     // testcase("====================%+-5.3rc\n", 'n');
 

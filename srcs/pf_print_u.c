@@ -62,7 +62,7 @@ static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit,
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
 		sub_u_width_handler(s, dy_len, unit, width);
-	s[width] = '\0';
+	// s[width] = '\0';
 	return (width);
 }
 
@@ -80,9 +80,7 @@ int				print_u(int fd, t_unit *unit)
 	ft_memset(s, 0, unit->val.u.precision + unit->val.u.width + 50);
 	pf_itoa_base(unit->val.u.un_int, 10, unit, str_uint);
 	dy_len = u_precision_handler(s, str_uint, unit->val.u.precision, unit);
-	// free(str_uint);
-	// str_uint = NULL;
 	dy_len = u_width_handler(s, dy_len, unit, unit->val.u.width);
-	ft_putstr_fd(s, fd);
+	write(fd, s, dy_len);
 	return (dy_len);
 }

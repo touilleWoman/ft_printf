@@ -48,7 +48,7 @@ static void				sub_d_width_handler(char *s, int dy_len,
 	if (unit->val.d.flag_zero == TRUE && unit->val.d.precision == 0)
 	{
 		ft_memset(s, '0', width);
-		if (*s_keep == '-' || *s_keep == '+')
+		if (*s_keep == '-' || *s_keep == '+'|| *s_keep == ' ')
 		{
 			s[0] = s_keep[0];
 			mark = 1;
@@ -75,7 +75,7 @@ static unsigned int		d_width_handler(char *s, int dy_len,
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
 		sub_d_width_handler(s, dy_len, unit, width);
-	s[width] = '\0';
+	// s[width] = '\0';
 	return (width);
 }
 
@@ -121,6 +121,6 @@ int						print_d(int fd, t_unit *unit)
 	if (unit->val.d.integer >= 0)
 		dy_len = d_flag_plus_and_blank(s, dy_len, unit);
 	dy_len = d_width_handler(s, dy_len, unit, unit->val.d.width);
-	ft_putstr_fd(s, fd);
+	write(fd, s, dy_len);
 	return (dy_len);
 }

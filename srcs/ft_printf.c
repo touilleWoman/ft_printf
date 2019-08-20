@@ -52,10 +52,10 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 	if (lst != NULL)
 	{
 		printed_nb = print_list(fd, lst);
-		freelst_and_errormsg(lst, NULL);
+		freelst(lst);
 	}
 	// if (format_ok)
-		return (printed_nb);
+	return (printed_nb);
 // 	else
 // 		return (-1);
 }
@@ -65,7 +65,6 @@ int		ft_printf(const char * restrict format, ...)
 {
 	va_list			args;
 	int				printed_nb;
-
 
 	va_start(args, format);
 	printed_nb = ft_vdprintf(STD_OUT, format, args);
