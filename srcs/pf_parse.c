@@ -12,13 +12,11 @@
 
 #include "ft_printf.h"
 
-
 /*
 **	a capsule is defined as :
 ** 	[flags][width][precision][modifier][conversion][literal]
 **	excepte the first capsule which may contains only literal
 */
-
 
 static int		find_end_of_capsule(const char *format)
 {
@@ -29,7 +27,6 @@ static int		find_end_of_capsule(const char *format)
 	{
 		if (is_conversion(format[i]))
 			break;
-			// return (i + 1);
 		i++;
 	}
 	return (i);
@@ -39,7 +36,6 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 {
 	int					index;
 	char				buf[ft_strlen(capsule)];
-	int					len;
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
 		{'c', parse_c},{'s', parse_s}, {'d', parse_d}, {'i', parse_d},
 		{'f', parse_f}, {'p', parse_p}, {'o', parse_oxx}, {'x', parse_oxx}, {'X', parse_oxx},
@@ -99,10 +95,9 @@ static int		parse_literal_substring(const char *capsule, t_list **alst,
 
 t_list		*parse_string(const char *format, va_list args, int *r_format_ok)
 {
-	int		i;
-	int		ret;
-	int		substr_format_ok;
-	t_list	*lst;
+	size_t		i;
+	int			substr_format_ok;
+	t_list		*lst;
 
 	*r_format_ok = TRUE;
 	lst = NULL;

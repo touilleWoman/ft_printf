@@ -22,13 +22,13 @@ static char		*type_c_get_flags(char *buf, t_unit *unit, int buf_len)
 	return (buf);
 }
 
-static char		*type_c_width_precision_handler(char *buf, t_unit *unit)
+static char		*type_c_width_precision_handler(char *buf, t_unit *unit, va_list args)
 {
 	int		digits;
 	int		digits_len;
 
 	digits = 0;
-	digits_len = get_digits(&digits, buf, ft_strlen(buf));
+	digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
 	if (digits_len)
 	{
 		unit->val.c.width = digits;
@@ -36,7 +36,6 @@ static char		*type_c_width_precision_handler(char *buf, t_unit *unit)
 	}
 	if (*buf == '.')
 	{
-		// ft_putstr_fd("format error : precesion value is ignored with %c\n", 2);
 		buf++;
 		while (ft_isdigit(*buf))
 			buf++;
@@ -61,13 +60,10 @@ int				parse_c(t_list **alst, char *buf, va_list args)
 
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_c_get_flags(buf, &unit, ft_strlen(buf));
-	buf = type_c_width_precision_handler(buf, &unit);
+	buf = type_c_width_precision_handler(buf, &unit, args);
 	buf = type_c_get_modifier(buf, &unit);
-	// if (*buf != 'c')
-	// {
-	// 	freelst_and_errormsg(*alst, "error: %c format wrong\n");
-	// 	return (ERROR);
-	// }
+	if (*buf != 'c')
+		return (ERROR);
 	unit.type = TYPE_C;
 	if (unit.val.c.modifier_l == TRUE)
 		unit.val.c.character = (wchar_t)va_arg(args, wint_t);
@@ -83,7 +79,7 @@ int				parse_percent(t_list **alst, char *buf, va_list args)
 
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_c_get_flags(buf, &unit, ft_strlen(buf));
-	buf = type_c_width_precision_handler(buf, &unit);
+	buf = type_c_width_precision_handler(buf, &unit, args);
 	buf = type_c_get_modifier(buf, &unit);
 	unit.type = TYPE_C;
 	unit.val.c.character = '%';

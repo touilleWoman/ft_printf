@@ -126,12 +126,9 @@ int					print_oxx(int fd, t_unit *unit)
 	else
 		pf_itoa_base(unit->val.oxx.un_int, 16, unit, str_uint);
 	dy_len = oxx_precision_handler(s, str_uint, unit->val.oxx.precision, unit);
-	// free(str_uint);
-	// str_uint = NULL;
 	if (unit->val.oxx.flag_hash == TRUE && unit->val.oxx.un_int != 0)
 		dy_len = oxx_prefix_handler(s, dy_len, unit->val.oxx.sub_type);
 	dy_len = oxx_width_handler(s, dy_len, unit, unit->val.oxx.width);
 	write(fd, s, dy_len);
-	// ft_putstr_fd(s, fd);
 	return (dy_len);
 }

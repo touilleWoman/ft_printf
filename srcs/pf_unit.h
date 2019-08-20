@@ -77,17 +77,29 @@ typedef struct		s_type_d
 	intmax_t		integer;
 }					t_type_d;
 
-typedef struct		s_type_oxx
+typedef struct		s_type_b
 {
 	t_bool			flag_minus;
-	t_bool			flag_hash;
+	t_bool			flag_plus;
 	t_bool			flag_zero;
+	t_bool			flag_blank;
 	int				width;
-	int				precision;
-	int				modifier;
-	uintmax_t		un_int;
-	t_unit_type		sub_type;
-}					t_type_oxx;
+	unsigned int	precision;
+	intmax_t		integer;
+}					t_type_b;
+
+
+typedef struct			s_type_oxx
+{
+	t_bool				flag_minus;
+	t_bool				flag_hash;
+	t_bool				flag_zero;
+	int					width;
+	int					precision;
+	int					modifier;
+	unsigned long long	un_int;
+	t_unit_type			sub_type;
+}						t_type_oxx;
 
 typedef struct		s_type_u
 {
@@ -96,7 +108,7 @@ typedef struct		s_type_u
 	int				width;
 	unsigned int	precision;
 	int				modifier;
-	uintmax_t		un_int;
+	unsigned long long	un_int;
 }					t_type_u;
 
 typedef struct		s_type_f
@@ -116,7 +128,7 @@ typedef struct		s_type_p
 {
 	t_bool			flag_minus;
 	int				width;
-	unsigned int	precision;
+	int				precision;
 	uintmax_t		pointer;
 }					t_type_p;
 

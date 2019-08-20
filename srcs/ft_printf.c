@@ -55,9 +55,9 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 		freelst(lst);
 	}
 	// if (format_ok)
-	return (printed_nb);
-// 	else
-// 		return (-1);
+		return (printed_nb);
+	// else
+		// return (-1);
 }
 
 

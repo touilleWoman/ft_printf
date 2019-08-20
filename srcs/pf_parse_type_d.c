@@ -38,19 +38,11 @@ static char		*type_d_get_width(char *buf, t_unit *unit, va_list args)
 	int		digits_len;
 
  	digits = 0;
- 	if (*buf == '*')
+	digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
+	if (digits_len)
 	{
-		unit->val.d.width = va_arg(args, int);
-		buf++;
-	}
-	else
-	{
-		digits_len = get_digits(&digits, buf, ft_strlen(buf));
-		if (digits_len)
-		{
-			unit->val.d.width = digits;
-			buf += digits_len;
-		}
+		unit->val.d.width = digits;
+		buf += digits_len;
 	}
 	return (buf);
 }
@@ -65,20 +57,12 @@ static char		*type_d_get_precision(char *buf, t_unit *unit, va_list args)
 	if (*buf == '.')
 	{
 		buf++;
-		if (*buf == '*')
-		{	
-			unit->val.d.precision = va_arg(args, int);
-			buf++;
-		}
+		digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
+		if (digits_len == 0 || (digits_len == 1 && digits == 0))
+			unit->val.d.precision = PRECISION_NULL;
 		else
-		{
-			digits_len = get_digits(&digits, buf, ft_strlen(buf));
-			if (digits_len == 0 || (digits_len == 1 && digits == 0))
-				unit->val.d.precision = PRECISION_NULL;
-			else
-				unit->val.d.precision = digits;
-			buf += digits_len;
-		}
+			unit->val.d.precision = digits;
+		buf += digits_len;
 	}
 	return (buf);
 }

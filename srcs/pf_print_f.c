@@ -160,7 +160,14 @@ void					pf_dtoa(long double nbr, int precision,
 	int			posi;
 	long long	int_part;
 	char		*str_int_part;
-
+	// union ieee854_long_double u;
+	// int is_neg = 0;
+	// u.d = nbr;
+	// if (u.ieee.negative != 0)
+	// {
+	// 	is_neg = 1;
+	// }
+	// printf("is_neg%d\n", is_neg);
 	int_part = (long long)nbr;
 	precision = (precision == 0 ? 6 : precision);
 	if (precision == PRECISION_NULL)

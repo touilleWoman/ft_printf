@@ -19,14 +19,19 @@ int		is_conversion(char c)
 	return (TRUE);
 }
 
-int				get_digits(int *digits, char *buf, int buf_len)
+int				get_digits_or_star(int *digits, char *buf, int buf_len, va_list args)
 {
 	int		i;
 	char	s1[buf_len];
 
 	i = 0;
-	if (ft_isdigit(*buf) == FALSE)
+	if (ft_isdigit(*buf) == FALSE && *buf != '*')
 		return (0);
+	if (*buf == '*')
+	{
+		*digits = va_arg(args, int);
+		return (1);
+	}
 	while (ft_isdigit(buf[i]))
 	{
 		s1[i] = buf[i];

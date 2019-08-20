@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static char		*type_oxx_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
+static char		*type_oxx_get_flags_and_width(char *buf, t_unit *unit, int buf_len, va_list args)
 {
 	int		digits;
 	int		digits_len;
@@ -31,7 +31,7 @@ static char		*type_oxx_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 		buf += flags_len;
 	}
  	digits = 0;
-	if ((digits_len = get_digits(&digits, buf, ft_strlen(buf))))
+	if ((digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args)))
 	{
 		unit->val.oxx.width = digits;
 		buf += digits_len;
@@ -39,7 +39,7 @@ static char		*type_oxx_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
 	return (buf);
 }
 
-static char		*type_oxx_get_precision(char *buf, t_unit *unit)
+static char		*type_oxx_get_precision(char *buf, t_unit *unit, va_list args)
 {
 		int		digits;
 		int		digits_len;
@@ -48,19 +48,12 @@ static char		*type_oxx_get_precision(char *buf, t_unit *unit)
 		if (*buf == '.')
 		{
 			buf++;
-			digits_len = get_digits(&digits, buf, ft_strlen(buf));
-			if (digits_len == 0)
+			digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
+			if (digits_len == 0 || (digits_len == 1 && digits == 0))
 				unit->val.oxx.precision = PRECISION_NULL;
-			else if (digits_len == 1 && digits == 0)
-			{
-				unit->val.oxx.precision = PRECISION_NULL;
-				buf++;
-			}
 			else
-			{
 				unit->val.oxx.precision = digits;
-				buf += digits_len;
-			}
+			buf += digits_len;
  		}
 		return (buf);
 }
@@ -95,8 +88,8 @@ int			parse_oxx(t_list **alst, char *buf, va_list args)
 	t_unit	unit;
 
 	ft_bzero(&unit, sizeof(t_unit));
-	buf = type_oxx_get_flags_and_width(buf, &unit, ft_strlen(buf));
-	buf = type_oxx_get_precision(buf, &unit);
+	buf = type_oxx_get_flags_and_width(buf, &unit, ft_strlen(buf), args);
+	buf = type_oxx_get_precision(buf, &unit, args);
 	buf = type_oxx_get_modifier(buf, &unit);
 	// if (*buf != 'o' && *buf != 'x' && *buf != 'X')
 	// {

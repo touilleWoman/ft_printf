@@ -39,7 +39,7 @@ typedef struct	s_print_funs
 }				t_print_funs;
 
 
-int			get_digits(int *digits, char *buf, int buf_len);
+int			get_digits_or_star(int *digits, char *buf, int buf_len, va_list args);
 int			get_flags(char *flags, char *buf, char *valid_flags);
 
 

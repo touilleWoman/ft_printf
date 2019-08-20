@@ -2,7 +2,7 @@
 #include "ft_printf.h"
 
 static char		*type_s_get_flags_and_width(char *buf,
-	t_unit *unit, int buf_len)
+	t_unit *unit, int buf_len, va_list args)
 {
 	int		digits;
 	int		digits_len;
@@ -16,7 +16,7 @@ static char		*type_s_get_flags_and_width(char *buf,
 		buf += flags_len;
 	}
 	digits = 0;
-	digits_len = get_digits(&digits, buf, ft_strlen(buf));
+	digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
 	if (digits_len)
 	{
 		unit->val.s.width = digits;
@@ -25,7 +25,7 @@ static char		*type_s_get_flags_and_width(char *buf,
 	return (buf);
 }
 
-static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit)
+static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit, va_list args)
 {
 	int		digits;
 	int		digits_len;
@@ -34,7 +34,7 @@ static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit)
 	if (*buf == '.')
 	{
 		buf++;
-		digits_len = get_digits(&digits, buf, ft_strlen(buf));
+		digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
 		if (digits_len == 0 || (digits_len == 1 && digits == 0))
 			unit->val.s.precision = PRECISION_NULL;
 		else
@@ -54,8 +54,8 @@ int			parse_s(t_list **alst, char *buf, va_list args)
 	t_unit	unit;
 
 	ft_bzero(&unit, sizeof(t_unit));
-	buf = type_s_get_flags_and_width(buf, &unit, ft_strlen(buf));
-	buf = type_s_get_precision_and_modifier(buf, &unit);
+	buf = type_s_get_flags_and_width(buf, &unit, ft_strlen(buf), args);
+	buf = type_s_get_precision_and_modifier(buf, &unit, args);
 	if (*buf != 's')
 		return (ERROR);
 	unit.type = TYPE_S;
