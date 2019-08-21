@@ -14,7 +14,7 @@
 
 CC ?= gcc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 
 NAME = libftprintf.a
 
@@ -73,7 +73,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 check:all
-	$(CC) $(CFLAGS) $(NAME) test_fd.c  -I ./srcs
+	$(CC) $(CFLAGS) $(NAME) test_fd.c -g -ggdb -I ./srcs
 # 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
 
 clean:

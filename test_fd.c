@@ -106,6 +106,7 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
+    testcase("%.5p", 0);
 #if 0
     ft_printf("%b\n", 1);
     ft_printf("%b\n", 2);
@@ -126,10 +127,7 @@ int main()
     ft_printf("%#10.7hb|\n", (short)9287539484444);
     ft_printf("%#10.7hhb|\n", 9287539484444);
 #endif
-    testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.419999999);
-    testcase("{%.11Lf}", 1.42l);
 
-    // testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 
 #if 0
 // flag *
@@ -173,7 +171,12 @@ int main()
 
 //type f
 
-#if 0
+#if 1
+    testcase("{%Lf}",1.419999999l);
+    testcase("{%Lf}",1.420000000000);
+    testcase("{%f}", 0.1111111111111111);
+    testcase("{%f}", 0.999999999999999999);
+    testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42L);
     float      fl2;
     fl2 = -0.000;
 
@@ -214,8 +217,8 @@ int main()
     testcase("size + minus + plus + prec:%-+5.3f\n",fl2);
     testcase("size + minus + plus + prec + hash:%-#+5.0f\n",fl2);
 
-    testcase("%.20f\n", 1.0 / 3.0);
-    testcase("%.20Lf\n", 1.0L / 3.0L);
+    // testcase("%.20f\n", 1.0 / 3.0);
+    // testcase("%.20Lf\n", 1.0L / 3.0L);
 
         double      db4;
 
@@ -244,6 +247,8 @@ int main()
     testcase("null prec : %+.0f\n", fl);
     // fl = 12.5;
     // testcase("null prec : %+.0f\n", fl);
+    fl = 12.6;
+    testcase("null prec : %+.0f\n", fl);
     fl = -25632.2541;
     testcase("null prec : %+.0f\n", fl);
     fl = -1.0123;
@@ -290,8 +295,22 @@ int main()
     testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db3);
     testcase("size + minus + plus + prec:%-+5.3f\n", db3);
     testcase("size + minus + plus + prec + hash:%-#+5.0f\n", db3);
+
+
+    long double ld;
+
+    ld = 2.1l;
+    testcase("space:%lf\n", ld);
+    testcase("space:%Lf\n", ld);
+    testcase("space:% f\n", ld);
+    testcase("plus:%+f\n", ld);
+    testcase("hash:%#f\n", ld);
+
 #endif
-#if 0
+#if 1
+    testcase( "big prec:%.14f\n", -12547.58);
+    testcase( "big prec:%.13f\n", -12547.58);
+
     testcase("%p", NULL);
     ft_printf(NULL);
     testcase("six%f|\n", 6.0);
@@ -303,7 +322,6 @@ int main()
     testcase( "plus:%+f\n", -12547.58);
     testcase( "hash:%#f\n", -12547.58);
     testcase( "precision:%.2f\n", -12547.58);
-    testcase( "big prec:%.14f\n", -12547.58);
     testcase( "precision = 0:%.0f\n", -12547.58);
     testcase( "precision + hash:%#.0f\n", -12547.58);
     testcase( "space + prec:% .5f\n", -12547.58);

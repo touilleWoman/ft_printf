@@ -12,32 +12,32 @@
 
 #include "ft_printf.h"
 
-static long long			round_int_part(long double nbr)
-{
-	long long		int_part;
+// static long long			round_int_part(long double nbr)
+// {
+// 	long long		int_part;
 
-	if (((long long)(nbr * 10.0)) % 10 < 5)
-		int_part = (long long)nbr;
-	else
-		int_part = ((long long)nbr) + 1;
-	return (int_part);
-}
+// 	if (((long long)(nbr * 10.0)) % 10 < 5)
+// 		int_part = (long long)nbr;
+// 	else
+// 		int_part = ((long long)nbr) + 1;
+// 	return (int_part);
+// }
 
-static long double			round_fractional_part(long double frac, int preci)
+static long double			round(long double nbr, int preci)
 {
 	int			i;
 	long double	round_val;
-	long double keep_frac;
+	long double keep_nbr;
 
-	keep_frac = frac;
+	keep_nbr = nbr;
 	i = 0;
 	while (i < preci + 1)
 	{
-		frac = frac * 10;
+		nbr = nbr * 10.0;
 		i++;
 	}
-	if (((long int)frac) % 10 < 5)
-		return (keep_frac);
+	if (((long long)nbr) % 10 < 5)
+		return (keep_nbr);
 	i = 0;
 	round_val = 1.0;
 	while (i < preci)
@@ -45,22 +45,22 @@ static long double			round_fractional_part(long double frac, int preci)
 		round_val = round_val * 0.1;
 		i++;
 	}
-	return (keep_frac + round_val);
+	return (keep_nbr + round_val);
 }
 
 static void					write_fractionl_on_buf(char *buf, long double nbr,
 							int precision, int posi)
 {
-	long double frac_part;
-
 	buf[posi] = '.';
-	frac_part = nbr - (long long)nbr;
-	frac_part = round_fractional_part(frac_part, precision);
+
+	// printf("nbr:%Lf, frac:%LF, precision%d\n", nbr, frac_part, precision);
 	while (precision > 0)
 	{
 		posi++;
-		buf[posi] = (int)(frac_part * 10) + '0';
-		frac_part = frac_part * 10 - (int)(frac_part * 10);
+		buf[posi] = ((unsigned long long)(nbr * 10.0)) % 10 + '0';
+		// printf("buf:%c, int:%lld\n", buf[posi], ((unsigned long long)(nbr * 10.0)) % 10 );
+
+		nbr = nbr * 10.0;
 		precision--;
 	}
 	posi++;
@@ -87,14 +87,16 @@ void						pf_dtoa(long double nbr, int precision,
 {
 	int				posi;
 	long long		int_part;
+	long double		nbr_rounded;
 
 	if (is_inf_or_nan(nbr, buf))
 		return ;
 	precision = (precision == 0 ? 6 : precision);
 	if (precision == PRECISION_NULL)
-		int_part = round_int_part(nbr);
+		nbr_rounded = round(nbr, 0);
 	else
-		int_part = (long long)nbr;
+		nbr_rounded = round(nbr, precision);
+	int_part = (long long)nbr_rounded;
 	pf_itoa_base(int_part, 10, NULL, buf);
 	posi = ft_strlen(buf);
 	if (precision == PRECISION_NULL && flag_hash == FALSE)
@@ -105,5 +107,5 @@ void						pf_dtoa(long double nbr, int precision,
 		buf[posi + 1] = 0;
 	}
 	else
-		write_fractionl_on_buf(buf, nbr, precision, posi);
+		write_fractionl_on_buf(buf, nbr_rounded, precision, posi);
 }
