@@ -68,5 +68,7 @@ int				print_b(int fd, t_unit *unit);
 void			pf_itoa_base(uintmax_t nbr, int base, t_unit *unit, char *buf);
 void			pf_dtoa(long double nbr, int precision,
 							char *buf, t_bool flag_hash);
+int				pf_isinf(long double d);
+int				pf_isnan(long double d);
 
 #endif

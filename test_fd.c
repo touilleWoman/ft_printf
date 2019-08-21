@@ -106,7 +106,7 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
-#if 01
+#if 0
     ft_printf("%b\n", 1);
     ft_printf("%b\n", 2);
     ft_printf("%b\n", 3);
@@ -126,6 +126,9 @@ int main()
     ft_printf("%#10.7hb|\n", (short)9287539484444);
     ft_printf("%#10.7hhb|\n", 9287539484444);
 #endif
+    testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.419999999);
+    testcase("{%.11Lf}", 1.42l);
+
     // testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 
 #if 0
@@ -211,30 +214,30 @@ int main()
     testcase("size + minus + plus + prec:%-+5.3f\n",fl2);
     testcase("size + minus + plus + prec + hash:%-#+5.0f\n",fl2);
 
-    // testcase("%.20f\n", 1.0 / 3.0);
-    // testcase("%.20Lf\n", 1.0L / 3.0L);
+    testcase("%.20f\n", 1.0 / 3.0);
+    testcase("%.20Lf\n", 1.0L / 3.0L);
 
-        // double      db4;
+        double      db4;
 
-        // db4 = 1.0/0.0;
-        // testcase("%f\n", db4);
-        // testcase("%12f\n", db4);
-        // testcase("%-12f\n", db4);
-        // testcase("%5.9f\n", db4);
-
-
-    //     db4 = -1.0/0.0;
-    //     testcase("%f\n", db4);
-    //     testcase("%12f\n", db4);
-    //     testcase("%-12f\n", db4);
-    //     testcase("%5.9f\n", db4);
+        db4 = 1.0/0.0;
+        testcase("%f\n", db4);
+        testcase("%12f\n", db4);
+        testcase("%-12f\n", db4);
+        testcase("%5.9f\n", db4);
 
 
-    //     db4 = 0.0/0.0;
-    //     testcase("%f\n", db4);
-    //     testcase("%12f\n", db4);
-    //     testcase("%-12f\n", db4);
-    //     testcase("%5.9f\n", db4);
+        db4 = -1.0/0.0;
+        testcase("%f\n", db4);
+        testcase("%12f\n", db4);
+        testcase("%-12f\n", db4);
+        testcase("%5.9f\n", db4);
+
+
+        db4 = 0.0/0.0;
+        testcase("%f\n", db4);
+        testcase("%12f\n", db4);
+        testcase("%-12f\n", db4);
+        testcase("%5.9f\n", db4);
 
     float       fl;
     fl = 0;

@@ -90,7 +90,7 @@ int						print_f(int fd, t_unit *unit)
 
 	neg_sign = 0;
 	ft_memset(s, 0, unit->val.f.precision + unit->val.f.width + 30);
-	if (1.0 / unit->val.f.doub < 0)
+	if (1.0 / unit->val.f.doub < 0 || pf_isinf(unit->val.f.doub) == -1)
 	{
 		*s = '-';
 		abs_doub = -(unit->val.f.doub);

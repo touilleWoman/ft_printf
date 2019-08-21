@@ -67,12 +67,29 @@ static void					write_fractionl_on_buf(char *buf, long double nbr,
 	buf[posi] = '\0';
 }
 
+int							is_inf_or_nan(long double nbr, char *buf)
+{
+	if (pf_isinf(nbr))
+	{
+		ft_strcpy(buf, "inf");
+		return (TRUE) ;
+	}
+	if (pf_isnan(nbr))
+	{
+		ft_strcpy(buf, "nan");
+		return (TRUE) ;
+	}
+	return (FALSE);
+}
+
 void						pf_dtoa(long double nbr, int precision,
 							char *buf, t_bool flag_hash)
 {
 	int				posi;
 	long long		int_part;
 
+	if (is_inf_or_nan(nbr, buf))
+		return ;
 	precision = (precision == 0 ? 6 : precision);
 	if (precision == PRECISION_NULL)
 		int_part = round_int_part(nbr);

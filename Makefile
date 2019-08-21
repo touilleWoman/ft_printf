@@ -39,9 +39,9 @@ SOURCE_NAME = ft_printf.c \
 					pf_print_b.c\
 					pf_dtoa.c\
 					pf_itoa.c\
+					pf_type_f_tool.c\
 					ft_strlen.c\
 					ft_strdup.c\
-					ft_lstadd_top.c\
 					ft_lstadd_bot.c\
 					ft_lstnew.c\
 					ft_strchr.c\
@@ -55,7 +55,6 @@ SOURCE_NAME = ft_printf.c \
 					ft_isdigit.c\
 					ft_putstr_fd.c\
 					ft_putstr.c \
-					ft_strcat.c\
 
 SOURCE_PATH = ./srcs
 

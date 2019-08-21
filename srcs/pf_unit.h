@@ -147,6 +147,12 @@ typedef	union			u_unit_union
 	t_type_b			b;
 }						t_unit_union;
 
+typedef union			u_inf_check
+{
+	unsigned long long	l;
+	double				d;
+}						t_inf_check;
+
 typedef struct			s_unit
 {
 	t_unit_union		val;
