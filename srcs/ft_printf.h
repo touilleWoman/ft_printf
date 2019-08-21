@@ -25,7 +25,6 @@
 # define ERROR -1
 # define STD_OUT 1
 
-
 typedef struct	s_parse_funs
 {
 	char		type;

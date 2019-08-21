@@ -1,13 +1,12 @@
-
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pf_main.c                                          :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/07 10:27:27 by jleblond          #+#    #+#             */
-/*   Updated: 2019/07/07 10:27:32 by jleblond         ###   ########.fr       */
+/*   Created: 2019/08/21 14:32:38 by jleblond          #+#    #+#             */
+/*   Updated: 2019/08/21 14:32:45 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +39,7 @@ int		print_list(int fd, t_list *lst)
 	return (printed_nb);
 }
 
-int		ft_vdprintf(int fd, const char * restrict format, va_list args)
+int		ft_vdprintf(int fd, const char *restrict format, va_list args)
 {
 	t_list			*lst;
 	int				printed_nb;
@@ -55,14 +54,10 @@ int		ft_vdprintf(int fd, const char * restrict format, va_list args)
 		printed_nb = print_list(fd, lst);
 		freelst(lst);
 	}
-	// if (format_ok)
-		return (printed_nb);
-	// else
-		// return (-1);
+	return (printed_nb);
 }
 
-
-int		ft_printf(const char * restrict format, ...)
+int		ft_printf(const char *restrict format, ...)
 {
 	va_list			args;
 	int				printed_nb;
@@ -72,7 +67,3 @@ int		ft_printf(const char * restrict format, ...)
 	va_end(args);
 	return (printed_nb);
 }
-
-/*	The va_list is nothing more than a byte pointer.
-**	#define va_start(args, param) (args = (((va_list)&param) + sizeof(param)))
-*/

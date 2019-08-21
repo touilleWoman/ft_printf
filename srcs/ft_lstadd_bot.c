@@ -21,7 +21,7 @@ void	ft_lstadd_bot(t_list **alst, t_list *new)
 		*alst = new;
 	else
 	{
-		while(tmp->next != NULL)
+		while (tmp->next != NULL)
 		{
 			tmp = tmp->next;
 		}

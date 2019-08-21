@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "ft_printf.h"
 
 static unsigned int		b_precision_handler(char *s, char *str_uint,

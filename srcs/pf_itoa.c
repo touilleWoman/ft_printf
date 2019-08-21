@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itoa.c                                          :+:      :+:    :+:   */
+/*   pf_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 14:43:29 by jleblond          #+#    #+#             */
-/*   Updated: 2018/11/23 14:43:30 by jleblond         ###   ########.fr       */
+/*   Created: 2019/08/21 14:35:03 by jleblond          #+#    #+#             */
+/*   Updated: 2019/08/21 14:35:06 by jleblond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,7 @@ char			*ft_itoa(long long x)
 	return (ptr);
 }
 
-
-
-void		pf_itoa_base(uintmax_t nbr, int base, t_unit *unit,
+void			pf_itoa_base(uintmax_t nbr, int base, t_unit *unit,
 							char *str)
 {
 	int		posi;
@@ -99,4 +97,3 @@ void		pf_itoa_base(uintmax_t nbr, int base, t_unit *unit,
 	}
 	ft_strcpy(str, buf + posi);
 }
-

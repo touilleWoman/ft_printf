@@ -38,6 +38,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_print_f.c\
 					pf_print_b.c\
 					pf_dtoa.c\
+					pf_itoa.c\
 					ft_strlen.c\
 					ft_strdup.c\
 					ft_lstadd_top.c\
@@ -51,7 +52,6 @@ SOURCE_NAME = ft_printf.c \
 					ft_memset.c\
 					ft_memalloc.c\
 					ft_atoi.c\
-					ft_itoa.c\
 					ft_isdigit.c\
 					ft_putstr_fd.c\
 					ft_putstr.c \
