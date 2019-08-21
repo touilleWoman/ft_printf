@@ -26,20 +26,21 @@ static int		find_end_of_capsule(const char *format)
 	while (format[i] != '\0')
 	{
 		if (is_conversion(format[i]))
-			break;
+			break ;
 		i++;
 	}
 	return (i);
 }
 
-static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list args)
+static int		parse_capsule(t_list **alst, const char *capsule,
+								int end, va_list args)
 {
 	int					index;
 	char				buf[ft_strlen(capsule)];
 	static t_parse_funs	funs[PARSE_FUNS_NB] = {
-		{'c', parse_c},{'s', parse_s}, {'d', parse_d}, {'i', parse_d},
-		{'f', parse_f}, {'p', parse_p}, {'o', parse_oxx}, {'x', parse_oxx}, {'X', parse_oxx},
-		{'u', parse_u}, {'%', parse_percent}
+		{'c', parse_c}, {'s', parse_s}, {'d', parse_d}, {'i', parse_d},
+		{'f', parse_f}, {'p', parse_p}, {'o', parse_oxx}, {'x', parse_oxx},
+		{'X', parse_oxx}, {'u', parse_u}, {'%', parse_percent}, {'b', parse_b}
 	};
 
 	index = 0;
@@ -47,13 +48,13 @@ static int			parse_capsule(t_list **alst, const char *capsule, int end, va_list 
 		return (ERROR);
 	while (index < PARSE_FUNS_NB)
 	{
-		if(capsule[end] ==  funs[index].type)
+		if (capsule[end] == funs[index].type)
 		{
-			ft_strncpy(buf, capsule, end + 1); //check later
+			ft_strncpy(buf, capsule, end + 1);
 			buf[end + 1] = '\0';
 			if (funs[index].f(alst, buf, args) == ERROR)
 				return (ERROR);
-			break;
+			break ;
 		}
 		index++;
 	}
@@ -92,8 +93,8 @@ static int		parse_literal_substring(const char *capsule, t_list **alst,
 	return (i);
 }
 
-
-t_list		*parse_string(const char *format, va_list args, int *r_format_ok)
+t_list			*parse_string(const char *format, va_list args,
+												int *r_format_ok)
 {
 	size_t		i;
 	int			substr_format_ok;
@@ -115,6 +116,5 @@ t_list		*parse_string(const char *format, va_list args, int *r_format_ok)
 		if (!substr_format_ok)
 			*r_format_ok = FALSE;
 	}
-	// show_list(lst);
 	return (lst);
 }

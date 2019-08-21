@@ -23,7 +23,7 @@ static long long			round_int_part(long double nbr)
 	return (int_part);
 }
 
-static long double			round_fractional_part(long double frac, int precision)
+static long double			round_fractional_part(long double frac, int preci)
 {
 	int			i;
 	long double	round_val;
@@ -31,7 +31,7 @@ static long double			round_fractional_part(long double frac, int precision)
 
 	keep_frac = frac;
 	i = 0;
-	while (i < precision + 1)
+	while (i < preci + 1)
 	{
 		frac = frac * 10;
 		i++;
@@ -40,7 +40,7 @@ static long double			round_fractional_part(long double frac, int precision)
 		return (keep_frac);
 	i = 0;
 	round_val = 1.0;
-	while (i < precision)
+	while (i < preci)
 	{
 		round_val = round_val * 0.1;
 		i++;

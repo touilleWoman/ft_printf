@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_parse_type_c.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 12:02:43 by jleblond          #+#    #+#             */
+/*   Updated: 2019/08/21 12:02:46 by jleblond         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static char		*type_c_get_flags(char *buf, t_unit *unit, int buf_len)
@@ -9,20 +21,12 @@ static char		*type_c_get_flags(char *buf, t_unit *unit, int buf_len)
 	if (flags_len)
 	{
 		(ft_strchr(flags, '-')) ? unit->val.c.flag_minus = TRUE : 0;
-		// if (ft_strchr(flags, ' '))
-		// 	ft_putstr_fd("format error : flag' ' is ignored with %c\n", 2);
-		// if (ft_strchr(flags, '+'))
-		// 	ft_putstr_fd("format error : flag'+' is ignored with %c\n", 2);
-		// if (ft_strchr(flags, '#'))
-		// 	ft_putstr_fd("format error : flag'#' is ignored with %c\n", 2);
-		// if (ft_strchr(flags, '0'))
-		// 	ft_putstr_fd("format error : flag'0' is ignored with %c\n", 2);
 		buf += flags_len;
 	}
 	return (buf);
 }
 
-static char		*type_c_width_precision_handler(char *buf, t_unit *unit, va_list args)
+static char		*type_c_width_precision(char *buf, t_unit *unit, va_list args)
 {
 	int		digits;
 	int		digits_len;
@@ -43,7 +47,6 @@ static char		*type_c_width_precision_handler(char *buf, t_unit *unit, va_list ar
 	return (buf);
 }
 
-
 static char		*type_c_get_modifier(char *buf, t_unit *unit)
 {
 	if (*buf == 'l')
@@ -60,7 +63,7 @@ int				parse_c(t_list **alst, char *buf, va_list args)
 
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_c_get_flags(buf, &unit, ft_strlen(buf));
-	buf = type_c_width_precision_handler(buf, &unit, args);
+	buf = type_c_width_precision(buf, &unit, args);
 	buf = type_c_get_modifier(buf, &unit);
 	if (*buf != 'c')
 		return (ERROR);
@@ -79,7 +82,7 @@ int				parse_percent(t_list **alst, char *buf, va_list args)
 
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_c_get_flags(buf, &unit, ft_strlen(buf));
-	buf = type_c_width_precision_handler(buf, &unit, args);
+	buf = type_c_width_precision(buf, &unit, args);
 	buf = type_c_get_modifier(buf, &unit);
 	unit.type = TYPE_C;
 	unit.val.c.character = '%';

@@ -55,7 +55,7 @@ char			*ft_itoa(long long x)
 	char		*ptr;
 	int			neg;
 
-	if (x == -9223372036854775808)
+	if (x == (-9223372036854775807) - 1)
 		return (ft_strdup("-9223372036854775808"));
 	len = lenth(x);
 	ptr = (char*)malloc(sizeof(char) * (len + 1));
@@ -79,9 +79,9 @@ void		pf_itoa_base(uintmax_t nbr, int base, t_unit *unit,
 							char *str)
 {
 	int		posi;
-	char	buf[30];
+	char	buf[50];
 
-	posi = 29;
+	posi = 49;
 	buf[posi] = '\0';
 	if (nbr == 0)
 	{

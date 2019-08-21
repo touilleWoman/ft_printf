@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pf_parse_type_s.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jleblond <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/21 11:58:55 by jleblond          #+#    #+#             */
+/*   Updated: 2019/08/21 11:58:59 by jleblond         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "ft_printf.h"
 
@@ -25,7 +36,8 @@ static char		*type_s_get_flags_and_width(char *buf,
 	return (buf);
 }
 
-static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit, va_list args)
+static char		*type_s_get_precision_and_modifier(char *buf,
+									t_unit *unit, va_list args)
 {
 	int		digits;
 	int		digits_len;
@@ -49,7 +61,7 @@ static char		*type_s_get_precision_and_modifier(char *buf, t_unit *unit, va_list
 	return (buf);
 }
 
-int			parse_s(t_list **alst, char *buf, va_list args)
+int				parse_s(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 

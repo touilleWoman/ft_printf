@@ -12,12 +12,12 @@
 
 #include "ft_printf.h"
 
-static char 	*type_p_get_flags(char *buf, int buf_len, t_unit *unit)
+static char		*type_p_get_flags(char *buf, int buf_len, t_unit *unit)
 {
 	char	flags[buf_len];
 	int		flags_len;
 
- 	if ((flags_len = get_flags(flags, buf, "+- 0#")))
+	if ((flags_len = get_flags(flags, buf, "+- 0#")))
 	{
 		if (ft_strchr(flags, '-'))
 			unit->val.p.flag_minus = TRUE;
@@ -26,13 +26,13 @@ static char 	*type_p_get_flags(char *buf, int buf_len, t_unit *unit)
 	return (buf);
 }
 
-static char 	*type_p_get_width(char *buf, t_unit *unit, va_list args)
- {
+static char		*type_p_get_width(char *buf, t_unit *unit, va_list args)
+{
 	int		digits;
 	int		digits_len;
 
- 	digits = 0;
- 	digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
+	digits = 0;
+	digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
 	if (digits_len)
 	{
 		unit->val.p.width = digits;
@@ -41,12 +41,12 @@ static char 	*type_p_get_width(char *buf, t_unit *unit, va_list args)
 	return (buf);
 }
 
-static char 	*type_p_null_precision_check(char *buf, t_unit *unit, va_list args)
- {
+static char		*type_p_null_preci_check(char *buf, t_unit *unit, va_list args)
+{
 	int		digits;
 	int		digits_len;
 
- 	digits = 0;
+	digits = 0;
 	if (*buf == '.')
 	{
 		buf++;
@@ -59,7 +59,6 @@ static char 	*type_p_null_precision_check(char *buf, t_unit *unit, va_list args)
 	}
 	return (buf);
 }
-
 
 static char		*type_p_modifier_check(char *buf)
 {
@@ -81,7 +80,7 @@ int				parse_p(t_list **alst, char *buf, va_list args)
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_p_get_flags(buf, ft_strlen(buf), &unit);
 	buf = type_p_get_width(buf, &unit, args);
-	buf = type_p_null_precision_check(buf, &unit, args);
+	buf = type_p_null_preci_check(buf, &unit, args);
 	buf = type_p_modifier_check(buf);
 	if (*buf != 'p')
 		return (ERROR);

@@ -12,12 +12,13 @@
 
 #include "ft_printf.h"
 
-static char		*type_d_get_flags_and_width(char *buf, t_unit *unit, int buf_len)
+static char		*type_d_get_flags_and_width(char *buf, t_unit *unit,
+														int buf_len)
 {
 	char	flags[buf_len];
 	int		flags_len;
 
- 	if ((flags_len = get_flags(flags, buf, "+- 0")))
+	if ((flags_len = get_flags(flags, buf, "+- 0")))
 	{
 		if (ft_strchr(flags, '+'))
 			unit->val.d.flag_plus = TRUE;
@@ -37,7 +38,7 @@ static char		*type_d_get_width(char *buf, t_unit *unit, va_list args)
 	int		digits;
 	int		digits_len;
 
- 	digits = 0;
+	digits = 0;
 	digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
 	if (digits_len)
 	{
@@ -46,7 +47,6 @@ static char		*type_d_get_width(char *buf, t_unit *unit, va_list args)
 	}
 	return (buf);
 }
-
 
 static char		*type_d_get_precision(char *buf, t_unit *unit, va_list args)
 {
@@ -81,18 +81,18 @@ static char		*type_d_get_modifier(char *buf, t_unit *unit)
 	}
 	else if (*buf == 'l')
 	{
-		unit->val.d.modifier= MD_L;
+		unit->val.d.modifier = MD_L;
 		buf++;
 	}
 	else if (*buf == 'h')
 	{
-		unit->val.d.modifier= MD_H;
+		unit->val.d.modifier = MD_H;
 		buf++;
 	}
 	return (buf);
 }
 
-int			parse_d(t_list **alst, char *buf, va_list args)
+int				parse_d(t_list **alst, char *buf, va_list args)
 {
 	t_unit	unit;
 
@@ -111,9 +111,9 @@ int			parse_d(t_list **alst, char *buf, va_list args)
 	else if (unit.val.d.modifier == MD_HH)
 		unit.val.d.integer = (signed char)va_arg(args, int);
 	else if (unit.val.d.modifier == MD_H)
-		unit.val.d.integer =(short)va_arg(args, int);
+		unit.val.d.integer = (short)va_arg(args, int);
 	else
-		unit.val.d.integer =va_arg(args, int);
+		unit.val.d.integer = va_arg(args, int);
 	unit_lstadd_bot(alst, &unit);
 	return (0);
 }

@@ -14,8 +14,7 @@
 
 CC ?= gcc
 
-CFLAGS = -g
-#  -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 NAME = libftprintf.a
 
@@ -29,6 +28,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_parse_type_p.c\
 					pf_parse_type_oxx.c\
 					pf_parse_type_u.c\
+					pf_parse_type_b.c\
 					pf_unit_list.c\
 					pf_print_c_s_ltr.c\
 					pf_print_d.c\
@@ -36,6 +36,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_print_oxx.c\
 					pf_print_u.c\
 					pf_print_f.c\
+					pf_print_b.c\
 					pf_dtoa.c\
 					ft_strlen.c\
 					ft_strdup.c\

@@ -20,10 +20,11 @@
 # include "pf_unit.h"
 # include "libft.h"
 # include <wchar.h>
-# define PARSE_FUNS_NB 11
-# define PRINT_FUNS_NB 8
+# define PARSE_FUNS_NB 12
+# define PRINT_FUNS_NB 9
 # define ERROR -1
 # define STD_OUT 1
+
 
 typedef struct	s_parse_funs
 {
@@ -54,6 +55,7 @@ int				parse_f(t_list **alst, char *buf, va_list args);
 int				parse_p(t_list **alst, char *buf, va_list args);
 int				parse_oxx(t_list **alst, char *buf, va_list args);
 int				parse_u(t_list **alst, char *buf, va_list args);
+int				parse_b(t_list **alst, char *buf, va_list args);
 int				parse_percentage(t_list **alst, char *buf, va_list args);
 int				print_ltr(int fd, t_unit *unit);
 int				print_c(int fd, t_unit *unit);
@@ -63,6 +65,7 @@ int				print_p(int fd, t_unit *unit);
 int				print_oxx(int fd, t_unit *unit);
 int				print_u(int fd, t_unit *unit);
 int				print_f(int fd, t_unit *unit);
+int				print_b(int fd, t_unit *unit);
 void			pf_itoa_base(uintmax_t nbr, int base, t_unit *unit, char *buf);
 void			pf_dtoa(long double nbr, int precision,
 							char *buf, t_bool flag_hash);

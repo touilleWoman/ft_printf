@@ -12,14 +12,15 @@
 
 #include "ft_printf.h"
 
-int		is_conversion(char c)
+int				is_conversion(char c)
 {
-	if (ft_strchr("cspdfiouxX%", c) == 0)
+	if (ft_strchr("cspdfiouxX%b", c) == 0)
 		return (FALSE);
 	return (TRUE);
 }
 
-int				get_digits_or_star(int *digits, char *buf, int buf_len, va_list args)
+int				get_digits_or_star(int *digits, char *buf,
+									int buf_len, va_list args)
 {
 	int		i;
 	char	s1[buf_len];
@@ -56,7 +57,7 @@ int				get_flags(char *flags, char *buf, char *valid_flags)
 	i = 0;
 	if (is_flags(*buf, valid_flags) == FALSE)
 		return (0);
-	while(is_flags(buf[i], valid_flags))
+	while (is_flags(buf[i], valid_flags))
 	{
 		flags[i] = buf[i];
 		i++;
@@ -64,4 +65,3 @@ int				get_flags(char *flags, char *buf, char *valid_flags)
 	flags[i] = '\0';
 	return (i);
 }
-
