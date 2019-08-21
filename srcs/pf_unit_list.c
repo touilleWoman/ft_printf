@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-void	freelst(t_list *lst)
+void		freelst(t_list *lst)
 {
 	t_unit		*unit;
 	t_list		*keep;
@@ -27,7 +27,6 @@ void	freelst(t_list *lst)
 		lst = keep;
 	}
 }
-
 
 t_list		*unit_list_new(t_unit const *unit)
 {
@@ -46,4 +45,3 @@ t_unit		*unit_access(t_list *lst)
 {
 	return ((t_unit*)lst->content);
 }
-

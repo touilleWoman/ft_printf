@@ -50,7 +50,6 @@ static unsigned int		f_width_handler(char *s, int dy_len, t_unit *unit,
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
 		sub_f_width_handler(s, dy_len, unit, width);
-	// s[width] = '\0';
 	return (width);
 }
 
@@ -82,112 +81,16 @@ static unsigned int		f_flag_plus_and_blank(char *s, int dy_len, t_unit *unit)
 **		it will change depending on precision, width, then flags
 */
 
-long double				round_fractional_part(long double frac, int precision)
-{
-	int			i;
-	long double	round_val;
-	long double keep_frac;
-
-	keep_frac = frac;
-	i = 0;
-	while (i < precision + 1)
-	{
-		frac = frac * 10;
-		i++;
-	}
-	if (((long int)frac) % 10 < 5)
-		return (keep_frac);
-	i = 0;
-	round_val = 1.0;
-	while (i < precision)
-	{
-		round_val = round_val * 0.1;
-		i++;
-	}
-	return (keep_frac + round_val);
-}
-
-long double				pf_double_abs(long double nbr)
-{
-	return (nbr >= 0 ? nbr : -nbr);
-}
-
-long long				round_int_part(long double nbr)
-{
-	long long		int_part;
-	int				neg_mark;
-	long double 	abs_nbr;
-
-	if (nbr < 0)
-	{
-		abs_nbr = -nbr;
-		neg_mark = -1;
-	}
-	else
-	{
-		abs_nbr = nbr;
-		neg_mark = 1;
-	}
-	if (((long long)(abs_nbr * 10.0)) % 10 < 5)
-		int_part = (long long)abs_nbr;
-	else
-		int_part = ((long long)abs_nbr) + 1;
-	return (int_part * neg_mark);
-}
-
-void					write_fractionl_on_buf(char *buf, long double nbr,
-							int precision, int posi)
-{
-	long double frac_part;
-
-	buf[posi] = '.';
-	frac_part = pf_double_abs(nbr - (long long)nbr);
-	frac_part = round_fractional_part(frac_part, precision);
-	while (precision > 0)
-	{
-		posi++;
-		buf[posi] = (int)(frac_part * 10) + '0';
-		frac_part = frac_part * 10 - (int)(frac_part * 10);
-		precision--;
-	}
-	posi++;
-	buf[posi] = '\0';
-}
-
-void					pf_dtoa(long double nbr, int precision,
-							char *buf, t_bool flag_hash)
-{
-	int				posi;
-	long long		int_part;
-
-	precision = (precision == 0 ? 6 : precision);
-	if (precision == PRECISION_NULL)
-		int_part = round_int_part(nbr);
-	else
-		int_part = (long long)nbr;
-	pf_itoa_base(int_part, 10, NULL, buf);
-	posi = ft_strlen(buf);
-	if (precision == PRECISION_NULL && flag_hash == FALSE)
-		return ;
-	else if (precision == PRECISION_NULL && flag_hash == TRUE)
-	{
-		buf[posi] = '.';
-		buf[posi + 1] = 0;
-	}
-	else
-		write_fractionl_on_buf(buf, nbr, precision, posi);
-}
-
 int						print_f(int fd, t_unit *unit)
 {
 	unsigned int	dy_len;
 	char			s[unit->val.f.precision + unit->val.f.width + 30];
-	int 			neg_sign;
-	long double 	abs_doub;
+	int				neg_sign;
+	long double		abs_doub;
 
 	neg_sign = 0;
 	ft_memset(s, 0, unit->val.f.precision + unit->val.f.width + 30);
-	if(1.0 / unit->val.f.doub < 0)
+	if (1.0 / unit->val.f.doub < 0)
 	{
 		*s = '-';
 		abs_doub = -(unit->val.f.doub);
@@ -195,7 +98,8 @@ int						print_f(int fd, t_unit *unit)
 	}
 	else
 		abs_doub = (unit->val.f.doub);
-	pf_dtoa(abs_doub, unit->val.f.precision, s + neg_sign, unit->val.f.flag_hash);
+	pf_dtoa(abs_doub, unit->val.f.precision, s + neg_sign,
+									unit->val.f.flag_hash);
 	dy_len = ft_strlen(s);
 	if (neg_sign == 0)
 		dy_len = f_flag_plus_and_blank(s, dy_len, unit);

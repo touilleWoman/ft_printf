@@ -35,7 +35,7 @@ typedef struct	s_color
 	unsigned char	b;
 }				t_color;
 
-typedef enum 	e_bool
+typedef enum	e_bool
 {
 	TRUE = 1,
 	FALSE = 0,
@@ -59,7 +59,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);
 char			*ft_strstr(const char *haystack, const char *needle);
 char			*ft_strnstr(const char *haystack,
-	const char *needle, size_t len);
+							const char *needle, size_t len);
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_atoi(const char *str);
@@ -116,7 +116,6 @@ t_list			*ft_lstcpy(t_list *lst);
 int				ft_word_nbr_counter(char const *s, char c);
 int				ft_islower(int c);
 int				ft_isupper(int c);
-
 /*
 ** convertir un tableux de string {"0", "5", "10"} vers un tableau de int
 ** [0, 10, 5]

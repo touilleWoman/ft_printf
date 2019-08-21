@@ -12,6 +12,15 @@
 
 #include "ft_printf.h"
 
+void		write_on_left(char *s, int width, int len, char *str_p)
+{
+	ft_strncpy(s, "0x", 2);
+	ft_strncpy(s + 2, str_p, len - 2);
+	if (width > len)
+		s[width] = 0;
+	else
+		s[len] = 0;
+}
 
 int			print_p(int fd, t_unit *unit)
 {
@@ -32,14 +41,7 @@ int			print_p(int fd, t_unit *unit)
 		s[unit->val.p.width] = 0;
 	}
 	else
-	{
-		ft_strncpy(s, "0x", 2);
-		ft_strncpy(s + 2, str_p, len - 2);
-		if (unit->val.p.width > len)
-			s[unit->val.p.width] = 0;
-		else
-			s[len] = 0;
-	}
+		write_on_left(s, unit->val.p.width, len, str_p);
 	ft_putstr_fd(s, fd);
 	return (unit->val.p.width > len ? unit->val.p.width : len);
 }

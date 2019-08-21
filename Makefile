@@ -14,7 +14,8 @@
 
 CC ?= gcc
 
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g
+#  -Wall -Werror -Wextra
 
 NAME = libftprintf.a
 
@@ -35,6 +36,7 @@ SOURCE_NAME = ft_printf.c \
 					pf_print_oxx.c\
 					pf_print_u.c\
 					pf_print_f.c\
+					pf_dtoa.c\
 					ft_strlen.c\
 					ft_strdup.c\
 					ft_lstadd_top.c\
@@ -61,7 +63,7 @@ SOURCE = $(addprefix $(SOURCE_PATH)/, $(SOURCE_NAME))
 
 OBJ = $(SOURCE:.c=.o)
 
-HEADER = $(SOURCE_PATH)/ft_printf.h $(SOURCE_PATH)/pf_unit.h 
+HEADER = $(SOURCE_PATH)/ft_printf.h $(SOURCE_PATH)/pf_unit.h
 
 all:$(NAME)
 

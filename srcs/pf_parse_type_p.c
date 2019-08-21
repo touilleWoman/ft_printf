@@ -51,7 +51,7 @@ static char 	*type_p_null_precision_check(char *buf, t_unit *unit, va_list args)
 	{
 		buf++;
 		digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
-		if (digits_len == 0 || (digits_len == 1 && digits == 0))
+		if (digits_len == 0 || (digits_len != 0 && digits == 0))
 		{
 			unit->val.p.precision = PRECISION_NULL;
 		}

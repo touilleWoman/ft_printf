@@ -35,31 +35,31 @@ void     testcase(const char *fmt, ...)
     char dyn_fmt[ft_strlen(fmt) + 1];
     strcpy(dyn_fmt, fmt);
     /* Open a file for each */
-    if (fd_oracle_p == NULL) 
+    if (fd_oracle_p == NULL)
     {
         fd_oracle_p = tmpfile();
         if (fd_oracle_p == NULL)
             FAIL_AND_EXIT("Cannot create temp file\n");
-    } 
-    else 
+    }
+    else
     {
         ftruncate(fileno(fd_oracle_p), 0);
-        fseek(fd_oracle_p, 0, SEEK_SET);        
+        fseek(fd_oracle_p, 0, SEEK_SET);
     }
     int fd_oracle = fileno(fd_oracle_p);
 
-    if (fd_test_p == NULL) 
+    if (fd_test_p == NULL)
     {
         fd_test_p = tmpfile();
         if (fd_test_p == NULL)
         {
             FAIL_AND_EXIT("Cannot create temp file\n");
         }
-    } 
-    else 
+    }
+    else
     {
         ftruncate(fileno(fd_test_p), 0);
-        fseek(fd_test_p, 0, SEEK_SET);        
+        fseek(fd_test_p, 0, SEEK_SET);
     }
     int fd_test = fileno(fd_test_p);
     /* Run the implementations */
@@ -106,9 +106,11 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
+    testcase("%+i", 2147483647);
+
     // testcase("{%f}{%lf}{%Lf}", 1.42, 1.42, 1.42l);
 
-#if 0
+#if 1
 // flag *
 
 	testcase("%*.*d", 8, 7, 1000);
@@ -117,7 +119,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
     // // type p
     char *ptr = "pointer test";
     void *ptr2 = NULL;
@@ -196,13 +198,13 @@ int main()
     // testcase("%.20f\n", 1.0 / 3.0);
     // testcase("%.20Lf\n", 1.0L / 3.0L);
 
-    //     double      db4;
+        // double      db4;
 
-    //     db4 = 1.0/0.0;
-    //     testcase("%f\n", db4);
-    //     testcase("%12f\n", db4);
-    //     testcase("%-12f\n", db4);
-    //     testcase("%5.9f\n", db4);
+        // db4 = 1.0/0.0;
+        // testcase("%f\n", db4);
+        // testcase("%12f\n", db4);
+        // testcase("%-12f\n", db4);
+        // testcase("%5.9f\n", db4);
 
 
     //     db4 = -1.0/0.0;
@@ -230,7 +232,7 @@ int main()
     fl = 12354;
     testcase("null prec : %+.0f\n", fl);
 
-    
+
     double      db3;
     db3 = 12389123798;
 
@@ -270,12 +272,12 @@ int main()
     testcase("size + minus + plus + prec:%-+5.3f\n", db3);
     testcase("size + minus + plus + prec + hash:%-#+5.0f\n", db3);
 #endif
-#if 0
+#if 1
     testcase("%p", NULL);
     // testcase(NULL);
     testcase("six%f|\n", 6.0);
     testcase("six%#6.10f|\n", 6.0);
-    // testcase("%lld", -9223372036854775808);
+    testcase("%lld", -9223372036854775808);
     testcase("%d%5ttttttt", 42);
     // testcase("%d%5kkkkkkk", 42);
     testcase( "space:% f\n", -12547.58);
@@ -331,7 +333,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
 	double db = 0;
 	// testcase("size + espace + zero + prec + hash:%#0 5.0f\n", db);
 	testcase("test basique:");
@@ -370,7 +372,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
 	double db2 = 45.123456789;
 	testcase("size + espace + zero + prec:%010.0f\n", db2);
 	testcase("size + espace + zero + prec:%0 10.2f\n", db2);
@@ -417,7 +419,7 @@ int main()
 
 #endif
 
-#if 0
+#if 1
 	// testcase("%2c", 0);
 	testcase("%.0%");
 	testcase("");
@@ -442,7 +444,7 @@ int main()
 	testcase("% u", 4294967295);
 	testcase("%+u", 4294967295);
 #endif
-#if 0
+#if 1
 
 // type c
     testcase("{%3c}\n", 0);
@@ -458,7 +460,7 @@ int main()
 	testcase("% c", 0);
 #endif
 
-#if 0
+#if 1
  // type s
     testcase("#nyancat inside");
     testcase("\x7f");
@@ -523,7 +525,7 @@ int main()
 	testcase("empty:%23s", "");
 
 #endif
-#if 0
+#if 1
 
 //type d
     testcase("{% 03d}", 0);
@@ -555,7 +557,7 @@ int main()
 	testcase("%+-d%0d%-d% d\n", 1, 22, 333, 444);
 #endif
 
-#if 0
+#if 1
 // type oxX
 
 
@@ -593,7 +595,7 @@ int main()
 	testcase("%#10.7hhX|\n", 9287539484444);
 #endif
 
-#if 0
+#if 1
 // type u
     unsigned int        un_int;
     un_int = 0;

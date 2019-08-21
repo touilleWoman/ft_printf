@@ -32,9 +32,10 @@ static unsigned int		u_precision_handler(char *s, char *str_uint,
 	return (dy_len);
 }
 
-static void				sub_u_width_handler(char *s, int dy_len, t_unit *unit, int width)
+static void				sub_u_width_handler(char *s, int dy_len,
+										t_unit *unit, int width)
 {
-	char 	s_keep[dy_len + 1];
+	char	s_keep[dy_len + 1];
 
 	ft_strcpy(s_keep, s);
 	if (unit->val.u.flag_zero == TRUE && unit->val.u.precision == 0)
@@ -45,7 +46,7 @@ static void				sub_u_width_handler(char *s, int dy_len, t_unit *unit, int width)
 	else
 	{
 		ft_memset(s, ' ', width);
-		ft_strncpy(s + width - dy_len, s_keep , dy_len);
+		ft_strncpy(s + width - dy_len, s_keep, dy_len);
 	}
 }
 
@@ -62,7 +63,6 @@ static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit,
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
 		sub_u_width_handler(s, dy_len, unit, width);
-	// s[width] = '\0';
 	return (width);
 }
 
@@ -71,7 +71,7 @@ static unsigned int		u_width_handler(char *s, int dy_len, t_unit *unit,
 **		it will change depending on precision, width, then flags
 */
 
-int				print_u(int fd, t_unit *unit)
+int						print_u(int fd, t_unit *unit)
 {
 	char			str_uint[30];
 	unsigned int	dy_len;

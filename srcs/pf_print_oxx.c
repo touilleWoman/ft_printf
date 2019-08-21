@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static unsigned int	oxx_precision_handler(char *s, char *str_uint,
+static unsigned int		oxx_precision_handler(char *s, char *str_uint,
 									int precision, t_unit *unit)
 {
 	int		dy_len;
@@ -37,7 +37,7 @@ static unsigned int	oxx_precision_handler(char *s, char *str_uint,
 	return (dy_len);
 }
 
-static void			sub_oxx_width_handler(char *s, int dy_len,
+static void				sub_oxx_width_handler(char *s, int dy_len,
 										t_unit *unit, int width)
 {
 	char	s_keep[dy_len + 1];
@@ -67,7 +67,8 @@ static void			sub_oxx_width_handler(char *s, int dy_len,
 **		flag '0' is ignored when flag '-' or precision present"
 */
 
-static unsigned int	oxx_width_handler(char *s, int dy_len, t_unit *unit, int width)
+static unsigned int		oxx_width_handler(char *s, int dy_len,
+									t_unit *unit, int width)
 {
 	if (width <= dy_len)
 		return (dy_len);
@@ -75,11 +76,10 @@ static unsigned int	oxx_width_handler(char *s, int dy_len, t_unit *unit, int wid
 		ft_memset(s + dy_len, ' ', width - dy_len);
 	else
 		sub_oxx_width_handler(s, dy_len, unit, width);
-	// s[width] = '\0';
 	return (width);
 }
 
-static unsigned int	oxx_prefix_handler(char *s, int dy_len,
+static unsigned int		oxx_prefix_handler(char *s, int dy_len,
 	t_unit_type sub_type)
 {
 	char	s_keep[dy_len + 1];
@@ -114,7 +114,7 @@ static unsigned int	oxx_prefix_handler(char *s, int dy_len,
 **		it will change depending on precision, width, then flags
 */
 
-int					print_oxx(int fd, t_unit *unit)
+int						print_oxx(int fd, t_unit *unit)
 {
 	char			str_uint[30];
 	unsigned int	dy_len;
