@@ -56,7 +56,6 @@ SOURCE_NAME = ft_printf.c \
 					ft_putstr_fd.c\
 					ft_putstr.c \
 					ft_strcat.c\
-					pf_test_functions.c\
 
 SOURCE_PATH = ./srcs
 
@@ -75,7 +74,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) -o $@ -c $<
 
 check:all
-	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -I ./srcs
+	$(CC) $(CFLAGS) $(NAME) test_fd.c  -I ./srcs
 # 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
 
 clean:
@@ -88,13 +87,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re:fclean all
-
-
-test: $(NAME)
-	$(CC) $(SOURCE_PATH)/test_fd.c $(NAME) -o run_tests $(CFLAGS)
-	./run_tests
-
-
-test2: $(NAME)
-	$(CC) $(SOURCE_PATH)/test_pft.c $(NAME) -o run_tests $(CFLAGS)
-	./run_tests
