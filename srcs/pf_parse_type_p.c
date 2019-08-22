@@ -21,6 +21,8 @@ static char		*type_p_get_flags(char *buf, int buf_len, t_unit *unit)
 	{
 		if (ft_strchr(flags, '-'))
 			unit->val.p.flag_minus = TRUE;
+		if (ft_strchr(flags, '0'))
+			unit->val.p.flag_zero = TRUE;
 		buf += flags_len;
 	}
 	return (buf);
@@ -41,7 +43,7 @@ static char		*type_p_get_width(char *buf, t_unit *unit, va_list args)
 	return (buf);
 }
 
-static char		*type_p_null_preci_check(char *buf, t_unit *unit, va_list args)
+static char		*type_p_get_precision(char *buf, t_unit *unit, va_list args)
 {
 	int		digits;
 	int		digits_len;
@@ -52,9 +54,9 @@ static char		*type_p_null_preci_check(char *buf, t_unit *unit, va_list args)
 		buf++;
 		digits_len = get_digits_or_star(&digits, buf, ft_strlen(buf), args);
 		if (digits_len == 0 || (digits_len != 0 && digits == 0))
-		{
 			unit->val.p.precision = PRECISION_NULL;
-		}
+		else
+			unit->val.p.precision = digits;
 		buf += digits_len;
 	}
 	return (buf);
@@ -80,7 +82,7 @@ int				parse_p(t_list **alst, char *buf, va_list args)
 	ft_bzero(&unit, sizeof(t_unit));
 	buf = type_p_get_flags(buf, ft_strlen(buf), &unit);
 	buf = type_p_get_width(buf, &unit, args);
-	buf = type_p_null_preci_check(buf, &unit, args);
+	buf = type_p_get_precision(buf, &unit, args);
 	buf = type_p_modifier_check(buf);
 	if (*buf != 'p')
 		return (ERROR);

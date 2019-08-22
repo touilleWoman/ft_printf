@@ -95,7 +95,7 @@ void     testcase(const char *fmt, ...)
     {
         printf(".");
         /* show printed content */
-        // printf("%s\n",out_test);
+        printf("%s\n",out_test);
     }
     else
         tests_failures += 1;
@@ -106,7 +106,7 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
-    testcase("%.5p", 0);
+
 #if 0
     ft_printf("%b\n", 1);
     ft_printf("%b\n", 2);
@@ -138,8 +138,18 @@ int main()
 
 #endif
 
-#if 0
+#if 1
     // // type p
+
+    testcase("%.0p", 0);
+    testcase("%.5p", 0);
+    testcase("%10.5p", 0);
+    testcase("%+-10.5p", 0);
+    testcase("%#10.5p", 0);
+    testcase("%*.5p", 0, 0);
+    testcase("%*.*p", 10, 4, 0);
+    testcase("%010p", 0);
+    testcase("%10p", 0);
     char *ptr = "pointer test";
     void *ptr2 = NULL;
     void *ptr3 = ptr;
@@ -171,7 +181,7 @@ int main()
 
 //type f
 
-#if 1
+#if 0
     testcase("{%Lf}",1.419999999l);
     testcase("{%Lf}",1.420000000000);
     testcase("{%f}", 0.1111111111111111);
@@ -307,7 +317,7 @@ int main()
     testcase("hash:%#f\n", ld);
 
 #endif
-#if 1
+#if 0
     testcase( "big prec:%.14f\n", -12547.58);
     testcase( "big prec:%.13f\n", -12547.58);
 

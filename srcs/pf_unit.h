@@ -129,6 +129,7 @@ typedef struct			s_type_f
 typedef struct			s_type_p
 {
 	t_bool				flag_minus;
+	t_bool				flag_zero;
 	int					width;
 	int					precision;
 	uintmax_t			pointer;
