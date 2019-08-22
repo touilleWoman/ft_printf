@@ -333,6 +333,8 @@ int main()
     testcase("big prec16:%.16f\n",12547.58);
     testcase("big prec17:%.17f\n",12547.58);
     testcase("big prec18:%.18f\n",12547.58);
+    testcase("big prec18:%.18f\n",12547.58);
+    testcase("big prec19:%.19f\n",12547.58);
 
     // testcase( "big prec:%.14f\n", 12547.58);
     // testcase( "big prec14L:%.14Lf\n", 12547.58l);
