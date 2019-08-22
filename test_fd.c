@@ -327,12 +327,12 @@ int main()
 
 #endif
 #if 1
-    // testcase("big prec13:%.13f\n", 12547.58);
-    // testcase( "big prec14:%.14f\n", 12547.58);
-    // testcase("big prec15:%.15f\n",12547.58);
-    // testcase("big prec16:%.16f\n",12547.58);
-    // testcase("big prec14:%.14f\n",12547.58);
-    testcase("big prec20:%.20f\n",12547.58);
+    testcase("big prec13:%.13f\n", 12547.58);
+    testcase( "big prec14:%.14f\n", 12547.58);
+    testcase("big prec15:%.15f\n",12547.58);
+    testcase("big prec16:%.16f\n",12547.58);
+    testcase("big prec17:%.17f\n",12547.58);
+    testcase("big prec18:%.18f\n",12547.58);
 
     // testcase( "big prec:%.14f\n", 12547.58);
     // testcase( "big prec14L:%.14Lf\n", 12547.58l);
