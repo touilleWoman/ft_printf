@@ -142,6 +142,7 @@ int main()
     // // type p
 
     testcase("%.0p", 0);
+    testcase("%10.0p", 0);
     testcase("%.5p", 0);
     testcase("%10.5p", 0);
     testcase("%+-10.5p", 0);
@@ -164,8 +165,16 @@ int main()
     testcase("%15.2p\n", &nb);
     testcase("%15.2p\n", &nb);
     testcase("%-15p\n", &nb);
+    testcase("%20.0p", &nb);
+    testcase("%20.0p", 0);
     testcase("%-5p\n", &nb);
     testcase("%42p\n", &nb);
+    testcase("%.0p", &nb);
+    testcase("%10.0p", &nb);
+    testcase("%.5p", &nb);
+    testcase("%10.5p", &nb);
+    testcase("%+-10.5p", &nb);
+    testcase("%#10.5p", &nb);
     testcase("%-18p\n", &nb);
     testcase("%42p\n", &nb);
     testcase("%5p\n", &c);

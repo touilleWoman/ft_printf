@@ -77,7 +77,7 @@ int			print_p(int fd, t_unit *unit)
 	int		final_len;
 
 	ft_memset(str_p, 0, unit->val.p.precision + 30);
-	if (unit->val.p.precision == PRECISION_NULL)
+	if (unit->val.p.precision == PRECISION_NULL && unit->val.p.pointer == 0)
 		*str_p = 0;
 	else
 		pf_itoa_base(unit->val.p.pointer, 16, unit, str_p);
