@@ -74,6 +74,7 @@ $(NAME): $(OBJ)
 
 check:all
 	$(CC) $(CFLAGS) $(NAME) test_fd.c -g -ggdb -I ./srcs
+# 	$(CC) $(CFLAGS) $(NAME) test_pft.c -g -ggdb -I ./srcs
 # 	$(CC) $(CFLAGS) $(NAME) srcs/test_fd.c  -g -fsanitize=address -I ./srcs
 
 clean:

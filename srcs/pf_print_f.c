@@ -84,12 +84,12 @@ static unsigned int		f_flag_plus_and_blank(char *s, int dy_len, t_unit *unit)
 int						print_f(int fd, t_unit *unit)
 {
 	unsigned int	dy_len;
-	char			s[unit->val.f.precision + unit->val.f.width + 30];
+	char			s[unit->val.f.precision + unit->val.f.width + 60];
 	int				neg_sign;
 	long double		abs_doub;
 
 	neg_sign = 0;
-	ft_memset(s, 0, unit->val.f.precision + unit->val.f.width + 30);
+	ft_memset(s, 0, unit->val.f.precision + unit->val.f.width + 60);
 	if (1.0 / unit->val.f.doub < 0 || pf_isinf(unit->val.f.doub) == -1)
 	{
 		*s = '-';

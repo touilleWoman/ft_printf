@@ -95,7 +95,7 @@ void     testcase(const char *fmt, ...)
     {
         printf(".");
         /* show printed content */
-        printf("%s\n",out_test);
+        // printf("%s\n",out_test);
     }
     else
         tests_failures += 1;
@@ -106,7 +106,6 @@ void     testcase(const char *fmt, ...)
 
 int main()
 {
-
 #if 0
     ft_printf("%b\n", 1);
     ft_printf("%b\n", 2);
@@ -138,7 +137,7 @@ int main()
 
 #endif
 
-#if 1
+#if 0
     // // type p
 
     testcase("%.0p", 0);
@@ -206,6 +205,7 @@ int main()
     testcase("hash:%#f\n",fl2);
     testcase("precision:%.2f\n",fl2);
     testcase("big prec:%.14f\n",fl2);
+
     testcase("precision + hash:%#.0f\n",fl2);
     testcase("space + prec:% .5f\n",fl2);
     testcase("space + prec + hash:%# .0f\n",fl2);
@@ -326,66 +326,74 @@ int main()
     testcase("hash:%#f\n", ld);
 
 #endif
-#if 0
-    testcase( "big prec:%.14f\n", -12547.58);
-    testcase( "big prec:%.13f\n", -12547.58);
+#if 1
+    // testcase("big prec13:%.13f\n", 12547.58);
+    // testcase( "big prec14:%.14f\n", 12547.58);
+    // testcase("big prec15:%.15f\n",12547.58);
+    // testcase("big prec16:%.16f\n",12547.58);
+    // testcase("big prec14:%.14f\n",12547.58);
+    testcase("big prec20:%.20f\n",12547.58);
 
-    testcase("%p", NULL);
-    ft_printf(NULL);
-    testcase("six%f|\n", 6.0);
-    testcase("six%#6.10f|\n", 6.0);
-    // testcase("%lld", -9223372036854775808);
-    testcase("%d%5ttttttt", 42);
-    // testcase("%d%5kkkkkkk", 42);
-    testcase( "space:% f\n", -12547.58);
-    testcase( "plus:%+f\n", -12547.58);
-    testcase( "hash:%#f\n", -12547.58);
-    testcase( "precision:%.2f\n", -12547.58);
-    testcase( "precision = 0:%.0f\n", -12547.58);
-    testcase( "precision + hash:%#.0f\n", -12547.58);
-    testcase( "space + prec:% .5f\n", -12547.58);
-    testcase( "space + prec + hash:%# .0f\n", -12547.58);
-    testcase( "space + prec + hash:% #.0f\n", -12547.58);
-    testcase( "Plus + prec / grande:%+.5f\n", -12547.58);
-    testcase( "Plus + prec / petite:%+.0f\n", -12547.58);
-    testcase( "Plus + prec + hash:%#+.0f\n", -12547.58);
-    testcase( "Prec + 0:%0.5f\n", -12547.58);
-    testcase( "Prec + minus:%-.5f\n", -12547.58);
-    testcase( "size:%5f\n", -12547.58);
-    testcase( "size + space:% 5f\n", -12547.58);
-    testcase( "size + plus:%+5f\n", -12547.58);
-    testcase( "size + space:%# 5f\n", -12547.58);
-    testcase( "size + plus:%#+5f\n", -12547.58);
-    testcase( "size + minus:%-5f\n", -12547.58);
-    testcase( "size + 0:%05f\n", -12547.58);
-    testcase( "size + 0 + plus:%+05f\n", -12547.58);
-    testcase( "size + 0 + plus:%0+5f\n", -12547.58);
-    testcase( "size + 0 + prec:%05.3f\n", -12547.58);
-    testcase( "size + 0 + prec + hash:%0#5.0f\n", -12547.58);
-    testcase( "size + minus + prec:%-5.3f\n", -12547.58);
-    testcase( "size + minus + prec + hash:%-#5.0f\n", -12547.58);
-    testcase( "size + plus + 0 + prec:%+05.3f\n", -12547.58);
-    testcase( "size + plus + 0 + prec + hash:%0+#5.0f\n", -12547.58);
-    testcase( "size + espace + zero + prec:%0 5.3f\n", -12547.58);
-    testcase( "size + espace + zero + prec:% 05.3f\n", -12547.58);
-    testcase( "size + espace + zero + prec + hash:%#0 5.0f\n", -12547.58);
-    testcase( "size + minus + plus + prec:%-+5.3f\n", -12547.58);
-    testcase( "size + minus + plus + prec + hash:%-#+5.0f\n", -12547.58);
-    testcase("%f\n", 2.345);
-    testcase("%4.5f\n", 2.345);
-    testcase("%5.2f\n", 2.325);
-    testcase("%5.2f\n", 2.395);
-    testcase("%+5.5f\n", 2.345);
-    testcase("%+05.5f\n", 2.345);
-    testcase("% 05.5f\n", 2.345);
-    testcase("%f\n", -2.345);
-    testcase("%4.5f\n", -2.345);
-    testcase("%5.2f\n", -2.345);
-    testcase("%+5.5f\n", -2.345);
-    testcase("%+05.5f\n", -2.345);
-    testcase("% 05.5f\n", -2.345);
-    testcase("zero%f|\n", 0.0);
-    testcase("one%f|\n", 1);
+    // testcase( "big prec:%.14f\n", 12547.58);
+    // testcase( "big prec14L:%.14Lf\n", 12547.58l);
+    // testcase( "big prec:%.13f\n", -12547.58);
+
+    // testcase("%p", NULL);
+    // ft_printf(NULL);
+    // testcase("six%f|\n", 6.0);
+    // testcase("six%#6.10f|\n", 6.0);
+    // // testcase("%lld", -9223372036854775808);
+    // testcase("%d%5ttttttt", 42);
+    // // testcase("%d%5kkkkkkk", 42);
+    // testcase( "space:% f\n", -12547.58);
+    // testcase( "plus:%+f\n", -12547.58);
+    // testcase( "hash:%#f\n", -12547.58);
+    // testcase( "precision:%.2f\n", -12547.58);
+    // testcase( "precision = 0:%.0f\n", -12547.58);
+    // testcase( "precision + hash:%#.0f\n", -12547.58);
+    // testcase( "space + prec:% .5f\n", -12547.58);
+    // testcase( "space + prec + hash:%# .0f\n", -12547.58);
+    // testcase( "space + prec + hash:% #.0f\n", -12547.58);
+    // testcase( "Plus + prec / grande:%+.5f\n", -12547.58);
+    // testcase( "Plus + prec / petite:%+.0f\n", -12547.58);
+    // testcase( "Plus + prec + hash:%#+.0f\n", -12547.58);
+    // testcase( "Prec + 0:%0.5f\n", -12547.58);
+    // testcase( "Prec + minus:%-.5f\n", -12547.58);
+    // testcase( "size:%5f\n", -12547.58);
+    // testcase( "size + space:% 5f\n", -12547.58);
+    // testcase( "size + plus:%+5f\n", -12547.58);
+    // testcase( "size + space:%# 5f\n", -12547.58);
+    // testcase( "size + plus:%#+5f\n", -12547.58);
+    // testcase( "size + minus:%-5f\n", -12547.58);
+    // testcase( "size + 0:%05f\n", -12547.58);
+    // testcase( "size + 0 + plus:%+05f\n", -12547.58);
+    // testcase( "size + 0 + plus:%0+5f\n", -12547.58);
+    // testcase( "size + 0 + prec:%05.3f\n", -12547.58);
+    // testcase( "size + 0 + prec + hash:%0#5.0f\n", -12547.58);
+    // testcase( "size + minus + prec:%-5.3f\n", -12547.58);
+    // testcase( "size + minus + prec + hash:%-#5.0f\n", -12547.58);
+    // testcase( "size + plus + 0 + prec:%+05.3f\n", -12547.58);
+    // testcase( "size + plus + 0 + prec + hash:%0+#5.0f\n", -12547.58);
+    // testcase( "size + espace + zero + prec:%0 5.3f\n", -12547.58);
+    // testcase( "size + espace + zero + prec:% 05.3f\n", -12547.58);
+    // testcase( "size + espace + zero + prec + hash:%#0 5.0f\n", -12547.58);
+    // testcase( "size + minus + plus + prec:%-+5.3f\n", -12547.58);
+    // testcase( "size + minus + plus + prec + hash:%-#+5.0f\n", -12547.58);
+    // testcase("%f\n", 2.345);
+    // testcase("%4.5f\n", 2.345);
+    // testcase("%5.2f\n", 2.325);
+    // testcase("%5.2f\n", 2.395);
+    // testcase("%+5.5f\n", 2.345);
+    // testcase("%+05.5f\n", 2.345);
+    // testcase("% 05.5f\n", 2.345);
+    // testcase("%f\n", -2.345);
+    // testcase("%4.5f\n", -2.345);
+    // testcase("%5.2f\n", -2.345);
+    // testcase("%+5.5f\n", -2.345);
+    // testcase("%+05.5f\n", -2.345);
+    // testcase("% 05.5f\n", -2.345);
+    // testcase("zero%f|\n", 0.0);
+    // testcase("one%f|\n", 1);
 
 #endif
 

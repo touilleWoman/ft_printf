@@ -23,49 +23,70 @@
 // 	return (int_part);
 // }
 
-static long double			round(long double nbr, int preci)
+static void				round(long double nbr, int preci, char *buf, t_bool flag_hash)
 {
 	int			i;
-	long double	round_val;
-	long double keep_nbr;
+	uintmax_t	frac_to_int;
+	uintmax_t	pw;
+	uintmax_t	int_part;
+	int			len;
 
-	keep_nbr = nbr;
 	i = 0;
+	pw = 1;
 	while (i < preci + 1)
 	{
-		nbr = nbr * 10.0;
+		pw = pw * 10;
 		i++;
 	}
-	if (((long long)nbr) % 10 < 5)
-		return (keep_nbr);
-	i = 0;
-	round_val = 1.0;
-	while (i < preci)
+	int_part = (uintmax_t)nbr;
+	frac_to_int = ((uintmax_t)((nbr - int_part) * pw));
+	// frac_to_int = ((uintmax_t)(nbr * pw)) % pw;
+	// printf("111nbr:%Lf, int_part%ju, frac_to_int %ju\n", nbr, int_part, frac_to_int);
+	if (frac_to_int % 10 >= 5)
+		frac_to_int = frac_to_int + 10;
+	int_part = int_part + frac_to_int / pw;
+	frac_to_int = frac_to_int % pw;
+	// printf("nbr:%Lf, int_part%ju, frac_to_int %ju\n", nbr, int_part, frac_to_int);
+	pf_itoa_base(int_part, 10, NULL, buf);
+	len = ft_strlen(buf);
+	if (preci == 0 && flag_hash == FALSE)
+		return ;
+	else if (preci == 0 && flag_hash == TRUE)
 	{
-		round_val = round_val * 0.1;
-		i++;
+		buf[len] = '.';
+		buf[len + 1] = 0;
+		return ;
 	}
-	return (keep_nbr + round_val);
+	buf[len] = '.';
+	buf += len + 1;
+	while (pw > 10)
+	{
+		pw = pw / 10;
+		*buf = frac_to_int / pw + '0';
+		buf++;
+		frac_to_int = frac_to_int % pw;
+	}
+	*buf = 0;
 }
 
-static void					write_fractionl_on_buf(char *buf, long double nbr,
-							int precision, int posi)
-{
-	buf[posi] = '.';
+// static void					write_fractionl_on_buf(char *buf, long double nbr,
+// 							int precision, int posi)
+// {
+// 	buf[posi] = '.';
 
-	// printf("nbr:%Lf, frac:%LF, precision%d\n", nbr, frac_part, precision);
-	while (precision > 0)
-	{
-		posi++;
-		buf[posi] = ((unsigned long long)(nbr * 10.0)) % 10 + '0';
-		// printf("buf:%c, int:%lld\n", buf[posi], ((unsigned long long)(nbr * 10.0)) % 10 );
+// 	// printf("nbr:%Lf, frac:%LF, precision%d\n", nbr, frac_part, precision);
+// 	while (precision > 0)
+// 	{
+// 		posi++;
+// 		buf[posi] = ((unsigned long long)(nbr * 10.0)) % 10 + '0';
+// 		// printf("buf:%c, int:%lld\n", buf[posi], ((unsigned long long)(nbr * 10.0)) % 10 );
 
-		nbr = nbr * 10.0;
-		precision--;
-	}
-	posi++;
-	buf[posi] = '\0';
-}
+// 		nbr = nbr * 10.0;
+// 		precision--;
+// 	}
+// 	posi++;
+// 	buf[posi] = '\0';
+// }
 
 int							is_inf_or_nan(long double nbr, char *buf)
 {
@@ -85,27 +106,22 @@ int							is_inf_or_nan(long double nbr, char *buf)
 void						pf_dtoa(long double nbr, int precision,
 							char *buf, t_bool flag_hash)
 {
-	int				posi;
-	long long		int_part;
-	long double		nbr_rounded;
+	// int				posi;
+	// char			buff[60];
 
 	if (is_inf_or_nan(nbr, buf))
 		return ;
 	precision = (precision == 0 ? 6 : precision);
 	if (precision == PRECISION_NULL)
-		nbr_rounded = round(nbr, 0);
+		round(nbr, 0, buf, flag_hash);
 	else
-		nbr_rounded = round(nbr, precision);
-	int_part = (long long)nbr_rounded;
-	pf_itoa_base(int_part, 10, NULL, buf);
-	posi = ft_strlen(buf);
-	if (precision == PRECISION_NULL && flag_hash == FALSE)
-		return ;
-	else if (precision == PRECISION_NULL && flag_hash == TRUE)
-	{
-		buf[posi] = '.';
-		buf[posi + 1] = 0;
-	}
-	else
-		write_fractionl_on_buf(buf, nbr_rounded, precision, posi);
+		round(nbr, precision, buf, flag_hash);
+	// posi = ft_strlen(buf);
+	// if (precision == PRECISION_NULL && flag_hash == FALSE)
+	// 	return ;
+	// else if (precision == PRECISION_NULL && flag_hash == TRUE)
+	// {
+	// 	buf[posi] = '.';
+	// 	buf[posi + 1] = 0;
+	// }
 }
