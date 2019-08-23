@@ -27,7 +27,8 @@ static uintmax_t		pow_ten(int preci)
 	return (pw);
 }
 
-static void				write_frac_on_buf(char *buf, uintmax_t pw, uintmax_t frac_to_int, int len)
+static void				write_frac_on_buf(char *buf, uintmax_t pw,
+									uintmax_t frac_to_int, int len)
 {
 	buf[len] = '.';
 	buf += len + 1;
@@ -40,7 +41,6 @@ static void				write_frac_on_buf(char *buf, uintmax_t pw, uintmax_t frac_to_int,
 	}
 	*buf = 0;
 }
-
 
 static void				round_then_write(long double nbr, int preci,
 							char *buf, t_bool flag_hash)
@@ -75,12 +75,12 @@ int						is_inf_or_nan(long double nbr, char *buf)
 	if (pf_isinf(nbr))
 	{
 		ft_strcpy(buf, "inf");
-		return (TRUE) ;
+		return (TRUE);
 	}
 	if (pf_isnan(nbr))
 	{
 		ft_strcpy(buf, "nan");
-		return (TRUE) ;
+		return (TRUE);
 	}
 	return (FALSE);
 }

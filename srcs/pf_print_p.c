@@ -12,10 +12,10 @@
 
 #include "ft_printf.h"
 
-void		p_sub_width_handler(char *str_p, char *s, t_unit *unit, int width)
+static void		p_sub_width(char *str_p, char *s, t_unit *unit, int width)
 {
 	int		len;
-	
+
 	len = ft_strlen(str_p) + 2;
 	ft_memset(s, ' ', width);
 	if (unit->val.p.flag_minus == TRUE)
@@ -26,11 +26,11 @@ void		p_sub_width_handler(char *str_p, char *s, t_unit *unit, int width)
 	else
 	{
 		ft_strncpy(s + width - len, "0x", 2);
-		ft_strncpy(s + width - len + 2, str_p, len - 2);		
+		ft_strncpy(s + width - len + 2, str_p, len - 2);
 	}
 }
 
-void		p_precision_handler(char *str_p, int precision)
+static void		p_precision_handler(char *str_p, int precision)
 {
 	char	s_keep[precision + 30];
 	int		len;
@@ -45,10 +45,10 @@ void		p_precision_handler(char *str_p, int precision)
 	}
 }
 
-int			p_width_handler(char *str_p, char *s, t_unit *unit, int width)
+static int		p_width_handler(char *str_p, char *s, t_unit *unit, int width)
 {
 	int		len;
-	
+
 	len = ft_strlen(str_p) + 2;
 	if (width <= len)
 	{
@@ -66,11 +66,11 @@ int			p_width_handler(char *str_p, char *s, t_unit *unit, int width)
 			ft_strncpy(s + width - len + 2, str_p, len - 2);
 		return (width);
 	}
-	p_sub_width_handler(str_p, s, unit, width);
+	p_sub_width(str_p, s, unit, width);
 	return (width);
 }
 
-int			print_p(int fd, t_unit *unit)
+int				print_p(int fd, t_unit *unit)
 {
 	char	s[unit->val.p.width + unit->val.p.precision + 30];
 	char	str_p[unit->val.p.precision + 30];

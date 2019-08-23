@@ -12,7 +12,8 @@
 
 #include "ft_printf.h"
 
-/*	References:
+/*
+**	References:
 **	https://en.wikipedia.org/wiki/Double-precision_floating-point_format
 **
 **	https://www.doc.ic.ac.uk/~eedwards/compsys/float/nan.html
